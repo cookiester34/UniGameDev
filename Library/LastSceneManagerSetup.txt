@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Individual/Programmers/Ryan.unity
+- path: Assets/Scenes/Pre_Load.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
