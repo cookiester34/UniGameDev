@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class ResourceManagement : MonoBehaviour
@@ -9,6 +8,29 @@ public class ResourceManagement : MonoBehaviour
     [Tooltip("This sets how often the resoources get updated in seconds")]
     [Range(0,30)]
     public int resourceTickTime;
+
+    /// <summary>
+    /// Singleton instance
+    /// </summary>
+    private static ResourceManagement _instance;
+    
+    /// <summary>
+    /// Public access to singleton instance
+    /// </summary>
+    public static ResourceManagement Instance => _instance;
+
+    /// <summary>
+    /// Handles setting up of the singleton
+    /// </summary>
+    private void Awake() {
+        if (_instance != null) {
+            SecondInstance();
+            Destroy(this);
+            return;
+        }
+
+        _instance = this;
+    }
 
     private void Start()
     {
@@ -110,6 +132,10 @@ public class ResourceManagement : MonoBehaviour
     private void NoResourceFound(string resourceName)
     {
         Debug.LogWarning("The resource: " + resourceName + " :was not found");
+    }
+
+    private void SecondInstance() {
+        Debug.LogWarning("Attempted to create 2nd instance of Resource Manager");
     }
     #endregion
 }

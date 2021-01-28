@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d82d17255b6fff04ca4e0e8aac33a27f, type: 3}
   m_Name: Pollen
   m_EditorClassIdentifier: 
-  resourceName: 
+  resourceName: pollen
   resourceStartingAmount: 0
   ResourceTickDrainAmount: 0
   currentResourceAmount: 0
