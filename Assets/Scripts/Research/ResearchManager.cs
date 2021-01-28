@@ -42,6 +42,11 @@ namespace Research {
         private void SecondInstance() {
             Debug.LogWarning("Attempted to create 2nd instance of Research Manager");
         }
+
+        private void PrerequisitesNotResearched(string researchName) {
+            Debug.LogWarning(
+                "Attempting to research " + researchName + " when its prerequisites have not been met");
+        }
         #endregion
 
         /// <summary>
@@ -72,6 +77,7 @@ namespace Research {
                 if (timer.Finished()) {
                     finishedResearch = research.Key;
                     completedResearch.Add(research.Key);
+                    research.Key.Researched = true;
                     researchCompleted?.Invoke();
                     Debug.Log("Research completed!");
                     break;
@@ -88,10 +94,14 @@ namespace Research {
         /// </summary>
         /// <param name="researchObject">The research object to begin researching</param>
         public void ResearchTopic(ResearchObject researchObject) {
-            ResourceManagement.Instance.UpdateResourceCurrentAmount("pollen", -researchObject.Cost);
-            Timer timer = new Timer(researchObject.TimeToResearch);
-            ongoingResearch.Add(researchObject, timer);
-            timer.Start();
+            if (researchObject.PrerequisitesMet()) {
+                ResourceManagement.Instance.UpdateResourceCurrentAmount("pollen", -researchObject.Cost);
+                Timer timer = new Timer(researchObject.TimeToResearch);
+                ongoingResearch.Add(researchObject, timer);
+                timer.Start();
+            } else {
+                PrerequisitesNotResearched(researchObject.Name);
+            }
         }
     }
 }
