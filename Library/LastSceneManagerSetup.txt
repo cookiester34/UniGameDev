@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/Scenes/Individual/Programmers/Joe.unity
+- path: Assets/Scenes/Individual/Programmers/George.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
