@@ -244,7 +244,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceList:
   - {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
-  resourceTickTime: 0
+  - {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
+  resourceTickTime: 10
 --- !u!4 &1730665284
 Transform:
   m_ObjectHideFlags: 0

@@ -8,12 +8,14 @@ public class Resources : ScriptableObject
     [Header("Resource Options")]
     public string resourceName;
     public int resourceStartingAmount;
+    //[HideInInspector] decided to show for now while debugging
     public int ResourceTickDrainAmount;
     //[HideInInspector] decided to show for now while debugging
     public int currentResourceAmount;
 
     void start()
     {
+        //sets the initial value of this resource
         currentResourceAmount = resourceStartingAmount;
     }
 }
