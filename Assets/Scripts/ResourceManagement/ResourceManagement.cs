@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class ResourceManagement : MonoBehaviour
 {
-    public List<Resources> resourceList = new List<Resources>();
+    public List<Resource> resourceList = new List<Resource>();
     [Header("Options")]
     [Tooltip("This sets how often the resoources get updated in seconds")]
     [Range(0,30)]
@@ -35,7 +35,66 @@ public class ResourceManagement : MonoBehaviour
     private void Start()
     {
         //will call the resourceTick every x seconds
-        InvokeRepeating("ResourceTick", 1, resourceTickTime);
+        InvokeRepeating(nameof(ResourceTick), 1, resourceTickTime);
+    }
+
+    /// <summary>
+    /// Given a list of resourcePurchases determines if they can be purchased
+    /// </summary>
+    /// <param name="resourcePurchases">The resources to attempt to purchase something with</param>
+    /// <returns>True if all the resources can be purchases, false if they cannot</returns>
+    public bool CanUseResources(List<ResourcePurchase> resourcePurchases) {
+        bool canUse = true;
+        foreach (ResourcePurchase resource in resourcePurchases) {
+            canUse = CanUseResource(resource);
+            if (!canUse) {
+                break;
+            }
+        }
+
+        return canUse;
+    }
+
+    /// <summary>
+    /// Given a resourcePurchase determines if the resource can be purchased
+    /// </summary>
+    /// <param name="resourcePurchase">The resource to purchase from</param>
+    /// <returns>True if the resource can be purchased from, else false</returns>
+    public bool CanUseResource(ResourcePurchase resourcePurchase) {
+        Resource matchingResource = GetResource(resourcePurchase.resourceType);
+        return matchingResource.CanPurchase(resourcePurchase.cost);
+    }
+
+    /// <summary>
+    /// Uses multiple resources to make a purchase if the purchase can be made
+    /// </summary>
+    /// <param name="resourcePurchases">The resources to purchase from</param>
+    /// <returns>True if the purchase was successful, else false</returns>
+    public bool UseResources(List<ResourcePurchase> resourcePurchases) {
+        bool canBeUsed = CanUseResources(resourcePurchases);
+        if (canBeUsed) {
+            foreach (ResourcePurchase resource in resourcePurchases) {
+                UseResource(resource);
+            }
+        }
+
+        return canBeUsed;
+    }
+
+    /// <summary>
+    /// Uses a resource to make a purchase if the purchase can be made
+    /// </summary>
+    /// <param name="resourcePurchase">The resource to purchase from</param>
+    /// <returns>True if the purchase was successful, else false</returns>
+    public bool UseResource(ResourcePurchase resourcePurchase) {
+        bool canUse = CanUseResource(resourcePurchase);
+        Resource matchingResource = GetResource(resourcePurchase.resourceType);
+
+        if (matchingResource != null) {
+            matchingResource.ModifyAmount(resourcePurchase.cost);
+        }
+
+        return canUse;
     }
 
 
@@ -46,16 +105,16 @@ public class ResourceManagement : MonoBehaviour
     /// </summary>
     /// <param name="resourceName"></param>
     /// <returns></returns>
-    public int GetResourceCurrentAmount(string resourceName)
+    public int GetResourceCurrentAmount(ResourceType resourceType)
     {
-        foreach (Resources i in resourceList)
+        foreach (Resource i in resourceList)
         {
-            if(i.resourceName == resourceName)
+            if(i.resourceType == resourceType)
             {
                 return i.currentResourceAmount;
             }
         }
-        NoResourceFound(resourceName);
+        NoResourceFound(resourceType);
         return 0;
     }
 
@@ -66,17 +125,17 @@ public class ResourceManagement : MonoBehaviour
     /// <param name="resourceName"></param>
     /// <param name="updateValue"></param>
     /// <returns></returns>
-    public int UpdateResourceCurrentAmount(string resourceName, int updateValue)
+    public int UpdateResourceCurrentAmount(ResourceType resourceType, int updateValue)
     {
-        foreach (Resources i in resourceList)
+        foreach (Resource i in resourceList)
         {
-            if (i.resourceName == resourceName)
+            if (i.resourceType == resourceType)
             {
                 i.currentResourceAmount += updateValue;
                 return i.currentResourceAmount;
             }
         }
-        NoResourceFound(resourceName);
+        NoResourceFound(resourceType);
         return 0;
     }
 
@@ -87,17 +146,17 @@ public class ResourceManagement : MonoBehaviour
     /// <param name="resourceName"></param>
     /// <param name="updateValue"></param>
     /// <returns></returns>
-    public int UpdateResourceTickAmount(string resourceName, int updateValue)
+    public int UpdateResourceTickAmount(ResourceType resourceType, int updateValue)
     {
-        foreach (Resources i in resourceList)
+        foreach (Resource i in resourceList)
         {
-            if (i.resourceName == resourceName)
+            if (i.resourceType == resourceType)
             {
                 i.ResourceTickDrainAmount += updateValue;
                 return i.ResourceTickDrainAmount;
             }
         }
-        NoResourceFound(resourceName);
+        NoResourceFound(resourceType);
         return 0;
     }
 
@@ -106,12 +165,12 @@ public class ResourceManagement : MonoBehaviour
     /// <para>Key = resource name, value = current resource amount</para>
     /// </summary>
     /// <returns></returns>
-    public Dictionary<string, int> GetAllCurrentResourceValues()
+    public Dictionary<ResourceType, int> GetAllCurrentResourceValues()
     {
-        Dictionary<string, int> temp = new Dictionary<string, int>();
-        foreach(Resources i in resourceList)
+        Dictionary<ResourceType, int> temp = new Dictionary<ResourceType, int>();
+        foreach(Resource i in resourceList)
         {
-            temp.Add(i.resourceName, i.currentResourceAmount);
+            temp.Add(i.resourceType, i.currentResourceAmount);
         }
         return temp;
     }
@@ -127,9 +186,25 @@ public class ResourceManagement : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Using a resourceType finds the correct resource, may return null if that resource is not stored
+    /// </summary>
+    /// <param name="resourceType">The resource type to find</param>
+    /// <returns>The matching resource, or null if it was not found</returns>
+    private Resource GetResource(ResourceType resourceType) {
+        Resource matchingResource = 
+            resourceList.Find(resource => resource.resourceType == resourceType);
+
+        if (matchingResource == null) {
+            NoResourceFound(resourceType);
+        }
+
+        return matchingResource;
+    }
+
 
     #region DebugCalls
-    private void NoResourceFound(string resourceName)
+    private void NoResourceFound(ResourceType resourceName) 
     {
         Debug.LogWarning("The resource: " + resourceName + " :was not found");
     }

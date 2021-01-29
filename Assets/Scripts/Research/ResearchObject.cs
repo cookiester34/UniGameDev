@@ -10,18 +10,15 @@ namespace Research {
         /// <summary>
         /// Name of the research
         /// </summary>
-        [SerializeField] private string name;
+        [SerializeField] private string researchName;
         
         /// <summary>
         /// A description to explain what the research does
         /// </summary>
-        [SerializeField] private string description;
-        
-        /// <summary>
-        /// A cost for the research
-        /// </summary>
-        [SerializeField] private int cost;
-        
+        [TextArea] [SerializeField] private string description;
+
+        [SerializeField] private List<ResourcePurchase> resources;
+
         /// <summary>
         /// How long it takes for the research to be completed
         /// </summary>
@@ -36,22 +33,33 @@ namespace Research {
         /// Whether this research topic has been researched
         /// </summary>
         [SerializeField] private bool researched;
-        
+
         /// <summary>
         /// An image for the research to show in the Ui
         /// </summary>
-        [SerializeField] Image UIImage;
+        [SerializeField] private Sprite uiSprite;
 
-        public string Name => name;
-        public int Cost => cost;
+        public string ResearchName => researchName;
+        public List<ResourcePurchase> Resources => resources;
+
         public int TimeToResearch => timeToResearch;
         public string Description => description;
+
+        public Sprite UiSprite => uiSprite;
 
         public bool Researched {
             get => researched;
             set => researched = value;
         }
 
+        private void OnEnable() {
+            researched = false;
+        }
+
+        /// <summary>
+        /// Determines if the previous research has been unlocked such that this one can
+        /// </summary>
+        /// <returns>True if previous required researches have been unlocked, else false</returns>
         public bool PrerequisitesMet() {
             bool met = true;
 

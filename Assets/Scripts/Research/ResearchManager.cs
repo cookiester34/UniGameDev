@@ -18,12 +18,12 @@ namespace Research {
         /// <summary>
         /// Private singleton access
         /// </summary>
-        private ResearchManager _instance;
+        private static ResearchManager _instance;
         
         /// <summary>
         /// Access to the singleton
         /// </summary>
-        public ResearchManager Instance => _instance;
+        public static ResearchManager Instance => _instance;
         
         /// <summary>
         /// List of all completed researches, can be queried against to see what options should be available
@@ -46,6 +46,10 @@ namespace Research {
         private void PrerequisitesNotResearched(string researchName) {
             Debug.LogWarning(
                 "Attempting to research " + researchName + " when its prerequisites have not been met");
+        }
+
+        private void DebugResearchStarted() {
+            Debug.Log("A research task has started");
         }
         #endregion
 
@@ -94,13 +98,21 @@ namespace Research {
         /// </summary>
         /// <param name="researchObject">The research object to begin researching</param>
         public void ResearchTopic(ResearchObject researchObject) {
-            if (researchObject.PrerequisitesMet()) {
-                ResourceManagement.Instance.UpdateResourceCurrentAmount("pollen", -researchObject.Cost);
+            if (researchObject.Researched) {
+                //Topic already researched
+                return;
+            }
+
+            if (!researchObject.PrerequisitesMet()) {
+                PrerequisitesNotResearched(researchObject.ResearchName);
+                return;
+            }
+
+            if (ResourceManagement.Instance.UseResources(researchObject.Resources)) {
+                DebugResearchStarted();
                 Timer timer = new Timer(researchObject.TimeToResearch);
                 ongoingResearch.Add(researchObject, timer);
                 timer.Start();
-            } else {
-                PrerequisitesNotResearched(researchObject.Name);
             }
         }
     }
