@@ -47,6 +47,10 @@ namespace Research {
             Debug.LogWarning(
                 "Attempting to research " + researchName + " when its prerequisites have not been met");
         }
+
+        private void DebugResearchStarted() {
+            Debug.Log("A research task has started");
+        }
         #endregion
 
         /// <summary>
@@ -94,13 +98,21 @@ namespace Research {
         /// </summary>
         /// <param name="researchObject">The research object to begin researching</param>
         public void ResearchTopic(ResearchObject researchObject) {
-            if (researchObject.PrerequisitesMet()) {
-                ResourceManagement.Instance.UpdateResourceCurrentAmount("pollen", -researchObject.Cost);
+            if (researchObject.Researched) {
+                //Topic already researched
+                return;
+            }
+
+            if (!researchObject.PrerequisitesMet()) {
+                PrerequisitesNotResearched(researchObject.ResearchName);
+                return;
+            }
+
+            if (ResourceManagement.Instance.UseResources(researchObject.Resources)) {
+                DebugResearchStarted();
                 Timer timer = new Timer(researchObject.TimeToResearch);
                 ongoingResearch.Add(researchObject, timer);
                 timer.Start();
-            } else {
-                PrerequisitesNotResearched(researchObject.Name);
             }
         }
     }
