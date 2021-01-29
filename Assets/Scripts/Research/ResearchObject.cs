@@ -15,7 +15,7 @@ namespace Research {
         /// <summary>
         /// A description to explain what the research does
         /// </summary>
-        [SerializeField] private string description;
+        [TextArea] [SerializeField] private string description;
 
         [SerializeField] private List<ResourcePurchase> resources;
 
@@ -37,13 +37,15 @@ namespace Research {
         /// <summary>
         /// An image for the research to show in the Ui
         /// </summary>
-        [SerializeField] Image UIImage;
+        [SerializeField] private Sprite uiSprite;
 
         public string ResearchName => researchName;
         public List<ResourcePurchase> Resources => resources;
 
         public int TimeToResearch => timeToResearch;
         public string Description => description;
+
+        public Sprite UiSprite => uiSprite;
 
         public bool Researched {
             get => researched;

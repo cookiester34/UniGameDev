@@ -18,12 +18,12 @@ namespace Research {
         /// <summary>
         /// Private singleton access
         /// </summary>
-        private ResearchManager _instance;
+        private static ResearchManager _instance;
         
         /// <summary>
         /// Access to the singleton
         /// </summary>
-        public ResearchManager Instance => _instance;
+        public static ResearchManager Instance => _instance;
         
         /// <summary>
         /// List of all completed researches, can be queried against to see what options should be available

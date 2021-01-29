@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
   m_Name: Tier3Housing
   m_EditorClassIdentifier: 
-  name: Tier 3 Housing
-  description: Allows housing to be upgraded to tier 3
+  researchName: Tier 3 Housing
+  description: 'Allows housing to be upgraded to Tier 3.
+
+    Tier 3 housing can
+    house even more bees in the same space.'
   resources:
   - cost: 100
     resourceType: 2
@@ -22,5 +25,5 @@ MonoBehaviour:
   timeToResearch: 30
   Prerequisites:
   - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
-  researched: 1
-  UIImage: {fileID: 0}
+  researched: 0
+  uiSprite: {fileID: 21300000, guid: 89ea58766fd313f439ec6f06828f95dd, type: 3}
