@@ -6,7 +6,7 @@ using UnityEngine;
 public class Resources : ScriptableObject
 {
     [Header("Resource Options")]
-    public resourceType resourceType;
+    public ResourceType resourceType;
     public int resourceStartingAmount;
     //[HideInInspector] decided to show for now while debugging
     public int ResourceTickDrainAmount;
