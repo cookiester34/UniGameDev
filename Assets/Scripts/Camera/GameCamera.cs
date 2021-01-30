@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Camera {
+namespace CameraNameSpace {
     /// <summary>
     /// The main camera to be used in the game scene.
     /// </summary>

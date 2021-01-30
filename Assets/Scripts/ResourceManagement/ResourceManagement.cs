@@ -100,6 +100,23 @@ public class ResourceManagement : MonoBehaviour
 
     /// all functions below will provide a warning if the resource cannot be found
 
+    public bool CanPurchase(ResourceType resourceType, int cost)
+    {
+        foreach (Resource i in resourceList)
+        {
+            //Debug.Log(resourceType + " : : " + i.resourceType);
+            if (i.resourceType == resourceType)
+            {
+                if (i.currentResourceAmount >= cost)
+                    return true;
+                else
+                    return false;
+            }
+        }
+        NoResourceFound(resourceType);
+        return false;
+    }
+
     /// <summary>
     /// to get the current resource amount, will return an int
     /// </summary>
@@ -131,8 +148,50 @@ public class ResourceManagement : MonoBehaviour
         {
             if (i.resourceType == resourceType)
             {
-                i.currentResourceAmount += updateValue;
-                return i.currentResourceAmount;
+                if(updateValue > 0)
+                {
+                    if (i.ResourceCapReached())
+                    {
+                        //resource has reached it's limit, trigger some UI here
+                        ResourceHasReachedLimit(i.resourceType);
+                        return i.currentResourceAmount;
+                    }
+                    else
+                    {
+                        i.currentResourceAmount += updateValue;
+                        return i.currentResourceAmount;
+                    }
+                }
+            }
+        }
+        NoResourceFound(resourceType);
+        return 0;
+    }
+
+    /// <summary>
+    /// updates the resource cap, you can provide a positive or negative value
+    /// <para>can return an int value if needed</para>
+    /// </summary>
+    /// <param name="resourceType"></param>
+    /// <param name="updateValue"></param>
+    /// <returns></returns>
+    public int UpdateResourceCapAmount(ResourceType resourceType, int updateValue)
+    {
+        foreach (Resource i in resourceList)
+        {
+            if (i.resourceType == resourceType)
+            {
+                if (updateValue > 0)
+                {
+                    i.resourceCap += updateValue;
+                    return i.resourceCap;
+                }
+                else
+                {
+                    if(i.resourceCap >= updateValue)
+                        i.resourceCap += updateValue;
+                    return i.resourceCap;
+                }
             }
         }
         NoResourceFound(resourceType);
@@ -152,8 +211,18 @@ public class ResourceManagement : MonoBehaviour
         {
             if (i.resourceType == resourceType)
             {
-                i.ResourceTickDrainAmount += updateValue;
-                return i.ResourceTickDrainAmount;
+                if (updateValue < 0)
+                {
+                    if (i.tickDrainAmountCap())
+                    {
+                        return 0;
+                    }
+                    else
+                    {
+                        i.resourceTickDrainAmount += updateValue;
+                        return i.resourceTickDrainAmount;
+                    }
+                }
             }
         }
         NoResourceFound(resourceType);
@@ -180,9 +249,9 @@ public class ResourceManagement : MonoBehaviour
     /// </summary>
     private void ResourceTick()
     {
-        for (int i = 0; i < resourceList.Count; i++)
+        foreach (Resource i in resourceList)
         {
-            resourceList[i].currentResourceAmount -= resourceList[i].ResourceTickDrainAmount;
+            i.currentResourceAmount -= i.resourceTickDrainAmount;
         }
     }
 
@@ -211,6 +280,11 @@ public class ResourceManagement : MonoBehaviour
 
     private void SecondInstance() {
         Debug.LogWarning("Attempted to create 2nd instance of Resource Manager");
+    }
+
+    private void ResourceHasReachedLimit(ResourceType resourceName)
+    {
+        Debug.Log("The resource: " + resourceName.ToString() + " :has reached it's limit");
     }
     #endregion
 }
