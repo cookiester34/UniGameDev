@@ -206,7 +206,7 @@ public class ResourceManagement : MonoBehaviour
     #region DebugCalls
     private void NoResourceFound(ResourceType resourceName) 
     {
-        Debug.LogWarning("The resource: " + resourceName + " :was not found");
+        Debug.LogWarning("The resource: " + resourceName.ToString() + " :was not found");
     }
 
     private void SecondInstance() {
