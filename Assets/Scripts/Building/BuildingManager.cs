@@ -12,33 +12,25 @@ public class BuildingManager : MonoBehaviour
     public ResourceManagement resourceManagement;
     public LayerMask mask;
     //have to make sure building objects are in the same order as the enum
-    public List<GameObject> buildings = new List<GameObject>();
+    public List<BuildingData> buildings = new List<BuildingData>();
 
     /// <summary>
     /// This is a function for UI, the button needs to have a building pass script on it determining what building it will place
     /// </summary>
-    /// <param name="building"></param>
-    public void PlaceBuilding(BuildingPass building)
-    {
-        if (buildings[(int)building.buildingType] != null)
-        {
-            Building temp = buildings[(int)building.buildingType].GetComponent<Building>();
-            if (resourceManagement.CanPurchase(temp.resourceCost, temp.buildingCost))
-            {
-                currentBuilding = buildings[(int)building.buildingType];
+    /// <param name="buildingType"></param>
+    public void PlaceBuilding(BuildingPass buildingType) {
+        BuildingData buildingData = buildings.Find(data => data.BuildingType == buildingType.buildingType);
+        if (buildingData == null) {
+            canPlaceBuilding = false;
+            NoBuildingFound(buildingType.buildingType);
+        } else {
+            Building temp = buildingData.BuildingPrefab.GetComponent<Building>();
+            canPlaceBuilding = !resourceManagement.CanPurchase(temp.resourceCost, temp.buildingCost);
+            if (canPlaceBuilding) {
+                currentBuilding = buildingData.BuildingPrefab;
                 tempBuilding = Instantiate(currentBuilding, new Vector3(0, 0, 0), Quaternion.identity);
                 tempBuilding.GetComponent<SphereCollider>().enabled = false;
-                canPlaceBuilding = true; 
             }
-            else
-            {
-                canPlaceBuilding = false;
-            }
-        }
-        else
-        {
-            canPlaceBuilding = false;
-            NoBuildingFound(building.buildingType);
         }
     }
 
