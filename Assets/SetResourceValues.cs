@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SetResourceValues : MonoBehaviour
-{
-    private int pollenAmount;
-    private int honeyAmount;
-    private int royalJellyAmount;
-    private int waxAmount;
-    private int populationAmount;
+public class SetResourceValues : MonoBehaviour {
+    [SerializeField] private Resource pollenResource;
+    [SerializeField] private Resource honeyResource;
+    [SerializeField] private Resource waxResource;
+    [SerializeField] private Resource royalJellyResource;
+    [SerializeField] private Resource populationResource;
 
     public Text pollenText;
     public Text honeyText;
@@ -17,35 +17,47 @@ public class SetResourceValues : MonoBehaviour
     public Text waxText;
     public Text populationText;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    private void Awake() {
+        SetupListeners();
+        InitialiseText();
     }
 
-    // Update is called once per frame. Gets and exposes the values of resources to whichever UI this script is attached to.
-    void Update()
-    {
-        GetCurrentResourceAmounts();
-        SetCurrentResourceAmounts();
+    /// <summary>
+    /// Sets up listeners so that when the value of a resource changes then so will its text display
+    /// </summary>
+    private void SetupListeners() {
+        pollenResource.OnCurrentValueChanged += UpdatePollenText;
+        honeyResource.OnCurrentValueChanged += UpdateHoneyText;
+        royalJellyResource.OnCurrentValueChanged += UpdateRoyalJellyText;
+        waxResource.OnCurrentValueChanged += UpdateWaxText;
+        populationResource.OnCurrentValueChanged += UpdatePopulationText;
     }
 
-    // Gets the current value of our resources.
-    public void GetCurrentResourceAmounts()
-    {
-        pollenAmount = Resources.Load<Resource>("Pollen").currentResourceAmount;
-        honeyAmount = Resources.Load<Resource>("Honey").currentResourceAmount;
-        royalJellyAmount = Resources.Load<Resource>("RoyalJelly").currentResourceAmount;
-        waxAmount = Resources.Load<Resource>("Wax").currentResourceAmount;
-        populationAmount = Resources.Load<Resource>("Population").currentResourceAmount;
+    private void InitialiseText() {
+        pollenText.text = "Pollen " + pollenResource.currentResourceAmount;
+        honeyText.text = "Honey " + honeyResource.currentResourceAmount;
+        jellyText.text = "Royal Jelly " + royalJellyResource.currentResourceAmount;
+        waxText.text = "Wax " + waxResource.currentResourceAmount;
+        populationText.text = "Population: " + populationResource.currentResourceAmount;
     }
 
-    // Sets public text with the values from their respective resources.
-    public void SetCurrentResourceAmounts()
-    {
-        pollenText.text = "Pollen " + pollenAmount.ToString();
-        honeyText.text = "Honey " + honeyAmount.ToString();
-        jellyText.text = "Royal Jelly " + royalJellyAmount.ToString();
-        waxText.text = "Wax " + waxAmount.ToString();
-        populationText.text = "Population: " + populationAmount.ToString();
+    private void UpdatePollenText() {
+        pollenText.text = "Pollen " + pollenResource.currentResourceAmount;
+    }
+
+    private void UpdateHoneyText() {
+        honeyText.text = "Honey " + honeyResource.currentResourceAmount;
+    }
+
+    private void UpdateRoyalJellyText() {
+        jellyText.text = "Royal Jelly " + royalJellyResource.currentResourceAmount;
+    }
+
+    private void UpdateWaxText() {
+        waxText.text = "Wax " + waxResource.currentResourceAmount;
+    }
+
+    private void UpdatePopulationText() {
+        populationText.text = "Population: " + populationResource.currentResourceAmount;
     }
 }

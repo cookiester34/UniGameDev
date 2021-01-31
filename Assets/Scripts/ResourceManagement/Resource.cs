@@ -3,8 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Resource")]
-public class Resource : ScriptableObject
-{
+public class Resource : ScriptableObject {
+    /// <summary>
+    /// Delegate for the current value change event
+    /// </summary>
+    public delegate void CurrentValueChanged();
+    
+    /// <summary>
+    /// Event to be fired whenever the value of the resource changes
+    /// </summary>
+    public event CurrentValueChanged OnCurrentValueChanged;
+    
     [Header("Resource Options")]
     public ResourceType resourceType;
     public int resourceStartingAmount;
@@ -15,14 +24,14 @@ public class Resource : ScriptableObject
     //[HideInInspector] decided to show for now while debugging
     public int resourceCap;
 
-    void OnEnable()
-    {
+    void OnEnable() {
         //sets the initial value of this resource
         currentResourceAmount = resourceStartingAmount;
     }
 
     public void ModifyAmount(int value) {
         currentResourceAmount -= value;
+        OnCurrentValueChanged?.Invoke();
     }
 
     public bool CanPurchase(int value) {
