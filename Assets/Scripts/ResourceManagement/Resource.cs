@@ -9,9 +9,11 @@ public class Resource : ScriptableObject
     public ResourceType resourceType;
     public int resourceStartingAmount;
     //[HideInInspector] decided to show for now while debugging
-    public int ResourceTickDrainAmount;
+    public int resourceTickDrainAmount;
     //[HideInInspector] decided to show for now while debugging
     public int currentResourceAmount;
+    //[HideInInspector] decided to show for now while debugging
+    public int resourceCap;
 
     void OnEnable()
     {
@@ -26,5 +28,26 @@ public class Resource : ScriptableObject
     public bool CanPurchase(int value) {
         return (currentResourceAmount - value > 0);
     }
+
+    public bool ResourceCapReached()
+    {
+        if (currentResourceAmount >= resourceCap)
+        {
+            currentResourceAmount = Mathf.Clamp(currentResourceAmount, 0, resourceCap);
+            return true;
+        }
+        else
+            return false;
+    }
     
+    public bool tickDrainAmountCap()
+    {
+        if (resourceTickDrainAmount < 0)
+        {
+            resourceTickDrainAmount = 0;
+            return true;
+        }
+        else
+            return false;
+    }
 }
