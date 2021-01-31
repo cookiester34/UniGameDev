@@ -23,10 +23,16 @@ namespace CameraNameSpace {
         private Vector3 _targetPosition;
 
         /// <summary>
+        /// Mask for the terrain
+        /// </summary>
+        [SerializeField] private LayerMask terrainMask;
+
+        /// <summary>
         /// Use current position for its beginning target
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
+            UpdateHeight();
         }
 
         /// <summary>
@@ -69,7 +75,7 @@ namespace CameraNameSpace {
         private Vector3 CastRay(Vector3 direction) {
             Vector3 hitPoint = new Vector3();
             Ray ray = new Ray(transform.position, direction);
-            if (Physics.Raycast(ray, out var hitInfo)) {
+            if (Physics.Raycast(ray, out var hitInfo, terrainMask)) {
                 hitPoint = hitInfo.point;
             }
 

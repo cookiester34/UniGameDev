@@ -15,10 +15,6 @@ public class BuildingManager : MonoBehaviour
     //have to make sure building objects are in the same order as the enum
     public List<BuildingData> buildings = new List<BuildingData>();
 
-    private void Awake() {
-        resourceManagement = ResourceManagement.Instance;
-    }
-
     /// <summary>
     /// This is a function for UI, the button needs to have a building pass script on it determining what building it will place
     /// </summary>

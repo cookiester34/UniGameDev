@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4181127338458705831}
   - component: {fileID: -6490704453852105424}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HexObject
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -116,10 +116,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 2.37
       objectReference: {fileID: 0}
+    - target: {fileID: 121204859330779623, guid: 6d83a43a2b52ce94e94d8e0c4841f736,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 6d83a43a2b52ce94e94d8e0c4841f736,
         type: 3}
       propertyPath: m_Name
       value: hex
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d83a43a2b52ce94e94d8e0c4841f736,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 6d83a43a2b52ce94e94d8e0c4841f736,
+        type: 3}
+      propertyPath: m_TagString
+      value: Tile
       objectReference: {fileID: 0}
     - target: {fileID: 3465460741324220990, guid: 6d83a43a2b52ce94e94d8e0c4841f736,
         type: 3}
