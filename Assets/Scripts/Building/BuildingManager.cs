@@ -1,10 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BuildingManager : MonoBehaviour
 {
-    GameObject currentBuilding;
+    BuildingData currentBuilding;
     GameObject tempBuilding;
     private bool canPlaceBuilding;
     private bool canDestroyBuilding;
@@ -13,6 +14,10 @@ public class BuildingManager : MonoBehaviour
     public LayerMask mask;
     //have to make sure building objects are in the same order as the enum
     public List<BuildingData> buildings = new List<BuildingData>();
+
+    private void Awake() {
+        resourceManagement = ResourceManagement.Instance;
+    }
 
     /// <summary>
     /// This is a function for UI, the button needs to have a building pass script on it determining what building it will place
@@ -24,11 +29,11 @@ public class BuildingManager : MonoBehaviour
             canPlaceBuilding = false;
             NoBuildingFound(buildingType.buildingType);
         } else {
-            Building temp = buildingData.BuildingPrefab.GetComponent<Building>();
-            canPlaceBuilding = !resourceManagement.CanPurchase(temp.resourceCost, temp.buildingCost);
+            canPlaceBuilding = resourceManagement.CanUseResources(buildingData.ResourcePurchase);
+
             if (canPlaceBuilding) {
-                currentBuilding = buildingData.BuildingPrefab;
-                tempBuilding = Instantiate(currentBuilding, new Vector3(0, 0, 0), Quaternion.identity);
+                currentBuilding = buildingData;
+                tempBuilding = Instantiate(currentBuilding.BuildingPrefab, new Vector3(0, 0, 0), Quaternion.identity);
                 tempBuilding.GetComponent<SphereCollider>().enabled = false;
             }
         }
@@ -83,6 +88,7 @@ public class BuildingManager : MonoBehaviour
                 canPlaceBuilding = false;
                 tempBuilding.transform.position = position;
                 Building tempManager = tempBuilding.AddComponent<Building>();
+                resourceManagement.UseResources(currentBuilding.ResourcePurchase);
                 tempManager.resourceManagement = resourceManagement;
                 tempBuilding.GetComponent<SphereCollider>().enabled = true;
                 tempManager.SetupBuilding();

@@ -16,3 +16,6 @@ MonoBehaviour:
     type: 3}
   buildingType: 1
   uiImage: {fileID: 0}
+  resourcePurchase:
+  - cost: 20
+    resourceType: 3

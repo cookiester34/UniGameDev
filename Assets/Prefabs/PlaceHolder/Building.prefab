@@ -109,8 +109,7 @@ MonoBehaviour:
   resourceManagement: {fileID: 0}
   resourceType: 1
   buildingType: 3
-  buildingCost: 50
-  resourceCost: 1
+  buildingData: {fileID: 11400000, guid: 463e347b6c625bb4891910e81b36b9d8, type: 2}
   resourceCapIncrease: 0
   resourceDrainAmount: 1
   resourceProductionTime: 2

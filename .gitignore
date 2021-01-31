@@ -63,10 +63,4 @@ crashlytics-build.properties
 /[Aa]ssets/Samples/
 
 # Personal excludes
-/[Aa]ssets/AssetStoreOriginals/
-/[Aa]ssets/HDRPDefaultResources/
-/[Aa]ssets/Models/
-/[Aa]ssets/PBR Ground Materials #1 [Dirt& Grass]/
-/[Aa]ssets/TextMesh Pro/
-/[Aa]ssets/Textures/
 /.idea/

@@ -8,10 +8,9 @@ public class Building : MonoBehaviour
     public ResourceManagement resourceManagement;
     public ResourceType resourceType;
     public BuildingType buildingType;
+    [SerializeField] private BuildingData buildingData;
 
-    [Header("Cost of the building")]
-    public int buildingCost;
-    public ResourceType resourceCost;
+    public BuildingData BuildingData => buildingData;
 
     [Header("Only if is a storage, or housing building")]
     public int resourceCapIncrease;
