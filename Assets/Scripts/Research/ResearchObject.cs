@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Research {
     [Serializable]
     [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Research")]
-    public class ResearchObject : ScriptableObject {
+    public class ResearchObject : ScriptableObject, IUiClickableHover {
         /// <summary>
         /// Name of the research
         /// </summary>
@@ -73,6 +74,19 @@ namespace Research {
             }
 
             return met;
+        }
+
+
+        public Sprite GetSprite() {
+            return uiSprite;
+        }
+
+        public string GetHoverText() {
+            return researchName;
+        }
+
+        public void OnClick() {
+            ResearchManager.Instance.ResearchTopic(this);
         }
     }
 }

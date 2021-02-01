@@ -35,7 +35,7 @@ public class Resource : ScriptableObject {
     }
 
     public bool CanPurchase(int value) {
-        return (currentResourceAmount - value > 0);
+        return (currentResourceAmount - value >= 0);
     }
 
     public bool ResourceCapReached()

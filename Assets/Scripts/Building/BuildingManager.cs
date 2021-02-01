@@ -14,16 +14,31 @@ public class BuildingManager : MonoBehaviour
     public LayerMask mask;
     //have to make sure building objects are in the same order as the enum
     public List<BuildingData> buildings = new List<BuildingData>();
+    
+    private static BuildingManager _instance;
+    public static BuildingManager Instance => _instance;
+
+    /// <summary>
+    /// Sets up singleton instance
+    /// </summary>
+    private void Awake() {
+        if (_instance != null) {
+            Debug.LogError("A 2nd instance of the building manager has been created, will now destroy");
+            Destroy(this);
+            return;
+        }
+
+        _instance = this;
+    }
 
     /// <summary>
     /// This is a function for UI, the button needs to have a building pass script on it determining what building it will place
     /// </summary>
     /// <param name="buildingType"></param>
-    public void PlaceBuilding(BuildingPass buildingType) {
-        BuildingData buildingData = buildings.Find(data => data.BuildingType == buildingType.buildingType);
+    public void PlaceBuilding(BuildingData buildingData) {
         if (buildingData == null) {
             canPlaceBuilding = false;
-            NoBuildingFound(buildingType.buildingType);
+            NoBuildingFound(buildingData.BuildingType);
         } else {
             canPlaceBuilding = resourceManagement.CanUseResources(buildingData.ResourcePurchase);
 

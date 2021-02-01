@@ -9,5 +9,6 @@ public enum BuildingType
     Storage,
     Housing,
     EggFactory,
-    HoneyFactory
+    HoneyFactory,
+    Destroy
 }

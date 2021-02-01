@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UI;
 using UnityEngine;
 
 /// <summary>
@@ -8,7 +9,7 @@ using UnityEngine;
 /// </summary>
 [Serializable]
 [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Building Data")]
-public class BuildingData : ScriptableObject {
+public class BuildingData : ScriptableObject, IUiClickableHover {
     /// <summary>
     /// The building prefab to instantiate
     /// </summary>
@@ -36,4 +37,20 @@ public class BuildingData : ScriptableObject {
     public BuildingType BuildingType => buildingType;
 
     public List<ResourcePurchase> ResourcePurchase => resourcePurchase;
+
+    public Sprite GetSprite() {
+        return uiImage;
+    }
+
+    public string GetHoverText() {
+        return name;
+    }
+
+    public void OnClick() {
+        if (buildingType != BuildingType.Destroy) {
+            BuildingManager.Instance.PlaceBuilding(this);
+        } else {
+            BuildingManager.Instance.DestroyBuilding();
+        }
+    }
 }
