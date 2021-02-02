@@ -18,6 +18,7 @@ public class Building : MonoBehaviour
     [Header("Only if a production building")]
     public int resourceDrainAmount;
     [Tooltip("Cannot be 0")]
+    [Range(1, 100)]//just to stop it being set to 0;
     public int resourceProductionTime;
     public int resourceProductionAmount;
 
