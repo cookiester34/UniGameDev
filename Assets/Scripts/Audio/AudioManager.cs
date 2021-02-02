@@ -28,6 +28,7 @@ public class AudioManager : MonoBehaviour
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
             s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = s.output;
         }
     }
 
@@ -35,6 +36,7 @@ public class AudioManager : MonoBehaviour
     void Start()
     {
         // Music playback can be started here.
+        Play("MainMusic");
     }
 
     public void Play (string name)
