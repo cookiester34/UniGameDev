@@ -28,6 +28,9 @@ public class GenerateFromEditor : Editor
 		if (GUILayout.Button("Update (Doesn't work)")) {
 			myScript.UpdateGrid();
 		}
+		if (GUILayout.Button("Destroy Grid")) {
+			myScript.DestroyGrid();
+		}
         serializedObject.ApplyModifiedProperties();
     }
     // Start is called before the first frame update

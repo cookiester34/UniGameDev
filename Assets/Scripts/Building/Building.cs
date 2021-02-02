@@ -1,11 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
 public class Building : MonoBehaviour
 {
-    [HideInInspector]
-    public ResourceManagement resourceManagement;
+    [NonSerialized] public ResourceManagement resourceManagement;
     public ResourceType resourceType;
     public BuildingType buildingType;
     [SerializeField] private BuildingData buildingData;

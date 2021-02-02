@@ -98,7 +98,7 @@ public class BuildingManager : MonoBehaviour
             {
                 canPlaceBuilding = false;
                 tempBuilding.transform.position = position;
-                Building tempManager = tempBuilding.AddComponent<Building>();
+                Building tempManager = tempBuilding.GetComponent<Building>();
                 resourceManagement.UseResources(currentBuilding.ResourcePurchase);
                 tempManager.resourceManagement = resourceManagement;
                 tempBuilding.GetComponent<SphereCollider>().enabled = true;

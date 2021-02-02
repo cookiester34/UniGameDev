@@ -52,6 +52,13 @@ public class GenerateHexMap : MonoBehaviour
 		}
 	}
 
+	public void DestroyGrid() {
+		// For some reason only deletes half
+		foreach (Transform child in transform) {
+			DestroyImmediate(child.gameObject);
+		}
+	}
+
     // Update is called once per frame
     void Update()
     {

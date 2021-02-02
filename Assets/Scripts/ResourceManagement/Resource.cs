@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Resource")]
@@ -27,6 +28,20 @@ public class Resource : ScriptableObject {
     void OnEnable() {
         //sets the initial value of this resource
         currentResourceAmount = resourceStartingAmount;
+    }
+
+    /// <summary>
+    /// Copies another resource into this resource
+    /// </summary>
+    /// <param name="resource">Resource to copy into this one</param>
+    public void Copy(Resource resource) {
+        resourceCap = resource.resourceCap;
+        resourceType = resource.resourceType;
+        resourceStartingAmount = resource.resourceStartingAmount;
+        resourceTickDrainAmount = resource.resourceTickDrainAmount;
+        currentResourceAmount = resource.currentResourceAmount;
+        OnCurrentValueChanged = resource.OnCurrentValueChanged;
+        OnCurrentValueChanged?.Invoke();
     }
 
     public void ModifyAmount(int value) {
