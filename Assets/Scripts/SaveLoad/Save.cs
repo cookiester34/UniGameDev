@@ -14,27 +14,13 @@ using Object = UnityEngine.Object;
 public class Save {
     public List<BuildingData> BuildingDatas = new List<BuildingData>();
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
-    public List<Resource> resources = new List<Resource>();
+    public List<SavedResource> resources = new List<SavedResource>();
+    public SavedTransform cameraTransform;
+    public Vector3 cameraTarget;
 
     public void ClearSave() {
         BuildingDatas.Clear();
         buildingTransforms.Clear();
         resources.Clear();
-    }
-}
-
-[Serializable]
-public class SavedTransform {
-    public Vector3 Position;
-    public Quaternion Rotation;
-
-    public SavedTransform(Vector3 position, Quaternion rotation) {
-        Position = position;
-        Rotation = rotation;
-    }
-    
-    public SavedTransform(Transform transform) {
-        Position = transform.position;
-        Rotation = transform.rotation;
     }
 }

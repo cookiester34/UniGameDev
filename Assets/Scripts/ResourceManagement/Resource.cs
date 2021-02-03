@@ -34,13 +34,12 @@ public class Resource : ScriptableObject {
     /// Copies another resource into this resource
     /// </summary>
     /// <param name="resource">Resource to copy into this one</param>
-    public void Copy(Resource resource) {
-        resourceCap = resource.resourceCap;
-        resourceType = resource.resourceType;
-        resourceStartingAmount = resource.resourceStartingAmount;
-        resourceTickDrainAmount = resource.resourceTickDrainAmount;
-        currentResourceAmount = resource.currentResourceAmount;
-        OnCurrentValueChanged = resource.OnCurrentValueChanged;
+    public void CopySavedResource(SavedResource resource) {
+        resourceCap = resource.Cap;
+        resourceType = resource.Type;
+        resourceStartingAmount = resource.StartingAmount;
+        resourceTickDrainAmount = resource.TickDrainAmount;
+        currentResourceAmount = resource.CurrentResourceAmount;
         OnCurrentValueChanged?.Invoke();
     }
 

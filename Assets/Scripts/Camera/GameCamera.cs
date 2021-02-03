@@ -27,6 +27,11 @@ namespace CameraNameSpace {
         /// </summary>
         [SerializeField] private LayerMask terrainMask;
 
+        public Vector3 TargetPositon {
+            get => _targetPosition;
+            set => _targetPosition = value;
+        }
+
         /// <summary>
         /// Use current position for its beginning target
         /// </summary>
