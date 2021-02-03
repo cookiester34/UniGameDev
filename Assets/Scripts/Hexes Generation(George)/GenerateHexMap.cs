@@ -1,12 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
+using Random = UnityEngine.Random;
+using Object = UnityEngine.Object;
 
 public class GenerateHexMap : MonoBehaviour
 {
+	[Range(1, 100)]
 	public int width = 1;
+	[Range(1, 100)]
 	public int length = 1;
-	public float stepHeight = 5f;
+	float steplength = 5f;
 	float bigRadius = 1.195f;
 	float smallRadius = 1.035f;
 	bool shouldOffsetRow = true;
@@ -14,15 +21,42 @@ public class GenerateHexMap : MonoBehaviour
 	public GameObject defaultHex;
 	public Material baseMat;
 	public Color[] colours;
+	
+	public InputField widthInputField;
+	public InputField lengthInputField;
+	public Button generateButton;
+	bool isUISetup;
+	
     // Start is called before the first frame update
     void Start()
     {
-
+		SetupUI();
     }
 	
+	void SetupUI() {
+				try { //try to find the UI input fields if they have not been manually assigned
+			if (!generateButton) {
+				generateButton = GameObject.Find("BtnGenerate").GetComponent<Button>();
+			}
+			if (!widthInputField) {
+				widthInputField = GameObject.Find("TxtGridWidthInput").GetComponent<InputField>();
+			}
+			if (!lengthInputField) {
+				lengthInputField = GameObject.Find("TxtGridLengthInput").GetComponent<InputField>();
+			}
+			
+			//add the "GenerateInGame" function to the Generate button
+			generateButton.onClick.AddListener(GenerateInGame);
+			isUISetup = true;
+			
+		} catch (Exception e) { //if 1 or more cannot be found then report an error
+			Debug.Log("UI Elements for grid generation have not all been assigned! Please set them in the Inspector for play mode generation to be supported.");
+			isUISetup = false; //shouldn't need this but just in case
+		}
+	}
+	
 	public void Generate() {
-		//float fWidth = width * bigRadius;
-		//transform.position = centre;
+		shouldOffsetRow = true; //need to reset this for consistency
 		float spawnBoundsX = ((float)width * (bigRadius / 2)) - (bigRadius / 2f);
 		float spawnBoundsY = ((float)length * (smallRadius / 2)) - (smallRadius / 2f);
 		for (float i = -spawnBoundsY; i <= (spawnBoundsY + 0.01f); i += smallRadius) {
@@ -45,10 +79,39 @@ public class GenerateHexMap : MonoBehaviour
 		}
 	}
 	
+	//"InGame" functions are made to be ideally be called from play mode rather than edit mode
+	public void GenerateInGame() {
+		if (isUISetup) {
+			GetParamsFromUI();
+			DestroyGridInGame();
+			Generate();
+		}
+	}
+	
+	void GetParamsFromUI() {
+		string widthStr = widthInputField.text;
+		string lengthStr = lengthInputField.text;
+		
+		if (int.TryParse(widthStr, out width)) {
+			width = Mathf.Clamp(int.Parse(widthInputField.text), 1, 100);
+		}
+		else {
+			width = 1;
+		}
+		
+		if (int.TryParse(lengthStr, out length)) {
+			length = Mathf.Clamp(int.Parse(lengthInputField.text), 1, 100);
+		}
+		else {
+			length = 1;
+		}
+		
+	}
+	
 	public void UpdateGrid() {
 		foreach (Transform child in transform) {
 			HexPanel HP = child.GetComponent<HexPanel>();
-			HP.AdjustHeightToNeighbours(stepHeight);
+			HP.AdjustHeightToNeighbours(steplength);
 		}
 	}
 
@@ -58,6 +121,13 @@ public class GenerateHexMap : MonoBehaviour
 			DestroyImmediate(child.gameObject);
 		}
 	}
+	
+	void DestroyGridInGame() {
+		HexPanel[] panels = Object.FindObjectsOfType<HexPanel>().ToArray();
+        foreach (HexPanel HP in panels) {
+            Object.Destroy(HP.gameObject);
+        }
+	}
 
     // Update is called once per frame
     void Update()
@@ -65,7 +135,7 @@ public class GenerateHexMap : MonoBehaviour
         
     }
 	
-	void SetRandColour(GameObject go) {
+	public void SetRandColour(GameObject go) {
 		Material mat = new Material(baseMat);
 		mat.color = colours[Random.Range(0, colours.Length)];
 		MeshRenderer mr = go.transform.GetChild(0).GetComponent<MeshRenderer>();

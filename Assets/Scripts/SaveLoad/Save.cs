@@ -15,6 +15,7 @@ public class Save {
     public List<BuildingData> BuildingDatas = new List<BuildingData>();
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
     public List<SavedResource> resources = new List<SavedResource>();
+	public List<SavedTransform> hexesTransforms = new List<SavedTransform>();
     public SavedTransform cameraTransform;
     public Vector3 cameraTarget;
 
@@ -22,5 +23,6 @@ public class Save {
         BuildingDatas.Clear();
         buildingTransforms.Clear();
         resources.Clear();
+		hexesTransforms.Clear();
     }
 }

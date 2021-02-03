@@ -39,6 +39,11 @@ public static class SaveLoad {
             SavedResource savedResource = new SavedResource(resource);
             save.resources.Add(savedResource);
         }
+		
+		HexPanel[] panels = Object.FindObjectsOfType<HexPanel>().ToArray();
+        foreach (HexPanel HP in panels) {
+            save.hexesTransforms.Add(new SavedTransform(HP.gameObject.transform));
+        }
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         save.cameraTransform = new SavedTransform(gameCamera.transform);
@@ -69,6 +74,13 @@ public static class SaveLoad {
         for (int i = 0; i < save.resources.Count; i++) {
             ResourceManagement.Instance.resourceList[i].CopySavedResource(save.resources[i]);
         }
+		
+		GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)
+		for (int i = 0; i < save.hexesTransforms.Count; i++) {
+			SavedTransform transform = save.hexesTransforms[i];
+			GameObject newHex = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
+			generatorInst.SetRandColour(newHex);
+		}
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         Transform cameraTransform = gameCamera.transform;
@@ -84,6 +96,11 @@ public static class SaveLoad {
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
             Object.Destroy(building.gameObject);
+        }
+		
+		HexPanel[] panels = Object.FindObjectsOfType<HexPanel>().ToArray();
+        foreach (HexPanel HP in panels) {
+            Object.Destroy(HP.gameObject);
         }
     }
 

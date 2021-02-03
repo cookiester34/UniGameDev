@@ -7,10 +7,7 @@ using UnityEditor;
 [CanEditMultipleObjects]
 public class GenerateFromEditor : Editor
 {
-	SerializedProperty width;
-	SerializedProperty length;
-	SerializedProperty defaultHex;
-	SerializedProperty colours;
+
 	
 	void OnEnable() {
 
