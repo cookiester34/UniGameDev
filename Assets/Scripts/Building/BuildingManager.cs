@@ -46,7 +46,7 @@ public class BuildingManager : MonoBehaviour
                 currentBuilding = buildingData;
                 tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
                     new Vector3(0, 0, 0), Quaternion.identity);
-                tempBuilding.GetComponent<SphereCollider>().enabled = false;
+                tempBuilding.GetComponent<Collider>().enabled = false;
             }
         }
     }
@@ -66,7 +66,7 @@ public class BuildingManager : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, mask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
             {
                 if (hit.transform.CompareTag("Tile"))
                 {
@@ -102,7 +102,7 @@ public class BuildingManager : MonoBehaviour
                 Building tempManager = tempBuilding.GetComponent<Building>();
                 resourceManagement.UseResources(currentBuilding.ResourcePurchase);
                 tempManager.resourceManagement = resourceManagement;
-                tempBuilding.GetComponent<SphereCollider>().enabled = true;
+                tempBuilding.GetComponent<Collider>().enabled = true;
                 tempManager.SetupBuilding();
             }
         }

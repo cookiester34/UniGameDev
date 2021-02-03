@@ -12,10 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd09f76a010b244a3a8194e0e93726, type: 3}
   m_Name: Tower
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 7642171427236103336, guid: 59be6edf750c4d24499e82ab2ec15f5d,
-    type: 3}
   buildingType: 5
-  uiImage: {fileID: 0}
+  uiImage: {fileID: 21300000, guid: 7fd28ba2ab5bd0e479318fc912d9e766, type: 3}
   resourcePurchase:
-  - cost: 100
+  - cost: 1
     resourceType: 0

@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3433452247964225345}
-  - component: {fileID: 4926982444884184341}
+  - component: {fileID: 8409040075947358733}
   m_Layer: 0
   m_Name: Sphere
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 1019907913518373587}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!135 &4926982444884184341
+--- !u!135 &8409040075947358733
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,7 +42,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.5
+  m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7642171427236103336
 GameObject:
@@ -55,8 +55,8 @@ GameObject:
   - component: {fileID: 1019907913518373587}
   - component: {fileID: 7051452525999942433}
   - component: {fileID: 7446007532295704477}
-  - component: {fileID: 6516629472474224501}
   - component: {fileID: 3046545903379351341}
+  - component: {fileID: 663785914879581673}
   m_Layer: 9
   m_Name: Tower
   m_TagString: Building
@@ -73,7 +73,7 @@ Transform:
   m_GameObject: {fileID: 7642171427236103336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.2, y: 1, z: 0.2}
+  m_LocalScale: {x: 0.3, y: 0.5, z: 0.3}
   m_Children:
   - {fileID: 3433452247964225345}
   m_Father: {fileID: 0}
@@ -86,7 +86,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7642171427236103336}
-  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &7446007532295704477
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -126,19 +126,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6516629472474224501
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7642171427236103336}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3046545903379351341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -151,7 +138,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb7ef49435289149859e89d4872814f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceManagement: {fileID: 0}
   resourceType: 0
   buildingType: 5
   buildingData: {fileID: 11400000, guid: 16ac760894581f240beb732d2ce9651a, type: 2}
@@ -165,3 +151,17 @@ MonoBehaviour:
   towerRange: 22
   sphereFiringRange: {fileID: 378701050537893272}
   firingSpeed: 0
+--- !u!64 &663785914879581673
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642171427236103336}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
