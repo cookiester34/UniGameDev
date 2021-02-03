@@ -21,9 +21,12 @@ public class HexPanel : MonoBehaviour
 	public void CalculateNeighbours() {
 		Collider[] hits = Physics.OverlapSphere(transform.position, 1.035f);
 		foreach (Collider hit in hits) {
-			HexPanel contender = hit.transform.parent.GetComponent<HexPanel>();
-			if (contender != this) {
-				neighbours.Add(contender);
+			Transform parent = hit.transform.parent;
+			if (hit.transform.parent != null) {
+				HexPanel contender = parent.GetComponent<HexPanel>();
+				if (contender != this) {
+					neighbours.Add(contender);
+				}
 			}
 		}
 	}
