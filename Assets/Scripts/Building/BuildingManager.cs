@@ -14,8 +14,7 @@ public class BuildingManager : MonoBehaviour
     public LayerMask mask;
     //have to make sure building objects are in the same order as the enum
     public List<BuildingData> buildings = new List<BuildingData>();
-    public List<GameObject> buildingPrefabs = new List<GameObject>();
-    
+
     private static BuildingManager _instance;
     public static BuildingManager Instance => _instance;
 

@@ -28,23 +28,23 @@ public static class BuildingTypeExtension {
         GameObject obj = null;
         switch (type) {
             case BuildingType.Storage:
-                obj = BuildingManager.Instance.buildingPrefabs[0];
+                obj = Resources.Load<GameObject>("Building");
                 break;
 
             case BuildingType.Housing:
-                obj = BuildingManager.Instance.buildingPrefabs[1];
+                obj = Resources.Load<GameObject>("Building 1");
                 break;
 
             case BuildingType.Tower:
-                obj = BuildingManager.Instance.buildingPrefabs[2];
+                obj = Resources.Load<GameObject>("Tower");
                 break;
 
             case BuildingType.HoneyFactory:
-                obj = BuildingManager.Instance.buildingPrefabs[3];
+                obj = Resources.Load<GameObject>("Tower");
                 break;
 
             case BuildingType.EggFactory:
-                obj = BuildingManager.Instance.buildingPrefabs[4];
+                obj = Resources.Load<GameObject>("Tower");
                 break;
         }
 
