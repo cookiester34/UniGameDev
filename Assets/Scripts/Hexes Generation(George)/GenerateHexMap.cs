@@ -13,7 +13,7 @@ public class GenerateHexMap : MonoBehaviour
 	public int width = 1;
 	[Range(1, 100)]
 	public int length = 1;
-	float steplength = 5f;
+	float stepheight = 5f;
 	float bigRadius = 1.195f;
 	float smallRadius = 1.035f;
 	bool shouldOffsetRow = true;
@@ -111,7 +111,7 @@ public class GenerateHexMap : MonoBehaviour
 	public void UpdateGrid() {
 		foreach (Transform child in transform) {
 			HexPanel HP = child.GetComponent<HexPanel>();
-			HP.AdjustHeightToNeighbours(steplength);
+			HP.AdjustHeightToNeighbours(stepheight);
 		}
 	}
 
