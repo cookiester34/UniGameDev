@@ -14,6 +14,7 @@ public class BuildingManager : MonoBehaviour
     public LayerMask mask;
     //have to make sure building objects are in the same order as the enum
     public List<BuildingData> buildings = new List<BuildingData>();
+    public List<GameObject> buildingPrefabs = new List<GameObject>();
     
     private static BuildingManager _instance;
     public static BuildingManager Instance => _instance;
@@ -44,7 +45,8 @@ public class BuildingManager : MonoBehaviour
 
             if (canPlaceBuilding) {
                 currentBuilding = buildingData;
-                tempBuilding = Instantiate(currentBuilding.BuildingPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
+                    new Vector3(0, 0, 0), Quaternion.identity);
                 tempBuilding.GetComponent<SphereCollider>().enabled = false;
             }
         }

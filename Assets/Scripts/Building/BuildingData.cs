@@ -11,11 +11,6 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Building Data")]
 public class BuildingData : ScriptableObject, IUiClickableHover {
     /// <summary>
-    /// The building prefab to instantiate
-    /// </summary>
-    [SerializeField] private GameObject buildingPrefab;
-    
-    /// <summary>
     /// The buildings type
     /// </summary>
     [SerializeField] private BuildingType buildingType;
@@ -30,13 +25,20 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     /// </summary>
     [SerializeField] private List<ResourcePurchase> resourcePurchase;
 
-    public GameObject BuildingPrefab => buildingPrefab;
-
     public Sprite UiImage => uiImage;
 
     public BuildingType BuildingType => buildingType;
 
     public List<ResourcePurchase> ResourcePurchase => resourcePurchase;
+
+    /// <summary>
+    /// Allows copyng in of saved data
+    /// </summary>
+    /// <param name="savedData">Data to copy in</param>
+    public void CopySavedData(SavedBuildingData savedData) {
+        buildingType = savedData.buildingType;
+        resourcePurchase = savedData.resourcePurchase;
+    }
 
     public Sprite GetSprite() {
         return uiImage;

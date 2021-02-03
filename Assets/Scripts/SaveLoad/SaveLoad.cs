@@ -32,7 +32,7 @@ public static class SaveLoad {
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
             save.buildingTransforms.Add(new SavedTransform(building.gameObject.transform));
-            save.BuildingDatas.Add(building.BuildingData);
+            save.BuildingDatas.Add(new SavedBuildingData(building.BuildingData));
         }
 
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
@@ -68,7 +68,7 @@ public static class SaveLoad {
 
         for (int i = 0; i < save.BuildingDatas.Count; i++) {
             SavedTransform transform = save.buildingTransforms[i];
-            Object.Instantiate(save.BuildingDatas[i].BuildingPrefab, transform.Position, transform.Rotation);
+            Object.Instantiate(save.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
         }
 
         for (int i = 0; i < save.resources.Count; i++) {
@@ -128,6 +128,15 @@ public static class SaveLoad {
                 string[] splitPath = strippedSavedFile.Split(Path.DirectorySeparatorChar);
                 OnSaveAdded?.Invoke(splitPath[splitPath.Length - 1]);
             }
+        }
+    }
+
+    public static void DeleteSave(string savename) {
+        string filePath = Path.Combine(saveDirectoryPath, savename) + saveExtension;
+        if (File.Exists(filePath)) {
+            File.Delete(filePath);
+        } else {
+            Debug.LogError("Attempting to delete file which does not exist, filepath: " + filePath);
         }
     }
 } 

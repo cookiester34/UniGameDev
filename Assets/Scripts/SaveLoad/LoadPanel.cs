@@ -6,15 +6,20 @@ using UnityEngine.UI;
 
 public class LoadPanel : MonoBehaviour {
     [SerializeField] private Text text;
-    [SerializeField] private Button button;
+    [SerializeField] private Button loadButton;
+    [SerializeField] private Button deleteButton;
 
     private void Awake() {
         if (text == null) {
             Debug.LogError("LoadPanel is missing its text component");
         }
 
-        if (button == null) {
-            Debug.LogError("LoadPanel is missing its button component");
+        if (loadButton == null) {
+            Debug.LogError("LoadPanel is missing its load button component");
+        }
+
+        if (deleteButton == null) {
+            Debug.LogError("LoadPanel is missing its delete button component");
         }
         
         SetupButtonListeners();
@@ -28,14 +33,25 @@ public class LoadPanel : MonoBehaviour {
     /// Sets up button listeners
     /// </summary>
     void SetupButtonListeners() {
-        button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(OnButtonClick);
+        loadButton.onClick.RemoveAllListeners();
+        loadButton.onClick.AddListener(OnLoadButtonClick);
+        
+        deleteButton.onClick.RemoveAllListeners();
+        deleteButton.onClick.AddListener(OnDeleteButtonClick);
     }
 
     /// <summary>
     /// Load the save data
     /// </summary>
-    void OnButtonClick() {
+    void OnLoadButtonClick() {
         SaveLoad.Load(text.text);
+    }
+
+    /// <summary>
+    /// Delete the save and destroy this gameobject
+    /// </summary>
+    void OnDeleteButtonClick() {
+        SaveLoad.DeleteSave(text.text);
+        Destroy(gameObject);
     }
 }
