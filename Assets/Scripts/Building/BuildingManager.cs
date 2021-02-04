@@ -129,7 +129,7 @@ public class BuildingManager : MonoBehaviour
             {
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, mask))
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     if (hit.transform.CompareTag("Building"))
                     {
