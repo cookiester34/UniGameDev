@@ -17,7 +17,6 @@ public class GenerateHexMap : MonoBehaviour
 	float bigRadius = 1.195f;
 	float smallRadius = 1.035f;
 	bool shouldOffsetRow = true;
-	//public Vector3 centre;
 	public GameObject defaultHex;
 	public Material baseMat;
 	public Color[] colours;
@@ -70,13 +69,15 @@ public class GenerateHexMap : MonoBehaviour
 				}
 				GameObject inst = Instantiate(defaultHex, pos, Quaternion.identity);
 				inst.transform.parent = transform;
-				SetRandColour(inst);
+				//SetRandColour(inst);
 			}
 		}
 		foreach (Transform child in transform) { //annoying having to do this loop twice
 			HexPanel HP = child.GetComponent<HexPanel>();
-			HP.CalculateNeighbours();
+			//HP.CalculateNeighbours();
+			HP.SetToTerrain();
 		}
+		DestroyUnneededHexes();
 	}
 	
 	//"InGame" functions are made to be ideally be called from play mode rather than edit mode
@@ -116,9 +117,23 @@ public class GenerateHexMap : MonoBehaviour
 	}
 
 	public void DestroyGrid() {
-		// For some reason only deletes half
-		foreach (Transform child in transform) {
-			DestroyImmediate(child.gameObject);
+		List<HexPanel> hexes = Object.FindObjectsOfType<HexPanel>().ToArray().ToList();
+		for (int i = 0; i < hexes.Count; i++) {
+			DestroyImmediate(hexes[i].gameObject);
+		}
+	}
+	
+	void DestroyUnneededHexes() {
+		List<HexPanel> hexes = Object.FindObjectsOfType<HexPanel>().ToArray().ToList();
+		for (int i = 0; i < hexes.Count; i++) {
+			if (hexes[i].GetComponent<HexPanel>().GetShouldBeDestroyed()) {
+				if (!Application.isPlaying) {
+					DestroyImmediate(hexes[i].gameObject);
+				}
+				else {
+					Destroy(hexes[i].gameObject);
+				}
+			}
 		}
 	}
 	

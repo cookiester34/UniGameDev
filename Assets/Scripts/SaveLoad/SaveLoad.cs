@@ -79,7 +79,7 @@ public static class SaveLoad {
 		for (int i = 0; i < save.hexesTransforms.Count; i++) {
 			SavedTransform transform = save.hexesTransforms[i];
 			GameObject newHex = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
-			generatorInst.SetRandColour(newHex);
+			//generatorInst.SetRandColour(newHex);
 		}
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
