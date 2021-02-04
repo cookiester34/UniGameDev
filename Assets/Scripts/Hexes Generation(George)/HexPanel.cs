@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
 public class HexPanel : MonoBehaviour
@@ -7,7 +8,10 @@ public class HexPanel : MonoBehaviour
 	List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
 	bool shouldBeDestroyed;
-    // Start is called before the first frame update
+
+	public List<HexPanel> Neighbours => neighbours;
+
+	// Start is called before the first frame update
     void Start()
     {
         //CalculateNeighbours();
@@ -86,5 +90,15 @@ public class HexPanel : MonoBehaviour
 		Vector3 pos = transform.position;
 		pos.y = newY;
 		transform.position = pos;
+	}
+
+	public HexPanel GetNeighbour(NeighbourDirection direction) {
+		foreach (HexPanel neighbour in neighbours) {
+			if (direction.InDirection(transform.position, neighbour.transform.position)) {
+				return neighbour;
+			}
+		}
+
+		return null;
 	}
 }
