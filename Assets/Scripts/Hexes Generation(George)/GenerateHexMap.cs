@@ -126,7 +126,7 @@ public class GenerateHexMap : MonoBehaviour
 	void DestroyUnneededHexes() {
 		List<HexPanel> hexes = Object.FindObjectsOfType<HexPanel>().ToArray().ToList();
 		for (int i = 0; i < hexes.Count; i++) {
-			if (hexes[i].GetComponent<HexPanel>().GetShouldBeDestroyed()) {
+			if (hexes[i].GetShouldBeDestroyed()) {
 				if (!Application.isPlaying) {
 					DestroyImmediate(hexes[i].gameObject);
 				}
