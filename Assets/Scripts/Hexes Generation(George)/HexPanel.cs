@@ -24,9 +24,7 @@ public class HexPanel : MonoBehaviour
 		RaycastHit rayHit;
 		LayerMask mask = LayerMask.GetMask("Environment");
 		if (Physics.Raycast(transform.position, Vector3.down, out rayHit, Mathf.Infinity, mask)) { //can only be fired below since firing upwards does not seem to interact with the Terrain's collider
-			if (rayHit.transform.tag == "Environment") {
-				AdjustYPos(rayHit.point.y + 0.05f);
-			}
+			AdjustYPos(rayHit.point.y + 0.05f);
 		}
 		Collider[] hits = Physics.OverlapBox(transform.position + bc.center, bc.size / 2f, Quaternion.identity, mask);
 		if (hits.Length > 0) {
