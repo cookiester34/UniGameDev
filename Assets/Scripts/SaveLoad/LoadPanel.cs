@@ -9,6 +9,9 @@ public class LoadPanel : MonoBehaviour {
     [SerializeField] private Button loadButton;
     [SerializeField] private Button deleteButton;
 
+    private string _savename;
+    public string Savename => _savename;
+
     private void Awake() {
         if (text == null) {
             Debug.LogError("LoadPanel is missing its text component");
@@ -27,6 +30,7 @@ public class LoadPanel : MonoBehaviour {
 
     public void SetText(string newText) {
         text.text = newText;
+        _savename = newText;
     }
 
     /// <summary>

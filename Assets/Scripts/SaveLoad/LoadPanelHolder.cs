@@ -16,6 +16,8 @@ public class LoadPanelHolder : MonoBehaviour {
     /// </summary>
     private RectTransform _rectTransform;
 
+    private List<LoadPanel> _loadPanels = new List<LoadPanel>();
+
     private void Awake() {
         _rectTransform = gameObject.GetComponent<RectTransform>();
         if (_rectTransform == null) {
@@ -32,13 +34,17 @@ public class LoadPanelHolder : MonoBehaviour {
     }
 
     /// <summary>
-    /// Adds a load panel to the scrollable so that the save may be loaded
+    /// Adds a load panel to the scrollable so that the save may be loaded if there is no loadPanel with its name
     /// </summary>
     /// <param name="savename">Name of the save</param>
     void AddLoadPanel(string savename) {
-        GameObject go = Instantiate(loadPanelPrefab, transform);
-        LoadPanel loadPanel = go.GetComponent<LoadPanel>();
-        loadPanel.SetText(savename);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
+        LoadPanel loadPanel = _loadPanels.Find(panel => panel.Savename == savename);
+        if (loadPanel == null) {
+            GameObject go = Instantiate(loadPanelPrefab, transform);
+            loadPanel = go.GetComponent<LoadPanel>();
+            _loadPanels.Add(loadPanel);
+            loadPanel.SetText(savename);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
+        }
     }
 }
