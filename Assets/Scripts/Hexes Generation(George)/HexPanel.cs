@@ -6,6 +6,7 @@ public class HexPanel : MonoBehaviour
 {
 	List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
+	bool shouldBeDestroyed;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +16,26 @@ public class HexPanel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+		
     }
+	
+	public void SetToTerrain() {
+		BoxCollider bc = GetComponent<BoxCollider>();
+		RaycastHit rayHit;
+		LayerMask mask = LayerMask.GetMask("Environment");
+		if (Physics.Raycast(transform.position, Vector3.down, out rayHit, Mathf.Infinity, mask)) { //can only be fired below since firing upwards does not seem to interact with the Terrain's collider
+			AdjustYPos(rayHit.point.y + 0.05f);
+		}
+		Collider[] hits = Physics.OverlapBox(transform.position + bc.center, bc.size / 2f, Quaternion.identity, mask);
+		if (hits.Length > 0) {
+			shouldBeDestroyed = true;
+		}
+	}
+	
+	public bool GetShouldBeDestroyed() {
+		return shouldBeDestroyed;
+	}
+	
 	
 	public void CalculateNeighbours() {
 		Collider[] hits = Physics.OverlapSphere(transform.position, 1.035f);
@@ -61,5 +80,11 @@ public class HexPanel : MonoBehaviour
 		Vector3 scale = transform.localScale;
 		scale.y = height;
 		transform.localScale = scale;
+	}
+	
+	void AdjustYPos(float newY) {
+		Vector3 pos = transform.position;
+		pos.y = newY;
+		transform.position = pos;
 	}
 }

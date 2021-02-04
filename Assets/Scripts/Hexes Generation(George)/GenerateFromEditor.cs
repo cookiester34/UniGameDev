@@ -22,9 +22,6 @@ public class GenerateFromEditor : Editor
 		if (GUILayout.Button("Generate")) {
 			myScript.Generate();
 		}
-		if (GUILayout.Button("Update (Doesn't work)")) {
-			myScript.UpdateGrid();
-		}
 		if (GUILayout.Button("Destroy Grid")) {
 			myScript.DestroyGrid();
 		}
