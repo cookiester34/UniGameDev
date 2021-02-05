@@ -10,6 +10,11 @@ public class Building : MonoBehaviour
     public ResourceType resourceType;
     public BuildingType buildingType;
     [SerializeField] private BuildingData buildingData;
+    [HideInInspector]
+    public int buildingTeir = 0;
+    public GameObject buildingTeir1;
+    public GameObject buildingTeir2;
+    public GameObject buildingTeir3;
 
     public BuildingData BuildingData => buildingData;
 
@@ -22,6 +27,28 @@ public class Building : MonoBehaviour
     [Range(1, 100)]//just to stop it being set to 0;
     public int resourceProductionTime;
     public int resourceProductionAmount;
+
+    private void Start()
+    {
+        if(buildingTeir == 0)
+        {
+            buildingTeir1.SetActive(true);
+            buildingTeir2.SetActive(false);
+            buildingTeir3.SetActive(false);
+        }
+        else if (buildingTeir == 1)
+        {
+            buildingTeir1.SetActive(false);
+            buildingTeir2.SetActive(true);
+            buildingTeir3.SetActive(false);
+        }
+        else if (buildingTeir == 2)
+        {
+            buildingTeir1.SetActive(false);
+            buildingTeir2.SetActive(false);
+            buildingTeir3.SetActive(true);
+        }
+    }
 
     /// <summary>
     /// Sets up how much the building consumes and starts the production of the building

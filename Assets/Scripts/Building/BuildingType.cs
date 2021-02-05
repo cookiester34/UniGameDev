@@ -20,7 +20,7 @@ public enum BuildingType
 public static class BuildingTypeExtension {
     
     /// <summary>
-    /// Relies on list in building manager to get the prefab from, the buildings must be in the correct order
+    /// Relies on list in building manager to get the prefab from
     /// </summary>
     /// <param name="type">Building type</param>
     /// <returns>The buildings prefab, may be null</returns>
