@@ -6,7 +6,6 @@ using UnityEngine;
 [Serializable]
 public class Building : MonoBehaviour
 {
-    [NonSerialized] public ResourceManagement resourceManagement;
     public ResourceType resourceType;
     public BuildingType buildingType;
     [SerializeField] private BuildingData buildingData;
@@ -30,23 +29,16 @@ public class Building : MonoBehaviour
 
     private void Start()
     {
-        if(buildingTeir == 0)
-        {
-            buildingTeir1.SetActive(true);
-            buildingTeir2.SetActive(false);
-            buildingTeir3.SetActive(false);
+        if (buildingTeir1 != null) {
+            buildingTeir1.SetActive(buildingTeir == 0);
         }
-        else if (buildingTeir == 1)
-        {
-            buildingTeir1.SetActive(false);
-            buildingTeir2.SetActive(true);
-            buildingTeir3.SetActive(false);
+
+        if (buildingTeir2 != null) {
+            buildingTeir2.SetActive(buildingTeir == 1);
         }
-        else if (buildingTeir == 2)
-        {
-            buildingTeir1.SetActive(false);
-            buildingTeir2.SetActive(false);
-            buildingTeir3.SetActive(true);
+
+        if (buildingTeir3 != null) {
+            buildingTeir3.SetActive(buildingTeir == 2);
         }
     }
 
@@ -57,11 +49,11 @@ public class Building : MonoBehaviour
     {
         if(buildingType == BuildingType.Storage || buildingType == BuildingType.Housing)
         {
-            resourceManagement.UpdateResourceCapAmount(resourceType, resourceCapIncrease);
+            ResourceManagement.Instance.UpdateResourceCapAmount(resourceType, resourceCapIncrease);
         }
         else
         {
-            resourceManagement.UpdateResourceTickAmount(resourceType, resourceDrainAmount);
+            ResourceManagement.Instance.UpdateResourceTickAmount(resourceType, resourceDrainAmount);
             InvokeRepeating(nameof(Production), 1, resourceProductionTime);
         }
     }
@@ -71,7 +63,7 @@ public class Building : MonoBehaviour
     /// </summary>
     private void Production()
     {
-        if(resourceManagement.GetResourceCurrentAmount(resourceType) >= resourceDrainAmount)
-            resourceManagement.UpdateResourceCurrentAmount(resourceType, resourceProductionAmount);
+        if(ResourceManagement.Instance.GetResourceCurrentAmount(resourceType) >= resourceDrainAmount)
+            ResourceManagement.Instance.UpdateResourceCurrentAmount(resourceType, resourceProductionAmount);
     }
 }

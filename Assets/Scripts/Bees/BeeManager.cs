@@ -10,14 +10,13 @@ using Util;
 public class BeeManager : MonoBehaviour {
     private List<Bee> _bees = new List<Bee>();
 
-    private static BeeManager _instance;
+    private static BeeManager _instance = null;
 
     public static BeeManager Instance {
         get {
             if (_instance == null) {
                 GameObject go = Resources.Load<GameObject>(ResourceLoad.BeeSingleton);
                 Instantiate(go);
-                _instance = go.GetComponent<BeeManager>();
             }
 
             return _instance;

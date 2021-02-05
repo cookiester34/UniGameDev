@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using Util;
 
@@ -16,11 +17,9 @@ public class BuildingManager : MonoBehaviour {
     private bool canSelectBuilding;
     private GameObject selectedBuilding;
     private Building selectedBuildingData;
-
-    private ResourceManagement resourceManagement;
     public LayerMask mask;
 
-    private static BuildingManager _instance;
+    private static BuildingManager _instance = null;
 
     [Header("Options")]
     [Range(2, 5)]
@@ -33,7 +32,6 @@ public class BuildingManager : MonoBehaviour {
             if (_instance == null) {
                 GameObject go = Resources.Load<GameObject>(ResourceLoad.BuildingSingleton);
                 Instantiate(go);
-                _instance = go.GetComponent<BuildingManager>();
             }
 
             return _instance;
@@ -52,8 +50,6 @@ public class BuildingManager : MonoBehaviour {
         }
 
         _instance = this;
-        
-        resourceManagement = ResourceManagement.Instance;
     }
 
     /// <summary>
@@ -65,7 +61,7 @@ public class BuildingManager : MonoBehaviour {
             canPlaceBuilding = false;
             NoBuildingFound(buildingData.BuildingType);
         } else {
-            canPlaceBuilding = resourceManagement.CanUseResources(buildingData.ResourcePurchase);
+            canPlaceBuilding = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase);
 
             if (canPlaceBuilding) {
                 currentBuilding = buildingData;
@@ -76,8 +72,7 @@ public class BuildingManager : MonoBehaviour {
         }
     }
 
-    private void Update()
-    {
+    private void Update() {
         PlacingBuilding();
         DestroyingBuildings();
         SelectingBuilding();
@@ -127,8 +122,7 @@ public class BuildingManager : MonoBehaviour {
             canPlaceBuilding = false;
             tempBuilding.transform.position = position;
             Building tempManager = tempBuilding.GetComponent<Building>();
-            resourceManagement.UseResources(currentBuilding.ResourcePurchase);
-            tempManager.resourceManagement = resourceManagement;
+            ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
             tempManager.SetupBuilding();
         }
@@ -165,11 +159,11 @@ public class BuildingManager : MonoBehaviour {
                         //When the building is removed remove all it's costs
                         if (hit.transform.GetComponent<Building>().buildingType == BuildingType.Storage || hit.transform.GetComponent<Building>().buildingType == BuildingType.Housing)
                         {
-                            resourceManagement.UpdateResourceCapAmount(hit.transform.GetComponent<Building>().resourceType, -hit.transform.GetComponent<Building>().resourceCapIncrease);
+                            ResourceManagement.Instance.UpdateResourceCapAmount(hit.transform.GetComponent<Building>().resourceType, -hit.transform.GetComponent<Building>().resourceCapIncrease);
                         }
                         else
                         {
-                            resourceManagement.UpdateResourceTickAmount(hit.transform.GetComponent<Building>().resourceType, -hit.transform.GetComponent<Building>().resourceDrainAmount);
+                            ResourceManagement.Instance.UpdateResourceTickAmount(hit.transform.GetComponent<Building>().resourceType, -hit.transform.GetComponent<Building>().resourceDrainAmount);
                         }
                         Destroy(hit.transform.gameObject, 0.2f);
                     }
@@ -228,7 +222,7 @@ public class BuildingManager : MonoBehaviour {
                     temp[i].cost *= teir2UpgradeCost;
                 else if (selectedBuildingData.buildingTeir > 1)//if is max teir can't uprgrade
                     canUse = false;
-                if (!resourceManagement.CanUseResource(temp[i]))//if doesn't have the resources can't upgrade
+                if (!ResourceManagement.Instance.CanUseResource(temp[i]))//if doesn't have the resources can't upgrade
                 {
                     canUse = false;
                 }
@@ -236,7 +230,7 @@ public class BuildingManager : MonoBehaviour {
             if (canUse)
             {
                 selectedBuildingData.buildingTeir++;
-                resourceManagement.UseResources(temp);
+                ResourceManagement.Instance.UseResources(temp);
                 if (selectedBuildingData.buildingTeir == 1)
                 {
                     selectedBuildingData.buildingTeir1.SetActive(false);

@@ -40,7 +40,7 @@ public class TowerBuilding : Building
 
     private void FireAtEnemies()
     {
-        resourceManagement.UpdateResourceCurrentAmount(resourceType, -towerAmmoCost);
+        ResourceManagement.Instance.UpdateResourceCurrentAmount(resourceType, -towerAmmoCost);
 
         GameObject temp = Instantiate(projectile, transform.position + new Vector3(0,1,0), Quaternion.identity);
         Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;

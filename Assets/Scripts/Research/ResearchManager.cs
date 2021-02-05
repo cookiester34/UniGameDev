@@ -18,7 +18,7 @@ namespace Research {
         /// <summary>
         /// Private singleton access
         /// </summary>
-        private static ResearchManager _instance;
+        private static ResearchManager _instance = null;
 
         /// <summary>
         /// List of all completed researches, can be queried against to see what options should be available
@@ -53,7 +53,6 @@ namespace Research {
                 if (_instance == null) {
                     GameObject go = Resources.Load<GameObject>(ResourceLoad.ResearchSingleton);
                     Instantiate(go);
-                    _instance = go.GetComponent<ResearchManager>();
                 }
 
                 return _instance;

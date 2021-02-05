@@ -13,7 +13,7 @@ public class ResourceManagement : MonoBehaviour
     /// <summary>
     /// Singleton instance
     /// </summary>
-    private static ResourceManagement _instance;
+    private static ResourceManagement _instance = null;
 
     /// <summary>
     /// Handles setting up of the singleton
@@ -33,7 +33,6 @@ public class ResourceManagement : MonoBehaviour
             if (_instance == null) {
                 GameObject go = Resources.Load<GameObject>(ResourceLoad.ResourceSingleton);
                 Instantiate(go);
-                _instance = go.GetComponent<ResourceManagement>();
             }
             return _instance;
         }
