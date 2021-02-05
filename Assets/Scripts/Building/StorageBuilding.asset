@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd09f76a010b244a3a8194e0e93726, type: 3}
   m_Name: StorageBuilding
   m_EditorClassIdentifier: 
-  buildingPrefab: {fileID: 7642171427236103336, guid: de0b65cb9e52e2c4490494af1f20abee,
-    type: 3}
   buildingType: 0
   uiImage: {fileID: 21300000, guid: ac23224a8914e1f46b87815fc7561a74, type: 3}
   resourcePurchase:
@@ -21,3 +19,4 @@ MonoBehaviour:
     resourceType: 3
   - cost: 5
     resourceType: 0
+  buildingSize: 2

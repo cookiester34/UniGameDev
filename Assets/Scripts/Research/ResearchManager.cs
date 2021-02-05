@@ -19,12 +19,7 @@ namespace Research {
         /// Private singleton access
         /// </summary>
         private static ResearchManager _instance;
-        
-        /// <summary>
-        /// Access to the singleton
-        /// </summary>
-        public static ResearchManager Instance => _instance;
-        
+
         /// <summary>
         /// List of all completed researches, can be queried against to see what options should be available
         /// </summary>
@@ -52,6 +47,18 @@ namespace Research {
             Debug.Log("A research task has started");
         }
         #endregion
+
+        public static ResearchManager Instance {
+            get {
+                if (_instance == null) {
+                    GameObject go = Resources.Load<GameObject>(ResourceLoad.ResearchSingleton);
+                    Instantiate(go);
+                    _instance = go.GetComponent<ResearchManager>();
+                }
+
+                return _instance;
+            }
+        }
 
         /// <summary>
         /// Handles singleton access

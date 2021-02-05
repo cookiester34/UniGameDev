@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using System.Diagnostics;
+using Debug = UnityEngine.Debug;
 
 [Serializable]
 public enum BuildingType
@@ -11,7 +13,8 @@ public enum BuildingType
     EggFactory,
     HoneyFactory,
     Destroy,
-    Tower
+    Tower,
+    QueenBee
 }
 
 /// <summary>
@@ -46,6 +49,14 @@ public static class BuildingTypeExtension {
             case BuildingType.EggFactory:
                 obj = Resources.Load<GameObject>("Tower");
                 break;
+
+            case BuildingType.QueenBee:
+                obj = Resources.Load<GameObject>("QueenBeeBuilding");
+                break;
+        }
+
+        if (obj == null) {
+            Debug.LogError(type + " has no matching prefab in building type enum");
         }
 
         return obj;

@@ -8,7 +8,7 @@ public class Resource : ScriptableObject {
     /// <summary>
     /// Delegate for the current value change event
     /// </summary>
-    public delegate void CurrentValueChanged();
+    public delegate void CurrentValueChanged(int currentValue);
     
     /// <summary>
     /// Event to be fired whenever the value of the resource changes
@@ -40,12 +40,12 @@ public class Resource : ScriptableObject {
         resourceStartingAmount = resource.StartingAmount;
         resourceTickDrainAmount = resource.TickDrainAmount;
         currentResourceAmount = resource.CurrentResourceAmount;
-        OnCurrentValueChanged?.Invoke();
+        OnCurrentValueChanged?.Invoke(currentResourceAmount);
     }
 
     public void ModifyAmount(int value) {
         currentResourceAmount -= value;
-        OnCurrentValueChanged?.Invoke();
+        OnCurrentValueChanged?.Invoke(currentResourceAmount);
     }
 
     public bool CanPurchase(int value) {

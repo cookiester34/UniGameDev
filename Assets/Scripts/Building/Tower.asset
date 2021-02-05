@@ -17,3 +17,4 @@ MonoBehaviour:
   resourcePurchase:
   - cost: 1
     resourceType: 0
+  buildingSize: 1

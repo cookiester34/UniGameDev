@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
 public class ResourceManagement : MonoBehaviour
 {
@@ -13,11 +14,6 @@ public class ResourceManagement : MonoBehaviour
     /// Singleton instance
     /// </summary>
     private static ResourceManagement _instance;
-    
-    /// <summary>
-    /// Public access to singleton instance
-    /// </summary>
-    public static ResourceManagement Instance => _instance;
 
     /// <summary>
     /// Handles setting up of the singleton
@@ -30,6 +26,17 @@ public class ResourceManagement : MonoBehaviour
         }
 
         _instance = this;
+    }
+
+    public static ResourceManagement Instance {
+        get {
+            if (_instance == null) {
+                GameObject go = Resources.Load<GameObject>(ResourceLoad.ResourceSingleton);
+                Instantiate(go);
+                _instance = go.GetComponent<ResourceManagement>();
+            }
+            return _instance;
+        }
     }
 
     private void Start()
@@ -260,7 +267,7 @@ public class ResourceManagement : MonoBehaviour
     /// </summary>
     /// <param name="resourceType">The resource type to find</param>
     /// <returns>The matching resource, or null if it was not found</returns>
-    private Resource GetResource(ResourceType resourceType) {
+    public Resource GetResource(ResourceType resourceType) {
         Resource matchingResource = 
             resourceList.Find(resource => resource.resourceType == resourceType);
 

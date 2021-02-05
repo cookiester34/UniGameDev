@@ -2,9 +2,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Util;
 
-public class BuildingManager : MonoBehaviour
-{
+public class BuildingManager : MonoBehaviour {
+    public delegate void BuildingSelected(bool selected);
+    public event BuildingSelected OnBuildingSelected;
+
     BuildingData currentBuilding;
     GameObject tempBuilding;
     private bool canPlaceBuilding;
@@ -14,21 +17,28 @@ public class BuildingManager : MonoBehaviour
     private GameObject selectedBuilding;
     private Building selectedBuildingData;
 
-    public ResourceManagement resourceManagement;
+    private ResourceManagement resourceManagement;
     public LayerMask mask;
-    //have to make sure building objects are in the same order as the enum
-    public List<BuildingData> buildings = new List<BuildingData>();
 
     private static BuildingManager _instance;
-    public static BuildingManager Instance => _instance;
-
-    public GameObject upgradeButton;
 
     [Header("Options")]
     [Range(2, 5)]
     public int teir1UpgradeCost;
     [Range(2, 5)]
     public int teir2UpgradeCost;
+
+    public static BuildingManager Instance {
+        get {
+            if (_instance == null) {
+                GameObject go = Resources.Load<GameObject>(ResourceLoad.BuildingSingleton);
+                Instantiate(go);
+                _instance = go.GetComponent<BuildingManager>();
+            }
+
+            return _instance;
+        }
+    }
 
 
     /// <summary>
@@ -42,6 +52,8 @@ public class BuildingManager : MonoBehaviour
         }
 
         _instance = this;
+        
+        resourceManagement = ResourceManagement.Instance;
     }
 
     /// <summary>
@@ -75,12 +87,6 @@ public class BuildingManager : MonoBehaviour
             canSelectBuilding = true;
         else
             canSelectBuilding = false;
-
-        //toggles the button for upgrading buildings
-        if (selectedBuildingData != null)
-            upgradeButton.SetActive(true);
-        else
-            upgradeButton.SetActive(false);
     }
 
     /// <summary>
@@ -182,6 +188,7 @@ public class BuildingManager : MonoBehaviour
         if (!canSelectBuilding)
         {
             selectedBuilding = null;
+            OnBuildingSelected?.Invoke(false);
         }
         else
         {
@@ -195,6 +202,7 @@ public class BuildingManager : MonoBehaviour
                     {
                         selectedBuilding = hit.transform.gameObject;
                         selectedBuildingData = selectedBuilding.GetComponent<Building>();
+                        OnBuildingSelected?.Invoke(true);
                     }
                 }
             }

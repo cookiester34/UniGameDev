@@ -41,23 +41,23 @@ public class SetResourceValues : MonoBehaviour {
         populationText.text = "Population: " + populationResource.currentResourceAmount;
     }
 
-    private void UpdatePollenText() {
-        pollenText.text = "Pollen " + pollenResource.currentResourceAmount;
+    private void UpdatePollenText(int newValue) {
+        pollenText.text = "Pollen " + newValue;
     }
 
-    private void UpdateHoneyText() {
-        honeyText.text = "Honey " + honeyResource.currentResourceAmount;
+    private void UpdateHoneyText(int newValue) {
+        honeyText.text = "Honey " + newValue;
     }
 
-    private void UpdateRoyalJellyText() {
-        jellyText.text = "Royal Jelly " + royalJellyResource.currentResourceAmount;
+    private void UpdateRoyalJellyText(int newValue) {
+        jellyText.text = "Royal Jelly " + newValue;
     }
 
-    private void UpdateWaxText() {
-        waxText.text = "Wax " + waxResource.currentResourceAmount;
+    private void UpdateWaxText(int newValue) {
+        waxText.text = "Wax " + newValue;
     }
 
-    private void UpdatePopulationText() {
-        populationText.text = "Population: " + populationResource.currentResourceAmount;
+    private void UpdatePopulationText(int newValue) {
+        populationText.text = "Population: " + newValue;
     }
 }
