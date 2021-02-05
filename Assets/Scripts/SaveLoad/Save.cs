@@ -14,8 +14,11 @@ using Object = UnityEngine.Object;
 public class Save {
     public List<SavedBuildingData> BuildingDatas = new List<SavedBuildingData>();
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
+
     public List<SavedResource> resources = new List<SavedResource>();
+
 	public List<SavedTransform> hexesTransforms = new List<SavedTransform>();
+
     public SavedTransform cameraTransform;
     public Vector3 cameraTarget;
 }

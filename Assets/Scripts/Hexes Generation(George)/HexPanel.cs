@@ -1,28 +1,22 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using UnityEngine;
 
 public class HexPanel : MonoBehaviour
 {
-	List<HexPanel> neighbours = new List<HexPanel>();
+	[SerializeField] List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
 	bool shouldBeDestroyed;
+	private BuildingFoundation _buildingFoundation;
 
-	public List<HexPanel> Neighbours => neighbours;
+	public BuildingFoundation BuildingFoundation => _buildingFoundation;
 
-	// Start is called before the first frame update
-    void Start()
-    {
-        //CalculateNeighbours();
-    }
+	private void Awake() {
+		_buildingFoundation = GetComponent<BuildingFoundation>();
+	}
 
-    // Update is called once per frame
-    void Update()
-    {
-		
-    }
-	
 	public void SetToTerrain() {
 		BoxCollider bc = GetComponent<BoxCollider>();
 		RaycastHit rayHit;
@@ -100,5 +94,12 @@ public class HexPanel : MonoBehaviour
 		}
 
 		return null;
+	}
+
+	private void OnDrawGizmosSelected() {
+		foreach (HexPanel neighbour in neighbours) {
+			Gizmos.color = Color.cyan;
+			Gizmos.DrawCube(neighbour.transform.position, new Vector3(0.5f, 0.5f, 0.5f));
+		}
 	}
 }

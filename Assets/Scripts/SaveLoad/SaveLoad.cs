@@ -76,11 +76,16 @@ public static class SaveLoad {
         }
 		
 		GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)
-		for (int i = 0; i < save.hexesTransforms.Count; i++) {
+        List<HexPanel> panels = new List<HexPanel>();
+        for (int i = 0; i < save.hexesTransforms.Count; i++) {
 			SavedTransform transform = save.hexesTransforms[i];
-			GameObject newHex = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
-			//generatorInst.SetRandColour(newHex);
-		}
+			GameObject go = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
+            panels.Add(go.GetComponent<HexPanel>());
+        }
+
+        foreach (HexPanel panel in panels) {
+            panel.CalculateNeighbours();
+        }
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         Transform cameraTransform = gameCamera.transform;

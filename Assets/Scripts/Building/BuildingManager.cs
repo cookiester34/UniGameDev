@@ -66,14 +66,15 @@ public class BuildingManager : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
-            {
-                if (hit.transform.CompareTag("Tile"))
-                {
-                    tempBuilding.transform.position = hit.collider.GetComponent<Renderer>().bounds.center;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) {
+                BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
+                if (foundation != null) {
+                    Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingSize);
+                    tempBuilding.transform.position = buildPosition;
 
-                    if (Input.GetKeyDown(KeyCode.Mouse0))
-                        PlaceBuilding(hit.collider.GetComponent<Renderer>().bounds.center);
+                    if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                        PlaceBuilding(buildPosition, foundation);
+                    }
                 }
             }
             if (Input.GetKeyDown(KeyCode.Escape))
@@ -85,26 +86,19 @@ public class BuildingManager : MonoBehaviour
     /// final placement of the building when mouse is clicked
     /// </summary>
     /// <param name="position"></param>
-    private void PlaceBuilding(Vector3 position)
+    private void PlaceBuilding(Vector3 position, BuildingFoundation foundation)
     {
-        RaycastHit hit;
-        if (Physics.Raycast(position + new Vector3(0, 10, 0), Vector3.down, out hit, 20, mask))
-        {
-            if (hit.transform.CompareTag("Building"))
-            {
-                CanclePlacingBuilding();
-                BuildingAlreadyThere();
-            }
-            else
-            {
-                canPlaceBuilding = false;
-                tempBuilding.transform.position = position;
-                Building tempManager = tempBuilding.GetComponent<Building>();
-                resourceManagement.UseResources(currentBuilding.ResourcePurchase);
-                tempManager.resourceManagement = resourceManagement;
-                tempBuilding.GetComponent<Collider>().enabled = true;
-                tempManager.SetupBuilding();
-            }
+        if (!foundation.BuildMulti(currentBuilding.BuildingSize)) {
+            CanclePlacingBuilding();
+            BuildingAlreadyThere();
+        } else {
+            canPlaceBuilding = false;
+            tempBuilding.transform.position = position;
+            Building tempManager = tempBuilding.GetComponent<Building>();
+            resourceManagement.UseResources(currentBuilding.ResourcePurchase);
+            tempManager.resourceManagement = resourceManagement;
+            tempBuilding.GetComponent<Collider>().enabled = true;
+            tempManager.SetupBuilding();
         }
     }
     /// <summary>

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Enum for hex neighbours directions
+/// </summary>
 public enum NeighbourDirection {
     Above, // position.x greater
     AboveRight, // position.x greater, position.z lower
@@ -12,6 +15,13 @@ public enum NeighbourDirection {
 }
 
 public static class NeighbourDirectionExtension {
+    /// <summary>
+    /// Determines if the neighbour is in the given direction
+    /// </summary>
+    /// <param name="direction">Direction to test for</param>
+    /// <param name="position">position of the central hex</param>
+    /// <param name="comparedPosition">position of the neighbour being checked</param>
+    /// <returns>True if the neighbour is in the given direction, else false</returns>
     public static bool InDirection(this NeighbourDirection direction, Vector3 position, Vector3 comparedPosition) {
         bool inDirection = false;
         switch (direction) {
@@ -22,16 +32,16 @@ public static class NeighbourDirectionExtension {
                 inDirection = (comparedPosition.x < position.x) && (position.z == comparedPosition.z);
                 break;
             case NeighbourDirection.BelowLeft:
-                inDirection = (comparedPosition.x - position.x) < 0 && comparedPosition.z - position.z > 0;
+                inDirection = (comparedPosition.x < position.x) && (comparedPosition.z > position.z);
                 break;
             case NeighbourDirection.BelowRight:
-                inDirection = (comparedPosition.x - position.x) < 0 && comparedPosition.z - position.z < 0;
+                inDirection = (comparedPosition.x < position.x) && (comparedPosition.z < position.z);
                 break;
             case NeighbourDirection.AboveLeft:
-                inDirection = (comparedPosition.x - position.x) > 0 && comparedPosition.z - position.z > 0;
+                inDirection = (comparedPosition.x > position.x) && (comparedPosition.z < position.z);
                 break;
             case NeighbourDirection.AboveRight:
-                inDirection = (comparedPosition.x - position.x) > 0 && comparedPosition.z - position.z < 0;
+                inDirection = (comparedPosition.x > position.x) && (comparedPosition.z < position.z);
                 break;
         }
 

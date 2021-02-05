@@ -25,11 +25,19 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     /// </summary>
     [SerializeField] private List<ResourcePurchase> resourcePurchase;
 
+    /// <summary>
+    /// The size of the building, 1 means it will take one tile, 2 will be a patch of 3, no consideration for greater
+    /// sizes yet
+    /// </summary>
+    [SerializeField] private int buildingSize;
+
     public Sprite UiImage => uiImage;
 
     public BuildingType BuildingType => buildingType;
 
     public List<ResourcePurchase> ResourcePurchase => resourcePurchase;
+
+    public int BuildingSize => buildingSize;
 
     /// <summary>
     /// Allows copyng in of saved data
