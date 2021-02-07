@@ -31,11 +31,11 @@ public static class BuildingTypeExtension {
         GameObject obj = null;
         switch (type) {
             case BuildingType.Storage:
-                obj = Resources.Load<GameObject>("Building");
+                obj = Resources.Load<GameObject>("Storage");
                 break;
 
             case BuildingType.Housing:
-                obj = Resources.Load<GameObject>("Building 1");
+                obj = Resources.Load<GameObject>("Housing");
                 break;
 
             case BuildingType.Tower:

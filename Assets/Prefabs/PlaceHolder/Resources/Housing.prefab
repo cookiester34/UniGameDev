@@ -13,9 +13,9 @@ GameObject:
   - component: {fileID: 7446007532295704477}
   - component: {fileID: 6516629472474224501}
   - component: {fileID: -3125807644095819491}
-  - component: {fileID: -7823651049734207575}
+  - component: {fileID: 4735565122750138493}
   m_Layer: 9
-  m_Name: QueenBeeBuilding
+  m_Name: Housing
   m_TagString: Building
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 7642171427236103336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
+  m_LocalScale: {x: 0.75, y: 0.5, z: 0.75}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -109,16 +109,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: 4
   buildingType: 6
-  buildingData: {fileID: 11400000, guid: 5fd12689c90bce44aa2b80341df40761, type: 2}
+  buildingData: {fileID: 11400000, guid: 0a8254fbfa9592545ab06b0685e0acf6, type: 2}
   buildingTeir: 0
   buildingTeir1: {fileID: 0}
   buildingTeir2: {fileID: 0}
   buildingTeir3: {fileID: 0}
-  resourceCapIncrease: 0
-  resourceDrainAmount: 1
-  resourceProductionTime: 1
-  resourceProductionAmount: 1
---- !u!114 &-7823651049734207575
+--- !u!114 &4735565122750138493
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,9 +123,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 7642171427236103336}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0af5e2bb59f4c7646871890a6c3584d5, type: 3}
+  m_Script: {fileID: 11500000, guid: 59b77dbb3b9b2a14baea2573b5de7108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionTime: 1
-  productionAmount: 0
+  amount: 10
   resource: {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}

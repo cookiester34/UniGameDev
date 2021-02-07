@@ -44,12 +44,22 @@ public class Resource : ScriptableObject {
     }
 
     public void ModifyAmount(int value) {
-        currentResourceAmount -= value;
-        OnCurrentValueChanged?.Invoke(currentResourceAmount);
+        if (currentResourceAmount < resourceCap) {
+            currentResourceAmount += value;
+            if (currentResourceAmount > resourceCap) {
+                currentResourceAmount = resourceCap;
+            }
+
+            OnCurrentValueChanged?.Invoke(currentResourceAmount);
+        }
     }
 
     public bool CanPurchase(int value) {
         return (currentResourceAmount - value >= 0);
+    }
+
+    public void ModifyCap(int amount) {
+        resourceCap += amount;
     }
 
     public bool ResourceCapReached()
@@ -62,7 +72,7 @@ public class Resource : ScriptableObject {
         else
             return false;
     }
-    
+
     public bool tickDrainAmountCap()
     {
         if (resourceTickDrainAmount < 0)

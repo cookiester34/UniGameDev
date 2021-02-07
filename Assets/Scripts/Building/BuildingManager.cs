@@ -121,10 +121,8 @@ public class BuildingManager : MonoBehaviour {
         } else {
             canPlaceBuilding = false;
             tempBuilding.transform.position = position;
-            Building tempManager = tempBuilding.GetComponent<Building>();
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
-            tempManager.SetupBuilding();
         }
     }
     /// <summary>
@@ -154,17 +152,9 @@ public class BuildingManager : MonoBehaviour {
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
-                    if (hit.transform.CompareTag("Building"))
-                    {
-                        //When the building is removed remove all it's costs
-                        if (hit.transform.GetComponent<Building>().buildingType == BuildingType.Storage || hit.transform.GetComponent<Building>().buildingType == BuildingType.Housing)
-                        {
-                            ResourceManagement.Instance.UpdateResourceCapAmount(hit.transform.GetComponent<Building>().resourceType, -hit.transform.GetComponent<Building>().resourceCapIncrease);
-                        }
-                        else
-                        {
-                            ResourceManagement.Instance.UpdateResourceTickAmount(hit.transform.GetComponent<Building>().resourceType, -hit.transform.GetComponent<Building>().resourceDrainAmount);
-                        }
+                    if (hit.transform.CompareTag("Building")) {
+                        var beforeDestroy =  hit.collider.GetComponent<IBeforeDestroy>();
+                        beforeDestroy?.BeforeDestroy();
                         Destroy(hit.transform.gameObject, 0.2f);
                     }
                 }
