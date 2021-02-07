@@ -9,11 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 810157f578f34cf4ab1c294031f89cf2, type: 3}
-  m_Name: RoyalJelly
+  m_Script: {fileID: 11500000, guid: a7cd09f76a010b244a3a8194e0e93726, type: 3}
+  m_Name: HoneyConverter
   m_EditorClassIdentifier: 
-  resourceType: 2
-  resourceStartingAmount: 10
-  resourceTickDrainAmount: 0
-  currentResourceAmount: 10
-  resourceCap: 510
+  buildingType: 3
+  uiImage: {fileID: 21300000, guid: 9f228397ce9376d40a8917ea0d573f98, type: 3}
+  resourcePurchase:
+  - cost: 10
+    resourceType: 3
+  buildingSize: 1

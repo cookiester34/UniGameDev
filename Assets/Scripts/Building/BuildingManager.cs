@@ -153,8 +153,13 @@ public class BuildingManager : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     if (hit.transform.CompareTag("Building")) {
-                        var beforeDestroy =  hit.collider.GetComponent<IBeforeDestroy>();
-                        beforeDestroy?.BeforeDestroy();
+                        var beforeDestroy =  hit.collider.GetComponents<IBeforeDestroy>();
+                        if (beforeDestroy != null && beforeDestroy.Length > 0) {
+                            foreach (var destroy in beforeDestroy) {
+                                destroy.BeforeDestroy();
+                            }
+                        }
+
                         Destroy(hit.transform.gameObject, 0.2f);
                     }
                 }

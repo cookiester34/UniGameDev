@@ -73,6 +73,15 @@ public class HexPanel : MonoBehaviour
 			scaleModifiedByCode = true;
 		}
 	}
+
+	/// <summary>
+	/// Removes this panel from the neighbours list of its neighbours
+	/// </summary>
+	public void RemoveFromNeighboursList() {
+		foreach (HexPanel neighbour in neighbours) {
+			neighbour.neighbours.Remove(this);
+		}
+	}
 	
 	void AdjustHeight(float height) {
 		Vector3 scale = transform.localScale;

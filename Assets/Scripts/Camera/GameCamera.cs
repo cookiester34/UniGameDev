@@ -80,7 +80,7 @@ namespace CameraNameSpace {
         private Vector3 CastRay(Vector3 direction) {
             Vector3 hitPoint = new Vector3();
             Ray ray = new Ray(transform.position, direction);
-            if (Physics.Raycast(ray, out var hitInfo, terrainMask)) {
+            if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, terrainMask)) {
                 hitPoint = hitInfo.point;
             }
 

@@ -43,7 +43,7 @@ public static class BuildingTypeExtension {
                 break;
 
             case BuildingType.HoneyFactory:
-                obj = Resources.Load<GameObject>("Tower");
+                obj = Resources.Load<GameObject>("HoneyConverter");
                 break;
 
             case BuildingType.EggFactory:

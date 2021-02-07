@@ -15,5 +15,5 @@ MonoBehaviour:
   resourceType: 4
   resourceStartingAmount: 5
   resourceTickDrainAmount: 0
-  currentResourceAmount: 5
-  resourceCap: 0
+  currentResourceAmount: 15
+  resourceCap: 530

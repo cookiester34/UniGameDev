@@ -127,6 +127,7 @@ public class GenerateHexMap : MonoBehaviour
 		List<HexPanel> hexes = Object.FindObjectsOfType<HexPanel>().ToArray().ToList();
 		for (int i = 0; i < hexes.Count; i++) {
 			if (hexes[i].GetShouldBeDestroyed()) {
+				hexes[i].RemoveFromNeighboursList();
 				if (!Application.isPlaying) {
 					DestroyImmediate(hexes[i].gameObject);
 				}
@@ -144,12 +145,6 @@ public class GenerateHexMap : MonoBehaviour
         }
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
 	public void SetRandColour(GameObject go) {
 		Material mat = new Material(baseMat);
 		mat.color = colours[Random.Range(0, colours.Length)];
