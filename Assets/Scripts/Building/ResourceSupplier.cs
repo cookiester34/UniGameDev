@@ -18,10 +18,14 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             Debug.LogError("A resource supplier has been created with no resource set");
             return;
         }
-        
-        resource.ModifyTickDrain(productionAmount, productionTime);
-    }
 
+        Building building = GetComponent<Building>();
+        if (building != null) {
+            building.OnBuildingPlaced += () => resource.ModifyTickDrain(productionAmount, productionTime);
+        } else {
+            resource.ModifyTickDrain(productionAmount, productionTime);
+        }
+    }
 
     public void BeforeDestroy() {
         resource.ModifyTickDrain(productionAmount * -1, productionTime);

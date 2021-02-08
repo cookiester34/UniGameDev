@@ -123,6 +123,7 @@ public class BuildingManager : MonoBehaviour {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
+            tempBuilding.GetComponent<Building>()?.PlaceBuilding();
         }
     }
     /// <summary>

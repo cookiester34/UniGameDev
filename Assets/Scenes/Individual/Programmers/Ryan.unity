@@ -1949,6 +1949,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beePrefab: {fileID: 326437159731175180, guid: 38a10bb7667555d45881063e54674893,
     type: 3}
+  QueenBeeBuilding: {fileID: 0}
 --- !u!4 &469484429
 Transform:
   m_ObjectHideFlags: 0
@@ -2831,8 +2832,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb90621b3b346948a1dd173485e31ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  offset: {x: 0, y: 5, z: 0}
-  panSpeed: 3
+  offset: {x: 0, y: 10, z: 0}
+  panSpeed: 5
   terrainMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -5196,7 +5197,7 @@ Transform:
   m_GameObject: {fileID: 1042168881}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -50, y: -10, z: -50}
-  m_LocalScale: {x: 0.009600166, y: 0.009600166, z: 0.009600166}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

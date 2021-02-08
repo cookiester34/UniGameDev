@@ -22,7 +22,13 @@ public class ResourceStorage : MonoBehaviour, IBeforeDestroy {
         if (resource == null) {
             Debug.LogError("A resource storage has been created with no resource set");
         }
-        ModifyCap(true);
+
+        Building building = GetComponent<Building>();
+        if (building != null) {
+            building.OnBuildingPlaced += () => ModifyCap(true);
+        } else {
+            ModifyCap(true);
+        }
     }
 
     private void ModifyCap(bool increase) {

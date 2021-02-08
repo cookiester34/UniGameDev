@@ -4,8 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public class Building : MonoBehaviour
-{
+public class Building : MonoBehaviour {
+    public delegate void BuildingPlaced();
+    public event BuildingPlaced OnBuildingPlaced;
+
     public ResourceType resourceType;
     [SerializeField] private BuildingData buildingData;
     [HideInInspector]
@@ -29,5 +31,9 @@ public class Building : MonoBehaviour
         if (buildingTeir3 != null) {
             buildingTeir3.SetActive(buildingTeir == 2);
         }
+    }
+
+    public void PlaceBuilding() {
+        OnBuildingPlaced?.Invoke();
     }
 }

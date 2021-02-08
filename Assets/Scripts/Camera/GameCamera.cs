@@ -16,6 +16,8 @@ namespace CameraNameSpace {
         /// </summary>
         [Tooltip("The speed at which the camera will pan")]
         [SerializeField] private int panSpeed;
+
+        private float timeMoving = 0;
         
         /// <summary>
         /// The position that the camera will attempt to target
@@ -48,7 +50,10 @@ namespace CameraNameSpace {
             float y = Input.GetAxis("Vertical");
             Vector2 panDirection = new Vector2(x, y);
             if (panDirection != Vector2.zero) {
+                timeMoving += Time.deltaTime;
                 Pan(panDirection.normalized * Time.deltaTime);
+            } else {
+                timeMoving = 0;
             }
         }
 
@@ -92,7 +97,7 @@ namespace CameraNameSpace {
         /// </summary>
         /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
         private void Pan(Vector2 inputDirection) {
-            inputDirection *= panSpeed;
+            inputDirection *= panSpeed * ConvertTimeToExtraSpeedMultiplier();
             Vector3 transformRight = transform.right;
             
             // Get the forward flattened for height
@@ -102,6 +107,16 @@ namespace CameraNameSpace {
 
             Vector3 movement = (transformRight * inputDirection.x) + (transformForwardsFlattened * inputDirection.y);
             _targetPosition += movement;
+        }
+
+        private float ConvertTimeToExtraSpeedMultiplier() {
+            float extraSpeed = 1;
+
+            if (timeMoving > 1) {
+                extraSpeed = Mathf.Min(3, timeMoving);
+            }
+
+            return extraSpeed;
         }
     }
 }
