@@ -10,8 +10,9 @@ public enum BuildingType
 {
     Storage,
     Housing,
-    EggFactory,
-    HoneyFactory,
+    WaxConverter,
+    HoneyConverter,
+    JellyConverter,
     Destroy,
     Tower,
     QueenBee
@@ -42,12 +43,16 @@ public static class BuildingTypeExtension {
                 obj = Resources.Load<GameObject>("Tower");
                 break;
 
-            case BuildingType.HoneyFactory:
+            case BuildingType.HoneyConverter:
                 obj = Resources.Load<GameObject>("HoneyConverter");
                 break;
 
-            case BuildingType.EggFactory:
-                obj = Resources.Load<GameObject>("Tower");
+            case BuildingType.WaxConverter:
+                obj = Resources.Load<GameObject>("WaxConverter");
+                break;
+
+            case BuildingType.JellyConverter:
+                obj = Resources.Load<GameObject>("JellyConverter");
                 break;
 
             case BuildingType.QueenBee:

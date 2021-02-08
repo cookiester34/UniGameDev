@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7cd09f76a010b244a3a8194e0e93726, type: 3}
   m_Name: Tower
   m_EditorClassIdentifier: 
-  buildingType: 5
+  buildingType: 6
   uiImage: {fileID: 21300000, guid: 7fd28ba2ab5bd0e479318fc912d9e766, type: 3}
   resourcePurchase:
   - cost: 1

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Population
   m_EditorClassIdentifier: 
   resourceType: 4
+  resourceTickAmount: 10
   resourceStartingAmount: 5
-  resourceTickDrainAmount: 0
-  currentResourceAmount: 15
+  currentResourceAmount: 107
+  startingTickAmount: 0
   resourceCap: 530
+  startingCap: 500

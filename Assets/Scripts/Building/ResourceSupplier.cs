@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 /// Building component that allows a building to supply, or use a resource
 /// </summary>
-public class ResourceSupplier : MonoBehaviour {
+public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     [Tooltip("Cannot be 0")]
     [Range(1, 100)]//just to stop it being set to 0;
     [SerializeField] private int productionTime = 1;
@@ -16,11 +16,14 @@ public class ResourceSupplier : MonoBehaviour {
     void Awake() {
         if (resource == null) {
             Debug.LogError("A resource supplier has been created with no resource set");
+            return;
         }
-        InvokeRepeating(nameof(Production), productionTime, productionTime);
+        
+        resource.ModifyTickDrain(productionAmount, productionTime);
     }
 
-    private void Production() {
-        resource.ModifyAmount(productionAmount);
+
+    public void BeforeDestroy() {
+        resource.ModifyTickDrain(productionAmount * -1, productionTime);
     }
 }

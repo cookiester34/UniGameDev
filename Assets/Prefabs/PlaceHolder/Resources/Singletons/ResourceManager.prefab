@@ -49,4 +49,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6805fa6b226494444ad52bbd41c2b73a, type: 2}
   - {fileID: 11400000, guid: bf2a7cd146a17794f99ce3ea80e7f5b1, type: 2}
   - {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
-  resourceTickTime: 10
+  resourceTickTime: 1

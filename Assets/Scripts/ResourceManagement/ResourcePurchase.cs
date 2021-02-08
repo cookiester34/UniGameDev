@@ -14,4 +14,9 @@ public class ResourcePurchase {
     /// The resource type to purchase from
     /// </summary>
     public ResourceType resourceType;
+
+    public ResourcePurchase(ResourceType type, int cost) {
+        this.cost = cost;
+        resourceType = type;
+    }
 }

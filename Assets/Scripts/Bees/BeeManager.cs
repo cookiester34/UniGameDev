@@ -14,7 +14,7 @@ public class BeeManager : MonoBehaviour {
 
     private static BeeManager _instance = null;
 
-    private int _cachedPopulation = 0;
+    private float _cachedPopulation = 0;
 
     public static BeeManager Instance {
         get {
@@ -37,12 +37,12 @@ public class BeeManager : MonoBehaviour {
         _instance = this;
 
         Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
-        _cachedPopulation = population.currentResourceAmount;
+        _cachedPopulation = population.CurrentResourceAmount;
         population.OnCurrentValueChanged += OnPopulationChange;
     }
 
-    public void OnPopulationChange(int populationNewValue) {
-        int populationChange = _cachedPopulation - populationNewValue;
+    public void OnPopulationChange(float populationNewValue) {
+        float populationChange = populationNewValue - _cachedPopulation;
         if (populationChange > 0) {
             for (int i = 0; i < populationChange; i++) {
                 GameObject go = Instantiate(beePrefab);

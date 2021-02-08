@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7cd09f76a010b244a3a8194e0e93726, type: 3}
-  m_Name: QueenBee
+  m_Name: DestroyBuilding
   m_EditorClassIdentifier: 
-  buildingType: 6
-  uiImage: {fileID: 21300000, guid: 9a2b4095fc12f2642bc167d9ba4ce5fe, type: 3}
+  buildingType: 5
+  uiImage: {fileID: 21300000, guid: 5af7ee8f99db29042855173ca79cc6f5, type: 3}
   resourcePurchase: []
-  buildingSize: 2
+  buildingSize: 0

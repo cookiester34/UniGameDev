@@ -10,8 +10,8 @@ using UnityEngine;
 public class SavedResource {
     public ResourceType Type;
     public int StartingAmount;
-    public int TickDrainAmount;
-    public int CurrentResourceAmount;
+    public float TickDrainAmount;
+    public float CurrentResourceAmount;
     public int Cap;
 
     /// <summary>
@@ -20,9 +20,9 @@ public class SavedResource {
     /// <param name="resource">Resource to save</param>
     public SavedResource(Resource resource) {
         Type = resource.resourceType;
-        StartingAmount = resource.resourceStartingAmount;
-        TickDrainAmount = resource.resourceTickDrainAmount;
-        CurrentResourceAmount = resource.currentResourceAmount;
-        Cap = resource.resourceCap;
+        StartingAmount = resource.ResourceStartingAmount;
+        TickDrainAmount = resource.ResourceTickAmount;
+        CurrentResourceAmount = resource.CurrentResourceAmount;
+        Cap = resource.ResourceCap;
     }
 }

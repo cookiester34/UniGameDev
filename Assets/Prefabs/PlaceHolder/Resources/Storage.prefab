@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 4263860906202005341}
   - component: {fileID: 2976878325122177308}
   - component: {fileID: -8870230007966069597}
+  - component: {fileID: 2080038946008790397}
   m_Layer: 9
   m_Name: Storage
   m_TagString: Building
@@ -111,7 +112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   resourceType: 1
-  buildingType: 3
   buildingData: {fileID: 11400000, guid: 463e347b6c625bb4891910e81b36b9d8, type: 2}
   buildingTeir: 0
   buildingTeir1: {fileID: 0}
@@ -173,3 +173,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 30
   resource: {fileID: 11400000, guid: bf2a7cd146a17794f99ce3ea80e7f5b1, type: 2}
+--- !u!208 &2080038946008790397
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642171427236103336}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5

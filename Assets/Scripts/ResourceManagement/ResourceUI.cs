@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
@@ -18,10 +19,10 @@ public class ResourceUI : MonoBehaviour {
         _text = GetComponent<Text>();
 
         resource.OnCurrentValueChanged += UpdateText;
-        UpdateText(resource.currentResourceAmount);
+        UpdateText(resource.CurrentResourceAmount);
     }
 
-    void UpdateText(int newValue) {
-        _text.text = resource.name + ": " + newValue + "/" + resource.resourceCap;
+    void UpdateText(float newValue) {
+        _text.text = String.Format("{0}: {1:0} / {2}", resource.name, newValue, resource.ResourceCap);
     }
 }

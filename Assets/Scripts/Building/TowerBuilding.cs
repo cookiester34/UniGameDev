@@ -40,12 +40,13 @@ public class TowerBuilding : Building
 
     private void FireAtEnemies()
     {
-        ResourceManagement.Instance.UpdateResourceCurrentAmount(resourceType, -towerAmmoCost);
+        if (ResourceManagement.Instance.UseResource(new ResourcePurchase(resourceType, towerAmmoCost))) {
 
-        GameObject temp = Instantiate(projectile, transform.position + new Vector3(0,1,0), Quaternion.identity);
-        Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
-        temp.GetComponent<Rigidbody>().AddForce(dir * projectileSpeed, ForceMode.Impulse);
-        StartCoroutine(DestroyProjectile(temp, 5f));
+            GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+            Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
+            temp.GetComponent<Rigidbody>().AddForce(dir * projectileSpeed, ForceMode.Impulse);
+            StartCoroutine(DestroyProjectile(temp, 5f));
+        }
     }
 
     IEnumerator DestroyProjectile(GameObject projectile, float delay)

@@ -8,7 +8,7 @@ public class Resource : ScriptableObject {
     /// <summary>
     /// Delegate for the current value change event
     /// </summary>
-    public delegate void CurrentValueChanged(int currentValue);
+    public delegate void CurrentValueChanged(float currentValue);
     
     /// <summary>
     /// Event to be fired whenever the value of the resource changes
@@ -17,17 +17,36 @@ public class Resource : ScriptableObject {
     
     [Header("Resource Options")]
     public ResourceType resourceType;
-    public int resourceStartingAmount;
-    //[HideInInspector] decided to show for now while debugging
-    public int resourceTickDrainAmount;
-    //[HideInInspector] decided to show for now while debugging
-    public int currentResourceAmount;
-    //[HideInInspector] decided to show for now while debugging
-    public int resourceCap;
+
+    /// <summary>
+    /// The amount that the current should change by each tick, a positive value increases the amount, negative reduces
+    /// </summary>
+    [SerializeField] private float resourceTickAmount;
+    [SerializeField] private int resourceStartingAmount;
+
+    [SerializeField] private float currentResourceAmount;
+    [SerializeField] private float startingTickAmount;
+
+    [SerializeField] private int resourceCap;
+    [SerializeField] private int startingCap;
+
+    public float CurrentResourceAmount => currentResourceAmount;
+
+    public float ResourceTickAmount => resourceTickAmount;
+
+    public int ResourceCap => resourceCap;
+
+    public int ResourceStartingAmount => resourceStartingAmount;
+
+    public float StartingTickAmount => startingTickAmount;
+
+    public int StartingCap => startingCap;
 
     void OnEnable() {
         //sets the initial value of this resource
         currentResourceAmount = resourceStartingAmount;
+        resourceTickAmount = startingTickAmount;
+        resourceCap = startingCap;
     }
 
     /// <summary>
@@ -38,12 +57,12 @@ public class Resource : ScriptableObject {
         resourceCap = resource.Cap;
         resourceType = resource.Type;
         resourceStartingAmount = resource.StartingAmount;
-        resourceTickDrainAmount = resource.TickDrainAmount;
+        resourceTickAmount = resource.TickDrainAmount;
         currentResourceAmount = resource.CurrentResourceAmount;
         OnCurrentValueChanged?.Invoke(currentResourceAmount);
     }
 
-    public void ModifyAmount(int value) {
+    public void ModifyAmount(float value) {
         if (currentResourceAmount < resourceCap) {
             currentResourceAmount += value;
             if (currentResourceAmount > resourceCap) {
@@ -62,6 +81,15 @@ public class Resource : ScriptableObject {
         resourceCap += amount;
     }
 
+    /// <summary>
+    /// Modifies the tick drain amount
+    /// </summary>
+    /// <param name="amount">The amount to modify it by</param>
+    /// <param name="time">Over how long the amount should take effect</param>
+    public void ModifyTickDrain(float amount, float time = 1) {
+        resourceTickAmount += amount / time;
+    }
+
     public bool ResourceCapReached()
     {
         if (currentResourceAmount >= resourceCap)
@@ -75,9 +103,9 @@ public class Resource : ScriptableObject {
 
     public bool tickDrainAmountCap()
     {
-        if (resourceTickDrainAmount < 0)
+        if (resourceTickAmount < 0)
         {
-            resourceTickDrainAmount = 0;
+            resourceTickAmount = 0;
             return true;
         }
         else

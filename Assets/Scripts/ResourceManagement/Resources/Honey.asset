@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Honey
   m_EditorClassIdentifier: 
   resourceType: 1
+  resourceTickAmount: 0
   resourceStartingAmount: 100
-  resourceTickDrainAmount: 0
-  currentResourceAmount: 100
+  currentResourceAmount: 110
+  startingTickAmount: 0
   resourceCap: 550
+  startingCap: 500

@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Wax
   m_EditorClassIdentifier: 
   resourceType: 3
+  resourceTickAmount: 0
   resourceStartingAmount: 100
-  resourceTickDrainAmount: 0
-  currentResourceAmount: 10
+  currentResourceAmount: 40
+  startingTickAmount: 0
   resourceCap: 530
+  startingCap: 500
