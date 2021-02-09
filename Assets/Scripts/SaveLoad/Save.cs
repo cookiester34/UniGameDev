@@ -16,6 +16,8 @@ public class Save {
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
 
     public List<SavedResource> resources = new List<SavedResource>();
+    
+    public List<SavedResearch> researches = new List<SavedResearch>();
 
 	public List<SavedTransform> hexesTransforms = new List<SavedTransform>();
 

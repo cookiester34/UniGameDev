@@ -5,6 +5,7 @@ using System.Linq;
 using System.Resources;
 using System.Runtime.Serialization.Formatters.Binary;
 using CameraNameSpace;
+using Research;
 using UnityEngine;
 
 /// <summary>
@@ -38,6 +39,11 @@ public static class SaveLoad {
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
             SavedResource savedResource = new SavedResource(resource);
             save.resources.Add(savedResource);
+        }
+
+        foreach (ResearchObject researchObject in ResearchManager.Instance.AllResearch) {
+            SavedResearch savedResearch = new SavedResearch(researchObject);
+            save.researches.Add(savedResearch);
         }
 		
 		HexPanel[] panels = Object.FindObjectsOfType<HexPanel>().ToArray();
@@ -75,6 +81,12 @@ public static class SaveLoad {
 
         for (int i = 0; i < save.resources.Count; i++) {
             ResourceManagement.Instance.resourceList[i].CopySavedResource(save.resources[i]);
+        }
+
+        foreach (SavedResearch research in save.researches) {
+            ResearchObject obj = ResearchManager.Instance.AllResearch.Find(
+                o => o.ResearchName == research.name);
+            obj.CopySavedResearch(research);
         }
 		
 		GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)

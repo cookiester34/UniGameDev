@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 968ac92e9712d544b88946406fa66867, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allResearch:
+  - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
+  - {fileID: 11400000, guid: bbd54cab746591c499d0f65321b4b680, type: 2}

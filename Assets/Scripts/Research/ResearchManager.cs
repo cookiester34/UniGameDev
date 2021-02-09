@@ -20,17 +20,14 @@ namespace Research {
         /// </summary>
         private static ResearchManager _instance = null;
 
-        /// <summary>
-        /// List of all completed researches, can be queried against to see what options should be available
-        /// </summary>
-        List<ResearchObject> completedResearch = new List<ResearchObject>();
+        [SerializeField] private List<ResearchObject> allResearch = new List<ResearchObject>();
         
         /// <summary>
         /// Dictionary of ongoing research timers used to track when the research is complete
         /// </summary>
         Dictionary<ResearchObject, Timer> ongoingResearch = new Dictionary<ResearchObject, Timer>();
-
-        public List<ResearchObject> CompletedResearch => completedResearch;
+        
+        public List<ResearchObject> AllResearch => allResearch;
         public Dictionary<ResearchObject, Timer> OngoingResearch => ongoingResearch;
 
         #region DebugMessages
@@ -86,7 +83,6 @@ namespace Research {
                 Timer timer = research.Value;
                 if (timer.Finished()) {
                     finishedResearch = research.Key;
-                    completedResearch.Add(research.Key);
                     research.Key.Researched = true;
                     researchCompleted?.Invoke();
                     Debug.Log("Research completed!");

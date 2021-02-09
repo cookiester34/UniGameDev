@@ -57,6 +57,10 @@ namespace Research {
             researched = false;
         }
 
+        public void CopySavedResearch(SavedResearch savedResearch) {
+            researched = savedResearch.researched;
+        }
+
         /// <summary>
         /// Determines if the previous research has been unlocked such that this one can
         /// </summary>
