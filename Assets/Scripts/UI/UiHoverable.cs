@@ -14,7 +14,7 @@ namespace UI {
         /// <summary>
         /// Button component
         /// </summary>
-        private Button _button;
+        protected Button _button;
 
         /// <summary>
         /// Text component should be found in child
@@ -22,10 +22,10 @@ namespace UI {
         private Text _tooltipText;
 
         [Tooltip("The scriptable object must implement IUiClickableHover, used to call its methods")]
-        [SerializeField] private ScriptableObject _scriptableObject;
+        [SerializeField] protected ScriptableObject _scriptableObject;
         private IUiClickableHover _clickableHover;
 
-        private void Awake() {
+        protected virtual void Awake() {
             Setup();
         }
 

@@ -5,17 +5,6 @@ using Util;
 namespace Research {
     public class ResearchManager : MonoBehaviour {
         /// <summary>
-        /// Delegate for the event to fire when research is completed
-        /// </summary>
-        public delegate void OnResearchComplete();
-
-        /// <summary>
-        /// Event to use when if something needs to update when a research is completed, hook into as such
-        /// ResearchManager.Instance.researchCompleted += MyFunc; 
-        /// </summary>
-        public event OnResearchComplete researchCompleted;
-        
-        /// <summary>
         /// Private singleton access
         /// </summary>
         private static ResearchManager _instance = null;
@@ -83,8 +72,7 @@ namespace Research {
                 Timer timer = research.Value;
                 if (timer.Finished()) {
                     finishedResearch = research.Key;
-                    research.Key.Researched = true;
-                    researchCompleted?.Invoke();
+                    research.Key.Research();
                     Debug.Log("Research completed!");
                     break;
                 }
@@ -114,6 +102,7 @@ namespace Research {
                 DebugResearchStarted();
                 Timer timer = new Timer(researchObject.TimeToResearch);
                 ongoingResearch.Add(researchObject, timer);
+                researchObject.BeginResearch();
                 timer.Start();
             }
         }

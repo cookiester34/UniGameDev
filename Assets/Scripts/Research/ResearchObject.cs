@@ -8,6 +8,9 @@ namespace Research {
     [Serializable]
     [CreateAssetMenu(fileName = "New Resource", menuName = "Resources/New Research")]
     public class ResearchObject : ScriptableObject, IUiClickableHover {
+        public delegate void ResearchedDelegate();
+        public event ResearchedDelegate OnResearchFinished;
+        public event ResearchedDelegate OnResearchStarted;
         /// <summary>
         /// Name of the research
         /// </summary>
@@ -48,10 +51,7 @@ namespace Research {
 
         public Sprite UiSprite => uiSprite;
 
-        public bool Researched {
-            get => researched;
-            set => researched = value;
-        }
+        public bool Researched => researched;
 
         private void OnEnable() {
             researched = false;
@@ -59,6 +59,18 @@ namespace Research {
 
         public void CopySavedResearch(SavedResearch savedResearch) {
             researched = savedResearch.researched;
+            if (researched) {
+                OnResearchFinished?.Invoke();
+            }
+        }
+
+        public void BeginResearch() {
+            OnResearchStarted?.Invoke();
+        }
+
+        public void Research() {
+            researched = true;
+            OnResearchFinished?.Invoke();
         }
 
         /// <summary>
