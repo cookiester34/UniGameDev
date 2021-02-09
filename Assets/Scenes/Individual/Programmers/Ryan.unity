@@ -889,7 +889,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar: {fileID: 677267006}
+  content: {fileID: 677267006}
 --- !u!114 &199625810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4710,7 +4710,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 5
+  m_Text: 50
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -6526,7 +6526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar: {fileID: 1091869382}
+  content: {fileID: 1091869382}
 --- !u!114 &1517460262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7001,7 +7001,7 @@ MonoBehaviour:
   m_CaretColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
   m_CustomCaretColor: 0
   m_SelectionColor: {r: 0.65882355, g: 0.80784315, b: 1, a: 0.7529412}
-  m_Text: 5
+  m_Text: 50
   m_CaretBlinkRate: 0.85
   m_CaretWidth: 1
   m_ReadOnly: 0
@@ -7311,7 +7311,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar: {fileID: 818246293}
+  content: {fileID: 818246293}
 --- !u!114 &1576811382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7998,7 +7998,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bar: {fileID: 744751046}
+  content: {fileID: 744751046}
 --- !u!114 &1716281914
 MonoBehaviour:
   m_ObjectHideFlags: 0
