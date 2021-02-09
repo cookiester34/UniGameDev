@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
 using Util;
+using Random = UnityEngine.Random;
 
 public class BuildingManager : MonoBehaviour {
     public delegate void BuildingSelected(bool selected);
@@ -66,7 +67,8 @@ public class BuildingManager : MonoBehaviour {
             if (canPlaceBuilding) {
                 currentBuilding = buildingData;
                 tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
-                    new Vector3(0, 0, 0), Quaternion.identity);
+                    new Vector3(0, 0, 0),
+                    Quaternion.Euler(0, 30 + Random.Range(0, 7) * 60, 0));
                 tempBuilding.GetComponent<Collider>().enabled = false;
             }
         }
