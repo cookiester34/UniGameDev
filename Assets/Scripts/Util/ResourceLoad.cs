@@ -8,5 +8,6 @@
         public const string ResearchSingleton = "Singletons/ResearchManager";
         public const string BeeSingleton = "Singletons/BeeManager";
         public const string BuildingSingleton = "Singletons/BuildingManager";
+        public const string SeasonSingleton = "Singletons/SeasonManager";
     }
 }

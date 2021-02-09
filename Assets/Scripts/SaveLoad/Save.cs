@@ -21,4 +21,6 @@ public class Save {
 
     public SavedTransform cameraTransform;
     public Vector3 cameraTarget;
+
+    public int currentSeason;
 }

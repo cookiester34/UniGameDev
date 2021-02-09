@@ -45,6 +45,8 @@ public static class SaveLoad {
             save.hexesTransforms.Add(new SavedTransform(HP.gameObject.transform));
         }
 
+        save.currentSeason = (int)SeasonManager.Instance.GetCurrentSeason();//save current season
+
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         save.cameraTransform = new SavedTransform(gameCamera.transform);
         save.cameraTarget = gameCamera.TargetPositon;
@@ -86,6 +88,8 @@ public static class SaveLoad {
         foreach (HexPanel panel in panels) {
             panel.CalculateNeighbours();
         }
+
+        SeasonManager.Instance.SetCurrentSeason((Seasons)save.currentSeason);//set currrent season
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         Transform cameraTransform = gameCamera.transform;
