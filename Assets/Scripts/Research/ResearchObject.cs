@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
+using Util;
 
 namespace Research {
     [Serializable]
@@ -24,11 +25,6 @@ namespace Research {
         [SerializeField] private List<ResourcePurchase> resources;
 
         /// <summary>
-        /// How long it takes for the research to be completed
-        /// </summary>
-        [SerializeField] int timeToResearch;
-
-        /// <summary>
         /// Other prerequisite researches that must first be unlocked
         /// </summary>
         [SerializeField] private List<ResearchObject> Prerequisites;
@@ -38,6 +34,9 @@ namespace Research {
         /// </summary>
         [SerializeField] private bool researched;
 
+        [SerializeField] private float researchProgress;
+        [SerializeField] private Timer timer;
+
         /// <summary>
         /// An image for the research to show in the Ui
         /// </summary>
@@ -45,13 +44,11 @@ namespace Research {
 
         public string ResearchName => researchName;
         public List<ResourcePurchase> Resources => resources;
-
-        public int TimeToResearch => timeToResearch;
         public string Description => description;
 
-        public Sprite UiSprite => uiSprite;
-
         public bool Researched => researched;
+
+        public float ResearchProgress => researchProgress;
 
         private void OnEnable() {
             researched = false;
@@ -65,12 +62,21 @@ namespace Research {
         }
 
         public void BeginResearch() {
+            timer.Start();
             OnResearchStarted?.Invoke();
         }
 
-        public void Research() {
+        public void TickTimer() {
+            researchProgress = timer.Progress();
+            if (!researched && researchProgress > 99f) {
+                FinishResearch();
+            }
+        }
+
+        public void FinishResearch() {
             researched = true;
             OnResearchFinished?.Invoke();
+            Debug.Log("The research: " + researchName + " has been completed");
         }
 
         /// <summary>

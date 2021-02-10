@@ -14,10 +14,16 @@ namespace Research {
         /// <summary>
         /// Dictionary of ongoing research timers used to track when the research is complete
         /// </summary>
-        Dictionary<ResearchObject, Timer> ongoingResearch = new Dictionary<ResearchObject, Timer>();
+        List<ResearchObject> ongoingResearch = new List<ResearchObject>();
+        
+        /// <summary>
+        /// A list to temporarily storing finished research in, used so we can remove an item from the ongoing without
+        /// modifying its contents when it may be iterating over them
+        /// </summary>
+        List<ResearchObject> tempFinishedResearch = new List<ResearchObject>();
         
         public List<ResearchObject> AllResearch => allResearch;
-        public Dictionary<ResearchObject, Timer> OngoingResearch => ongoingResearch;
+        public List<ResearchObject> OngoingResearch => ongoingResearch;
 
         #region DebugMessages
         private void SecondInstance() {
@@ -67,20 +73,14 @@ namespace Research {
         /// event will be fired
         /// </summary>
         private void RunTimers() {
-            ResearchObject finishedResearch = null;
-            foreach (KeyValuePair<ResearchObject,Timer> research in ongoingResearch) {
-                Timer timer = research.Value;
-                if (timer.Finished()) {
-                    finishedResearch = research.Key;
-                    research.Key.Research();
-                    Debug.Log("Research completed!");
-                    break;
-                }
+            foreach (ResearchObject research in ongoingResearch) {
+                research.TickTimer();
             }
 
-            if (finishedResearch != null) {
-                ongoingResearch.Remove(finishedResearch);
+            foreach (ResearchObject researchObject in tempFinishedResearch) {
+                ongoingResearch.Remove(researchObject);
             }
+            tempFinishedResearch.Clear();
         }
 
         /// <summary>
@@ -100,10 +100,9 @@ namespace Research {
 
             if (ResourceManagement.Instance.UseResources(researchObject.Resources)) {
                 DebugResearchStarted();
-                Timer timer = new Timer(researchObject.TimeToResearch);
-                ongoingResearch.Add(researchObject, timer);
+                ongoingResearch.Add(researchObject);
                 researchObject.BeginResearch();
-                timer.Start();
+                researchObject.OnResearchFinished += () => tempFinishedResearch.Add(researchObject);
             }
         }
     }
