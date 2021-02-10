@@ -76,7 +76,8 @@ namespace Research {
         public void FinishResearch() {
             researched = true;
             OnResearchFinished?.Invoke();
-            Debug.Log("The research: " + researchName + " has been completed");
+			Debug.Log("The research: " + researchName + " has been completed");
+			UIEventAnnounceManager.Instance.AnnounceEvent("The research: " + researchName + " has been completed");
         }
 
         /// <summary>

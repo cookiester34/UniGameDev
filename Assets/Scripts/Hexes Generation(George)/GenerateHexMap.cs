@@ -33,7 +33,7 @@ public class GenerateHexMap : MonoBehaviour
     }
 	
 	void SetupUI() {
-				try { //try to find the UI input fields if they have not been manually assigned
+		try { //try to find the UI input fields if they have not been manually assigned
 			if (!generateButton) {
 				generateButton = GameObject.Find("BtnGenerate").GetComponent<Button>();
 			}

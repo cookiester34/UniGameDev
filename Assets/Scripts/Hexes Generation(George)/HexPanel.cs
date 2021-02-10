@@ -8,7 +8,7 @@ public class HexPanel : MonoBehaviour
 {
 	[SerializeField] List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
-	bool shouldBeDestroyed;
+	bool shouldBeDestroyed = true;
 	private BuildingFoundation _buildingFoundation;
 
 	public BuildingFoundation BuildingFoundation => _buildingFoundation;
@@ -23,6 +23,7 @@ public class HexPanel : MonoBehaviour
 		LayerMask mask = LayerMask.GetMask("Environment");
 		if (Physics.Raycast(transform.position, Vector3.down, out rayHit, Mathf.Infinity, mask)) { //can only be fired below since firing upwards does not seem to interact with the Terrain's collider
 			AdjustYPos(rayHit.point.y + 0.05f);
+			shouldBeDestroyed = false;
 		}
 		Collider[] hits = Physics.OverlapBox(transform.position + bc.center, bc.size / 2f, Quaternion.identity, mask);
 		if (hits.Length > 0) {

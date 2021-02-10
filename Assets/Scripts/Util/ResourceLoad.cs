@@ -9,5 +9,6 @@
         public const string BeeSingleton = "Singletons/BeeManager";
         public const string BuildingSingleton = "Singletons/BuildingManager";
         public const string SeasonSingleton = "Singletons/SeasonManager";
+		public const string EventAnnounceSingleton = "Singletons/EventAnnounceManager";
     }
 }
