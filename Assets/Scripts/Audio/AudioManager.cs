@@ -7,6 +7,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public List<Music> peaceMusic;
     public List<Music> combatMusic;
+    public Music mainMenuMusic;
 
     private Music currentTrack;
     private float currentTrackLength;
@@ -60,13 +61,24 @@ public class AudioManager : MonoBehaviour
             m.source.pitch = m.pitch;
             m.source.outputAudioMixerGroup = m.output;
         }
+
+        mainMenuMusic.source = gameObject.AddComponent<AudioSource>();
+        mainMenuMusic.source.clip = mainMenuMusic.musicClip;
+        mainMenuMusic.source.volume = mainMenuMusic.volume;
+        mainMenuMusic.source.pitch = mainMenuMusic.pitch;
+        mainMenuMusic.source.outputAudioMixerGroup = mainMenuMusic.output;
+        mainMenuMusic.source.loop = true;
+
     }
 
     // Start is called before the first frame update.
     void Start()
     {
         // Music playback can be started here.
-        StartPeaceMusic();
+        //StartPeaceMusic();
+        if (mainMenuMusic != null)
+            mainMenuMusic.source.Play();
+
     }
 
     // This is what is used to play the sound in code.
@@ -108,6 +120,8 @@ public class AudioManager : MonoBehaviour
     // Two functions stop the current queue, assign a new one and start playback. These could be condensed in to one function with a parameter, but user input isn't required so typos won't break stuff.
     public void StartCombatMusic ()
     {
+        if (mainMenuMusic.source.isPlaying)
+            mainMenuMusic.source.Stop();
         StopMusic();
         musicQueue = new MusicQueue(combatMusic);
         musicSource = GetComponent<AudioSource>();
@@ -116,6 +130,8 @@ public class AudioManager : MonoBehaviour
 
     public void StartPeaceMusic ()
     {
+        if (mainMenuMusic.source.isPlaying)
+            mainMenuMusic.source.Stop();
         StopMusic();
         musicQueue = new MusicQueue(peaceMusic);
         musicSource = GetComponent<AudioSource>();
