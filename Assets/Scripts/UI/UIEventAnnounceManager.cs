@@ -26,17 +26,18 @@ public class UIEventAnnounceManager : MonoBehaviour
     // Start is called before the first frame update
 	void Awake() {
 		if (inst) {
-            Debug.LogWarning("Attempted to create 2nd instance of Resource Manager");
+            Debug.LogWarning("Attempted to create 2nd instance of Event Announce Manager");
             Destroy(this);
             return;
         }
 
         inst = this;
+		InitCanvas();
 	}
 	
     void Start()
     {
-		InitCanvas();
+		
 		//just going to leave these here in case they are needed to test again
 		
 		/*AnnounceEvent("This is a test message!");
@@ -54,7 +55,7 @@ public class UIEventAnnounceManager : MonoBehaviour
     }
 	
 	void InitCanvas() {
-		canvas = GameObject.Find("Canvas");
+		canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
 		if (!canvas) {
 			Debug.LogWarning("Event announcements require a UI canvas to work.");
 			Destroy(this);
@@ -62,9 +63,6 @@ public class UIEventAnnounceManager : MonoBehaviour
 	}
 	
 	public void AnnounceEvent(string announceText) {
-		if (!canvas) {
-			InitCanvas();
-		}
 		while (messageBoxes.Count >= maxMessageBoxes) {
 			DismissMessage(messageBoxes[0]);
 		}
@@ -79,7 +77,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 	void CreateMessageBox(string message) {
 		ShiftMessageBoxes();
 		UIAnnounceMessageBox msgInst = Instantiate(messageBoxPrefab);
-		msgInst.transform.parent = canvas.transform;
+		msgInst.transform.SetParent(canvas.transform);
 		msgInst.GetComponent<RectTransform>().anchoredPosition = startPoint;
 		msgInst.SetText(message);
 		messageBoxes.Add(msgInst);

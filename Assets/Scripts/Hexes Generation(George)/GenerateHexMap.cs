@@ -48,7 +48,7 @@ public class GenerateHexMap : MonoBehaviour
 			generateButton.onClick.AddListener(GenerateInGame);
 			isUISetup = true;
 			
-		} catch (Exception e) { //if 1 or more cannot be found then report an error
+		} catch { //if 1 or more cannot be found then report an error
 			Debug.Log("UI Elements for grid generation have not all been assigned! Please set them in the Inspector for play mode generation to be supported.");
 			isUISetup = false; //shouldn't need this but just in case
 		}
