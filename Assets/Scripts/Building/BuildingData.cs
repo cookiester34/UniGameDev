@@ -30,6 +30,11 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     /// sizes yet
     /// </summary>
     [SerializeField] private int buildingSize;
+	
+	/// <summary>
+    /// How many instances of this type of building can exist at once
+    /// </summary>
+    [SerializeField] private int maxInstances;
 
     public Sprite UiImage => uiImage;
 
@@ -38,6 +43,8 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     public List<ResourcePurchase> ResourcePurchase => resourcePurchase;
 
     public int BuildingSize => buildingSize;
+	
+	public int MaxInstances => maxInstances;
 
     /// <summary>
     /// Allows copyng in of saved data

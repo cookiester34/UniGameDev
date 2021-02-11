@@ -9,7 +9,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 	private static UIEventAnnounceManager inst;
 	public UIAnnounceMessageBox messageBoxPrefab;
 	public Vector2 startPoint; //acts as the first point that the newest message box will spawn at
-	int maxMessageBoxes = 6; //change this depending on how screen space works in the final project
+	int maxMessageBoxes = 4; //change this depending on how screen space works in the final project
 	List<UIAnnounceMessageBox> messageBoxes = new List<UIAnnounceMessageBox>(); //lists all active message boxes
 	GameObject canvas;
 	

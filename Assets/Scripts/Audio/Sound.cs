@@ -14,6 +14,7 @@ public class Sound
     public float pitch;
 
     public bool loop;
+    //public bool autoModulation; - Not yet implemented.
 
     public AudioMixerGroup output;
 

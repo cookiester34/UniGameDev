@@ -18,3 +18,4 @@ MonoBehaviour:
   - cost: 20
     resourceType: 3
   buildingSize: 1
+  maxInstances: 1000
