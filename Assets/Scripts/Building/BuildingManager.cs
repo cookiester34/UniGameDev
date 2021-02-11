@@ -14,6 +14,8 @@ public class BuildingManager : MonoBehaviour {
     GameObject tempBuilding;
     private bool canPlaceBuilding;
     private bool canDestroyBuilding;
+	
+	private int[] numBuildingTypes;
 
     private bool canSelectBuilding;
     private GameObject selectedBuilding;
@@ -51,6 +53,7 @@ public class BuildingManager : MonoBehaviour {
         }
 
         _instance = this;
+		numBuildingTypes = new int[Enum.GetNames(typeof(BuildingType)).Length];
     }
 
     /// <summary>
@@ -62,7 +65,8 @@ public class BuildingManager : MonoBehaviour {
             canPlaceBuilding = false;
             NoBuildingFound(buildingData.BuildingType);
         } else {
-            canPlaceBuilding = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase);
+			bool isInBuildingLimit = GetIsInBuildingLimit(buildingData);
+            canPlaceBuilding = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase) && isInBuildingLimit;
 
             if (canPlaceBuilding) {
                 currentBuilding = buildingData;
@@ -71,8 +75,19 @@ public class BuildingManager : MonoBehaviour {
                     Quaternion.Euler(0, 30 + Random.Range(0, 7) * 60, 0));
                 tempBuilding.GetComponent<Collider>().enabled = false;
             }
+			else if (!isInBuildingLimit) {
+				UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
+			}
+			else {
+				UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
+			}
         }
     }
+	
+	private bool GetIsInBuildingLimit(BuildingData buildingData) {
+		int buildingTypeIndex = (int)buildingData.BuildingType;
+		return buildingData.MaxInstances > numBuildingTypes[buildingTypeIndex];
+	}
 
     private void Update() {
         PlacingBuilding();
@@ -122,10 +137,15 @@ public class BuildingManager : MonoBehaviour {
             BuildingAlreadyThere();
         } else {
             canPlaceBuilding = false;
+			numBuildingTypes[(int)currentBuilding.BuildingType]++;
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
             tempBuilding.GetComponent<Building>()?.PlaceBuilding();
+			//this is here to allow for multiple buildings to be placed at once
+			if (GetIsInBuildingLimit(currentBuilding)) {
+				PlaceBuilding(currentBuilding);
+			}
         }
     }
     /// <summary>
@@ -156,6 +176,7 @@ public class BuildingManager : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     if (hit.transform.CompareTag("Building")) {
+						numBuildingTypes[(int)hit.transform.GetComponent<Building>().BuildingData.BuildingType]--;
                         var beforeDestroy =  hit.collider.GetComponents<IBeforeDestroy>();
                         if (beforeDestroy != null && beforeDestroy.Length > 0) {
                             foreach (var destroy in beforeDestroy) {
@@ -251,6 +272,7 @@ public class BuildingManager : MonoBehaviour {
     private void BuildingAlreadyThere()
     {
         Debug.LogWarning("Building is already there");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.");
     }
     #endregion
 }

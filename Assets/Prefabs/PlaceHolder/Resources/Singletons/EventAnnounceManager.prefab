@@ -45,4 +45,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageBoxPrefab: {fileID: 2302360476238097051, guid: 8d916cdb612eb1e4b8e53c00e2036a08,
     type: 3}
-  startPoint: {x: 210, y: 240}
+  startPoint: {x: 210, y: 400}

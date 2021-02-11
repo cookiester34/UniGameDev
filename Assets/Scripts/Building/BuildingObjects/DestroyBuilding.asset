@@ -16,3 +16,4 @@ MonoBehaviour:
   uiImage: {fileID: 21300000, guid: 5af7ee8f99db29042855173ca79cc6f5, type: 3}
   resourcePurchase: []
   buildingSize: 0
+  maxInstances: 100000
