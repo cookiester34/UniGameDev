@@ -22,7 +22,10 @@ MonoBehaviour:
     resourceType: 2
   - cost: 50
     resourceType: 1
-  timeToResearch: 15
   Prerequisites: []
   researched: 0
+  researchProgress: 99.02108
+  timer:
+    _startTime: 1.205396
+    _runningTime: 15
   uiSprite: {fileID: 21300000, guid: decdd7477cfda494a9b9b97cb95d64db, type: 3}
