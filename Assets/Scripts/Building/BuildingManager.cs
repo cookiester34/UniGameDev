@@ -68,7 +68,7 @@ public class BuildingManager : MonoBehaviour {
                 currentBuilding = buildingData;
                 tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
                     new Vector3(0, 0, 0),
-                    Quaternion.Euler(0, 30 + Random.Range(0, 7) * 60, 0));
+                    currentBuilding.BuildingType.GetPrefab().transform.rotation);
                 tempBuilding.GetComponent<Collider>().enabled = false;
             }
         }

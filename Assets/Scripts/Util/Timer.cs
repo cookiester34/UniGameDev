@@ -40,7 +40,7 @@ namespace Util {
         public float Progress() {
             float currentRunTime = Time.time - (_startTime);
             float endTime = _startTime + _runningTime;
-            return (currentRunTime / endTime) * 100;
+            return ((_startTime + currentRunTime) / endTime) * 100;
         }
     }
 }

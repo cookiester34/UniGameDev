@@ -12,6 +12,8 @@ using Object = UnityEngine.Object;
 /// </summary>s
 [Serializable]
 public class Save {
+    public string terrainSceneName;
+    
     public List<SavedBuildingData> BuildingDatas = new List<SavedBuildingData>();
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
 
