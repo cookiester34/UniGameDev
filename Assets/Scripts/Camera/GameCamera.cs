@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CameraNameSpace {
     /// <summary>
@@ -28,6 +29,9 @@ namespace CameraNameSpace {
         /// Mask for the terrain
         /// </summary>
         [SerializeField] private LayerMask terrainMask;
+        
+        private Vector3 MAX_ZOOM = new Vector3(5f, 15f, 5f);
+        private Vector3 MIN_ZOOM = new Vector3(-5f, 5f, -5f);
 
         public Vector3 TargetPositon {
             get => _targetPosition;
@@ -54,6 +58,15 @@ namespace CameraNameSpace {
                 Pan(panDirection.normalized * Time.deltaTime);
             } else {
                 timeMoving = 0;
+            }
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Math.Abs(scroll) > 0.05f) {
+                Vector3 newOffset = offset + (transform.forward * (scroll * Time.deltaTime * 500f));
+                if (newOffset.x > MIN_ZOOM.x && newOffset.y > MIN_ZOOM.y && newOffset.z > MIN_ZOOM.z &&
+                    newOffset.x < MAX_ZOOM.x && newOffset.y < MAX_ZOOM.y && newOffset.z < MAX_ZOOM.z ) {
+                    offset = newOffset;
+                }
             }
         }
 
