@@ -14,7 +14,7 @@ public class SceneManagement : MonoBehaviour {
     public static SceneManagement Instance {
         get {
             if (_instance == null) {
-                GameObject go = Resources.Load<GameObject>(ResourceLoad.EventAnnounceSingleton);
+                GameObject go = Resources.Load<GameObject>(ResourceLoad.SceneSingleton);
                 Instantiate(go);
             }
 

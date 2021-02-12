@@ -106,6 +106,11 @@ public static class SaveLoad {
             ResearchObject obj = ResearchManager.Instance.AllResearch.Find(
                 o => o.ResearchName == research.name);
             obj.CopySavedResearch(research);
+            
+            // If research was being researched begin research again on load
+            if (obj.Timer.Active) {
+                ResearchManager.Instance.ResearchTopic(obj, false);
+            }
         }
 		
         GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)
