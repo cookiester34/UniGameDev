@@ -11,11 +11,6 @@ public class SeasonManager : MonoBehaviour
     {
         get
         {
-            if (_instance == null)
-            {
-                GameObject go = Resources.Load<GameObject>(ResourceLoad.BeeSingleton);
-                Instantiate(go);
-            }
             return _instance;
         }
     }
@@ -37,6 +32,11 @@ public class SeasonManager : MonoBehaviour
     public static event SeasonChanged SeasonChange;
     float seasonTimer;
     public int seasonLength;
+
+    public GameObject springEffect;
+    public GameObject summerEffect;
+    public GameObject autumnEffect;
+    public GameObject winterEffect;
 
     private void Start()
     {
@@ -76,6 +76,12 @@ public class SeasonManager : MonoBehaviour
                 currentSeason = Seasons.Spring;
                 break;
         }
+
+        //change the effect depending on the season
+        //springEffect.SetActive(currentSeason == Seasons.Spring);
+        //summerEffect.SetActive(currentSeason == Seasons.Summer);
+        //autumnEffect.SetActive(currentSeason == Seasons.Autumn);
+        //winterEffect.SetActive(currentSeason == Seasons.Winter);
     }
 
     public Seasons GetCurrentSeason()

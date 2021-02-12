@@ -15,7 +15,8 @@ public enum BuildingType
     JellyConverter,
     Destroy,
     Tower,
-    QueenBee
+    QueenBee,
+    EnemyBuilding
 }
 
 /// <summary>
@@ -57,6 +58,9 @@ public static class BuildingTypeExtension {
 
             case BuildingType.QueenBee:
                 obj = Resources.Load<GameObject>("QueenBeeBuilding");
+                break;
+            case BuildingType.EnemyBuilding:
+                obj = Resources.Load<GameObject>("EnemyBuilding");
                 break;
         }
 

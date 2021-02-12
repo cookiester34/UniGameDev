@@ -60,8 +60,10 @@ public class BuildingManager : MonoBehaviour {
     /// This is a function for UI, the button needs to have a building pass script on it determining what building it will place
     /// </summary>
     /// <param name="buildingType"></param>
-    public void PlaceBuilding(BuildingData buildingData) {
-        if (buildingData == null) {
+    public void PlaceBuilding(BuildingData buildingData) 
+    {
+        if (buildingData == null) 
+        {
             canPlaceBuilding = false;
             NoBuildingFound(buildingData.BuildingType);
         } else {
