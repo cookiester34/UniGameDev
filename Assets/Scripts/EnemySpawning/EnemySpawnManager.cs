@@ -37,8 +37,6 @@ public class EnemySpawnManager : MonoBehaviour
     }
     #endregion
 
-    private SeasonManager seasonManager;
-
     public Seasons enemySpawnSeason = Seasons.Autumn;
 
     [Range(1,5)]
@@ -50,23 +48,19 @@ public class EnemySpawnManager : MonoBehaviour
 
     public GameObject enemyPrefab;
 
-    private void Start()
-    {
-        seasonManager = SeasonManager.Instance;
-    }
-
     void SpawnWave()
     {
-        if (seasonManager.GetCurrentSeason() == enemySpawnSeason)
+        if (SeasonManager.Instance.GetCurrentSeason() == enemySpawnSeason)
         {
-            foreach (Transform building in enemyBuildingsList)
+            List<Transform> temp = enemyBuildingsList;
+            for (int i = 0; i < temp.Count; i++)
             {
-                if(building == null)
+                if (temp[i] == null)
                 {
-                    enemyBuildingsList.Remove(building);//removing gives a weird error not sure why
+                    enemyBuildingsList.Remove(temp[i]);
                 }
                 else
-                    StartCoroutine(DelaySpawn(building));
+                    StartCoroutine(DelaySpawn(temp[i]));
             }
         }
     }
