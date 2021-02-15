@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.Audio;
 
 using Util;
 
@@ -101,6 +99,15 @@ public class AudioManager : MonoBehaviour
 
     }
 
+    // Offset the pitch and volume by 5% from its setting in soundlist. Could promote the ranges to a variable but isn't required as it's a subtle effect.
+    void AutoModulate(Sound sound)
+    {
+        float pitchOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        float volumeOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        sound.source.pitch = sound.pitch + pitchOffset;
+        sound.source.volume = sound.volume + volumeOffset;
+    }
+
     // This is what is used to play the sound in code.
     public void PlaySound (string name)
     {
@@ -111,20 +118,34 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        if (s.autoModulation)
+        {
+            AutoModulate(s);
+        }
+
         s.source.Play();
     }
 
     public void PlaySoundClip (AudioClip sound)
     {
+        // Find the specified sound in the list.
         foreach (Sound s in sounds)
         {
             if (s.soundClip == sound)
             {
+                // Modulate if enabled.
+
+                if (s.autoModulation)
+                {
+                    AutoModulate(s);
+                }
+
+                // Play the sound, then stop iterating through the list after we've found our sound.
                 s.source.Play();
                 break;
             }
         }
-    }
+    } 
 
     // Ensures the current source is stopped before assigning and playing the new one.
     public void PlayMusicClip(Music music)
@@ -145,7 +166,7 @@ public class AudioManager : MonoBehaviour
 
     // Initialises the music queue and starts playback.
 
-    // Two functions stop the current queue, assign a new one and start playback. These could be condensed in to one function with a parameter, but user input isn't required so typos won't break stuff.
+    // We stop the current queue and any music playing. We then queue and play the type of music requested.
     public void StartMusic (SceneMusicType type)
     {
         if (mainMenuMusic.source.isPlaying)
