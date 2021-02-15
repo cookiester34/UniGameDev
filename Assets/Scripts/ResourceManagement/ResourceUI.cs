@@ -22,6 +22,10 @@ public class ResourceUI : MonoBehaviour {
         UpdateText(resource.CurrentResourceAmount);
     }
 
+    private void OnDestroy() {
+        resource.OnCurrentValueChanged -= UpdateText;
+    }
+
     void UpdateText(float newValue) {
         _text.text = String.Format("{0}: {1:0} / {2}", resource.name, newValue, resource.ResourceCap);
     }

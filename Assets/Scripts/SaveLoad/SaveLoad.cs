@@ -28,10 +28,6 @@ public static class SaveLoad {
     /// </summary>
     private static Save _currentSave;
 
-    static SaveLoad() {
-        SceneManagement.Instance.SceneLoaded += SceneLoaded;
-    }
-
     /// <summary>
     /// Using the current scene generates a save and stores it
     /// </summary>
@@ -86,6 +82,9 @@ public static class SaveLoad {
         Save save = JsonUtility.FromJson<Save>(json);
         _currentSave = save;
 
+        // Have to re-register on every load for reasons unbeknown to me, thought registering once in constructor would
+        // work but it is somehow cleared
+        SceneManagement.Instance.SceneLoaded += SceneLoaded;
         SceneManagement.Instance.LoadScene(save.terrainSceneName);
     }
 
