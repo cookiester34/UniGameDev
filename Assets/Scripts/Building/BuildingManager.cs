@@ -80,10 +80,12 @@ public class BuildingManager : MonoBehaviour {
             }
 			else if (!isInBuildingLimit) {
 				UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
+                AudioManager.Instance.PlaySound("Error");
 			}
 			else {
 				UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
-			}
+                AudioManager.Instance.PlaySound("Error");
+            }
         }
     }
 	
@@ -138,6 +140,7 @@ public class BuildingManager : MonoBehaviour {
         if (!foundation.BuildMulti(currentBuilding.BuildingSize)) {
             CanclePlacingBuilding();
             BuildingAlreadyThere();
+            AudioManager.Instance.PlaySound("Error");
         } else {
             canPlaceBuilding = false;
 			numBuildingTypes[(int)currentBuilding.BuildingType]++;
@@ -145,8 +148,9 @@ public class BuildingManager : MonoBehaviour {
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
             tempBuilding.GetComponent<Building>()?.PlaceBuilding();
-			//this is here to allow for multiple buildings to be placed at once
-			if (GetIsInBuildingLimit(currentBuilding)) {
+            AudioManager.Instance.PlaySound("PlaceBuilding");
+            //this is here to allow for multiple buildings to be placed at once
+            if (GetIsInBuildingLimit(currentBuilding)) {
 				PlaceBuilding(currentBuilding);
 			}
         }
@@ -188,6 +192,7 @@ public class BuildingManager : MonoBehaviour {
                         }
 
                         Destroy(hit.transform.gameObject, 0.2f);
+                        AudioManager.Instance.PlaySound("DestroyBuilding");
                     }
                 }
             }
