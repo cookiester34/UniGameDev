@@ -69,7 +69,7 @@ public class Health : MonoBehaviour {
 
     private void HealthGained() {
         if (healthGainAudio != null) {
-            AudioManager.instance.PlaySound(healthGainAudio.name);
+            AudioManager.Instance.PlaySound(healthGainAudio.name);
         }
 
         if (healthGainParticles != null) {
@@ -79,7 +79,7 @@ public class Health : MonoBehaviour {
 
     private void HealthLost() {
         if (healthLostAudio != null) {
-            AudioManager.instance.PlaySound(healthLostAudio.name);
+            AudioManager.Instance.PlaySound(healthLostAudio.name);
         }
 
         if (healthLostParticles != null) {
@@ -89,7 +89,7 @@ public class Health : MonoBehaviour {
 
     private void Death() {
         if (deathAudio != null) {
-            AudioManager.instance.PlaySound(deathAudio.name);
+            AudioManager.Instance.PlaySound(deathAudio.name);
         }
 
         if (deathParticles != null) {

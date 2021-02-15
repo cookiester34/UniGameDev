@@ -4,12 +4,15 @@ using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Audio;
 
+using Util;
+
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     public List<Music> peaceMusic;
     public List<Music> combatMusic;
     public Music mainMenuMusic;
+    public SceneMusicType startingMusicType;
 
     private Music currentTrack;
     private float currentTrackLength;
@@ -26,7 +29,12 @@ public class AudioManager : MonoBehaviour
     {
         get
         {
-            Assert.IsNotNull(_instance, "No AudioManager present, create a GameObject with the AudioManager script.");
+            if (_instance == null)
+            {
+                GameObject go = Resources.Load<GameObject>(ResourceLoad.AudioSingleton);
+                Instantiate(go);
+            }
+                
             return _instance;
         }
     }
@@ -35,15 +43,15 @@ public class AudioManager : MonoBehaviour
     // Loop through our list of sounds and add an audio source for each.
     void Awake()
     {
+        Debug.Log(GetHashCode());
         if (_instance == null)
             _instance = this;
         else
         {
+            Debug.LogWarning("Creating Second instance of AudioManager. Deleting.");
             Destroy(gameObject);
             return;
         }
-
-        DontDestroyOnLoad(gameObject);
 
         // Apply settings chosen in list to sound sources.
 
@@ -89,8 +97,7 @@ public class AudioManager : MonoBehaviour
     {
         // Music playback can be started here.
         //StartPeaceMusic();
-        if (mainMenuMusic != null)
-            mainMenuMusic.source.Play();
+        StartMusic(startingMusicType);
 
     }
 
@@ -105,6 +112,18 @@ public class AudioManager : MonoBehaviour
         }
 
         s.source.Play();
+    }
+
+    public void PlaySoundClip (AudioClip sound)
+    {
+        foreach (Sound s in sounds)
+        {
+            if (s.soundClip == sound)
+            {
+                s.source.Play();
+                break;
+            }
+        }
     }
 
     // Ensures the current source is stopped before assigning and playing the new one.
@@ -125,29 +144,36 @@ public class AudioManager : MonoBehaviour
     }
 
     // Initialises the music queue and starts playback.
-    public void StartMusic()
-    {
-        musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
-    }
 
     // Two functions stop the current queue, assign a new one and start playback. These could be condensed in to one function with a parameter, but user input isn't required so typos won't break stuff.
-    public void StartCombatMusic ()
+    public void StartMusic (SceneMusicType type)
     {
         if (mainMenuMusic.source.isPlaying)
             mainMenuMusic.source.Stop();
         StopMusic();
-        musicQueue = new MusicQueue(combatMusic);
-        musicSource = GetComponent<AudioSource>();
-        StartMusic();
+        switch(type)
+        {
+            case SceneMusicType.mainMenu:
+                mainMenuMusic.source.Play();
+                break;
+            case SceneMusicType.peace:
+                musicQueue = new MusicQueue(peaceMusic);
+                musicSource = GetComponent<AudioSource>();
+                musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
+                break;
+            case SceneMusicType.combat:
+                musicQueue = new MusicQueue(combatMusic);
+                musicSource = GetComponent<AudioSource>();
+                musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
+                break;
+        }
     }
+}
 
-    public void StartPeaceMusic ()
-    {
-        if (mainMenuMusic.source.isPlaying)
-            mainMenuMusic.source.Stop();
-        StopMusic();
-        musicQueue = new MusicQueue(peaceMusic);
-        musicSource = GetComponent<AudioSource>();
-        StartMusic();
-    }
+[Serializable]
+public enum SceneMusicType
+{
+    mainMenu,
+    combat,
+    peace,
 }

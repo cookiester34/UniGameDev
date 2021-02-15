@@ -1,0 +1,150 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1714416664458419524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7513036419181782114}
+  - component: {fileID: 345207262248793613}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7513036419181782114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714416664458419524}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345207262248793613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714416664458419524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c8f54514bac1647b2ed65d74c7359f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sounds:
+  - name: BuildSound
+    soundClip: {fileID: 8300000, guid: 14a33af5c6923514c999aeaa69246a02, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: BuildSoundTemp
+    soundClip: {fileID: 8300000, guid: 2863163ea02ab7349a03664974f6eb68, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: BuildSound2
+    soundClip: {fileID: 8300000, guid: c19ae64e939198e4f987efff6d8a7ff9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIHovered
+    soundClip: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: UIPressed
+    soundClip: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  peaceMusic:
+  - name: PeaceMusic0
+    musicClip: {fileID: 8300000, guid: b09b2c806d22dba45987f80cba30812d, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: PeaceMusic1
+    musicClip: {fileID: 8300000, guid: a22920e3293485a4b8f9b7c3145f0cbf, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: PeaceMusic2
+    musicClip: {fileID: 8300000, guid: e8833e8ae2f5b1d48a9cc56a9a72ebab, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: PeaceMusic
+    musicClip: {fileID: 8300000, guid: c07dfe81a62d22a47a5663984ca7bfe7, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  combatMusic:
+  - name: CombatTrack0
+    musicClip: {fileID: 8300000, guid: 2c348a1bd17ace940a1a1f69c5baafd3, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: CombatTrack1
+    musicClip: {fileID: 8300000, guid: b4c3dcf0d76773b45b7507e25801baec, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: CombatTrack2
+    musicClip: {fileID: 8300000, guid: 1aff85f7a3822884c890d7a377377a16, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: CombatTrack3
+    musicClip: {fileID: 8300000, guid: 968888e723e39a949aca6a547dce27bc, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  mainMenuMusic:
+    name: MainMenuTheme
+    musicClip: {fileID: 8300000, guid: f34e48c37fa62a54ea84dc72d08d8f37, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
