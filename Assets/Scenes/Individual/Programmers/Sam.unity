@@ -719,6 +719,7 @@ GameObject:
   - component: {fileID: 818706395}
   - component: {fileID: 818706394}
   - component: {fileID: 818706393}
+  - component: {fileID: 818706396}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -789,9 +790,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 345207262248793613, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
-          type: 3}
-        m_MethodName: StartPeaceMusic
+      - m_Target: {fileID: 818706396}
+        m_MethodName: PlayPeaceMusic
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -800,7 +800,7 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
-        m_CallState: 1
+        m_CallState: 2
 --- !u!114 &818706394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -838,6 +838,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818706391}
   m_CullTransparentMesh: 0
+--- !u!114 &818706396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818706391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb061595faa58264099fbc2354c509d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990200236
 GameObject:
   m_ObjectHideFlags: 0

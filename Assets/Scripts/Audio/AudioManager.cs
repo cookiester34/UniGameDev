@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions;
+using UnityEngine.Audio;
 
 public class AudioManager : MonoBehaviour
 {
@@ -17,13 +19,24 @@ public class AudioManager : MonoBehaviour
 
     private MusicQueue musicQueue;
 
-    public static AudioManager instance;
+    #region SINGLETON PATTERN
+
+    private static AudioManager _instance = null;
+    public static AudioManager Instance
+    {
+        get
+        {
+            Assert.IsNotNull(_instance, "No AudioManager present, create a GameObject with the AudioManager script.");
+            return _instance;
+        }
+    }
+    #endregion
 
     // Loop through our list of sounds and add an audio source for each.
     void Awake()
     {
-        if (instance == null)
-            instance = this;
+        if (_instance == null)
+            _instance = this;
         else
         {
             Destroy(gameObject);
