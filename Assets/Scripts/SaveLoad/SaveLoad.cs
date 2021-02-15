@@ -40,11 +40,13 @@ public static class SaveLoad {
         SetupSaveDirectory();
         Save save = new Save {terrainSceneName = SceneManager.GetActiveScene().name};
 
-
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
             save.buildingTransforms.Add(new SavedTransform(building.gameObject.transform));
             save.BuildingDatas.Add(new SavedBuildingData(building.BuildingData));
+            
+            //Storing null health if no health component, allows same index to be used for all buildings
+            save.buildingHealth.Add(new SavedHealth(building.GetComponent<Health>()));
         }
 
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
@@ -95,7 +97,9 @@ public static class SaveLoad {
 
         for (int i = 0; i < _currentSave.BuildingDatas.Count; i++) {
             SavedTransform transform = _currentSave.buildingTransforms[i];
-            Object.Instantiate(_currentSave.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
+            GameObject go = Object.Instantiate(
+                _currentSave.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
+            go.GetComponent<Health>().LoadSavedHealth(_currentSave.buildingHealth[i]);
         }
 
         for (int i = 0; i < _currentSave.resources.Count; i++) {

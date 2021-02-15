@@ -16,6 +16,7 @@ public class Save {
     
     public List<SavedBuildingData> BuildingDatas = new List<SavedBuildingData>();
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
+    public List<SavedHealth> buildingHealth = new List<SavedHealth>();
 
     public List<SavedResource> resources = new List<SavedResource>();
     

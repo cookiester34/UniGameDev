@@ -9,7 +9,9 @@ public class SavedHealth {
     public float maxHealth;
     
     public SavedHealth(Health health) {
-        currentHealth = health.CurrentHealth;
-        maxHealth = health.MaxHealth;
+        if (health != null) {
+            currentHealth = health.CurrentHealth;
+            maxHealth = health.MaxHealth;
+        }
     }
 }
