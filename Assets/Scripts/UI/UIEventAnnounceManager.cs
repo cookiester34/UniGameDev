@@ -55,7 +55,15 @@ public class UIEventAnnounceManager : MonoBehaviour
     }
 	
 	void InitCanvas() {
-		canvas = GameObject.FindObjectOfType<Canvas>().gameObject;
+		Canvas[] canvases = GameObject.FindObjectsOfType<Canvas>();
+		if (canvases != null && canvases.Length > 0) {
+			foreach (Canvas canvase in canvases) {
+				if (canvase.renderMode == RenderMode.ScreenSpaceOverlay) {
+					canvas = canvase.gameObject;
+					break;
+				}
+			}
+		}
 		if (!canvas) {
 			Debug.LogWarning("Event announcements require a UI canvas to work.");
 			Destroy(this);
