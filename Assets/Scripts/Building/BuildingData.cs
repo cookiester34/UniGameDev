@@ -36,6 +36,17 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     /// </summary>
     [SerializeField] private int maxInstances;
 
+    /// <summary>
+    /// number of bees assigned to this building
+    /// </summary>
+    public int assignedBees;
+
+    /// <summary>
+    /// max number of bees allowed to work at this building
+    /// </summary>
+    [Range(0,10)]
+    public int maxNumberOfWorkers;
+
     public Sprite UiImage => uiImage;
 
     public BuildingType BuildingType => buildingType;

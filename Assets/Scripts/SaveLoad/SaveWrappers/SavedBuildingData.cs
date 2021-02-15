@@ -18,8 +18,11 @@ public class SavedBuildingData {
     /// </summary>
     public List<ResourcePurchase> resourcePurchase;
 
+    public int assignedBees;
+
     public SavedBuildingData(BuildingData buildingData) {
         buildingType = buildingData.BuildingType;
         resourcePurchase = buildingData.ResourcePurchase;
+        assignedBees = buildingData.assignedBees;
     }
 }

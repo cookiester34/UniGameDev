@@ -68,7 +68,6 @@ public class Resource : ScriptableObject {
             if (currentResourceAmount > resourceCap) {
                 currentResourceAmount = resourceCap;
             }
-
             OnCurrentValueChanged?.Invoke(currentResourceAmount);
         }
     }

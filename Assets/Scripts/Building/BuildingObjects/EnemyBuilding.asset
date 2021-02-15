@@ -17,3 +17,5 @@ MonoBehaviour:
   resourcePurchase: []
   buildingSize: 1
   maxInstances: 10000
+  assignedBees: 0
+  maxNumberOfWorkers: 0

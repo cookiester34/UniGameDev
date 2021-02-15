@@ -19,7 +19,8 @@ public class BuildingManager : MonoBehaviour {
 
     private bool canSelectBuilding;
     private GameObject selectedBuilding;
-    private Building selectedBuildingData;
+    [HideInInspector]
+    public  Building selectedBuildingData;
     public LayerMask mask;
 
     private static BuildingManager _instance = null;
@@ -227,6 +228,53 @@ public class BuildingManager : MonoBehaviour {
     }
 
     /// <summary>
+    /// for ui button to add a bee to the selected building
+    /// </summary>
+    public void AddBeeToBuilding()
+    {
+        if(selectedBuilding != null && selectedBuildingData != null)
+        {
+            BuildingData buildingData = selectedBuildingData.BuildingData;
+            if (buildingData.assignedBees < buildingData.maxNumberOfWorkers)
+            {
+                Resource temp = ResourceManagement.Instance.GetResource(ResourceType.Population);
+                if (temp != null)
+                {
+                    if (temp.CanPurchase(1))
+                    {
+                        buildingData.assignedBees++;
+                        temp.ModifyAmount(-1);
+                    }
+                    else
+                        NotEnoughResources();
+                }
+                else
+                    NoResourceFound(ResourceType.Population);
+            }
+        }
+    }
+
+
+    public void RemoveBeeFromBuilding()
+    {
+        if (selectedBuilding != null && selectedBuildingData != null)
+        {
+            BuildingData buildingData = selectedBuildingData.BuildingData;
+            if (buildingData.assignedBees > 0)
+            {
+                Resource temp = ResourceManagement.Instance.GetResource(ResourceType.Population);
+                if (temp != null)
+                {
+                    buildingData.assignedBees--;
+                    temp.ModifyAmount(1);
+                }
+                else
+                    NoResourceFound(ResourceType.Population);
+            }
+        }
+    }
+
+    /// <summary>
     /// goes through the resource costs of the selecetd building and applies a teirupgrade to the original cost
     /// </summary>
     public void UpgradeBuilding()
@@ -275,6 +323,16 @@ public class BuildingManager : MonoBehaviour {
     {
         Debug.LogWarning("Building is already there");
 		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.");
+    }
+
+    private void NoResourceFound(ResourceType resourceType)
+    {
+        Debug.LogWarning("No building of type: " + resourceType.ToString() + " :found");
+    }
+
+    private void NotEnoughResources()
+    {
+        Debug.LogWarning("Not Enough Resources To Make Purchase");
     }
     #endregion
 }
