@@ -24,13 +24,13 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             return;
         }
 
-        CalculateProductionAmount();
         building = GetComponent<Building>();
         if (building != null) {
             building.OnBuildingPlaced += () => resource.ModifyTickDrain(actualProductionAmount, productionTime);
         } else {
             resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
+        CalculateProductionAmount();
     }
 
     void Update()
