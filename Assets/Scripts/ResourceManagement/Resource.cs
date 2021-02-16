@@ -65,7 +65,7 @@ public class Resource : ScriptableObject {
     }
 
     public void ModifyAmount(float value) {
-        if (currentResourceAmount < resourceCap) {
+        if (currentResourceAmount < resourceCap || value < 0) {
             currentResourceAmount += value;
             if (currentResourceAmount > resourceCap) {
                 currentResourceAmount = resourceCap;
@@ -80,6 +80,12 @@ public class Resource : ScriptableObject {
 
     public void ModifyCap(int amount) {
         resourceCap += amount;
+        OnCapChanged?.Invoke(resourceCap);
+    }
+
+    public void OverrideCap(int amount)
+    {
+        resourceCap = amount;
         OnCapChanged?.Invoke(resourceCap);
     }
 

@@ -57,7 +57,7 @@ public class BeeManager : MonoBehaviour {
                 Destroy(bee);
             }
         }
-
+        ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);
         _cachedPopulation = populationNewValue;
     }
 }
