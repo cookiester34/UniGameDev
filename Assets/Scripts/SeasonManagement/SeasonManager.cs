@@ -82,6 +82,8 @@ public class SeasonManager : MonoBehaviour
         //summerEffect.SetActive(currentSeason == Seasons.Summer);
         //autumnEffect.SetActive(currentSeason == Seasons.Autumn);
         //winterEffect.SetActive(currentSeason == Seasons.Winter);
+
+        AudioManager.Instance.PlaySound("SeasonChange");
     }
 
     public Seasons GetCurrentSeason()

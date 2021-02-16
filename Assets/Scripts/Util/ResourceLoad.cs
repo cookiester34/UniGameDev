@@ -11,5 +11,6 @@
         public const string SeasonSingleton = "Singletons/SeasonManager";
 		public const string EventAnnounceSingleton = "Singletons/EventAnnounceManager";
 		public const string SceneSingleton = "Singletons/SceneManager";
+        public const string AudioSingleton = "Singletons/AudioManager";
     }
 }
