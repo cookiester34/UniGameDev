@@ -14,6 +14,7 @@ public class Resource : ScriptableObject {
     /// Event to be fired whenever the value of the resource changes
     /// </summary>
     public event CurrentValueChanged OnCurrentValueChanged;
+    public event CurrentValueChanged OnCapChanged;
     
     [Header("Resource Options")]
     public ResourceType resourceType;
@@ -60,6 +61,7 @@ public class Resource : ScriptableObject {
         resourceTickAmount = resource.TickDrainAmount;
         currentResourceAmount = resource.CurrentResourceAmount;
         OnCurrentValueChanged?.Invoke(currentResourceAmount);
+        OnCapChanged?.Invoke(resourceCap);
     }
 
     public void ModifyAmount(float value) {
@@ -78,6 +80,7 @@ public class Resource : ScriptableObject {
 
     public void ModifyCap(int amount) {
         resourceCap += amount;
+        OnCapChanged?.Invoke(resourceCap);
     }
 
     /// <summary>
