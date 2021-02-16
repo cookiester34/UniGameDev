@@ -42,7 +42,10 @@ public class SceneManagement : MonoBehaviour {
     private IEnumerator SceneLoad(string sceneName) {
         var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
-        ao.completed += delegate { SceneLoaded?.Invoke(); };
+        ao.completed += delegate {
+            CurrentSceneType.sceneType.FromScene(sceneName);
+            SceneLoaded?.Invoke();
+        };
 
         while (!ao.isDone) {
             if (ao.progress >= 0.9f) {
