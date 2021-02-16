@@ -97,28 +97,28 @@ MonoBehaviour:
     source: {fileID: 0}
   peaceMusic:
   - name: PeaceMusic0
-    musicClip: {fileID: 8300000, guid: b09b2c806d22dba45987f80cba30812d, type: 3}
+    musicClip: {fileID: 8300000, guid: df11f8b5e148a1d4dbc00c18788cf1e1, type: 3}
     volume: 0.5
     pitch: 1
     output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
   - name: PeaceMusic1
-    musicClip: {fileID: 8300000, guid: a22920e3293485a4b8f9b7c3145f0cbf, type: 3}
+    musicClip: {fileID: 8300000, guid: fb86fd711be8d704c964022c0a49bb13, type: 3}
     volume: 0.5
     pitch: 1
     output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
   - name: PeaceMusic2
-    musicClip: {fileID: 8300000, guid: e8833e8ae2f5b1d48a9cc56a9a72ebab, type: 3}
+    musicClip: {fileID: 8300000, guid: 29bf3639f8cdbc34b859cfe6993ad79f, type: 3}
     volume: 0.5
     pitch: 1
     output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
-  - name: PeaceMusic
-    musicClip: {fileID: 8300000, guid: c07dfe81a62d22a47a5663984ca7bfe7, type: 3}
+  - name: PeaceMusic3
+    musicClip: {fileID: 8300000, guid: 2e05534fd65cca343b5d32f0fda93c86, type: 3}
     volume: 0.5
     pitch: 1
     output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
