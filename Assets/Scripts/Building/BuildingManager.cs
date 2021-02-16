@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -22,6 +24,8 @@ public class BuildingManager : MonoBehaviour {
     [HideInInspector]
     public  Building selectedBuildingData;
     public LayerMask mask;
+	private EventSystem eventSys;
+	private GameObject oldTempBuilding;
 
     private static BuildingManager _instance = null;
 
@@ -55,6 +59,7 @@ public class BuildingManager : MonoBehaviour {
 
         _instance = this;
 		numBuildingTypes = new int[Enum.GetNames(typeof(BuildingType)).Length];
+		eventSys = GameObject.FindObjectOfType<EventSystem>();
     }
 
     /// <summary>
@@ -63,11 +68,15 @@ public class BuildingManager : MonoBehaviour {
     /// <param name="buildingType"></param>
     public void PlaceBuilding(BuildingData buildingData) 
     {
+		if (tempBuilding) {
+			oldTempBuilding = tempBuilding;
+		}
         if (buildingData == null) 
         {
             canPlaceBuilding = false;
             NoBuildingFound(buildingData.BuildingType);
         } else {
+			canDestroyBuilding = false;
 			bool isInBuildingLimit = GetIsInBuildingLimit(buildingData);
             canPlaceBuilding = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase) && isInBuildingLimit;
 
@@ -76,6 +85,9 @@ public class BuildingManager : MonoBehaviour {
                 tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
                     new Vector3(0, 0, 0),
                     currentBuilding.BuildingType.GetPrefab().transform.rotation);
+				if (oldTempBuilding == null) {
+					oldTempBuilding = tempBuilding;
+				}
                 tempBuilding.GetComponent<Collider>().enabled = false;
             }
 			else if (!isInBuildingLimit) {
@@ -87,6 +99,9 @@ public class BuildingManager : MonoBehaviour {
                 AudioManager.Instance.PlaySound("Error");
             }
         }
+		if (oldTempBuilding && !oldTempBuilding.activeSelf) {
+			Destroy(oldTempBuilding);
+		}
     }
 	
 	private bool GetIsInBuildingLimit(BuildingData buildingData) {
@@ -115,7 +130,11 @@ public class BuildingManager : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) {
+			if (eventSys.IsPointerOverGameObject()) { //this checks if the mouse is over a UI element
+				tempBuilding.SetActive(false);
+			}
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) {
+				tempBuilding.SetActive(true);
                 BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
                 if (foundation != null) {
                     Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingSize);
@@ -150,7 +169,7 @@ public class BuildingManager : MonoBehaviour {
             tempBuilding.GetComponent<Building>()?.PlaceBuilding();
             AudioManager.Instance.PlaySound("PlaceBuilding");
             //this is here to allow for multiple buildings to be placed at once
-            if (GetIsInBuildingLimit(currentBuilding)) {
+            if (ResourceManagement.Instance.CanUseResources(currentBuilding.ResourcePurchase) && GetIsInBuildingLimit(currentBuilding)) {
 				PlaceBuilding(currentBuilding);
 			}
         }
@@ -166,6 +185,7 @@ public class BuildingManager : MonoBehaviour {
 
     public void DestroyBuilding()
     {
+		canPlaceBuilding = false;
         canDestroyBuilding = true;
     }
 
