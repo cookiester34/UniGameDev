@@ -211,6 +211,7 @@ public class BuildingManager : MonoBehaviour {
                             }
                         }
 
+                        // TODO: make the building clear itself from the building foundations it was placed on
                         Destroy(hit.transform.gameObject, 0.2f);
                         AudioManager.Instance.PlaySound("DestroyBuilding");
                     }
