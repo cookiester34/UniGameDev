@@ -20,7 +20,7 @@ public static class SceneTypeExtensions {
             case "Ryan":
                 sceneType = SceneType.LevelEditor;
                 break;
-            case "MainMenu":
+            case "Main":
                 sceneType = SceneType.Main;
                 break;
             case "Flat":

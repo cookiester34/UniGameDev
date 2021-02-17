@@ -24,12 +24,15 @@ EditorBuildSettings:
     path: Assets/Scenes/Individual/Programmers/Sam.unity
     guid: 13f7a6a876dd9e545b3e17e2e6e5ba81
   - enabled: 1
-    path: Assets/Scenes/BaseLevels/Flat.unity
-    guid: 98973ff1f6925674a85b02c0b0da68a8
-  - enabled: 1
     path: Assets/Scenes/IntermediateLoadScene.unity
     guid: 22597a4ae54788e4ca2ce6e464124c84
   - enabled: 1
     path: Assets/Scenes/MergeScene.unity
     guid: e6730ab636bc9ea42b0bffd1c37fcc58
+  - enabled: 1
+    path: Assets/Scenes/BaseLevels/CornerHill.unity
+    guid: 991558fb58b60b8438f2c5953c8b882f
+  - enabled: 1
+    path: Assets/Scenes/BaseLevels/Flat.unity
+    guid: 30678b1b2a0533e48b4f403bb65b1a47
   m_configObjects: {}
