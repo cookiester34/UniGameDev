@@ -15,6 +15,8 @@ public class Save {
     public string terrainSceneName;
     
     public List<SavedBuildingData> BuildingDatas = new List<SavedBuildingData>();
+    public List<int> AssignedBees = new List<int>();
+
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
     public List<SavedHealth> buildingHealth = new List<SavedHealth>();
 

@@ -13,14 +13,14 @@ public class EnableUIOnBuildingSelect : MonoBehaviour {
         BuildingManager.Instance.OnBuildingSelected += gameObject.SetActive;
     }
 
-    private void OnEnable()
+    private void Update()
     {
         UpdateAssignedBeesUI();
     }
 
     private void UpdateAssignedBeesUI()
     {
-        buildingsAssignedBees.text = "Assigned Bees: " + BuildingManager.Instance.selectedBuildingData.BuildingData.assignedBees;
+        buildingsAssignedBees.text = "Assigned Bees: " + BuildingManager.Instance.selectedBuildingData.assignedBees;
     }
 
     public void UpgradeBuilding()

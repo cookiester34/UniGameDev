@@ -18,6 +18,12 @@ public class Building : MonoBehaviour {
 
     public BuildingData BuildingData => buildingData;
 
+    /// <summary>
+    /// number of bees assigned to this building
+    /// </summary>
+    [HideInInspector]
+    public int assignedBees;
+
     private void Start()
     {
         if (buildingTeir1 != null) {
