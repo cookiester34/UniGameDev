@@ -72,10 +72,14 @@ public class GenerateHexMap : MonoBehaviour
 				//SetRandColour(inst);
 			}
 		}
-		foreach (Transform child in transform) { //annoying having to do this loop twice
+		foreach (Transform child in transform) {
 			HexPanel HP = child.GetComponent<HexPanel>();
 			HP.CalculateNeighbours();
 			HP.SetToTerrain();
+		}
+		foreach (Transform child in transform) { //annoying having to do this loop twice. Trust me, it needs to be here tho
+			HexPanel HP = child.GetComponent<HexPanel>();
+			HP.TryToMatchHeightWithNeighbour();
 		}
 		DestroyUnneededHexes();
 	}
