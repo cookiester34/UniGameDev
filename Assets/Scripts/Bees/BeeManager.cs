@@ -85,8 +85,7 @@ public class BeeManager : MonoBehaviour {
     /// <summary>
     /// gets called when a building has it's assigned bee's number change
     /// </summary>
-    public void OnAssignedBeeChange()
-    {
-        AssignedBeeUpdated();
+    public void OnAssignedBeeChange() {
+        AssignedBeeUpdated?.Invoke();
     }
 }
