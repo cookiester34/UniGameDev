@@ -20,6 +20,7 @@ public class GenerateHexMap : MonoBehaviour
 	public GameObject defaultHex;
 	public Material baseMat;
 	public Color[] colours;
+	[SerializeField] private bool hexesVisible;
 	
 	public InputField widthInputField;
 	public InputField lengthInputField;
@@ -74,6 +75,7 @@ public class GenerateHexMap : MonoBehaviour
 		}
 		foreach (Transform child in transform) {
 			HexPanel HP = child.GetComponent<HexPanel>();
+			HP.ToggleVisibility(hexesVisible);
 			HP.CalculateNeighbours();
 			HP.SetToTerrain();
 		}
@@ -90,6 +92,14 @@ public class GenerateHexMap : MonoBehaviour
 			GetParamsFromUI();
 			DestroyGridInGame();
 			Generate();
+		}
+	}
+	
+	public void ToggleVisibility() {
+		hexesVisible = !hexesVisible;
+		List<HexPanel> hexes = Object.FindObjectsOfType<HexPanel>().ToArray().ToList();
+		for (int i = 0; i < hexes.Count; i++) {
+			hexes[i].ToggleVisibility(hexesVisible);
 		}
 	}
 	

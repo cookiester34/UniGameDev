@@ -26,6 +26,10 @@ public class BuildingManager : MonoBehaviour {
     public LayerMask mask;
 	private EventSystem eventSys;
 	private GameObject oldTempBuilding;
+	
+	private Image selectedBuildingUI;
+	public Sprite destroyIcon; //need this since a building data reference is not passed when destroying buildings
+	private Text selectedBuildingText;
 
     private static BuildingManager _instance = null;
 
@@ -60,6 +64,8 @@ public class BuildingManager : MonoBehaviour {
         _instance = this;
 		numBuildingTypes = new int[Enum.GetNames(typeof(BuildingType)).Length];
 		eventSys = GameObject.FindObjectOfType<EventSystem>();
+		selectedBuildingUI = GameObject.Find("SelectedBuildingUIImage").GetComponent<Image>();
+		selectedBuildingText = selectedBuildingUI.gameObject.GetComponentInChildren<Text>();
     }
 
     /// <summary>
@@ -81,6 +87,8 @@ public class BuildingManager : MonoBehaviour {
             canPlaceBuilding = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase) && isInBuildingLimit;
 
             if (canPlaceBuilding) {
+				selectedBuildingUI.sprite = buildingData.UiImage;
+				selectedBuildingText.text = buildingData.Description;
                 currentBuilding = buildingData;
                 tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
                     new Vector3(0, 0, 0),
@@ -180,11 +188,15 @@ public class BuildingManager : MonoBehaviour {
     private void CanclePlacingBuilding()
     {
         canPlaceBuilding = false;
+		selectedBuildingUI.sprite = null;
+		selectedBuildingText.text = "No building selected.";
         Destroy(tempBuilding);
     }
 
     public void DestroyBuilding()
     {
+		selectedBuildingUI.sprite = destroyIcon;
+		selectedBuildingText.text = "Destroy placed buildings";
 		canPlaceBuilding = false;
         canDestroyBuilding = true;
     }
@@ -217,8 +229,11 @@ public class BuildingManager : MonoBehaviour {
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape)) {
                 canDestroyBuilding = false;
+				selectedBuildingUI.sprite = null;
+				selectedBuildingText.text = "No building selected.";
+			}
         }
     }
 

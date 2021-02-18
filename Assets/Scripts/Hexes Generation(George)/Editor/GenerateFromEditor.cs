@@ -7,7 +7,6 @@ using UnityEditor;
 [CanEditMultipleObjects]
 public class GenerateFromEditor : Editor
 {
-
 	
 	void OnEnable() {
 
@@ -24,6 +23,9 @@ public class GenerateFromEditor : Editor
 		}
 		if (GUILayout.Button("Destroy Grid")) {
 			myScript.DestroyGrid();
+		}
+		if (GUILayout.Button("Toggle Hex Visibility")) {
+			myScript.ToggleVisibility();
 		}
         serializedObject.ApplyModifiedProperties();
     }

@@ -17,5 +17,5 @@ MonoBehaviour:
   resourcePurchase: []
   buildingSize: 3
   maxInstances: 1
-  assignedBees: 0
+  description: The Queen Bee building
   maxNumberOfWorkers: 5
