@@ -14,6 +14,7 @@ public class TowerBuilding : Building
     public GameObject sphereFiringRange;
 
     [Range(1,10)]
+    public float baseFiringSpeed;
     public float firingSpeed;
     private float timer = 1f;
 
@@ -27,9 +28,13 @@ public class TowerBuilding : Building
 
     private void Update()
     {
-        if(enemiesInRange.Count > 0 && timer <= 0)
+        if (enemiesInRange.Count > 0 && timer <= 0)
         {
-            FireAtEnemies();
+            if (assignedBees > 0)
+            {
+                FireAtEnemies();
+                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * assignedBees;
+            }
             timer = firingSpeed;
         }
         if(timer >= 0)

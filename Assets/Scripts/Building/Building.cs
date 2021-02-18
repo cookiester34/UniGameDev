@@ -23,6 +23,7 @@ public class Building : MonoBehaviour {
     /// </summary>
     [HideInInspector]
     public int assignedBees;
+    private int lastBeeNum = 0;
 
     private void Start()
     {
@@ -41,5 +42,14 @@ public class Building : MonoBehaviour {
 
     public void PlaceBuilding() {
         OnBuildingPlaced?.Invoke();
+    }
+
+    private void Update()
+    {
+        if(lastBeeNum != assignedBees)
+        {
+            lastBeeNum = assignedBees;
+            BeeManager.Instance.OnAssignedBeeChange();
+        }
     }
 }

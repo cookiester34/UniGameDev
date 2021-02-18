@@ -14,6 +14,8 @@ public class BeeManager : MonoBehaviour {
     [SerializeField] private GameObject QueenBeeBuilding;
 
     private static BeeManager _instance = null;
+    public delegate void AssignedBeeUpdate();
+    public static event AssignedBeeUpdate AssignedBeeUpdated;
 
     private float _cachedPopulation = 0;
 
@@ -59,5 +61,13 @@ public class BeeManager : MonoBehaviour {
         }
         ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);
         _cachedPopulation = populationNewValue;
+    }
+
+    /// <summary>
+    /// gets called when a building has it's assigned bee's number change
+    /// </summary>
+    public void OnAssignedBeeChange()
+    {
+        AssignedBeeUpdated();
     }
 }

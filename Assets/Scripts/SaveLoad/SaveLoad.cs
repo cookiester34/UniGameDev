@@ -62,6 +62,7 @@ public static class SaveLoad {
         }
 
         save.currentSeason = (int)SeasonManager.Instance.GetCurrentSeason();//save current season
+        save.waveNumber = EnemySpawnManager.Instance.waveNumber;
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         save.cameraTransform = new SavedTransform(gameCamera.transform);
@@ -131,6 +132,7 @@ public static class SaveLoad {
         }
 
         SeasonManager.Instance.SetCurrentSeason((Seasons)_currentSave.currentSeason);//set currrent season
+        EnemySpawnManager.Instance.waveNumber = _currentSave.waveNumber;
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         Transform cameraTransform = gameCamera.transform;

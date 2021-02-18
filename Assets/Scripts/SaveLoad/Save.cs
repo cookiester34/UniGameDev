@@ -30,4 +30,5 @@ public class Save {
     public Vector3 cameraTarget;
 
     public int currentSeason;
+    public int waveNumber;
 }

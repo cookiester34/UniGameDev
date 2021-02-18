@@ -39,6 +39,9 @@ public class EnemySpawnManager : MonoBehaviour
 
     public Seasons enemySpawnSeason = Seasons.Autumn;
 
+    [HideInInspector]
+    public int waveNumber = 0;
+
     [Range(1,5)]
     public int numberOfEnemiesSpawnableMin;
     [Range(3, 10)]
@@ -62,6 +65,7 @@ public class EnemySpawnManager : MonoBehaviour
                 else
                     StartCoroutine(DelaySpawn(temp[i]));
             }
+            waveNumber++;
         }
     }
 
@@ -70,8 +74,7 @@ public class EnemySpawnManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
         if (Random.Range(0f, 100f) < 60f)
         {
-            //set to number of max + 1 because range int high value is exclusive
-            for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin, numberOfEnemiesSpawnableMax + 1); i++)
+            for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin, numberOfEnemiesSpawnableMax + waveNumber); i++)
             {
                 Instantiate(enemyPrefab, building.position, Quaternion.identity);
             }
