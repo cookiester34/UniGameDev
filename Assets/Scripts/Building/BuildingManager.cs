@@ -27,6 +27,9 @@ public class BuildingManager : MonoBehaviour {
 	private EventSystem eventSys;
 	private GameObject oldTempBuilding;
 
+    private List<Building> _buildings = new List<Building>();
+
+
     private static BuildingManager _instance = null;
 
     [Header("Options")]
@@ -34,6 +37,8 @@ public class BuildingManager : MonoBehaviour {
     public int teir1UpgradeCost;
     [Range(2, 5)]
     public int teir2UpgradeCost;
+    
+    public List<Building> Buildings => _buildings;
 
     public static BuildingManager Instance {
         get {
@@ -166,6 +171,7 @@ public class BuildingManager : MonoBehaviour {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
+            _buildings.Add(tempBuilding.GetComponent<Building>());
             tempBuilding.GetComponent<Building>()?.PlaceBuilding();
             AudioManager.Instance.PlaySound("PlaceBuilding");
             //this is here to allow for multiple buildings to be placed at once
@@ -204,6 +210,7 @@ public class BuildingManager : MonoBehaviour {
                 {
                     if (hit.transform.CompareTag("Building")) {
 						numBuildingTypes[(int)hit.transform.GetComponent<Building>().BuildingData.BuildingType]--;
+                        _buildings.Remove(hit.transform.GetComponent<Building>());
                         var beforeDestroy =  hit.collider.GetComponents<IBeforeDestroy>();
                         if (beforeDestroy != null && beforeDestroy.Length > 0) {
                             foreach (var destroy in beforeDestroy) {
@@ -335,6 +342,30 @@ public class BuildingManager : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public List<Building> GetAllStorageBuildingsOfType(ResourceType resourceType) {
+        return _buildings.FindAll(building => {
+            bool add = false;
+            var storage = building.GetComponent<ResourceStorage>();
+            if (storage != null && storage.Resource.resourceType == resourceType) {
+                add = true;
+            }
+
+            return add;
+        });
+    }
+
+    public List<Building> GetAllSupplierBuildingsOfType(ResourceType resourceType) {
+        return _buildings.FindAll(building => {
+            bool add = false;
+            var supplier = building.GetComponent<ResourceSupplier>();
+            if (supplier != null && supplier.Resource.resourceType == resourceType) {
+                add = true;
+            }
+
+            return add;
+        });
     }
 
     #region Debugs

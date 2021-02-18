@@ -8,8 +8,14 @@ using UnityEngine.PlayerLoop;
 public class BeeStateMachine : MonoBehaviour {
     private Bee _bee;
     private BeeState _currentState = null;
+    private Building targetBuilding;
 
     public Bee Bee => _bee;
+
+    public Building TargetBuilding {
+        get => targetBuilding;
+        set => targetBuilding = value;
+    }
 
     #region states
 

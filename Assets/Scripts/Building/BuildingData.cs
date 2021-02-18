@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using Random = System.Random;
 
 /// <summary>
 /// Class to store building data, should be one for each building type
