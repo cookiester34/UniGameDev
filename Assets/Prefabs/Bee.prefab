@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 583407852114117726}
   - component: {fileID: 1578177077107356437}
   - component: {fileID: 3639824613797981917}
+  - component: {fileID: -5077826352974351252}
   m_Layer: 0
   m_Name: Bee
   m_TagString: Untagged
@@ -143,5 +144,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   productionTime: 10
-  productionAmount: 1
+  baseProductionAmount: 1
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
+--- !u!114 &-5077826352974351252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326437159731175180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bfdf3c6411cf39a4080d4eed1bc212c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

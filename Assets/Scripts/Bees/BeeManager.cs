@@ -11,13 +11,12 @@ using Random = UnityEngine.Random;
 public class BeeManager : MonoBehaviour {
     private List<Bee> _bees = new List<Bee>();
     [SerializeField] private GameObject beePrefab;
-    [SerializeField] private GameObject QueenBeeBuilding;
 
     private static BeeManager _instance = null;
     public delegate void AssignedBeeUpdate();
     public static event AssignedBeeUpdate AssignedBeeUpdated;
 
-    private float _cachedPopulation = 0;
+    private int _cachedPopulation = 0;
 
     public static BeeManager Instance {
         get {
@@ -40,17 +39,37 @@ public class BeeManager : MonoBehaviour {
         _instance = this;
 
         Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
-        _cachedPopulation = population.CurrentResourceAmount;
+        _cachedPopulation = Mathf.FloorToInt(population.CurrentResourceAmount);
         population.OnCurrentValueChanged += OnPopulationChange;
+        GetComponent<Building>().OnBuildingPlaced += delegate {
+            population.ModifyAmount(10f);
+        };
+    }
+
+    private void Start() {
+        ResourceStorage[] suppliers = FindObjectsOfType<ResourceStorage>();
+        foreach (ResourceStorage storage in suppliers) {
+            if (storage.Resource.resourceType == ResourceType.Population 
+                && storage.gameObject.GetComponent<Building>() != null) {
+            }
+        }
+
+        foreach (Bee bee in _bees) {
+            if (bee.Home == null) {
+                var housing = BuildingManager.Instance.GetAllStorageBuildingsOfType(ResourceType.Population);
+                bee.Home = housing[Random.Range(0, housing.Count)];
+            }
+        }
     }
 
     public void OnPopulationChange(float populationNewValue) {
-        QueenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
-        float populationChange = populationNewValue - _cachedPopulation;
+        int populationChange = Mathf.FloorToInt(populationNewValue - _cachedPopulation);
         if (populationChange > 0) {
             for (int i = 0; i < populationChange; i++) {
-                GameObject go = Instantiate(beePrefab, QueenBeeBuilding.transform);
+                GameObject go = Instantiate(beePrefab, gameObject.transform);
                 Bee bee = go.GetComponent<Bee>();
+                var housing = BuildingManager.Instance.GetAllStorageBuildingsOfType(ResourceType.Population);
+                bee.Home = housing[Random.Range(0, housing.Count)];
                 _bees.Add(bee);
             }
         } else {
@@ -60,7 +79,7 @@ public class BeeManager : MonoBehaviour {
             }
         }
         ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);
-        _cachedPopulation = populationNewValue;
+        _cachedPopulation += populationChange;
     }
 
     /// <summary>

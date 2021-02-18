@@ -5,8 +5,8 @@ using UnityEngine;
 
 [Serializable]
 public class Building : MonoBehaviour {
-    public delegate void BuildingPlaced();
-    public event BuildingPlaced OnBuildingPlaced;
+    public delegate void EmptyEvent();
+    public event EmptyEvent OnBuildingPlaced;
 
     public ResourceType resourceType;
     [SerializeField] private BuildingData buildingData;

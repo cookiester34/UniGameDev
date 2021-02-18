@@ -113,7 +113,10 @@ public class ResourceManagement : MonoBehaviour
     {
         foreach (Resource i in resourceList)
         {
-            i.ModifyAmount(i.ResourceTickAmount);
+            // Avoid ticking with 0 value, no point in modifying
+            if (Mathf.Abs(i.ResourceTickAmount) > 0.005f) {
+                i.ModifyAmount(i.ResourceTickAmount);
+            }
         }
     }
 

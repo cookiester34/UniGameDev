@@ -10,10 +10,11 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     [Tooltip("Cannot be 0")]
     [Range(1, 100)]//just to stop it being set to 0;
     [SerializeField] private int productionTime = 1;
-    [SerializeField] private int baseProductionAmount = 0;
+    [SerializeField] private float baseProductionAmount = 1;
     private float actualProductionAmount;
 
     [SerializeField] private Resource resource;
+    public Resource Resource => resource;
 
     Building building;
     int _lastAssignedBees = 0;
@@ -27,15 +28,15 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         building = GetComponent<Building>();
         if (building != null) {
             building.OnBuildingPlaced += () => resource.ModifyTickDrain(actualProductionAmount, productionTime);
+            CalculateProductionAmount();
         } else {
             resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
-        CalculateProductionAmount();
     }
 
     void Update()
     {
-        if(_lastAssignedBees != building.assignedBees)
+        if(building != null &&_lastAssignedBees != building.assignedBees)
         {
             _lastAssignedBees = building.assignedBees;
             resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);

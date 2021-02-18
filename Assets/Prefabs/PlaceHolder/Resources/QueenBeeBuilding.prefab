@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: -3125807644095819491}
   - component: {fileID: -7823651049734207575}
   - component: {fileID: 7310969651345916939}
+  - component: {fileID: 5719779461004591944}
+  - component: {fileID: 8266421058985765894}
   m_Layer: 9
   m_Name: QueenBeeBuilding
   m_TagString: Building
@@ -114,6 +116,7 @@ MonoBehaviour:
   buildingTeir1: {fileID: 0}
   buildingTeir2: {fileID: 0}
   buildingTeir3: {fileID: 0}
+  assignedBees: 0
 --- !u!114 &-7823651049734207575
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   productionTime: 1
-  productionAmount: 1
+  baseProductionAmount: 1
   resource: {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
 --- !u!208 &7310969651345916939
 NavMeshObstacle:
@@ -145,3 +148,31 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
+--- !u!114 &5719779461004591944
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642171427236103336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59b77dbb3b9b2a14baea2573b5de7108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  amount: 10
+  resource: {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
+--- !u!114 &8266421058985765894
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7642171427236103336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a64dc16cede39e94fbee54f2bb19f9c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  beePrefab: {fileID: 326437159731175180, guid: 38a10bb7667555d45881063e54674893,
+    type: 3}
