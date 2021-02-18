@@ -10,12 +10,14 @@ public class HexPanel : MonoBehaviour
 	[SerializeField] List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
 	bool shouldBeDestroyed = true;
+	MeshRenderer mr;
 	private BuildingFoundation _buildingFoundation;
 
 	public BuildingFoundation BuildingFoundation => _buildingFoundation;
 
 	private void Awake() {
 		_buildingFoundation = GetComponent<BuildingFoundation>();
+		mr = GetComponentInChildren<MeshRenderer>();
 	}
 
 	public void SetToTerrain() {
@@ -43,6 +45,13 @@ public class HexPanel : MonoBehaviour
 				}
 			}
 		}
+	}
+	
+	public void ToggleVisibility(bool val) {
+		if (!mr) {
+			mr = GetComponentInChildren<MeshRenderer>();
+		}
+		mr.enabled = val;
 	}
 	
 	void SortNeighboursByHeight() {

@@ -43,10 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3388263edc0fd44aa953a0e2c7de6d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resourceManagement: {fileID: 0}
+  selectedBuildingData: {fileID: 0}
   mask:
     serializedVersion: 2
     m_Bits: 768
-  upgradeButton: {fileID: 0}
+  destroyIcon: {fileID: 21300000, guid: 5af7ee8f99db29042855173ca79cc6f5, type: 3}
   teir1UpgradeCost: 0
   teir2UpgradeCost: 0
