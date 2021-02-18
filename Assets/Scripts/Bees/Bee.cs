@@ -8,14 +8,18 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Bee : MonoBehaviour {
     private Building _home;
+    private Building _work;
     private BeeStateMachine _stateMachine;
     private NavMeshAgent _agent;
-
-    private List<BeeTask> tasks = new List<BeeTask>();
 
     public Building Home {
         get => _home;
         set => _home = value;
+    }
+
+    public Building Work {
+        get => _work;
+        set => _work = value;
     }
 
     public NavMeshAgent Agent {
@@ -26,15 +30,4 @@ public class Bee : MonoBehaviour {
     private void Awake() {
         _agent = GetComponent<NavMeshAgent>();
     }
-
-    
-    private void AddTask() {
-        
-    }
-}
-
-public class BeeTask {
-    private bool permanent = false;
-    private Vector3 position;
-    private Building _building;
 }

@@ -36,9 +36,9 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
 
     void Update()
     {
-        if(building != null &&_lastAssignedBees != building.assignedBees)
+        if(building != null &&_lastAssignedBees != building.numAssignedBees)
         {
-            _lastAssignedBees = building.assignedBees;
+            _lastAssignedBees = building.numAssignedBees;
             resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
             CalculateProductionAmount();
             resource.ModifyTickDrain(actualProductionAmount, productionTime);
@@ -47,10 +47,10 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
 
     void CalculateProductionAmount()
     {
-        if (building.assignedBees == 0)
+        if (building.numAssignedBees == 0)
             actualProductionAmount = 0;
         else
-            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.assignedBees;
+            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees;
     }
 
     public void BeforeDestroy() {

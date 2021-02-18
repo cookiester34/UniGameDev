@@ -176,12 +176,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170ef695898af1040b15ccb60ce3849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 1
   resourceType: 4
   buildingData: {fileID: 11400000, guid: 0a8254fbfa9592545ab06b0685e0acf6, type: 2}
   buildingTeir: 0
   buildingTeir1: {fileID: 5018363373151657191}
   buildingTeir2: {fileID: 3671619186576650861}
   buildingTeir3: {fileID: 0}
+  assignedBees: 0
 --- !u!114 &4735565122750138493
 MonoBehaviour:
   m_ObjectHideFlags: 0

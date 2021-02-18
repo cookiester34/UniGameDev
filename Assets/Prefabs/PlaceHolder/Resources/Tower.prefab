@@ -139,17 +139,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb7ef49435289149859e89d4872814f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 6
   resourceType: 0
   buildingData: {fileID: 11400000, guid: 16ac760894581f240beb732d2ce9651a, type: 2}
   buildingTeir: 0
   buildingTeir1: {fileID: 0}
   buildingTeir2: {fileID: 0}
   buildingTeir3: {fileID: 0}
+  assignedBees: 0
   towerAmmoCost: 5
   projectile: {fileID: 7277737900402773344, guid: e03c7411cb7bd084cb86a6a334a9ada6,
     type: 3}
   towerRange: 22
   sphereFiringRange: {fileID: 378701050537893272}
+  baseFiringSpeed: 0
   firingSpeed: 0
 --- !u!64 &663785914879581673
 MeshCollider:

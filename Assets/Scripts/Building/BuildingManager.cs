@@ -283,14 +283,14 @@ public class BuildingManager : MonoBehaviour {
         if(selectedBuilding != null && selectedBuildingData != null)
         {
             BuildingData buildingData = selectedBuildingData.BuildingData;
-            if (selectedBuildingData.assignedBees < buildingData.maxNumberOfWorkers)
+            if (selectedBuildingData.numAssignedBees < buildingData.maxNumberOfWorkers)
             {
                 Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
                 if (temp != null)
                 {
                     if (temp.CurrentResourceAmount < temp.ResourceCap)
                     {
-                        selectedBuildingData.assignedBees++;
+                        BeeManager.Instance.AssignBeeToBuilding(selectedBuildingData);
                         temp.ModifyAmount(1);
                     }
                 }
@@ -305,12 +305,12 @@ public class BuildingManager : MonoBehaviour {
     {
         if (selectedBuilding != null && selectedBuildingData != null)
         {
-            if (selectedBuildingData.assignedBees > 0)
+            if (selectedBuildingData.numAssignedBees > 0)
             {
                 Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
                 if (temp != null)
                 {
-                    selectedBuildingData.assignedBees--;
+                    BeeManager.Instance.UnassignBeeFromBuilding(selectedBuildingData);
                     temp.ModifyAmount(-1);
                 }
                 else

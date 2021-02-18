@@ -4,5 +4,7 @@ using UnityEngine;
 
 public enum BeeStates {
     Idle,
-    Move
+    Move,
+    Sleep,
+    Work
 }

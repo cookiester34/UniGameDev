@@ -204,12 +204,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170ef695898af1040b15ccb60ce3849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 4
   resourceType: 1
   buildingData: {fileID: 11400000, guid: 672494d383c27664b9bfb5c176b036a6, type: 2}
   buildingTeir: 0
   buildingTeir1: {fileID: 0}
   buildingTeir2: {fileID: 0}
   buildingTeir3: {fileID: 0}
+  assignedBees: 0
 --- !u!114 &-4221982890271757352
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -223,7 +225,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   productionTime: 10
-  productionAmount: 1
+  baseProductionAmount: 1
   resource: {fileID: 11400000, guid: 6805fa6b226494444ad52bbd41c2b73a, type: 2}
 --- !u!114 &381196182239843206
 MonoBehaviour:
@@ -238,7 +240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   productionTime: 10
-  productionAmount: -10
+  baseProductionAmount: 1
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
 --- !u!208 &4993526729541551008
 NavMeshObstacle:

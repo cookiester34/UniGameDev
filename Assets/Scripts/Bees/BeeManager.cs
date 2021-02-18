@@ -53,13 +53,6 @@ public class BeeManager : MonoBehaviour {
                 && storage.gameObject.GetComponent<Building>() != null) {
             }
         }
-
-        foreach (Bee bee in _bees) {
-            if (bee.Home == null) {
-                var housing = BuildingManager.Instance.GetAllStorageBuildingsOfType(ResourceType.Population);
-                bee.Home = housing[Random.Range(0, housing.Count)];
-            }
-        }
     }
 
     public void OnPopulationChange(float populationNewValue) {
@@ -68,8 +61,6 @@ public class BeeManager : MonoBehaviour {
             for (int i = 0; i < populationChange; i++) {
                 GameObject go = Instantiate(beePrefab, gameObject.transform);
                 Bee bee = go.GetComponent<Bee>();
-                var housing = BuildingManager.Instance.GetAllStorageBuildingsOfType(ResourceType.Population);
-                bee.Home = housing[Random.Range(0, housing.Count)];
                 _bees.Add(bee);
             }
         } else {
@@ -82,10 +73,77 @@ public class BeeManager : MonoBehaviour {
         _cachedPopulation += populationChange;
     }
 
+    public void AssignBeeToBuilding(Building building) {
+        switch (building.BuildingType) {
+            case BuildingType.QueenBee:
+            // fall through
+            case BuildingType.Housing:
+                foreach (Bee bee in _bees) {
+                    if (bee.Home == null) {
+                        bee.Home = building;
+                        building.AssignBee(bee);
+                        break;
+                    }
+                }
+                break;
+            
+            default:
+                foreach (Bee bee in _bees) {
+                    if (bee.Work == null) {
+                        bee.Work = building;
+                        building.AssignBee(bee);
+                        break;
+                    }
+                }
+                break;
+        }
+    }
+
+    public void UnassignBeeFromBuilding(Building building) {
+        building.UnassignBee();
+        switch (building.BuildingType) {
+            case BuildingType.QueenBee:
+            // fall through
+            case BuildingType.Housing: {
+                Bee unassignedBee = building.UnassignBee();
+                unassignedBee.Home = null;
+                break;
+            }
+
+            default: {
+                Bee unassignedBee = building.UnassignBee();
+                unassignedBee.Work = null;
+                break;
+            }
+        }
+    }
+
     /// <summary>
     /// gets called when a building has it's assigned bee's number change
     /// </summary>
-    public void OnAssignedBeeChange() {
+    public void OnAssignedBeeChange(Building building) {
+        switch (building.BuildingType) {
+            case BuildingType.QueenBee:
+                // fall through
+            case BuildingType.Housing:
+                foreach (Bee bee in _bees) {
+                    if (bee.Home == null) {
+                        bee.Home = building;
+                        break;
+                    }
+                }
+                break;
+            
+            default:
+                foreach (Bee bee in _bees) {
+                    if (bee.Work == null) {
+                        bee.Work = building;
+                        break;
+                    }
+                }
+                break;
+            
+        }
         AssignedBeeUpdated?.Invoke();
     }
 }

@@ -8,6 +8,8 @@ public class Building : MonoBehaviour {
     public delegate void EmptyEvent();
     public event EmptyEvent OnBuildingPlaced;
 
+    [SerializeField] private BuildingType buildingType;
+
     public ResourceType resourceType;
     [SerializeField] private BuildingData buildingData;
     [HideInInspector]
@@ -18,14 +20,16 @@ public class Building : MonoBehaviour {
 
     public BuildingData BuildingData => buildingData;
 
+    public BuildingType BuildingType => buildingType;
+
     /// <summary>
     /// number of bees assigned to this building
     /// </summary>
     [HideInInspector]
-    public int assignedBees;
-    private int lastBeeNum = 0;
+    public int numAssignedBees;
+    private List<Bee> _assignedBees;
 
-    private void Start()
+    protected virtual void Start()
     {
         if (buildingTeir1 != null) {
             buildingTeir1.SetActive(buildingTeir == 0);
@@ -38,18 +42,32 @@ public class Building : MonoBehaviour {
         if (buildingTeir3 != null) {
             buildingTeir3.SetActive(buildingTeir == 2);
         }
+        _assignedBees = new List<Bee>();
     }
 
     public void PlaceBuilding() {
         OnBuildingPlaced?.Invoke();
     }
 
-    private void Update()
-    {
-        if(lastBeeNum != assignedBees)
-        {
-            lastBeeNum = assignedBees;
-            BeeManager.Instance.OnAssignedBeeChange();
+    public void AssignBee(Bee bee) {
+        if (_assignedBees.Contains(bee)) {
+            Debug.LogWarning("Attempting to assign a bee that is already assigned to this building");
         }
+
+        _assignedBees.Add(bee);
+        numAssignedBees = _assignedBees.Count;
+    }
+
+    public Bee UnassignBee() {
+        Bee beeUnassigned = null;
+        if (_assignedBees.Count < 1) {
+            Debug.LogWarning("Attempting to unassign a bee when no bees are  assigned to this building");
+        } else {
+            beeUnassigned = _assignedBees[0];
+            _assignedBees.Remove(beeUnassigned);
+        }
+        numAssignedBees = _assignedBees.Count;
+
+        return beeUnassigned;
     }
 }

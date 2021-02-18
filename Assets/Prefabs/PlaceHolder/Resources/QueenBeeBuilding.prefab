@@ -110,6 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170ef695898af1040b15ccb60ce3849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 7
   resourceType: 4
   buildingData: {fileID: 11400000, guid: 5fd12689c90bce44aa2b80341df40761, type: 2}
   buildingTeir: 0
