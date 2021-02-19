@@ -16,7 +16,7 @@ namespace CameraNameSpace {
         /// A value to change to increase/decrease the speed of panning
         /// </summary>
         [Tooltip("The speed at which the camera will pan")]
-        [SerializeField] private int panSpeed;
+        [SerializeField] private float panSpeed;
 
         private float timeMoving = 0;
         
@@ -43,6 +43,7 @@ namespace CameraNameSpace {
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
+            panSpeed = PlayerPrefs.GetFloat(SettingsPanel.CameraPanSpeed);
             UpdateHeight();
         }
 

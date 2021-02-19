@@ -18,4 +18,4 @@ MonoBehaviour:
   buildingSize: 3
   maxInstances: 1
   description: The Queen Bee building
-  maxNumberOfWorkers: 5
+  maxNumberOfWorkers: 10
