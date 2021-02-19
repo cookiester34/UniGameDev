@@ -11,6 +11,7 @@ using Random = UnityEngine.Random;
 public class BeeManager : MonoBehaviour {
     private List<Bee> _bees = new List<Bee>();
     [SerializeField] private GameObject beePrefab;
+    [SerializeField] private GameObject beeSpawn;
 
     private static BeeManager _instance = null;
     public delegate void AssignedBeeUpdate();
@@ -59,7 +60,7 @@ public class BeeManager : MonoBehaviour {
         int populationChange = Mathf.FloorToInt(populationNewValue - _cachedPopulation);
         if (populationChange > 0) {
             for (int i = 0; i < populationChange; i++) {
-                GameObject go = Instantiate(beePrefab, gameObject.transform);
+                GameObject go = Instantiate(beePrefab, beeSpawn.transform.position, beeSpawn.transform.rotation);
                 Bee bee = go.GetComponent<Bee>();
                 _bees.Add(bee);
             }
