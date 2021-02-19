@@ -28,6 +28,12 @@ public class Building : MonoBehaviour {
     [HideInInspector]
     public int numAssignedBees;
     private List<Bee> _assignedBees;
+    private List<BuildingFoundation> usedFoundations = new List<BuildingFoundation>();
+
+    public List<BuildingFoundation> UsedFoundations {
+        get => usedFoundations;
+        set => usedFoundations = value;
+    }
 
     protected virtual void Start()
     {
@@ -69,5 +75,11 @@ public class Building : MonoBehaviour {
         numAssignedBees = _assignedBees.Count;
 
         return beeUnassigned;
+    }
+
+    private void OnDestroy() {
+        foreach (BuildingFoundation foundation in usedFoundations) {
+            foundation.CanBuild = true;
+        }
     }
 }

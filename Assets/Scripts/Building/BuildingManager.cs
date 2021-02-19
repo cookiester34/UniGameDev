@@ -179,8 +179,14 @@ public class BuildingManager : MonoBehaviour {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
-            _buildings.Add(tempBuilding.GetComponent<Building>());
-            tempBuilding.GetComponent<Building>()?.PlaceBuilding();
+
+            Building placedBuilding = tempBuilding.GetComponent<Building>();
+            if (placedBuilding != null) {
+                _buildings.Add(placedBuilding);
+                placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingSize);
+                placedBuilding.PlaceBuilding();
+            }
+
             AudioManager.Instance.PlaySound("PlaceBuilding");
             //this is here to allow for multiple buildings to be placed at once
             if (ResourceManagement.Instance.CanUseResources(currentBuilding.ResourcePurchase) && GetIsInBuildingLimit(currentBuilding)) {
@@ -221,8 +227,9 @@ public class BuildingManager : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     if (hit.transform.CompareTag("Building")) {
-						numBuildingTypes[(int)hit.transform.GetComponent<Building>().BuildingData.BuildingType]--;
-                        _buildings.Remove(hit.transform.GetComponent<Building>());
+                        Building destroyedBuilding = hit.transform.GetComponent<Building>();
+						numBuildingTypes[(int)destroyedBuilding.BuildingData.BuildingType]--;
+                        _buildings.Remove(destroyedBuilding);
                         var beforeDestroy =  hit.collider.GetComponents<IBeforeDestroy>();
                         if (beforeDestroy != null && beforeDestroy.Length > 0) {
                             foreach (var destroy in beforeDestroy) {

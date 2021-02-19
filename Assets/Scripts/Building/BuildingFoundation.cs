@@ -122,4 +122,29 @@ public class BuildingFoundation : MonoBehaviour {
 
         return canBuild;
     }
+
+    public List<BuildingFoundation> GetFoundations(int buildTiles) {
+        List<BuildingFoundation> foundations = new List<BuildingFoundation>();
+        switch (buildTiles) {
+            case 1:
+                foundations.Add(this);
+                break;
+            
+            case 2:
+                HexPanel br = _hexPanel.GetNeighbour(NeighbourDirection.BelowRight);
+                HexPanel ar = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
+                foundations.Add(ar.BuildingFoundation);
+                foundations.Add(br.BuildingFoundation);
+                break;
+
+            case 3:
+                foundations.Add(this);
+                foreach (HexPanel neighbour in _hexPanel.GetNeighbours()) {
+                    foundations.Add(neighbour.BuildingFoundation);
+                }
+                break;
+        }
+
+        return foundations;
+    }
 }
