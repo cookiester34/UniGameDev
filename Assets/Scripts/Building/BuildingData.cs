@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using Random = System.Random;
 
 /// <summary>
 /// Class to store building data, should be one for each building type
@@ -35,6 +36,17 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     /// How many instances of this type of building can exist at once
     /// </summary>
     [SerializeField] private int maxInstances;
+	
+	/// <summary>
+    /// Description of the building
+    /// </summary>
+    [SerializeField] private string description = "Building description here!";
+
+    /// <summary>
+    /// max number of bees allowed to work at this building
+    /// </summary>
+    [Range(0,10)]
+    public int maxNumberOfWorkers;
 
     public Sprite UiImage => uiImage;
 
@@ -45,6 +57,8 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     public int BuildingSize => buildingSize;
 	
 	public int MaxInstances => maxInstances;
+	
+	public string Description => description;
 
     /// <summary>
     /// Allows copyng in of saved data

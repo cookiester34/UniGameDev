@@ -74,7 +74,7 @@ namespace Research {
         /// </summary>
         private void RunTimers() {
             foreach (ResearchObject research in ongoingResearch) {
-                research.TickTimer();
+                research.TickTimer(Time.deltaTime);
             }
 
             foreach (ResearchObject researchObject in tempFinishedResearch) {
@@ -87,7 +87,8 @@ namespace Research {
         /// Begins research on a topic
         /// </summary>
         /// <param name="researchObject">The research object to begin researching</param>
-        public void ResearchTopic(ResearchObject researchObject) {
+        /// <param name="useResources">Whether the resources should be used to begin the research</param>
+        public void ResearchTopic(ResearchObject researchObject, bool useResources = true) {
             if (researchObject.Researched) {
                 //Topic already researched
                 return;
@@ -98,7 +99,7 @@ namespace Research {
                 return;
             }
 
-            if (ResourceManagement.Instance.UseResources(researchObject.Resources)) {
+            if (!useResources || ResourceManagement.Instance.UseResources(researchObject.Resources)) {
                 DebugResearchStarted();
                 ongoingResearch.Add(researchObject);
                 researchObject.BeginResearch();

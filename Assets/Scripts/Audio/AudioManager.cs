@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using Util;
+
 public class AudioManager : MonoBehaviour
 {
     public Sound[] sounds;
     public List<Music> peaceMusic;
     public List<Music> combatMusic;
     public Music mainMenuMusic;
+    public SceneMusicType startingMusicType;
 
     private Music currentTrack;
     private float currentTrackLength;
@@ -17,20 +20,36 @@ public class AudioManager : MonoBehaviour
 
     private MusicQueue musicQueue;
 
-    public static AudioManager instance;
+    #region SINGLETON PATTERN
+
+    private static AudioManager _instance = null;
+    public static AudioManager Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                GameObject go = Resources.Load<GameObject>(ResourceLoad.AudioSingleton);
+                Instantiate(go);
+            }
+                
+            return _instance;
+        }
+    }
+    #endregion
 
     // Loop through our list of sounds and add an audio source for each.
     void Awake()
     {
-        if (instance == null)
-            instance = this;
+        Debug.Log(GetHashCode());
+        if (_instance == null)
+            _instance = this;
         else
         {
+            Debug.LogWarning("Creating Second instance of AudioManager. Deleting.");
             Destroy(gameObject);
             return;
         }
-
-        DontDestroyOnLoad(gameObject);
 
         // Apply settings chosen in list to sound sources.
 
@@ -76,9 +95,17 @@ public class AudioManager : MonoBehaviour
     {
         // Music playback can be started here.
         //StartPeaceMusic();
-        if (mainMenuMusic != null)
-            mainMenuMusic.source.Play();
+        StartMusic(startingMusicType);
 
+    }
+
+    // Offset the pitch and volume by 5% from its setting in soundlist. Could promote the ranges to a variable but isn't required as it's a subtle effect.
+    void AutoModulate(Sound sound)
+    {
+        float pitchOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        float volumeOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        sound.source.pitch = sound.pitch + pitchOffset;
+        sound.source.volume = sound.volume + volumeOffset;
     }
 
     // This is what is used to play the sound in code.
@@ -91,8 +118,34 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
+        if (s.autoModulation)
+        {
+            AutoModulate(s);
+        }
+
         s.source.Play();
     }
+
+    public void PlaySoundClip (AudioClip sound)
+    {
+        // Find the specified sound in the list.
+        foreach (Sound s in sounds)
+        {
+            if (s.soundClip == sound)
+            {
+                // Modulate if enabled.
+
+                if (s.autoModulation)
+                {
+                    AutoModulate(s);
+                }
+
+                // Play the sound, then stop iterating through the list after we've found our sound.
+                s.source.Play();
+                break;
+            }
+        }
+    } 
 
     // Ensures the current source is stopped before assigning and playing the new one.
     public void PlayMusicClip(Music music)
@@ -112,29 +165,36 @@ public class AudioManager : MonoBehaviour
     }
 
     // Initialises the music queue and starts playback.
-    public void StartMusic()
-    {
-        musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
-    }
 
-    // Two functions stop the current queue, assign a new one and start playback. These could be condensed in to one function with a parameter, but user input isn't required so typos won't break stuff.
-    public void StartCombatMusic ()
+    // We stop the current queue and any music playing. We then queue and play the type of music requested.
+    public void StartMusic (SceneMusicType type)
     {
         if (mainMenuMusic.source.isPlaying)
             mainMenuMusic.source.Stop();
         StopMusic();
-        musicQueue = new MusicQueue(combatMusic);
-        musicSource = GetComponent<AudioSource>();
-        StartMusic();
+        switch(type)
+        {
+            case SceneMusicType.mainMenu:
+                mainMenuMusic.source.Play();
+                break;
+            case SceneMusicType.peace:
+                musicQueue = new MusicQueue(peaceMusic);
+                musicSource = GetComponent<AudioSource>();
+                musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
+                break;
+            case SceneMusicType.combat:
+                musicQueue = new MusicQueue(combatMusic);
+                musicSource = GetComponent<AudioSource>();
+                musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
+                break;
+        }
     }
+}
 
-    public void StartPeaceMusic ()
-    {
-        if (mainMenuMusic.source.isPlaying)
-            mainMenuMusic.source.Stop();
-        StopMusic();
-        musicQueue = new MusicQueue(peaceMusic);
-        musicSource = GetComponent<AudioSource>();
-        StartMusic();
-    }
+[Serializable]
+public enum SceneMusicType
+{
+    mainMenu,
+    combat,
+    peace,
 }

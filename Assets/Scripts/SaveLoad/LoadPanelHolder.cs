@@ -40,7 +40,7 @@ public class LoadPanelHolder : MonoBehaviour {
     void AddLoadPanel(string savename) {
         LoadPanel loadPanel = _loadPanels.Find(panel => panel.Savename == savename);
         if (loadPanel == null) {
-            GameObject go = Instantiate(loadPanelPrefab, transform);
+            GameObject go = Instantiate(loadPanelPrefab, _rectTransform);
             loadPanel = go.GetComponent<LoadPanel>();
             _loadPanels.Add(loadPanel);
             loadPanel.SetText(savename);

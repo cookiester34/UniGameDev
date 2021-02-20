@@ -6,5 +6,6 @@ public enum ResourceType {
     Honey,
     RoyalJelly,
     Wax,
-    Population
+    Population,
+    AssignedPop
 }

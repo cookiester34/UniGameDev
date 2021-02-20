@@ -14,22 +14,27 @@ public class TowerBuilding : Building
     public GameObject sphereFiringRange;
 
     [Range(1,10)]
+    public float baseFiringSpeed;
     public float firingSpeed;
     private float timer = 1f;
 
     private List<Transform> enemiesInRange = new List<Transform>();
 
     //set the collider object to the range of the tower
-    private void Start()
-    {
+    protected override void Start() {
+        base.Start();
         sphereFiringRange.transform.localScale = new Vector3(towerRange, 1, towerRange);
     }
 
     private void Update()
     {
-        if(enemiesInRange.Count > 0 && timer <= 0)
+        if (enemiesInRange.Count > 0 && timer <= 0)
         {
-            FireAtEnemies();
+            if (numAssignedBees > 0)
+            {
+                FireAtEnemies();
+                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
+            }
             timer = firingSpeed;
         }
         if(timer >= 0)

@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using UnityEngine;
 
 public class HexPanel : MonoBehaviour
@@ -9,26 +10,62 @@ public class HexPanel : MonoBehaviour
 	[SerializeField] List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
 	bool shouldBeDestroyed = true;
+	MeshRenderer mr;
 	private BuildingFoundation _buildingFoundation;
 
 	public BuildingFoundation BuildingFoundation => _buildingFoundation;
 
 	private void Awake() {
 		_buildingFoundation = GetComponent<BuildingFoundation>();
+		mr = GetComponentInChildren<MeshRenderer>();
 	}
 
 	public void SetToTerrain() {
-		BoxCollider bc = GetComponent<BoxCollider>();
 		RaycastHit rayHit;
 		LayerMask mask = LayerMask.GetMask("Environment");
 		if (Physics.Raycast(transform.position, Vector3.down, out rayHit, Mathf.Infinity, mask)) { //can only be fired below since firing upwards does not seem to interact with the Terrain's collider
 			AdjustYPos(rayHit.point.y + 0.05f);
 			shouldBeDestroyed = false;
+			if (CheckForTerrainOverlap()) {
+				shouldBeDestroyed = true;
+			}
 		}
+
+	}
+	
+	public void TryToMatchHeightWithNeighbour() {
+		SortNeighboursByHeight();
+		for (int i = 0; i < neighbours.Count; i++) {
+			float heightDiff = neighbours[i].transform.position.y - transform.position.y;
+			if (heightDiff <= 0.3f && heightDiff > 0f) {
+				AdjustYPos(neighbours[i].transform.position.y);
+				if (!CheckForTerrainOverlap()) {
+					shouldBeDestroyed = false;
+					return;
+				}
+			}
+		}
+	}
+	
+	public void ToggleVisibility(bool val) {
+		if (!mr) {
+			mr = GetComponentInChildren<MeshRenderer>();
+		}
+		mr.enabled = val;
+	}
+	
+	void SortNeighboursByHeight() {
+		neighbours = neighbours.OrderBy(x => x.transform.position.y).ToList();
+	}
+	
+	bool CheckForTerrainOverlap() {
+		BoxCollider bc = GetComponent<BoxCollider>();
+		LayerMask mask = LayerMask.GetMask("Environment");
 		Collider[] hits = Physics.OverlapBox(transform.position + bc.center, bc.size / 2f, Quaternion.identity, mask);
 		if (hits.Length > 0) {
-			shouldBeDestroyed = true;
+			return true;
 		}
+		return false;
 	}
 	
 	public bool GetShouldBeDestroyed() {

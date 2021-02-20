@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using Util;
 using Random = UnityEngine.Random;
 
@@ -19,8 +21,18 @@ public class BuildingManager : MonoBehaviour {
 
     private bool canSelectBuilding;
     private GameObject selectedBuilding;
-    private Building selectedBuildingData;
+    [HideInInspector]
+    public  Building selectedBuildingData;
     public LayerMask mask;
+	private EventSystem eventSys;
+	private GameObject oldTempBuilding;
+	
+	private Image selectedBuildingUI;
+	public Sprite destroyIcon; //need this since a building data reference is not passed when destroying buildings
+	private Text selectedBuildingText;
+
+    private List<Building> _buildings = new List<Building>();
+
 
     private static BuildingManager _instance = null;
 
@@ -29,6 +41,8 @@ public class BuildingManager : MonoBehaviour {
     public int teir1UpgradeCost;
     [Range(2, 5)]
     public int teir2UpgradeCost;
+    
+    public List<Building> Buildings => _buildings;
 
     public static BuildingManager Instance {
         get {
@@ -54,34 +68,53 @@ public class BuildingManager : MonoBehaviour {
 
         _instance = this;
 		numBuildingTypes = new int[Enum.GetNames(typeof(BuildingType)).Length];
+		eventSys = GameObject.FindObjectOfType<EventSystem>();
+		selectedBuildingUI = GameObject.Find("SelectedBuildingUIImage").GetComponent<Image>();
+		selectedBuildingText = selectedBuildingUI.gameObject.GetComponentInChildren<Text>();
     }
 
     /// <summary>
     /// This is a function for UI, the button needs to have a building pass script on it determining what building it will place
     /// </summary>
     /// <param name="buildingType"></param>
-    public void PlaceBuilding(BuildingData buildingData) {
-        if (buildingData == null) {
+    public void PlaceBuilding(BuildingData buildingData) 
+    {
+		if (tempBuilding) {
+			oldTempBuilding = tempBuilding;
+		}
+        if (buildingData == null) 
+        {
             canPlaceBuilding = false;
             NoBuildingFound(buildingData.BuildingType);
         } else {
+			canDestroyBuilding = false;
 			bool isInBuildingLimit = GetIsInBuildingLimit(buildingData);
             canPlaceBuilding = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase) && isInBuildingLimit;
 
             if (canPlaceBuilding) {
+				selectedBuildingUI.sprite = buildingData.UiImage;
+				selectedBuildingText.text = buildingData.Description;
                 currentBuilding = buildingData;
                 tempBuilding = Instantiate(currentBuilding.BuildingType.GetPrefab(),
                     new Vector3(0, 0, 0),
-                    Quaternion.Euler(0, 30 + Random.Range(0, 7) * 60, 0));
+                    currentBuilding.BuildingType.GetPrefab().transform.rotation);
+				if (oldTempBuilding == null) {
+					oldTempBuilding = tempBuilding;
+				}
                 tempBuilding.GetComponent<Collider>().enabled = false;
             }
 			else if (!isInBuildingLimit) {
 				UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
+                AudioManager.Instance.PlaySound("Error");
 			}
 			else {
 				UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
-			}
+                AudioManager.Instance.PlaySound("Error");
+            }
         }
+		if (oldTempBuilding && !oldTempBuilding.activeSelf) {
+			Destroy(oldTempBuilding);
+		}
     }
 	
 	private bool GetIsInBuildingLimit(BuildingData buildingData) {
@@ -110,7 +143,11 @@ public class BuildingManager : MonoBehaviour {
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) {
+			if (eventSys.IsPointerOverGameObject()) { //this checks if the mouse is over a UI element
+				tempBuilding.SetActive(false);
+			}
+            else if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask)) {
+				tempBuilding.SetActive(true);
                 BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
                 if (foundation != null) {
                     Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingSize);
@@ -135,15 +172,24 @@ public class BuildingManager : MonoBehaviour {
         if (!foundation.BuildMulti(currentBuilding.BuildingSize)) {
             CanclePlacingBuilding();
             BuildingAlreadyThere();
+            AudioManager.Instance.PlaySound("Error");
         } else {
             canPlaceBuilding = false;
 			numBuildingTypes[(int)currentBuilding.BuildingType]++;
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
-            tempBuilding.GetComponent<Building>()?.PlaceBuilding();
-			//this is here to allow for multiple buildings to be placed at once
-			if (GetIsInBuildingLimit(currentBuilding)) {
+
+            Building placedBuilding = tempBuilding.GetComponent<Building>();
+            if (placedBuilding != null) {
+                _buildings.Add(placedBuilding);
+                placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingSize);
+                placedBuilding.PlaceBuilding();
+            }
+
+            AudioManager.Instance.PlaySound("PlaceBuilding");
+            //this is here to allow for multiple buildings to be placed at once
+            if (ResourceManagement.Instance.CanUseResources(currentBuilding.ResourcePurchase) && GetIsInBuildingLimit(currentBuilding)) {
 				PlaceBuilding(currentBuilding);
 			}
         }
@@ -154,11 +200,16 @@ public class BuildingManager : MonoBehaviour {
     private void CanclePlacingBuilding()
     {
         canPlaceBuilding = false;
+		selectedBuildingUI.sprite = null;
+		selectedBuildingText.text = "No building selected.";
         Destroy(tempBuilding);
     }
 
     public void DestroyBuilding()
     {
+		selectedBuildingUI.sprite = destroyIcon;
+		selectedBuildingText.text = "Destroy placed buildings";
+		canPlaceBuilding = false;
         canDestroyBuilding = true;
     }
 
@@ -176,7 +227,9 @@ public class BuildingManager : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     if (hit.transform.CompareTag("Building")) {
-						numBuildingTypes[(int)hit.transform.GetComponent<Building>().BuildingData.BuildingType]--;
+                        Building destroyedBuilding = hit.transform.GetComponent<Building>();
+						numBuildingTypes[(int)destroyedBuilding.BuildingData.BuildingType]--;
+                        _buildings.Remove(destroyedBuilding);
                         var beforeDestroy =  hit.collider.GetComponents<IBeforeDestroy>();
                         if (beforeDestroy != null && beforeDestroy.Length > 0) {
                             foreach (var destroy in beforeDestroy) {
@@ -184,12 +237,17 @@ public class BuildingManager : MonoBehaviour {
                             }
                         }
 
+                        // TODO: make the building clear itself from the building foundations it was placed on
                         Destroy(hit.transform.gameObject, 0.2f);
+                        AudioManager.Instance.PlaySound("DestroyBuilding");
                     }
                 }
             }
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape)) {
                 canDestroyBuilding = false;
+				selectedBuildingUI.sprite = null;
+				selectedBuildingText.text = "No building selected.";
+			}
         }
     }
 
@@ -221,6 +279,50 @@ public class BuildingManager : MonoBehaviour {
             }
             if (Input.GetKeyDown(KeyCode.Escape))
                 canSelectBuilding = false;
+        }
+    }
+
+    /// <summary>
+    /// for ui button to add a bee to the selected building
+    /// </summary>
+    public void AddBeeToBuilding()
+    {
+        if(selectedBuilding != null && selectedBuildingData != null)
+        {
+            BuildingData buildingData = selectedBuildingData.BuildingData;
+            if (selectedBuildingData.numAssignedBees < buildingData.maxNumberOfWorkers)
+            {
+                Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
+                if (temp != null)
+                {
+                    if (temp.CurrentResourceAmount < temp.ResourceCap)
+                    {
+                        BeeManager.Instance.AssignBeeToBuilding(selectedBuildingData);
+                        temp.ModifyAmount(1);
+                    }
+                }
+                else
+                    NoResourceFound(ResourceType.AssignedPop);
+            }
+        }
+    }
+
+
+    public void RemoveBeeFromBuilding()
+    {
+        if (selectedBuilding != null && selectedBuildingData != null)
+        {
+            if (selectedBuildingData.numAssignedBees > 0)
+            {
+                Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
+                if (temp != null)
+                {
+                    BeeManager.Instance.UnassignBeeFromBuilding(selectedBuildingData);
+                    temp.ModifyAmount(-1);
+                }
+                else
+                    NoResourceFound(ResourceType.AssignedPop);
+            }
         }
     }
 
@@ -264,6 +366,30 @@ public class BuildingManager : MonoBehaviour {
         }
     }
 
+    public List<Building> GetAllStorageBuildingsOfType(ResourceType resourceType) {
+        return _buildings.FindAll(building => {
+            bool add = false;
+            var storage = building.GetComponent<ResourceStorage>();
+            if (storage != null && storage.Resource.resourceType == resourceType) {
+                add = true;
+            }
+
+            return add;
+        });
+    }
+
+    public List<Building> GetAllSupplierBuildingsOfType(ResourceType resourceType) {
+        return _buildings.FindAll(building => {
+            bool add = false;
+            var supplier = building.GetComponent<ResourceSupplier>();
+            if (supplier != null && supplier.Resource.resourceType == resourceType) {
+                add = true;
+            }
+
+            return add;
+        });
+    }
+
     #region Debugs
     private void NoBuildingFound(BuildingType buildingType)
     {
@@ -273,6 +399,16 @@ public class BuildingManager : MonoBehaviour {
     {
         Debug.LogWarning("Building is already there");
 		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.");
+    }
+
+    private void NoResourceFound(ResourceType resourceType)
+    {
+        Debug.LogWarning("No building of type: " + resourceType.ToString() + " :found");
+    }
+
+    private void NotEnoughResources()
+    {
+        Debug.LogWarning("Not Enough Resources To Make Purchase");
     }
     #endregion
 }

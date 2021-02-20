@@ -5,8 +5,10 @@ using UnityEngine;
 
 [Serializable]
 public class Building : MonoBehaviour {
-    public delegate void BuildingPlaced();
-    public event BuildingPlaced OnBuildingPlaced;
+    public delegate void EmptyEvent();
+    public event EmptyEvent OnBuildingPlaced;
+
+    [SerializeField] private BuildingType buildingType;
 
     public ResourceType resourceType;
     [SerializeField] private BuildingData buildingData;
@@ -18,7 +20,22 @@ public class Building : MonoBehaviour {
 
     public BuildingData BuildingData => buildingData;
 
-    private void Start()
+    public BuildingType BuildingType => buildingType;
+
+    /// <summary>
+    /// number of bees assigned to this building
+    /// </summary>
+    [HideInInspector]
+    public int numAssignedBees;
+    private List<Bee> _assignedBees;
+    private List<BuildingFoundation> usedFoundations = new List<BuildingFoundation>();
+
+    public List<BuildingFoundation> UsedFoundations {
+        get => usedFoundations;
+        set => usedFoundations = value;
+    }
+
+    protected virtual void Start()
     {
         if (buildingTeir1 != null) {
             buildingTeir1.SetActive(buildingTeir == 0);
@@ -31,9 +48,38 @@ public class Building : MonoBehaviour {
         if (buildingTeir3 != null) {
             buildingTeir3.SetActive(buildingTeir == 2);
         }
+        _assignedBees = new List<Bee>();
     }
 
     public void PlaceBuilding() {
         OnBuildingPlaced?.Invoke();
+    }
+
+    public void AssignBee(Bee bee) {
+        if (_assignedBees.Contains(bee)) {
+            Debug.LogWarning("Attempting to assign a bee that is already assigned to this building");
+        }
+
+        _assignedBees.Add(bee);
+        numAssignedBees = _assignedBees.Count;
+    }
+
+    public Bee UnassignBee() {
+        Bee beeUnassigned = null;
+        if (_assignedBees.Count < 1) {
+            Debug.LogWarning("Attempting to unassign a bee when no bees are  assigned to this building");
+        } else {
+            beeUnassigned = _assignedBees[0];
+            _assignedBees.Remove(beeUnassigned);
+        }
+        numAssignedBees = _assignedBees.Count;
+
+        return beeUnassigned;
+    }
+
+    private void OnDestroy() {
+        foreach (BuildingFoundation foundation in usedFoundations) {
+            foundation.CanBuild = true;
+        }
     }
 }

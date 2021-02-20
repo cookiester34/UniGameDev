@@ -49,13 +49,18 @@ namespace Research {
         public bool Researched => researched;
 
         public float ResearchProgress => researchProgress;
+        public Timer Timer => timer;
 
         private void OnEnable() {
             researched = false;
+            timer.OnTimerFinish += FinishResearch;
+            timer.Reset();
         }
 
         public void CopySavedResearch(SavedResearch savedResearch) {
             researched = savedResearch.researched;
+            researchProgress = savedResearch.progress;
+            timer.LoadTimer(savedResearch.timer);
             if (researched) {
                 OnResearchFinished?.Invoke();
             }
@@ -66,11 +71,9 @@ namespace Research {
             OnResearchStarted?.Invoke();
         }
 
-        public void TickTimer() {
-            researchProgress = timer.Progress();
-            if (!researched && researchProgress > 99f) {
-                FinishResearch();
-            }
+        public void TickTimer(float timePassed) {
+            timer.Tick(timePassed);
+            researchProgress = timer.ProgressPercent;
         }
 
         public void FinishResearch() {

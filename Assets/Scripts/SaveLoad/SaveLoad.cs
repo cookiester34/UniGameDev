@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using CameraNameSpace;
 using Research;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 /// Class that handles saving and loading functionality
@@ -23,17 +24,26 @@ public static class SaveLoad {
     private static string saveDirectoryPath;
 
     /// <summary>
+    /// Save file that is currently being dealt with
+    /// </summary>
+    private static Save _currentSave;
+
+    /// <summary>
     /// Using the current scene generates a save and stores it
     /// </summary>
     /// <param name="savename">Name of the scene</param>
     public static void CreateSaveFromScene(string savename) {
         SetupSaveDirectory();
-        Save save = new Save();
+        Save save = new Save {terrainSceneName = SceneManager.GetActiveScene().name};
 
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
             save.buildingTransforms.Add(new SavedTransform(building.gameObject.transform));
             save.BuildingDatas.Add(new SavedBuildingData(building.BuildingData));
+            save.AssignedBees.Add(building.numAssignedBees);
+            
+            //Storing null health if no health component, allows same index to be used for all buildings
+            save.buildingHealth.Add(new SavedHealth(building.GetComponent<Health>()));
         }
 
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
@@ -52,6 +62,7 @@ public static class SaveLoad {
         }
 
         save.currentSeason = (int)SeasonManager.Instance.GetCurrentSeason();//save current season
+        save.waveNumber = EnemySpawnManager.Instance.waveNumber;
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         save.cameraTransform = new SavedTransform(gameCamera.transform);
@@ -68,32 +79,51 @@ public static class SaveLoad {
     /// </summary>
     /// <param name="savename">Name of the save to load</param>
     public static void Load(string savename) {
-        WipeScene();
-
         string savePath = Path.Combine(saveDirectoryPath, savename);
         string json = File.ReadAllText(savePath + saveExtension);
         Save save = JsonUtility.FromJson<Save>(json);
+        _currentSave = save;
 
-        for (int i = 0; i < save.BuildingDatas.Count; i++) {
-            SavedTransform transform = save.buildingTransforms[i];
-            Object.Instantiate(save.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
+        // Have to re-register on every load for reasons unbeknown to me, thought registering once in constructor would
+        // work but it is somehow cleared
+        SceneManagement.Instance.SceneLoaded += SceneLoaded;
+        SceneManagement.Instance.LoadScene(save.terrainSceneName);
+    }
+
+    /// <summary>
+    /// All functionality to be done after the scene is loaded with the terrain 
+    /// </summary>
+    private static void SceneLoaded() {
+        WipeScene();
+
+        for (int i = 0; i < _currentSave.BuildingDatas.Count; i++) {
+            SavedTransform transform = _currentSave.buildingTransforms[i];
+            GameObject go = Object.Instantiate(
+                _currentSave.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
+            go.GetComponent<Health>().LoadSavedHealth(_currentSave.buildingHealth[i]);
+            go.GetComponent<Building>().numAssignedBees = _currentSave.AssignedBees[i];
         }
 
-        for (int i = 0; i < save.resources.Count; i++) {
-            ResourceManagement.Instance.resourceList[i].CopySavedResource(save.resources[i]);
+        for (int i = 0; i < _currentSave.resources.Count; i++) {
+            ResourceManagement.Instance.resourceList[i].CopySavedResource(_currentSave.resources[i]);
         }
 
-        foreach (SavedResearch research in save.researches) {
+        foreach (SavedResearch research in _currentSave.researches) {
             ResearchObject obj = ResearchManager.Instance.AllResearch.Find(
                 o => o.ResearchName == research.name);
             obj.CopySavedResearch(research);
+            
+            // If research was being researched begin research again on load
+            if (obj.Timer.Active) {
+                ResearchManager.Instance.ResearchTopic(obj, false);
+            }
         }
 		
-		GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)
+        GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)
         List<HexPanel> panels = new List<HexPanel>();
-        for (int i = 0; i < save.hexesTransforms.Count; i++) {
-			SavedTransform transform = save.hexesTransforms[i];
-			GameObject go = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
+        for (int i = 0; i < _currentSave.hexesTransforms.Count; i++) {
+            SavedTransform transform = _currentSave.hexesTransforms[i];
+            GameObject go = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
             panels.Add(go.GetComponent<HexPanel>());
         }
 
@@ -101,13 +131,14 @@ public static class SaveLoad {
             panel.CalculateNeighbours();
         }
 
-        SeasonManager.Instance.SetCurrentSeason((Seasons)save.currentSeason);//set currrent season
+        SeasonManager.Instance.SetCurrentSeason((Seasons)_currentSave.currentSeason);//set currrent season
+        EnemySpawnManager.Instance.waveNumber = _currentSave.waveNumber;
 
         GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
         Transform cameraTransform = gameCamera.transform;
-        cameraTransform.position = save.cameraTransform.Position;
-        cameraTransform.rotation = save.cameraTransform.Rotation;
-        gameCamera.TargetPositon = save.cameraTarget;
+        cameraTransform.position = _currentSave.cameraTransform.Position;
+        cameraTransform.rotation = _currentSave.cameraTransform.Rotation;
+        gameCamera.TargetPositon = _currentSave.cameraTarget;
     }
 
     /// <summary>

@@ -18,6 +18,8 @@ public class ResourceStorage : MonoBehaviour, IBeforeDestroy {
     /// </summary>
     [SerializeField] private Resource resource;
 
+    public Resource Resource => resource;
+
     private void Awake() {
         if (resource == null) {
             Debug.LogError("A resource storage has been created with no resource set");

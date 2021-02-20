@@ -12,8 +12,13 @@ using Object = UnityEngine.Object;
 /// </summary>s
 [Serializable]
 public class Save {
+    public string terrainSceneName;
+    
     public List<SavedBuildingData> BuildingDatas = new List<SavedBuildingData>();
+    public List<int> AssignedBees = new List<int>();
+
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
+    public List<SavedHealth> buildingHealth = new List<SavedHealth>();
 
     public List<SavedResource> resources = new List<SavedResource>();
     
@@ -25,4 +30,5 @@ public class Save {
     public Vector3 cameraTarget;
 
     public int currentSeason;
+    public int waveNumber;
 }

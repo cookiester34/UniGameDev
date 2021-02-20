@@ -2,19 +2,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
 
 [RequireComponent(typeof(Bee))]
 public class BeeStateMachine : MonoBehaviour {
     private Bee _bee;
     private BeeState _currentState = null;
+    private Building targetBuilding;
 
     public Bee Bee => _bee;
+
+    public Building TargetBuilding {
+        get => targetBuilding;
+        set => targetBuilding = value;
+    }
 
     #region states
 
     private BeeIdleState _idleState;
     private BeeMoveState _moveState;
+    private BeeWorkState _workState;
+    private BeeSleepState _sleepState;
 
     #endregion
 
@@ -27,6 +36,8 @@ public class BeeStateMachine : MonoBehaviour {
     private void InitStates() {
         _idleState = new BeeIdleState(this);
         _moveState = new BeeMoveState(this);
+        _workState = new BeeWorkState(this);
+        _sleepState = new BeeSleepState(this);
     }
 
     public void ChangeState(BeeStates state) {
@@ -38,6 +49,12 @@ public class BeeStateMachine : MonoBehaviour {
                 break;
             case BeeStates.Move:
                 _currentState = _moveState;
+                break;
+            case BeeStates.Sleep:
+                _currentState = _sleepState;
+                break;
+            case BeeStates.Work:
+                _currentState = _workState;
                 break;
 
             default:
@@ -54,5 +71,41 @@ public class BeeStateMachine : MonoBehaviour {
 
     private void FixedUpdate() {
         _currentState?.PhysicsUpdate();
+    }
+
+    public bool NearBuilding(Building building) {
+        bool nearBuilding = false;
+
+        if (building != null) {
+            if (Vector3.Distance(transform.position, building.transform.position) < 2f) {
+                nearBuilding = true;
+            }
+        }
+
+        return nearBuilding;
+    }
+
+
+    public void SleepTime(float timeSeconds) {
+        StartCoroutine(Sleep(timeSeconds));
+    }
+
+    private IEnumerator Sleep(float timeSeconds) {
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<Collider>().enabled = false;
+        gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        yield return new WaitForSeconds(timeSeconds);
+        gameObject.GetComponent<NavMeshAgent>().enabled = true;
+        gameObject.GetComponent<MeshRenderer>().enabled = true;
+        gameObject.GetComponent<Collider>().enabled = true;
+        if (_currentState is BeeWorkState workState) {
+            workState.WakeUp();
+        } else if (_currentState is BeeSleepState sleepState) {
+            sleepState.WakeUp();
+        } else {
+            Debug.LogError(
+                "Bee AI confused, waking up from sleep should either be in sleep or work state but is in: " 
+                + _currentState);
+        }
     }
 }

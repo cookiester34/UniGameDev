@@ -15,5 +15,7 @@ MonoBehaviour:
   buildingType: 7
   uiImage: {fileID: 21300000, guid: 9a2b4095fc12f2642bc167d9ba4ce5fe, type: 3}
   resourcePurchase: []
-  buildingSize: 2
+  buildingSize: 3
   maxInstances: 1
+  description: The Queen Bee building
+  maxNumberOfWorkers: 10

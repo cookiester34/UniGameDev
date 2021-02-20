@@ -7,40 +7,65 @@ namespace Util {
     /// </summary>
     [Serializable]
     public class Timer {
-        /// <summary>
-        /// Time that the timer started running
-        /// </summary>
-        [SerializeField] private float _startTime = 0f;
-        
+        public delegate void TimerFinsihed();
+        public event TimerFinsihed OnTimerFinish;
+
         /// <summary>
         /// How long the timer should run for
         /// </summary>
-        [SerializeField] private float _runningTime = 1f;
+        [SerializeField] private float runTime;
         
-        public float RunningTime {
-            set => _runningTime = value;
-        }
+        /// <summary>
+        /// How long the timer has been running for
+        /// </summary>
+        [SerializeField] private float timeRunning;
+        
+        /// <summary>
+        /// Percentage through the timer
+        /// </summary>
+        [SerializeField] private float progressPercent;
+        
+        /// <summary>
+        ///  Whether the timer is currently active
+        /// </summary>
+        [SerializeField] private bool active;
 
-        public Timer(float runningTime = 1) {
-            _runningTime = runningTime;
-        }
+        public bool Active => active;
+        public float ProgressPercent => progressPercent;
 
-        public void Start() {
-            _startTime = Time.time;
-        }
-
-        public bool Finished() {
-            return Time.time >= (_runningTime + _startTime);
+        public Timer(float runTime = 1) {
+            this.runTime = runTime;
         }
 
         /// <summary>
-        /// Gets the progress through the timer as a value between 0 and 100
+        /// Loads another timer into this one maintaining the listeners on this timer
         /// </summary>
-        /// <returns>The progress through the timer between 0 and 100</returns>
-        public float Progress() {
-            float currentRunTime = Time.time - (_startTime);
-            float endTime = _startTime + _runningTime;
-            return (currentRunTime / endTime) * 100;
+        /// <param name="otherTimer">THe other timer to load its progress etc from, does not load its listeners</param>
+        public void LoadTimer(Timer otherTimer) {
+            runTime = otherTimer.runTime;
+            progressPercent = otherTimer.progressPercent;
+            active = otherTimer.active;
+            timeRunning = otherTimer.timeRunning;
+        }
+
+        public void Tick(float timeTick) {
+            if (active) {
+                timeRunning += timeTick;
+                progressPercent = (timeRunning / runTime) * 100;
+                if (progressPercent > 99f) {
+                    active = false;
+                    OnTimerFinish?.Invoke();
+                }
+            }
+        }
+
+        public void Reset() {
+            timeRunning = 0;
+            progressPercent = 0;
+        }
+
+        public void Start() {
+            active = true;
         }
     }
 }

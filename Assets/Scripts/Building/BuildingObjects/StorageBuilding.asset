@@ -21,3 +21,5 @@ MonoBehaviour:
     resourceType: 0
   buildingSize: 2
   maxInstances: 1000
+  assignedBees: 0
+  maxNumberOfWorkers: 5

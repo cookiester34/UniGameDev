@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace CameraNameSpace {
     /// <summary>
@@ -15,7 +16,9 @@ namespace CameraNameSpace {
         /// A value to change to increase/decrease the speed of panning
         /// </summary>
         [Tooltip("The speed at which the camera will pan")]
-        [SerializeField] private int panSpeed;
+        [SerializeField] private float panSpeed;
+
+        private bool allowMousePan;
 
         private float timeMoving = 0;
         
@@ -28,6 +31,9 @@ namespace CameraNameSpace {
         /// Mask for the terrain
         /// </summary>
         [SerializeField] private LayerMask terrainMask;
+        
+        private Vector3 MAX_ZOOM = new Vector3(5f, 15f, 5f);
+        private Vector3 MIN_ZOOM = new Vector3(-5f, 5f, -5f);
 
         public Vector3 TargetPositon {
             get => _targetPosition;
@@ -39,6 +45,8 @@ namespace CameraNameSpace {
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
+            panSpeed = PlayerPrefs.GetFloat(SettingsPanel.CameraPanSpeed);
+            allowMousePan = PlayerPrefsBool.GetBool(SettingsPanel.CameraMousePan);
             UpdateHeight();
         }
 
@@ -54,6 +62,19 @@ namespace CameraNameSpace {
                 Pan(panDirection.normalized * Time.deltaTime);
             } else {
                 timeMoving = 0;
+            }
+
+            float scroll = Input.GetAxis("Mouse ScrollWheel");
+            if (Math.Abs(scroll) > 0.05f) {
+                Vector3 newOffset = offset + (transform.forward * (scroll * Time.deltaTime * 500f));
+                if (newOffset.x > MIN_ZOOM.x && newOffset.y > MIN_ZOOM.y && newOffset.z > MIN_ZOOM.z &&
+                    newOffset.x < MAX_ZOOM.x && newOffset.y < MAX_ZOOM.y && newOffset.z < MAX_ZOOM.z ) {
+                    offset = newOffset;
+                }
+            }
+
+            if (allowMousePan) {
+                AttemptMousePan();
             }
         }
 
@@ -90,6 +111,28 @@ namespace CameraNameSpace {
             }
 
             return hitPoint;
+        }
+
+        private void AttemptMousePan() {
+            Vector2 mousePos = Input.mousePosition;
+            float xNormalized = (Screen.width - mousePos.x) / Screen.width;
+            float yNormalized = (Screen.height - mousePos.y) / Screen.height;
+            float panX = 0;
+            if (xNormalized > 0.99f) {
+                panX = -0.1f;
+            } else if (xNormalized < 0.01f) {
+                panX = 0.1f;
+            }
+            float panY = 0;
+            if (yNormalized > 0.99f) {
+                panY = -0.1f;
+            } else if (yNormalized < 0.01f) {
+                panY = 0.1f;
+            }
+            Vector2 pan = new Vector2(panX, panY);
+            if (pan != Vector2.zero) {
+                Pan(pan);
+            }
         }
 
         /// <summary>

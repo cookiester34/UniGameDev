@@ -19,10 +19,17 @@ public class ResourceUI : MonoBehaviour {
         _text = GetComponent<Text>();
 
         resource.OnCurrentValueChanged += UpdateText;
+        resource.OnCapChanged += UpdateText;
         UpdateText(resource.CurrentResourceAmount);
     }
 
+    private void OnDestroy() {
+        resource.OnCurrentValueChanged -= UpdateText;
+        resource.OnCapChanged -= UpdateText;
+    }
+
     void UpdateText(float newValue) {
-        _text.text = String.Format("{0}: {1:0} / {2}", resource.name, newValue, resource.ResourceCap);
+        _text.text =
+            String.Format("{0}: {1:0} / {2}", resource.name, resource.CurrentResourceAmount, resource.ResourceCap);
     }
 }
