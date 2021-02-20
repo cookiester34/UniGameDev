@@ -46,7 +46,7 @@ namespace CameraNameSpace {
         private void Awake() {
             _targetPosition = transform.position;
             panSpeed = PlayerPrefs.GetFloat(SettingsPanel.CameraPanSpeed);
-            allowMousePan = PlayerPrefs.GetInt(SettingsPanel.CameraMousePan) == 1;
+            allowMousePan = PlayerPrefsBool.GetBool(SettingsPanel.CameraMousePan);
             UpdateHeight();
         }
 
