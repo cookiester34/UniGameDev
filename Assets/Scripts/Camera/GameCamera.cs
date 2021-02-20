@@ -18,6 +18,8 @@ namespace CameraNameSpace {
         [Tooltip("The speed at which the camera will pan")]
         [SerializeField] private float panSpeed;
 
+        private bool allowMousePan;
+
         private float timeMoving = 0;
         
         /// <summary>
@@ -44,6 +46,7 @@ namespace CameraNameSpace {
         private void Awake() {
             _targetPosition = transform.position;
             panSpeed = PlayerPrefs.GetFloat(SettingsPanel.CameraPanSpeed);
+            allowMousePan = PlayerPrefs.GetInt(SettingsPanel.CameraMousePan) == 1;
             UpdateHeight();
         }
 
@@ -70,7 +73,9 @@ namespace CameraNameSpace {
                 }
             }
 
-            AttemptMousePan();
+            if (allowMousePan) {
+                AttemptMousePan();
+            }
         }
 
         /// <summary>
