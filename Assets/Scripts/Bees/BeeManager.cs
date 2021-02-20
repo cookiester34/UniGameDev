@@ -101,7 +101,6 @@ public class BeeManager : MonoBehaviour {
     }
 
     public void UnassignBeeFromBuilding(Building building) {
-        building.UnassignBee();
         switch (building.BuildingType) {
             case BuildingType.QueenBee:
             // fall through
