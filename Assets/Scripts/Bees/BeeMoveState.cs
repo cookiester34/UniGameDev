@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class BeeMoveState : BeeState {
     private NavMeshAgent _agent;
     private NavMeshPath _path;
-    private float moveSpeed = 3;
 
     public BeeMoveState(BeeStateMachine stateMachine) : base(stateMachine) {
         _agent = stateMachine.Bee.Agent;
@@ -19,7 +18,6 @@ public class BeeMoveState : BeeState {
         }
 
         _agent.destination = _stateMachine.TargetBuilding.transform.position;
-        _agent.speed = moveSpeed;
     }
 
     public override void Update() {
