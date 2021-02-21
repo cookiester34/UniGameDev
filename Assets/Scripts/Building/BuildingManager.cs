@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -394,6 +395,7 @@ public class BuildingManager : MonoBehaviour {
     }
 
     private void PlayBuildingPlaceParticles(Transform parent) {
+        parent.DOShakeScale(0.5f, 0.5f);
         GameObject go = Instantiate(buildingPlaceParticles, parent, false);
         ParticleSystem particles = go.GetComponent<ParticleSystem>();
         particles.Play();
