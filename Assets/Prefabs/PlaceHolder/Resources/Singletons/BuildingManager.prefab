@@ -48,5 +48,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 768
   destroyIcon: {fileID: 21300000, guid: 5af7ee8f99db29042855173ca79cc6f5, type: 3}
+  buildingPlaceParticles: {fileID: 5863162297296634450, guid: de14abbe1a27d5d4b9520a033b30ab70,
+    type: 3}
   teir1UpgradeCost: 0
   teir2UpgradeCost: 0
