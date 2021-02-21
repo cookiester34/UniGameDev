@@ -18,6 +18,9 @@ public class GenerateFromEditor : Editor
         serializedObject.Update();
 		DrawDefaultInspector();
 		GenerateHexMap myScript = (GenerateHexMap)target;
+		if (GUILayout.Button("Set Height to Terrain")) {
+			myScript.SetGeneratorHeight();
+		}
 		if (GUILayout.Button("Generate")) {
 			myScript.Generate();
 		}
