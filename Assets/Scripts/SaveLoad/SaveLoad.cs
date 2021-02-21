@@ -40,7 +40,7 @@ public static class SaveLoad {
         foreach (Building building in buildings) {
             save.buildingTransforms.Add(new SavedTransform(building.gameObject.transform));
             save.BuildingDatas.Add(new SavedBuildingData(building.BuildingData));
-            save.AssignedBees.Add(building.assignedBees);
+            save.AssignedBees.Add(building.numAssignedBees);
             
             //Storing null health if no health component, allows same index to be used for all buildings
             save.buildingHealth.Add(new SavedHealth(building.GetComponent<Health>()));
@@ -101,7 +101,7 @@ public static class SaveLoad {
             GameObject go = Object.Instantiate(
                 _currentSave.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
             go.GetComponent<Health>().LoadSavedHealth(_currentSave.buildingHealth[i]);
-            go.GetComponent<Building>().assignedBees = _currentSave.AssignedBees[i];
+            go.GetComponent<Building>().numAssignedBees = _currentSave.AssignedBees[i];
         }
 
         for (int i = 0; i < _currentSave.resources.Count; i++) {

@@ -31,6 +31,11 @@ public class BuildingManager : MonoBehaviour {
 	public Sprite destroyIcon; //need this since a building data reference is not passed when destroying buildings
 	private Text selectedBuildingText;
 
+    private List<Building> _buildings = new List<Building>();
+
+    [SerializeField] private GameObject buildingPlaceParticles;
+
+
     private static BuildingManager _instance = null;
 
     [Header("Options")]
@@ -38,6 +43,8 @@ public class BuildingManager : MonoBehaviour {
     public int teir1UpgradeCost;
     [Range(2, 5)]
     public int teir2UpgradeCost;
+    
+    public List<Building> Buildings => _buildings;
 
     public static BuildingManager Instance {
         get {
@@ -174,7 +181,15 @@ public class BuildingManager : MonoBehaviour {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
-            tempBuilding.GetComponent<Building>()?.PlaceBuilding();
+            PlayBuildingPlaceParticles(tempBuilding.transform);
+
+            Building placedBuilding = tempBuilding.GetComponent<Building>();
+            if (placedBuilding != null) {
+                _buildings.Add(placedBuilding);
+                placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingSize);
+                placedBuilding.PlaceBuilding();
+            }
+
             AudioManager.Instance.PlaySound("PlaceBuilding");
             //this is here to allow for multiple buildings to be placed at once
             if (ResourceManagement.Instance.CanUseResources(currentBuilding.ResourcePurchase) && GetIsInBuildingLimit(currentBuilding)) {
@@ -215,7 +230,9 @@ public class BuildingManager : MonoBehaviour {
                 if (Physics.Raycast(ray, out hit, Mathf.Infinity, mask))
                 {
                     if (hit.transform.CompareTag("Building")) {
-						numBuildingTypes[(int)hit.transform.GetComponent<Building>().BuildingData.BuildingType]--;
+                        Building destroyedBuilding = hit.transform.GetComponent<Building>();
+						numBuildingTypes[(int)destroyedBuilding.BuildingData.BuildingType]--;
+                        _buildings.Remove(destroyedBuilding);
                         var beforeDestroy =  hit.collider.GetComponents<IBeforeDestroy>();
                         if (beforeDestroy != null && beforeDestroy.Length > 0) {
                             foreach (var destroy in beforeDestroy) {
@@ -276,14 +293,14 @@ public class BuildingManager : MonoBehaviour {
         if(selectedBuilding != null && selectedBuildingData != null)
         {
             BuildingData buildingData = selectedBuildingData.BuildingData;
-            if (selectedBuildingData.assignedBees < buildingData.maxNumberOfWorkers)
+            if (selectedBuildingData.numAssignedBees < buildingData.maxNumberOfWorkers)
             {
                 Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
                 if (temp != null)
                 {
                     if (temp.CurrentResourceAmount < temp.ResourceCap)
                     {
-                        selectedBuildingData.assignedBees++;
+                        BeeManager.Instance.AssignBeeToBuilding(selectedBuildingData);
                         temp.ModifyAmount(1);
                     }
                 }
@@ -298,12 +315,12 @@ public class BuildingManager : MonoBehaviour {
     {
         if (selectedBuilding != null && selectedBuildingData != null)
         {
-            if (selectedBuildingData.assignedBees > 0)
+            if (selectedBuildingData.numAssignedBees > 0)
             {
                 Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
                 if (temp != null)
                 {
-                    selectedBuildingData.assignedBees--;
+                    BeeManager.Instance.UnassignBeeFromBuilding(selectedBuildingData);
                     temp.ModifyAmount(-1);
                 }
                 else
@@ -334,8 +351,8 @@ public class BuildingManager : MonoBehaviour {
                     canUse = false;
                 }
             }
-            if (canUse)
-            {
+            if (canUse) {
+                PlayBuildingPlaceParticles(selectedBuildingData.transform);
                 selectedBuildingData.buildingTeir++;
                 ResourceManagement.Instance.UseResources(temp);
                 if (selectedBuildingData.buildingTeir == 1)
@@ -350,6 +367,36 @@ public class BuildingManager : MonoBehaviour {
                 }
             }
         }
+    }
+
+    public List<Building> GetAllStorageBuildingsOfType(ResourceType resourceType) {
+        return _buildings.FindAll(building => {
+            bool add = false;
+            var storage = building.GetComponent<ResourceStorage>();
+            if (storage != null && storage.Resource.resourceType == resourceType) {
+                add = true;
+            }
+
+            return add;
+        });
+    }
+
+    public List<Building> GetAllSupplierBuildingsOfType(ResourceType resourceType) {
+        return _buildings.FindAll(building => {
+            bool add = false;
+            var supplier = building.GetComponent<ResourceSupplier>();
+            if (supplier != null && supplier.Resource.resourceType == resourceType) {
+                add = true;
+            }
+
+            return add;
+        });
+    }
+
+    private void PlayBuildingPlaceParticles(Transform parent) {
+        GameObject go = Instantiate(buildingPlaceParticles, parent, false);
+        ParticleSystem particles = go.GetComponent<ParticleSystem>();
+        particles.Play();
     }
 
     #region Debugs

@@ -16,7 +16,9 @@ namespace CameraNameSpace {
         /// A value to change to increase/decrease the speed of panning
         /// </summary>
         [Tooltip("The speed at which the camera will pan")]
-        [SerializeField] private int panSpeed;
+        [SerializeField] private float panSpeed;
+
+        private bool allowMousePan;
 
         private float timeMoving = 0;
         
@@ -43,6 +45,8 @@ namespace CameraNameSpace {
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
+            panSpeed = PlayerPrefs.GetFloat(SettingsPanel.CameraPanSpeed);
+            allowMousePan = PlayerPrefsBool.GetBool(SettingsPanel.CameraMousePan);
             UpdateHeight();
         }
 
@@ -67,6 +71,10 @@ namespace CameraNameSpace {
                     newOffset.x < MAX_ZOOM.x && newOffset.y < MAX_ZOOM.y && newOffset.z < MAX_ZOOM.z ) {
                     offset = newOffset;
                 }
+            }
+
+            if (allowMousePan) {
+                AttemptMousePan();
             }
         }
 
@@ -103,6 +111,28 @@ namespace CameraNameSpace {
             }
 
             return hitPoint;
+        }
+
+        private void AttemptMousePan() {
+            Vector2 mousePos = Input.mousePosition;
+            float xNormalized = (Screen.width - mousePos.x) / Screen.width;
+            float yNormalized = (Screen.height - mousePos.y) / Screen.height;
+            float panX = 0;
+            if (xNormalized > 0.99f) {
+                panX = -0.1f;
+            } else if (xNormalized < 0.01f) {
+                panX = 0.1f;
+            }
+            float panY = 0;
+            if (yNormalized > 0.99f) {
+                panY = -0.1f;
+            } else if (yNormalized < 0.01f) {
+                panY = 0.1f;
+            }
+            Vector2 pan = new Vector2(panX, panY);
+            if (pan != Vector2.zero) {
+                Pan(pan);
+            }
         }
 
         /// <summary>

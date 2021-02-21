@@ -9,6 +9,15 @@ public class HealthUI : MonoBehaviour {
     private ProgressBar _progressBar;
 
     private void Awake() {
+        if (health == null) {
+            health = GetComponentInParent<Health>();
+        }
+
+        if (health == null) {
+            Debug.LogError("Health UI relies on health component but is not setup");
+            return;
+        } 
+        
         _progressBar = GetComponent<ProgressBar>();
         health.OnHealthGain += UpdateHealthBar;
         health.OnHealthLost += UpdateHealthBar;

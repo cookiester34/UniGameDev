@@ -20,7 +20,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour {
 
     private void UpdateAssignedBeesUI()
     {
-        buildingsAssignedBees.text = "Assigned Bees: " + BuildingManager.Instance.selectedBuildingData.assignedBees;
+        buildingsAssignedBees.text = "Assigned Bees: " + BuildingManager.Instance.selectedBuildingData.numAssignedBees;
     }
 
     public void UpgradeBuilding()

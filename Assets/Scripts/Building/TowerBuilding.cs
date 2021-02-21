@@ -21,8 +21,8 @@ public class TowerBuilding : Building
     private List<Transform> enemiesInRange = new List<Transform>();
 
     //set the collider object to the range of the tower
-    private void Start()
-    {
+    protected override void Start() {
+        base.Start();
         sphereFiringRange.transform.localScale = new Vector3(towerRange, 1, towerRange);
     }
 
@@ -30,10 +30,10 @@ public class TowerBuilding : Building
     {
         if (enemiesInRange.Count > 0 && timer <= 0)
         {
-            if (assignedBees > 0)
+            if (numAssignedBees > 0)
             {
                 FireAtEnemies();
-                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * assignedBees;
+                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
             }
             timer = firingSpeed;
         }

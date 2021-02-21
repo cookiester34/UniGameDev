@@ -112,6 +112,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: {fileID: 1451867429838769534}
+--- !u!114 &8015153397703752394
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6284002675617090065}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4eb5944ca4dc93040abddae914e5dbbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7642171427236103336
 GameObject:
   m_ObjectHideFlags: 0
@@ -125,7 +137,6 @@ GameObject:
   - component: {fileID: -3125807644095819491}
   - component: {fileID: 4735565122750138493}
   - component: {fileID: -7766972306021319815}
-  - component: {fileID: 260273163903709451}
   - component: {fileID: 1451867429838769534}
   m_Layer: 9
   m_Name: Housing
@@ -176,12 +187,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170ef695898af1040b15ccb60ce3849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingType: 1
   resourceType: 4
   buildingData: {fileID: 11400000, guid: 0a8254fbfa9592545ab06b0685e0acf6, type: 2}
   buildingTeir: 0
   buildingTeir1: {fileID: 5018363373151657191}
   buildingTeir2: {fileID: 3671619186576650861}
   buildingTeir3: {fileID: 0}
+  numAssignedBees: 0
 --- !u!114 &4735565122750138493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,36 +219,12 @@ NavMeshObstacle:
   m_Enabled: 1
   serializedVersion: 3
   m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_Extents: {x: 0.35, y: 0.5, z: 0.4}
   m_MoveThreshold: 0.1
   m_Carve: 1
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0.5, z: 0}
   m_TimeToStationary: 0.5
---- !u!205 &260273163903709451
-LODGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7642171427236103336}
-  serializedVersion: 2
-  m_LocalReferencePoint: {x: 0, y: 0, z: 0}
-  m_Size: 1
-  m_FadeMode: 0
-  m_AnimateCrossFading: 0
-  m_LastLODIsBillboard: 0
-  m_LODs:
-  - screenRelativeHeight: 0.6
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: 0.3
-    fadeTransitionWidth: 0
-    renderers: []
-  - screenRelativeHeight: 0.1
-    fadeTransitionWidth: 0
-    renderers: []
-  m_Enabled: 1
 --- !u!114 &1451867429838769534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -248,8 +237,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54268b38ed3b18240a8830d92b69fab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  maxHealth: 10
+  currentHealth: 3
+  maxHealth: 3
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
   healthLostParticles: {fileID: 0}
@@ -301,12 +290,12 @@ PrefabInstance:
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 50
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 23
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
