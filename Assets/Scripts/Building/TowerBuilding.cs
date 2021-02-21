@@ -7,34 +7,35 @@ public class TowerBuilding : Building
     [Range(1,100)]
     public int towerAmmoCost;
     public GameObject projectile;
-    private float projectileSpeed = 5f;
+    public float projectileSpeed = 10f;
 
     [Range(1,100)] //not sure on what the range values should be
     public int towerRange;
-    public GameObject sphereFiringRange;
+    public GameObject SphereRange;
 
     [Range(1,10)]
     public float baseFiringSpeed;
     public float firingSpeed;
     private float timer = 1f;
 
-    private List<Transform> enemiesInRange = new List<Transform>();
+    [HideInInspector]
+    public List<Transform> enemiesInRange = new List<Transform>();
 
     //set the collider object to the range of the tower
     protected override void Start() {
         base.Start();
-        sphereFiringRange.transform.localScale = new Vector3(towerRange, 1, towerRange);
+        SphereRange.GetComponent<SphereCollider>().radius = towerRange;
     }
 
     private void Update()
     {
         if (enemiesInRange.Count > 0 && timer <= 0)
         {
-            if (numAssignedBees > 0)
-            {
+            //if (numAssignedBees > 0)
+            //{
                 FireAtEnemies();
-                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
-            }
+                //firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
+            //}
             timer = firingSpeed;
         }
         if(timer >= 0)
@@ -47,10 +48,14 @@ public class TowerBuilding : Building
     {
         if (ResourceManagement.Instance.UseResource(new ResourcePurchase(resourceType, towerAmmoCost))) {
 
-            GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
-            temp.GetComponent<Rigidbody>().AddForce(dir * projectileSpeed, ForceMode.Impulse);
-            StartCoroutine(DestroyProjectile(temp, 5f));
+            if (enemiesInRange[0] != null)
+            {
+                Debug.Log("fired");
+                GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
+                temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
+                StartCoroutine(DestroyProjectile(temp, 5f));
+            }
         }
     }
 
@@ -59,23 +64,5 @@ public class TowerBuilding : Building
         yield return new WaitForSeconds(delay);
         if(projectile != null)
             Destroy(projectile);
-    }
-
-    //if an enemy enters range add them to the list
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.transform.CompareTag("Enemy"))
-        {
-            enemiesInRange.Add(collision.transform);
-        }
-    }
-
-    //if an enemy leaves range remove them from the list
-    private void OnCollisionExit(Collision collision)
-    {
-        if (collision.transform.CompareTag("Enemy") && enemiesInRange.Contains(collision.transform))
-        {
-            enemiesInRange.Remove(collision.transform);
-        }
     }
 }

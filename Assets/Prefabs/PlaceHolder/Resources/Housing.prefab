@@ -503,6 +503,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -339398988111377321, guid: f59e9cdf29be8484f94059b44dab6a6a,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f2b3b12614f7e04abae2226354b2a61, type: 2}
     - target: {fileID: 919132149155446097, guid: f59e9cdf29be8484f94059b44dab6a6a,
         type: 3}
       propertyPath: m_Name
@@ -599,11 +604,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BeeHouseLv1
       objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 15a74869f86743e4cac57723996445e2,
+    - target: {fileID: 4086144671076271286, guid: 15a74869f86743e4cac57723996445e2,
         type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f2b3b12614f7e04abae2226354b2a61, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15a74869f86743e4cac57723996445e2, type: 3}
 --- !u!1 &5018363373151657191 stripped
