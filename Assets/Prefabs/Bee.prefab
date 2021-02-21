@@ -143,7 +143,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0af5e2bb59f4c7646871890a6c3584d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  productionTime: 10
+  productionTime: 2
   baseProductionAmount: 1
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
 --- !u!114 &-5077826352974351252
