@@ -103,6 +103,13 @@ public class GenerateHexMap : MonoBehaviour
 		}
 	}
 	
+	public void SetGeneratorHeight() {
+		Terrain terrain = GameObject.FindObjectOfType<Terrain>();
+		Vector3 pos = transform.position;
+		pos.y = terrain.transform.position.y + terrain.terrainData.bounds.max.y + 3f;
+		transform.position = pos;
+	}
+	
 	void GetParamsFromUI() {
 		string widthStr = widthInputField.text;
 		string lengthStr = lengthInputField.text;

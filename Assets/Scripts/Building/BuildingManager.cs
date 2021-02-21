@@ -201,8 +201,9 @@ public class BuildingManager : MonoBehaviour {
     /// <summary>
     /// cancles the placement of the chosen building
     /// </summary>
-    private void CanclePlacingBuilding()
+    public void CanclePlacingBuilding()
     {
+		canDestroyBuilding = false;
         canPlaceBuilding = false;
 		selectedBuildingUI.sprite = null;
 		selectedBuildingText.text = "No building selected.";
