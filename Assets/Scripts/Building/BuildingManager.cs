@@ -72,8 +72,11 @@ public class BuildingManager : MonoBehaviour {
         _instance = this;
 		numBuildingTypes = new int[Enum.GetNames(typeof(BuildingType)).Length];
 		eventSys = GameObject.FindObjectOfType<EventSystem>();
-		selectedBuildingUI = GameObject.Find("SelectedBuildingUIImage").GetComponent<Image>();
-		selectedBuildingText = selectedBuildingUI.gameObject.GetComponentInChildren<Text>();
+        GameObject go = GameObject.Find("SelectedBuildingUIImage");
+        if (go != null) {
+            selectedBuildingUI = go.GetComponent<Image>();
+            selectedBuildingText = go.GetComponentInChildren<Text>();
+        }
     }
 
     /// <summary>
@@ -205,8 +208,14 @@ public class BuildingManager : MonoBehaviour {
     {
 		canDestroyBuilding = false;
         canPlaceBuilding = false;
-		selectedBuildingUI.sprite = null;
-		selectedBuildingText.text = "No building selected.";
+        if (selectedBuildingUI != null) {
+            selectedBuildingUI.sprite = null;
+        }
+
+        if (selectedBuildingText != null) {
+            selectedBuildingText.text = "No building selected.";
+        }
+
         Destroy(tempBuilding);
     }
 
