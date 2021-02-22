@@ -1,0 +1,120 @@
+﻿using System;
+using DG.Tweening;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using Object = UnityEngine.Object;
+
+public class BuildState : BuildingManagerState {
+    private EventSystem eventSys;
+    GameObject tempBuilding;
+    private BuildingData currentBuilding;
+
+    public override void Enter() {
+        eventSys = GameObject.FindObjectOfType<EventSystem>();
+    }
+
+    public override void Exit() {
+        GameObject.Destroy(tempBuilding);
+        buildingManager.selectedBuildingText.text = "No building is selected";
+        buildingManager.selectedBuildingUI.sprite = null;
+    }
+
+    public override void Update() {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (eventSys.IsPointerOverGameObject()) {
+            //this checks if the mouse is over a UI element
+            tempBuilding.SetActive(false);
+        } else if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.mask)) {
+            tempBuilding.SetActive(true);
+            BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
+            if (foundation != null) {
+                Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingSize);
+                tempBuilding.transform.position = buildPosition;
+
+                if (Input.GetKeyDown(KeyCode.Mouse0)) {
+                    PlaceBuilding(buildPosition, foundation);
+                }
+            }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            buildingManager.SetBuildMode(BuildingMode.Selection);
+        }
+    }
+
+    public void SetupBuilding(BuildingData buildingData) {
+        if (buildingData == null) {
+            buildingManager.SetBuildMode(BuildingMode.Selection);
+        } else {
+            bool isInBuildingLimit = GetIsInBuildingLimit(buildingData);
+            bool canUseResources = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase);
+
+            if (!canUseResources) {
+                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
+                AudioManager.Instance.PlaySound("Error");
+            } else if (!isInBuildingLimit) {
+                UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
+                AudioManager.Instance.PlaySound("Error");
+            } else {
+                buildingManager.selectedBuildingUI.sprite = buildingData.UiImage;
+                buildingManager.selectedBuildingText.text = buildingData.Description;
+                currentBuilding = buildingData;
+                tempBuilding = GameObject.Instantiate(currentBuilding.BuildingType.GetPrefab(),
+                    new Vector3(0, 0, 0),
+                    currentBuilding.BuildingType.GetPrefab().transform.rotation);
+                tempBuilding.GetComponent<Collider>().enabled = false;
+            }
+        }
+    }
+    
+    /// <summary>
+    /// final placement of the building when mouse is clicked
+    /// </summary>
+    /// <param name="position"></param>
+    private void PlaceBuilding(Vector3 position, BuildingFoundation foundation)
+    {
+        if (!foundation.BuildMulti(currentBuilding.BuildingSize)) {
+            buildingManager.SetBuildMode(BuildingMode.Selection);
+            buildingManager.BuildingAlreadyThere();
+            AudioManager.Instance.PlaySound("Error");
+        } else {
+            buildingManager.numBuildingTypes[(int)currentBuilding.BuildingType]++;
+            tempBuilding.transform.position = position;
+            ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
+            tempBuilding.GetComponent<Collider>().enabled = true;
+            PlayBuildingPlaceParticles(tempBuilding.transform);
+
+            Building placedBuilding = tempBuilding.GetComponent<Building>();
+            if (placedBuilding != null) {
+                buildingManager.Buildings.Add(placedBuilding);
+                placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingSize);
+                placedBuilding.PlaceBuilding();
+            }
+
+            AudioManager.Instance.PlaySound("PlaceBuilding");
+            tempBuilding = null;
+            if (ResourceManagement.Instance.CanUseResources(currentBuilding.ResourcePurchase) &&
+                GetIsInBuildingLimit(currentBuilding)) {
+                buildingManager.SetBuildMode(BuildingMode.Build, currentBuilding);
+            } else {
+                buildingManager.SetBuildMode(BuildingMode.Selection);
+            }
+        }
+    }
+    
+    private bool GetIsInBuildingLimit(BuildingData buildingData) {
+        int buildingTypeIndex = (int)buildingData.BuildingType;
+        return buildingData.MaxInstances > buildingManager.numBuildingTypes[buildingTypeIndex];
+    }
+    
+    private void PlayBuildingPlaceParticles(Transform parent) {
+        parent.DOShakeScale(0.5f, 0.5f);
+        GameObject go = Object.Instantiate(buildingManager.BuildingPlaceParticles, parent, false);
+        ParticleSystem particles = go.GetComponent<ParticleSystem>();
+        particles.Play();
+    }
+
+    public BuildState(BuildingManager buildingManager) : base(buildingManager) { }
+}
+

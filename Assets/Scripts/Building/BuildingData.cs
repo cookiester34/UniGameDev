@@ -78,10 +78,7 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     }
 
     public void OnClick() {
-        if (buildingType != BuildingType.Destroy) {
-            BuildingManager.Instance.PlaceBuilding(this);
-        } else {
-            BuildingManager.Instance.DestroyBuilding();
-        }
+        BuildingMode mode = buildingType == BuildingType.Destroy ? BuildingMode.Destroy : BuildingMode.Build;
+        BuildingManager.Instance.SetBuildMode(mode, this);
     }
 }

@@ -13,8 +13,10 @@ public class BuildingFoundation : MonoBehaviour {
 
     private bool _canBuild = true;
 
-    private static Color canBuildColor = new Color(0.2f, 0.8f, 0.2f);
-    private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f);
+    private static Color canBuildColor = new Color(0.2f, 0.8f, 0.2f, 0.6f);
+    private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f, 0.6f);
+    private static Color invisibleColor = new Color(0f, 0f, 0f, 0f);
+    private static Color defaultColor = new Color(0.5f, 0.5f, 0.5f, 0.2f);
     private MaterialPropertyBlock _propBlock;
 
     public bool CanBuild {
@@ -24,8 +26,6 @@ public class BuildingFoundation : MonoBehaviour {
             UpdateVisibleColour();
         }
     }
-
-    public Renderer Renderer => _renderer;
 
     private void Awake() {
         _hexPanel = GetComponent<HexPanel>();
@@ -37,7 +37,7 @@ public class BuildingFoundation : MonoBehaviour {
     /// <summary>
     /// Gets the central position for the building
     /// </summary>
-    /// <param name="buildingSize">NUmber of tiles the building uses</param>
+    /// <param name="buildingSize">Number of tiles the building uses</param>
     /// <returns>The central position for the building</returns>
     public Vector3 BuildingPosition(int buildingSize) {
         Vector3 buildingCenter = Vector3.zero;
@@ -161,7 +161,12 @@ public class BuildingFoundation : MonoBehaviour {
         return foundations;
     }
 
+
     private void UpdateVisibleColour() {
+        UpdateVisibleColour(_canBuild ? canBuildColor : cannotBuildColor);
+    }
+
+    private void UpdateVisibleColour(Color color) {
         if (_renderer == null) {
             _renderer = GetComponentInChildren<Renderer>();
         }
@@ -171,7 +176,7 @@ public class BuildingFoundation : MonoBehaviour {
         }
 
         _renderer.GetPropertyBlock(_propBlock);
-        _propBlock.SetColor("_Color", _canBuild ? canBuildColor : cannotBuildColor);
+        _propBlock.SetColor("_Color", color);
         _renderer.SetPropertyBlock(_propBlock);
     }
 }

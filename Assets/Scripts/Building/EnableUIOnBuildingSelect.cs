@@ -10,17 +10,20 @@ public class EnableUIOnBuildingSelect : MonoBehaviour {
 
     private void Awake() {
         gameObject.SetActive(false);
-        BuildingManager.Instance.OnBuildingSelected += gameObject.SetActive;
+        BuildingManager.Instance.OnBuildingSelected += DataChanged;
     }
 
-    private void Update()
-    {
-        UpdateAssignedBeesUI();
+    private void UpdateAssignedBeesUI(int numAssigned) {
+        buildingsAssignedBees.text = "Assigned Bees: " + numAssigned;
     }
 
-    private void UpdateAssignedBeesUI()
-    {
-        buildingsAssignedBees.text = "Assigned Bees: " + BuildingManager.Instance.selectedBuildingData.numAssignedBees;
+    private void DataChanged(Building building) {
+        if (building != null) {
+            gameObject.SetActive(true);
+            UpdateAssignedBeesUI(building.numAssignedBees);
+        } else {
+            gameObject.SetActive(false);
+        }
     }
 
     public void UpgradeBuilding()
@@ -31,12 +34,10 @@ public class EnableUIOnBuildingSelect : MonoBehaviour {
     public void AddBee()
     {
         BuildingManager.Instance.AddBeeToBuilding();
-        UpdateAssignedBeesUI();
     }
 
     public void RemoveBeeFromBuilding()
     {
         BuildingManager.Instance.RemoveBeeFromBuilding();
-        UpdateAssignedBeesUI();
     }
 }
