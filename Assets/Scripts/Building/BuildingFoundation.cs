@@ -10,11 +10,19 @@ using UnityEngine;
 public class BuildingFoundation : MonoBehaviour {
     private HexPanel _hexPanel;
     private Renderer _renderer;
+
     private bool _canBuild = true;
+
+    private static Color canBuildColor = new Color(0.2f, 0.8f, 0.2f);
+    private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f);
+    private MaterialPropertyBlock _propBlock;
 
     public bool CanBuild {
         get => _canBuild;
-        set => _canBuild = value;
+        set {
+            _canBuild = value;
+            UpdateVisibleColour();
+        }
     }
 
     public Renderer Renderer => _renderer;
@@ -22,6 +30,8 @@ public class BuildingFoundation : MonoBehaviour {
     private void Awake() {
         _hexPanel = GetComponent<HexPanel>();
         _renderer = GetComponentInChildren<Renderer>();
+        _propBlock = new MaterialPropertyBlock();
+        UpdateVisibleColour();
     }
 
     /// <summary>
@@ -84,6 +94,7 @@ public class BuildingFoundation : MonoBehaviour {
             case 1:
                 canBuild = _canBuild;
                 _canBuild = false;
+                UpdateVisibleColour();
                 break;
 
             case 2:
@@ -95,6 +106,7 @@ public class BuildingFoundation : MonoBehaviour {
                     ar.BuildingFoundation.CanBuild = false;
                     _canBuild = false;
                 }
+                UpdateVisibleColour();
 
                 break;
 
@@ -117,6 +129,7 @@ public class BuildingFoundation : MonoBehaviour {
                         neighbour.BuildingFoundation.CanBuild = false;
                     }
                 }
+                UpdateVisibleColour();
                 break;
         }
 
@@ -146,5 +159,19 @@ public class BuildingFoundation : MonoBehaviour {
         }
 
         return foundations;
+    }
+
+    private void UpdateVisibleColour() {
+        if (_renderer == null) {
+            _renderer = GetComponentInChildren<Renderer>();
+        }
+
+        if (_propBlock == null) {
+            _propBlock = new MaterialPropertyBlock();
+        }
+
+        _renderer.GetPropertyBlock(_propBlock);
+        _propBlock.SetColor("_Color", _canBuild ? canBuildColor : cannotBuildColor);
+        _renderer.SetPropertyBlock(_propBlock);
     }
 }
