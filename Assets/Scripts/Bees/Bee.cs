@@ -30,4 +30,14 @@ public class Bee : MonoBehaviour {
     private void Awake() {
         _agent = GetComponent<NavMeshAgent>();
     }
+
+    private void Update()
+    {
+        float currentSpeed = transform.GetComponent<NavMeshAgent>().velocity.magnitude;
+        float movementPitchComponent = currentSpeed / 30;
+        float basePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
+        float volume = 1f + UnityEngine.Random.Range(-0.5f, 0.05f);
+        transform.GetComponent<AudioSource>().pitch = basePitch + movementPitchComponent;
+        transform.GetComponent<AudioSource>().volume = volume;
+    }
 }
