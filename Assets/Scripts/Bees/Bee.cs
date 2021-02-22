@@ -12,6 +12,9 @@ public class Bee : MonoBehaviour {
     private BeeStateMachine _stateMachine;
     private NavMeshAgent _agent;
 
+    public float _soundLoopBasePitch;
+    private float _soundLoopVolume;
+
     public Building Home {
         get => _home;
         set => _home = value;
@@ -29,15 +32,10 @@ public class Bee : MonoBehaviour {
 
     private void Awake() {
         _agent = GetComponent<NavMeshAgent>();
-    }
 
-    private void Update()
-    {
-        float currentSpeed = transform.GetComponent<NavMeshAgent>().velocity.magnitude;
-        float movementPitchComponent = currentSpeed / 30;
-        float basePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
-        float volume = 1f + UnityEngine.Random.Range(-0.5f, 0.05f);
-        transform.GetComponent<AudioSource>().pitch = basePitch + movementPitchComponent;
-        transform.GetComponent<AudioSource>().volume = volume;
+        _soundLoopBasePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
+        _soundLoopVolume = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
+        transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
+        transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
     }
 }
