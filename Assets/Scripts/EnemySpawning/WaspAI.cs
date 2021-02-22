@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(Health))]
+[RequireComponent(typeof(HealthUI))]
+
+
 public class WaspAI : MonoBehaviour
 {
     private List<Transform> targetsInRange = new List<Transform>();
@@ -13,10 +17,9 @@ public class WaspAI : MonoBehaviour
     private NavMeshAgent _agent;
 
     //wasp Stats
+    Health health;
     [Range(1, 10)]
     public int waspDamage = 1;
-    [Range(10, 100)]
-    public float waspHealth = 10;
     [Range(1, 10)]
     public float attackRange = 5;
     [Range(10, 50)]
@@ -29,6 +32,7 @@ public class WaspAI : MonoBehaviour
 
     void Awake()
     {
+        health = GetComponentInParent<Health>();
         queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
         _agent = GetComponent<NavMeshAgent>();
         GetComponent<SphereCollider>().radius = detectionRange;
@@ -46,7 +50,7 @@ public class WaspAI : MonoBehaviour
             _agent.destination = targetsInRange[0].position;
             if (AttackDistance(targetsInRange[0]))
             {
-                if (actualTimer <= 0)// assuming bees use the same health script
+                if (actualTimer <= 0)
                 {
                     targetsInRange[0].GetComponent<Health>().ModifyHealth(-waspDamage);
                     actualTimer = attacktimer;
@@ -67,22 +71,16 @@ public class WaspAI : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        waspHealth -= damage;
-        if(waspHealth <= 0)
-        {
-            isDead = true;
-            //do some effect here maybe
-            Destroy(gameObject, 2f);
-        }
+        health.ModifyHealth(-damage);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (/*other.CompareTag("Bee")|| */ other.CompareTag("Building"))
+        if (other.CompareTag("Bee") || other.CompareTag("Building"))
         {
             if (other != null)
             {
-                if (other.GetComponent<Health>().CurrentHealth > 0) // assuming bees use the same health script
+                if (other.GetComponent<Health>().CurrentHealth > 0)
                     targetsInRange.Add(other.transform);
             }
         }
