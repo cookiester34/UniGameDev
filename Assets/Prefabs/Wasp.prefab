@@ -13,8 +13,11 @@ GameObject:
   - component: {fileID: 2986233097041001592}
   - component: {fileID: 5840852689383082046}
   - component: {fileID: 1578177077107356437}
-  - component: {fileID: 5083937948336514198}
   - component: {fileID: 309098481044241291}
+  - component: {fileID: 5017920266862173970}
+  - component: {fileID: 5675944905165077019}
+  - component: {fileID: 4732445709679031396}
+  - component: {fileID: 5594373203866081987}
   m_Layer: 0
   m_Name: Wasp
   m_TagString: Enemy
@@ -119,22 +122,6 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &5083937948336514198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326437159731175180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e38320ccd4f391458d34a5f1ecec47d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waspDamage: 1
-  waspHealth: 10
-  attackRange: 2.62
-  detectionRange: 13.8
 --- !u!54 &309098481044241291
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,6 +138,69 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &5017920266862173970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326437159731175180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54268b38ed3b18240a8830d92b69fab2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentHealth: 10
+  maxHealth: 10
+  shouldDestroyOnDeath: 1
+  healthGainParticles: {fileID: 0}
+  healthGainAudio: {fileID: 0}
+  healthLostParticles: {fileID: 0}
+  healthLostAudio: {fileID: 0}
+  deathParticles: {fileID: 0}
+  deathAudio: {fileID: 0}
+--- !u!114 &5675944905165077019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326437159731175180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af8cb34537292604dbeaf328d069dfe3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: {fileID: 5017920266862173970}
+--- !u!114 &4732445709679031396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326437159731175180}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e38320ccd4f391458d34a5f1ecec47d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waspDamage: 1
+  attackRange: 2.62
+  detectionRange: 13.8
+  attacktimer: 2
+--- !u!65 &5594373203866081987
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326437159731175180}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3513668560095600200
 GameObject:
   m_ObjectHideFlags: 0
