@@ -10,15 +10,16 @@ public class Health : MonoBehaviour {
     public event EmptyEvent OnDeath;
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
+    [SerializeField] private bool shouldDestroyOnDeath = false;
 
     [Header("Optional common things")]
-    [SerializeField] private ParticleSystem healthGainParticles;
+    [SerializeField] private GameObject healthGainParticles;
     [SerializeField] private AudioClip healthGainAudio;
 
-    [SerializeField] private ParticleSystem healthLostParticles;
+    [SerializeField] private GameObject healthLostParticles;
     [SerializeField] private AudioClip healthLostAudio;
 
-    [SerializeField] private ParticleSystem deathParticles;
+    [SerializeField] private GameObject deathParticles;
     [SerializeField] private AudioClip deathAudio;
 
     public float CurrentHealth => currentHealth;
@@ -73,7 +74,7 @@ public class Health : MonoBehaviour {
         }
 
         if (healthGainParticles != null) {
-            
+            CreateParticles(healthGainParticles);
         }
     }
 
@@ -83,7 +84,7 @@ public class Health : MonoBehaviour {
         }
 
         if (healthLostParticles != null) {
-            
+            CreateParticles(healthLostParticles);
         }
     }
 
@@ -93,7 +94,18 @@ public class Health : MonoBehaviour {
         }
 
         if (deathParticles != null) {
-            
+            CreateParticles(deathParticles);
         }
+
+        if (shouldDestroyOnDeath) {
+            Destroy(gameObject);
+        }
+    }
+
+    private void CreateParticles(GameObject particlePrefab) {
+        GameObject go = Instantiate(particlePrefab, transform, false);
+        ParticleSystem particles = go.GetComponent<ParticleSystem>();
+        particles.Play();
+        Destroy(particles, particles.time);
     }
 }

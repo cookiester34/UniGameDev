@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class ProjectileHit : MonoBehaviour
 {
+    public float damage = 1f;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Enemy"))
         {
-            //deal the damage to the AI here
-            Destroy(transform);
+            if (other != null)
+            {
+                other.GetComponent<WaspAI>().TakeDamage(damage);
+            }
         }
     }
 }

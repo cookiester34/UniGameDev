@@ -72,7 +72,7 @@ public class EnemySpawnManager : MonoBehaviour
     IEnumerator DelaySpawn(Transform building)
     {
         yield return new WaitForSeconds(1f);
-        if (Random.Range(0f, 100f) < 60f)
+        if (Random.Range(0f, 100f) < 80f)
         {
             for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin, numberOfEnemiesSpawnableMax + waveNumber); i++)
             {

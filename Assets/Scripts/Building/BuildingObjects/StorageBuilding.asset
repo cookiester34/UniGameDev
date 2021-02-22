@@ -15,11 +15,9 @@ MonoBehaviour:
   buildingType: 0
   uiImage: {fileID: 21300000, guid: ac23224a8914e1f46b87815fc7561a74, type: 3}
   resourcePurchase:
-  - cost: 50
+  - cost: 20
     resourceType: 3
-  - cost: 5
-    resourceType: 0
   buildingSize: 2
   maxInstances: 1000
-  assignedBees: 0
+  description: Building description here!
   maxNumberOfWorkers: 5

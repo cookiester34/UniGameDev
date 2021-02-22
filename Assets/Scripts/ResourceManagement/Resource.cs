@@ -80,6 +80,11 @@ public class Resource : ScriptableObject {
 
     public void ModifyCap(int amount) {
         resourceCap += amount;
+
+        if (currentResourceAmount > resourceCap) {
+            ModifyAmount(resourceCap - currentResourceAmount);
+        }
+
         OnCapChanged?.Invoke(resourceCap);
     }
 

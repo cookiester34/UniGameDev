@@ -37,7 +37,7 @@ public class BeeMoveState : BeeState {
     }
 
     public override void Exit() {
-        
+
     }
     
     private bool PathComplete()

@@ -42,17 +42,12 @@ public class BeeManager : MonoBehaviour {
         Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
         _cachedPopulation = Mathf.FloorToInt(population.CurrentResourceAmount);
         population.OnCurrentValueChanged += OnPopulationChange;
-        GetComponent<Building>().OnBuildingPlaced += delegate {
-            population.ModifyAmount(10f);
-        };
     }
 
-    private void Start() {
-        ResourceStorage[] suppliers = FindObjectsOfType<ResourceStorage>();
-        foreach (ResourceStorage storage in suppliers) {
-            if (storage.Resource.resourceType == ResourceType.Population 
-                && storage.gameObject.GetComponent<Building>() != null) {
-            }
+    private void OnDestroy() {
+        if (!ApplicationUtil.IsQuitting) {
+            Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
+            population.OnCurrentValueChanged -= OnPopulationChange;
         }
     }
 
@@ -65,9 +60,11 @@ public class BeeManager : MonoBehaviour {
                 _bees.Add(bee);
             }
         } else {
+            populationChange = Mathf.Abs(populationChange);
             for (int i = 0; i < populationChange; i++) {
-                Bee bee = _bees[Random.Range(0, _bees.Count)];
-                Destroy(bee);
+                Bee bee = _bees.Random();
+                _bees.Remove(bee);
+                Destroy(bee.gameObject);
             }
         }
         ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   resourceType: 2
   resourceTickAmount: 0
-  resourceStartingAmount: 10
-  currentResourceAmount: 10
+  resourceStartingAmount: 0
+  currentResourceAmount: 0
   startingTickAmount: 0
-  resourceCap: 510
-  startingCap: 500
+  resourceCap: 0
+  startingCap: 0

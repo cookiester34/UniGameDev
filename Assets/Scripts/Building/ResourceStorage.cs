@@ -18,6 +18,12 @@ public class ResourceStorage : MonoBehaviour, IBeforeDestroy {
     /// </summary>
     [SerializeField] private Resource resource;
 
+    /// <summary>
+    /// Whether the storage should be filled on placement
+    /// </summary>
+    [Tooltip("Whether the storage should be filled on placement")]
+    [SerializeField]private bool fillOnPlace = false;
+
     public Resource Resource => resource;
 
     private void Awake() {
@@ -27,7 +33,12 @@ public class ResourceStorage : MonoBehaviour, IBeforeDestroy {
 
         Building building = GetComponent<Building>();
         if (building != null) {
-            building.OnBuildingPlaced += () => ModifyCap(true);
+            building.OnBuildingPlaced += () => {
+                ModifyCap(true);
+                if (fillOnPlace) {
+                    resource.ModifyAmount(amount);
+                }
+            };
         } else {
             ModifyCap(true);
         }

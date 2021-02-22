@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -32,6 +33,8 @@ public class BuildingManager : MonoBehaviour {
 	private Text selectedBuildingText;
 
     private List<Building> _buildings = new List<Building>();
+
+    [SerializeField] private GameObject buildingPlaceParticles;
 
 
     private static BuildingManager _instance = null;
@@ -179,6 +182,7 @@ public class BuildingManager : MonoBehaviour {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;
+            PlayBuildingPlaceParticles(tempBuilding.transform);
 
             Building placedBuilding = tempBuilding.GetComponent<Building>();
             if (placedBuilding != null) {
@@ -197,8 +201,9 @@ public class BuildingManager : MonoBehaviour {
     /// <summary>
     /// cancles the placement of the chosen building
     /// </summary>
-    private void CanclePlacingBuilding()
+    public void CanclePlacingBuilding()
     {
+		canDestroyBuilding = false;
         canPlaceBuilding = false;
 		selectedBuildingUI.sprite = null;
 		selectedBuildingText.text = "No building selected.";
@@ -348,8 +353,8 @@ public class BuildingManager : MonoBehaviour {
                     canUse = false;
                 }
             }
-            if (canUse)
-            {
+            if (canUse) {
+                PlayBuildingPlaceParticles(selectedBuildingData.transform);
                 selectedBuildingData.buildingTeir++;
                 ResourceManagement.Instance.UseResources(temp);
                 if (selectedBuildingData.buildingTeir == 1)
@@ -388,6 +393,13 @@ public class BuildingManager : MonoBehaviour {
 
             return add;
         });
+    }
+
+    private void PlayBuildingPlaceParticles(Transform parent) {
+        parent.DOShakeScale(0.5f, 0.5f);
+        GameObject go = Instantiate(buildingPlaceParticles, parent, false);
+        ParticleSystem particles = go.GetComponent<ParticleSystem>();
+        particles.Play();
     }
 
     #region Debugs
