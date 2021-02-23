@@ -21,21 +21,24 @@ public class TowerBuilding : Building
     [HideInInspector]
     public List<Transform> enemiesInRange = new List<Transform>();
 
+    ResourcePurchase resourcePurchase;
+
     //set the collider object to the range of the tower
     protected override void Start() {
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
+        resourcePurchase = new ResourcePurchase(resourceType, towerAmmoCost);
     }
 
     private void Update()
     {
         if (enemiesInRange.Count > 0 && timer <= 0)
         {
-            //if (numAssignedBees > 0)
-            //{
+            if (numAssignedBees > 0)
+            {
                 FireAtEnemies();
-                //firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
-            //}
+                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
+            }
             timer = firingSpeed;
         }
         if(timer >= 0)
@@ -46,11 +49,10 @@ public class TowerBuilding : Building
 
     private void FireAtEnemies()
     {
-        if (ResourceManagement.Instance.UseResource(new ResourcePurchase(resourceType, towerAmmoCost))) {
-
-            if (enemiesInRange[0] != null)
+        if (enemiesInRange[0] != null)
+        {
+            if (ResourceManagement.Instance.UseResource(resourcePurchase))
             {
-                Debug.Log("fired");
                 GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
                 temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);

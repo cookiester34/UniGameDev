@@ -96,7 +96,7 @@ public class ResourceManagement : MonoBehaviour
         bool canUse = CanUseResource(resourcePurchase);
         Resource matchingResource = GetResource(resourcePurchase.resourceType);
 
-        if (matchingResource != null) {
+        if (matchingResource != null && canUse) {
             matchingResource.ModifyAmount(resourcePurchase.cost * -1);
         }
 
