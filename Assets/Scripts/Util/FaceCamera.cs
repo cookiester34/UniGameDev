@@ -7,7 +7,7 @@ public class FaceCamera : MonoBehaviour {
 
     void FixedUpdate() {
         if (Camera.main != null) {
-            transform.LookAt(Camera.main.transform);
+            transform.LookAt(Camera.main.transform , -Vector3.up);
         }
     }
 }

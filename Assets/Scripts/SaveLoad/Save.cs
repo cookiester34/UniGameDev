@@ -17,6 +17,9 @@ public class Save {
     public List<SavedBuildingData> BuildingDatas = new List<SavedBuildingData>();
     public List<int> AssignedBees = new List<int>();
 
+    public List<SavedBuilding> buildings = new List<SavedBuilding>();
+    public List<SavedBee> bees = new List<SavedBee>();
+
     public List<SavedTransform> buildingTransforms = new List<SavedTransform>();
     public List<SavedHealth> buildingHealth = new List<SavedHealth>();
 

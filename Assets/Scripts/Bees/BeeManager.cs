@@ -19,6 +19,8 @@ public class BeeManager : MonoBehaviour {
 
     private int _cachedPopulation = 0;
 
+    public List<Bee> Bees => _bees;
+
     public static BeeManager Instance {
         get {
             if (_instance == null) {

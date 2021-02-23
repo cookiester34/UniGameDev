@@ -35,6 +35,8 @@ public class Building : MonoBehaviour {
         set => usedFoundations = value;
     }
 
+    public List<Bee> AssignedBees => _assignedBees;
+
     protected virtual void Start()
     {
         if (buildingTeir1 != null) {

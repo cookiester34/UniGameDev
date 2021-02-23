@@ -38,13 +38,14 @@ public static class SaveLoad {
 
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
-            save.buildingTransforms.Add(new SavedTransform(building.gameObject.transform));
-            save.BuildingDatas.Add(new SavedBuildingData(building.BuildingData));
-            save.AssignedBees.Add(building.numAssignedBees);
-            
-            //Storing null health if no health component, allows same index to be used for all buildings
-            save.buildingHealth.Add(new SavedHealth(building.GetComponent<Health>()));
+            save.buildings.Add(new SavedBuilding(building));
         }
+
+        List<SavedBee> savedBees = new List<SavedBee>();
+        foreach (Bee bee in Object.FindObjectsOfType<Bee>().ToArray()) {
+            savedBees.Add(new SavedBee(bee));
+        }
+        save.bees = savedBees;
 
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
             SavedResource savedResource = new SavedResource(resource);
@@ -94,14 +95,12 @@ public static class SaveLoad {
     /// All functionality to be done after the scene is loaded with the terrain 
     /// </summary>
     private static void SceneLoaded() {
-        WipeScene();
+        foreach (SavedBee savedBee in _currentSave.bees) {
+            savedBee.Instantiate();
+        }
 
-        for (int i = 0; i < _currentSave.BuildingDatas.Count; i++) {
-            SavedTransform transform = _currentSave.buildingTransforms[i];
-            GameObject go = Object.Instantiate(
-                _currentSave.BuildingDatas[i].buildingType.GetPrefab(), transform.Position, transform.Rotation);
-            go.GetComponent<Health>().LoadSavedHealth(_currentSave.buildingHealth[i]);
-            go.GetComponent<Building>().numAssignedBees = _currentSave.AssignedBees[i];
+        foreach (SavedBuilding building in _currentSave.buildings) {
+            building.Instantiate();
         }
 
         for (int i = 0; i < _currentSave.resources.Count; i++) {
@@ -139,21 +138,6 @@ public static class SaveLoad {
         cameraTransform.position = _currentSave.cameraTransform.Position;
         cameraTransform.rotation = _currentSave.cameraTransform.Rotation;
         gameCamera.TargetPositon = _currentSave.cameraTarget;
-    }
-
-    /// <summary>
-    /// Wipes the current scene of data that gets saved, used when loading data to avoid duplicates
-    /// </summary>
-    private static void WipeScene() {
-        Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
-        foreach (Building building in buildings) {
-            Object.Destroy(building.gameObject);
-        }
-		
-		HexPanel[] panels = Object.FindObjectsOfType<HexPanel>().ToArray();
-        foreach (HexPanel HP in panels) {
-            Object.Destroy(HP.gameObject);
-        }
     }
 
     /// <summary>
