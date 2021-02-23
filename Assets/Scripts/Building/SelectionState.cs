@@ -24,7 +24,7 @@ public class SelectionState : BuildingManagerState {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.mask)) {
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
                 if (hit.transform.CompareTag("Building")) {
                     selectedBuilding = hit.transform.gameObject;
                     selectedBuildingData = selectedBuilding.GetComponent<Building>();

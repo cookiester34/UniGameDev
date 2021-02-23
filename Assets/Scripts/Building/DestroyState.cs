@@ -15,7 +15,7 @@ public class DestroyState : BuildingManagerState {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.mask)) {
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
                 if (hit.transform.CompareTag("Building")) {
                     Building destroyedBuilding = hit.transform.GetComponent<Building>();
                     buildingManager.numBuildingTypes[(int) destroyedBuilding.BuildingData.BuildingType]--;

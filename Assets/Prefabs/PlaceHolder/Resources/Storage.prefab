@@ -191,7 +191,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8f2b3b12614f7e04abae2226354b2a61, type: 2}
+  - {fileID: 2100000, guid: 8ef801830a0f3ba4cabddef7ae756844, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -259,6 +259,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 50
   resource: {fileID: 11400000, guid: d12ccc48f246a524f87010e885d9430d, type: 2}
+  fillOnPlace: 0
 --- !u!114 &4263860906202005341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -273,6 +274,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 10
   resource: {fileID: 11400000, guid: 6805fa6b226494444ad52bbd41c2b73a, type: 2}
+  fillOnPlace: 0
 --- !u!114 &2976878325122177308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -287,6 +289,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 100
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
+  fillOnPlace: 0
 --- !u!114 &-8870230007966069597
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,6 +304,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 30
   resource: {fileID: 11400000, guid: bf2a7cd146a17794f99ce3ea80e7f5b1, type: 2}
+  fillOnPlace: 0
 --- !u!208 &2080038946008790397
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -331,6 +335,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 5
   maxHealth: 5
+  shouldDestroyOnDeath: 0
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
   healthLostParticles: {fileID: 0}

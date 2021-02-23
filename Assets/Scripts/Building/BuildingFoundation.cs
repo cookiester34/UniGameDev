@@ -41,44 +41,12 @@ public class BuildingFoundation : MonoBehaviour {
     /// <returns>The central position for the building</returns>
     public Vector3 BuildingPosition(int buildingSize) {
         Vector3 buildingCenter = Vector3.zero;
-        switch (buildingSize) {
-            case 1:
-                buildingCenter = _renderer.bounds.center;
-                break;
-
-            case 2:
-                // Currently assuming size to be 2, which means it will build on this tile, its below right, and below
-                HexPanel br = _hexPanel.GetNeighbour(NeighbourDirection.BelowRight);
-                HexPanel ar = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
-
-                if (br != null && ar != null) {
-                    BuildingFoundation brFoundation = br.BuildingFoundation;
-                    BuildingFoundation bFoundation = ar.BuildingFoundation;
-
-                    if (br != null && ar != null) {
-                        buildingCenter = (BuildingPosition(1) + bFoundation.BuildingPosition(1)
-                                                              + brFoundation.BuildingPosition(1)) / 3;
-                    }
-                }
-                break;
-
-            case 3:
-                List<HexPanel> neighbours = _hexPanel.GetNeighbours();
-                buildingCenter = Vector3.zero;
-                foreach (HexPanel neighbour in neighbours) {
-                    if (neighbour.BuildingFoundation != null) {
-                        buildingCenter += neighbour.BuildingFoundation._renderer.bounds.center;
-                    }
-                }
-
-                buildingCenter /= neighbours.Count;
-                break;
-            
-            default:
-                Debug.LogError("Building size of: " + buildingSize + " not supported");
-                break;
+        List<BuildingFoundation> foundations = GetFoundations(buildingSize);
+        foreach (BuildingFoundation foundation in foundations) {
+            buildingCenter += foundation._renderer.bounds.center;
         }
 
+        buildingCenter /= foundations.Count;
         return buildingCenter;
     }
 
@@ -87,49 +55,53 @@ public class BuildingFoundation : MonoBehaviour {
     /// </summary>
     /// <param name="buildTiles">Size of tiles that the building will take</param>
     /// <returns>Whether the building can be built</returns>
-    public bool BuildMulti(int buildTiles) {
+    public bool BuildMulti(int buildTiles, bool updateBuildStatus = true) {
         bool canBuild = false;
+        List<BuildingFoundation> foundations = GetFoundations(buildTiles);
 
         switch (buildTiles) {
             case 1:
                 canBuild = _canBuild;
-                _canBuild = false;
-                UpdateVisibleColour();
+                if (updateBuildStatus) {
+                    CanBuild = false;
+                }
+
                 break;
 
             case 2:
-                HexPanel br = _hexPanel.GetNeighbour(NeighbourDirection.BelowRight);
-                HexPanel ar = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
-                canBuild = _canBuild && br.BuildingFoundation.CanBuild && ar.BuildingFoundation.CanBuild;
-                if (canBuild) {
-                    br.BuildingFoundation.CanBuild = false;
-                    ar.BuildingFoundation.CanBuild = false;
-                    _canBuild = false;
-                }
-                UpdateVisibleColour();
-
-                break;
-
-            case 3:
-                List<HexPanel> neighbours = _hexPanel.GetNeighbours();
-                canBuild = neighbours.Count == 6 && CanBuild;
-
-                if (canBuild) {
-                    foreach (HexPanel neighbour in _hexPanel.GetNeighbours()) {
-                        canBuild = neighbour.BuildingFoundation.CanBuild;
+                if (foundations.Count == 3) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
                         if (!canBuild) {
                             break;
                         }
                     }
-                }
 
-                if (canBuild) {
-                    _canBuild = false;
-                    foreach (HexPanel neighbour in _hexPanel.GetNeighbours()) {
-                        neighbour.BuildingFoundation.CanBuild = false;
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
                     }
                 }
-                UpdateVisibleColour();
+                break;
+
+            case 3:
+                if (foundations.Count == 7) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
                 break;
         }
 
@@ -144,10 +116,17 @@ public class BuildingFoundation : MonoBehaviour {
                 break;
             
             case 2:
+                foundations.Add(this);
                 HexPanel br = _hexPanel.GetNeighbour(NeighbourDirection.BelowRight);
                 HexPanel ar = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
-                foundations.Add(ar.BuildingFoundation);
-                foundations.Add(br.BuildingFoundation);
+                if (ar != null) {
+                    foundations.Add(ar.BuildingFoundation);
+                }
+
+                if (br != null) {
+                    foundations.Add(br.BuildingFoundation);
+                }
+
                 break;
 
             case 3:
@@ -168,7 +147,7 @@ public class BuildingFoundation : MonoBehaviour {
 
     private void UpdateVisibleColour(Color color) {
         if (_renderer == null) {
-            _renderer = GetComponentInChildren<Renderer>();
+            return;
         }
 
         if (_propBlock == null) {

@@ -210,6 +210,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   amount: 10
   resource: {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
+  fillOnPlace: 0
 --- !u!208 &-7766972306021319815
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -240,6 +241,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 3
   maxHealth: 3
+  shouldDestroyOnDeath: 0
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
   healthLostParticles: {fileID: 0}
@@ -256,7 +258,7 @@ Animator:
   m_GameObject: {fileID: 7642171427236103336}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: d685e4cea7272e64686473fb779fe022, type: 2}
+  m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -507,7 +509,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8f2b3b12614f7e04abae2226354b2a61, type: 2}
+      objectReference: {fileID: 2100000, guid: 8ef801830a0f3ba4cabddef7ae756844, type: 2}
     - target: {fileID: 919132149155446097, guid: f59e9cdf29be8484f94059b44dab6a6a,
         type: 3}
       propertyPath: m_Name
@@ -608,7 +610,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 8f2b3b12614f7e04abae2226354b2a61, type: 2}
+      objectReference: {fileID: 2100000, guid: 8ef801830a0f3ba4cabddef7ae756844, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15a74869f86743e4cac57723996445e2, type: 3}
 --- !u!1 &5018363373151657191 stripped

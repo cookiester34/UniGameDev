@@ -27,7 +27,8 @@ public class BuildingManager : MonoBehaviour {
     /// <summary>
     /// Mask to use when placing, destroying, or selecting
     /// </summary>
-    public LayerMask mask;
+    public LayerMask buildingMask;
+    public LayerMask tileMask;
 
     // TODO: Two UI elements should receive an event when they need to update rather than manager telling them directly
     public Image selectedBuildingUI;

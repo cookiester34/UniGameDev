@@ -17,3 +17,5 @@ MonoBehaviour:
   resourcePurchase: []
   buildingSize: 0
   maxInstances: 100000
+  description: Destroys buildings, offering no refund
+  maxNumberOfWorkers: 0
