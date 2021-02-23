@@ -31,17 +31,9 @@ public class Health : MonoBehaviour {
     public float NormalizedHealth => (currentHealth / maxHealth);
 
     private void Awake() {
-        if (healthGainParticles != null || healthGainAudio != null) {
-            OnHealthGain += HealthGained;
-        }
-        
-        if (healthLostParticles != null || healthLostAudio != null) {
-            OnHealthLost += HealthLost;
-        }
-        
-        if (deathParticles != null || deathAudio != null) {
-            OnDeath += Death;
-        }
+        OnHealthGain += HealthGained;
+        OnHealthLost += HealthLost;
+        OnDeath += Death;
     }
 
     public void LoadSavedHealth(SavedHealth savedHealth) {

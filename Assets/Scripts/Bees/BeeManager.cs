@@ -59,13 +59,6 @@ public class BeeManager : MonoBehaviour {
                 Bee bee = go.GetComponent<Bee>();
                 _bees.Add(bee);
             }
-        } else {
-            populationChange = Mathf.Abs(populationChange);
-            for (int i = 0; i < populationChange; i++) {
-                Bee bee = _bees.Random();
-                _bees.Remove(bee);
-                Destroy(bee.gameObject);
-            }
         }
         ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);
         _cachedPopulation += populationChange;

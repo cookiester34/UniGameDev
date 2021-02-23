@@ -38,4 +38,17 @@ public class Bee : MonoBehaviour {
         transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
         transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
     }
+
+    private void OnDestroy() {
+        if (!ApplicationUtil.IsQuitting) {
+            ResourceManagement.Instance.GetResource(ResourceType.Population).ModifyAmount(-1);
+            if (_work != null) {
+                _work.UnassignBee(this);
+            }
+
+            if (_home != null) {
+                _home.UnassignBee(this);
+            }
+        }
+    }
 }

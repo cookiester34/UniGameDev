@@ -64,12 +64,21 @@ public class Building : MonoBehaviour {
         numAssignedBees = _assignedBees.Count;
     }
 
-    public Bee UnassignBee() {
-        Bee beeUnassigned = null;
+    /// <summary>
+    /// Attempts to unassign a bee from the building
+    /// </summary>
+    /// <param name="bee">A specific bee to remove, or null for a random one</param>
+    /// <returns>The bee removed</returns>
+    public Bee UnassignBee(Bee bee = null) {
+        Bee beeUnassigned = bee;
         if (_assignedBees.Count < 1) {
             Debug.LogWarning("Attempting to unassign a bee when no bees are  assigned to this building");
+            beeUnassigned = null;
         } else {
-            beeUnassigned = _assignedBees[0];
+            if (beeUnassigned == null) {
+                beeUnassigned = _assignedBees[0];
+            }
+
             _assignedBees.Remove(beeUnassigned);
         }
         numAssignedBees = _assignedBees.Count;

@@ -4,9 +4,6 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(HealthUI))]
-
-
 public class WaspAI : MonoBehaviour
 {
     private List<Transform> targetsInRange = new List<Transform>();

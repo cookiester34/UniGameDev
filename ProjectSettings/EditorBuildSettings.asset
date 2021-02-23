@@ -30,9 +30,12 @@ EditorBuildSettings:
     path: Assets/Scenes/MergeScene.unity
     guid: e6730ab636bc9ea42b0bffd1c37fcc58
   - enabled: 1
+    path: Assets/Scenes/BaseLevels/Flat.unity
+    guid: 9e432c1f9700b9348a48d765db10d165
+  - enabled: 1
     path: Assets/Scenes/BaseLevels/CornerHill.unity
     guid: 991558fb58b60b8438f2c5953c8b882f
   - enabled: 1
-    path: Assets/Scenes/BaseLevels/Flat.unity
+    path: Assets/Scenes/BaseLevels/SmoothHills.unity
     guid: 30678b1b2a0533e48b4f403bb65b1a47
   m_configObjects: {}
