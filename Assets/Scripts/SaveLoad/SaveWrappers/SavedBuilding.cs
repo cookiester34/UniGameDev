@@ -16,14 +16,22 @@ public class SavedBuilding {
         health = new SavedHealth(building.GetComponent<Health>());
         buildingData = new SavedBuildingData(building.BuildingData);
         assignedBees = new List<SavedBee>();
-        foreach (Bee bee in building.AssignedBees) {
-            assignedBees.Add(new SavedBee(bee));
+        if (building.AssignedBees != null) {
+            foreach (Bee bee in building.AssignedBees) {
+                assignedBees.Add(new SavedBee(bee));
+            }
         }
     }
 
-    public void Instantiate() {
+    public void Instantiate(List<Bee> loadedBees) {
         GameObject go = Object.Instantiate(
             buildingData.buildingType.GetPrefab(), transform.Position, transform.Rotation);
         go.GetComponent<Health>().LoadSavedHealth(health);
+        foreach (SavedBee bee in assignedBees) {
+            Bee matchingBee = loadedBees.Find(bee1 => bee1.Id == bee.id);
+            if (matchingBee != null) {
+                go.GetComponent<Building>().AssignBee(matchingBee);
+            }
+        }
     }
 }

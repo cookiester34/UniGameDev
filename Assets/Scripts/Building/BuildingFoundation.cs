@@ -11,7 +11,7 @@ public class BuildingFoundation : MonoBehaviour {
     private HexPanel _hexPanel;
     private Renderer _renderer;
 
-    private bool _canBuild = true;
+    [SerializeField] private bool _canBuild = true;
 
     private static Color canBuildColor = new Color(0.2f, 0.8f, 0.2f, 0.6f);
     private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f, 0.6f);

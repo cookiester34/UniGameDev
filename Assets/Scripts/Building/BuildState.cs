@@ -101,7 +101,6 @@ public class BuildState : BuildingManagerState {
 
             Building placedBuilding = tempBuilding.GetComponent<Building>();
             if (placedBuilding != null) {
-                buildingManager.Buildings.Add(placedBuilding);
                 placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingSize);
                 placedBuilding.PlaceBuilding();
             }

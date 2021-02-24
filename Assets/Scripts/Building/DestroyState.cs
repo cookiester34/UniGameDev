@@ -19,7 +19,6 @@ public class DestroyState : BuildingManagerState {
                 if (hit.transform.CompareTag("Building")) {
                     Building destroyedBuilding = hit.transform.GetComponent<Building>();
                     buildingManager.numBuildingTypes[(int) destroyedBuilding.BuildingData.BuildingType]--;
-                    buildingManager.Buildings.Remove(destroyedBuilding);
                     var beforeDestroy = hit.collider.GetComponents<IBeforeDestroy>();
                     if (beforeDestroy != null && beforeDestroy.Length > 0) {
                         foreach (var destroy in beforeDestroy) {

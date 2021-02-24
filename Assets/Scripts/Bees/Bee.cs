@@ -15,6 +15,14 @@ public class Bee : MonoBehaviour {
     public float _soundLoopBasePitch;
     private float _soundLoopVolume;
 
+    private int id;
+    private static int idCounter;
+
+    public int Id {
+        get => id;
+        set => id = value;
+    }
+
     public Building Home {
         get => _home;
         set => _home = value;
@@ -31,6 +39,9 @@ public class Bee : MonoBehaviour {
     }
 
     private void Awake() {
+        idCounter++;
+        id = idCounter;
+
         _agent = GetComponent<NavMeshAgent>();
 
         _soundLoopBasePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);

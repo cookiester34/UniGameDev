@@ -95,12 +95,13 @@ public static class SaveLoad {
     /// All functionality to be done after the scene is loaded with the terrain 
     /// </summary>
     private static void SceneLoaded() {
+        List<Bee> loadedBees = new List<Bee>();
         foreach (SavedBee savedBee in _currentSave.bees) {
-            savedBee.Instantiate();
+            loadedBees.Add(savedBee.Instantiate());
         }
 
         foreach (SavedBuilding building in _currentSave.buildings) {
-            building.Instantiate();
+            building.Instantiate(loadedBees);
         }
 
         for (int i = 0; i < _currentSave.resources.Count; i++) {

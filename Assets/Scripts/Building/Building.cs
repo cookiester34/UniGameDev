@@ -50,7 +50,7 @@ public class Building : MonoBehaviour {
         if (buildingTeir3 != null) {
             buildingTeir3.SetActive(buildingTeir == 2);
         }
-        _assignedBees = new List<Bee>();
+        BuildingManager.Instance.Buildings.Add(this);
     }
 
     public void PlaceBuilding() {
@@ -58,6 +58,10 @@ public class Building : MonoBehaviour {
     }
 
     public void AssignBee(Bee bee) {
+        if (_assignedBees == null) {
+            _assignedBees = new List<Bee>();
+        }
+
         if (_assignedBees.Contains(bee)) {
             Debug.LogWarning("Attempting to assign a bee that is already assigned to this building");
         }
@@ -72,6 +76,10 @@ public class Building : MonoBehaviour {
     /// <param name="bee">A specific bee to remove, or null for a random one</param>
     /// <returns>The bee removed</returns>
     public Bee UnassignBee(Bee bee = null) {
+        if (_assignedBees == null) {
+            _assignedBees = new List<Bee>();
+        }
+
         Bee beeUnassigned = bee;
         if (_assignedBees.Count < 1) {
             Debug.LogWarning("Attempting to unassign a bee when no bees are  assigned to this building");
@@ -92,5 +100,6 @@ public class Building : MonoBehaviour {
         foreach (BuildingFoundation foundation in usedFoundations) {
             foundation.CanBuild = true;
         }
+        BuildingManager.Instance.Buildings.Add(this);
     }
 }
