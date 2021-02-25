@@ -79,6 +79,7 @@ public class SelectionState : BuildingManagerState {
             bool canUse = true;
             List<ResourcePurchase> temp = selectedBuildingData.BuildingData.ResourcePurchase.ToList();
             for(int i = 0; i < selectedBuildingData.BuildingData.ResourcePurchase.Count; i++) {
+                buildingManager.BuildingSelected(selectedBuildingData);
                 if (selectedBuildingData.buildingTeir == 0)
                     temp[i].cost *= tier1UpgradeCost;
                 else if (selectedBuildingData.buildingTeir == 1)

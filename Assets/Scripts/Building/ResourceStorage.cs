@@ -44,6 +44,11 @@ public class ResourceStorage : MonoBehaviour, IBeforeDestroy {
         }
     }
 
+    public int GetStorage()
+    {
+        return amount;
+    }
+
     private void ModifyCap(bool increase) {
         if (increase) {
             resource.ModifyCap(amount);

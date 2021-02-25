@@ -53,6 +53,20 @@ public class Building : MonoBehaviour {
         BuildingManager.Instance.Buildings.Add(this);
     }
 
+    public GameObject GetActiveBuilding()
+    {
+        switch (buildingTeir)
+        {
+            case 0:
+                return buildingTeir1;
+            case 1:
+                return buildingTeir2;
+            case 2:
+                return buildingTeir3;
+        }
+        return null;
+    }
+
     public void PlaceBuilding() {
         OnBuildingPlaced?.Invoke();
     }
