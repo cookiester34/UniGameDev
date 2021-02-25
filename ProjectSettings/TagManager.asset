@@ -8,6 +8,7 @@ TagManager:
   - Building
   - Environment
   - Enemy
+  - Bee
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Tile
   - Building
   - Environment
-  - 
+  - PostProcessing
   - 
   - 
   - 
