@@ -19,5 +19,6 @@ MonoBehaviour:
     resourceType: 3
   buildingSize: 2
   maxInstances: 1000
-  description: Building description here!
+  description: Storage - This building is used to increase the maximum capacity of
+    various resource types.
   maxNumberOfWorkers: 5

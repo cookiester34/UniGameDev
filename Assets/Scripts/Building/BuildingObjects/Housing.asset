@@ -19,5 +19,6 @@ MonoBehaviour:
     resourceType: 3
   buildingSize: 1
   maxInstances: 1000
-  description: Building description here!
+  description: Housing - A place for bees to rest up and raise their happiness. Bees
+    with higher happiness will work more efficiently.
   maxNumberOfWorkers: 5

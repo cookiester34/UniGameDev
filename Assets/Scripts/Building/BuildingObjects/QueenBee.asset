@@ -17,5 +17,7 @@ MonoBehaviour:
   resourcePurchase: []
   buildingSize: 3
   maxInstances: 1
-  description: The Queen Bee building
+  description: Queen Bee - The heart of the hive, generates population when bees
+    are assigned and stores a small amount of all resources. Without the queen the
+    rest will fall
   maxNumberOfWorkers: 10

@@ -24,6 +24,7 @@ namespace UI {
         [Tooltip("The scriptable object must implement IUiClickableHover, used to call its methods")]
         [SerializeField] protected ScriptableObject _scriptableObject;
         private IUiClickableHover _clickableHover;
+		private BuildingData _buildingData;
 
         protected virtual void Awake() {
             Setup();
@@ -70,9 +71,27 @@ namespace UI {
                 _image.sprite = _clickableHover.GetSprite();
                 _button.onClick.RemoveAllListeners();
                 _button.onClick.AddListener(_clickableHover.OnClick);
-                _tooltipText.text = _clickableHover.GetHoverText();
+				if (_scriptableObject is BuildingData) {
+					_buildingData = (BuildingData) _scriptableObject;
+					_tooltipText.text = _clickableHover.GetHoverText() + CalculateCostString();
+				}
+				else {
+					_tooltipText.text = _clickableHover.GetHoverText();
+				}
+                
             }
         }
+		
+		private string CalculateCostString() {
+			string builder = "\n";
+			foreach (ResourcePurchase cost in _buildingData.ResourcePurchase) {
+				builder = builder + cost.resourceType.ToString() + ": " + cost.cost.ToString() + " ";
+			}
+			if (builder != "\n") {
+				return builder;
+			}
+			return "\nNo cost";
+		}
 
         /// <summary>
         /// Displays the tooltip on hover

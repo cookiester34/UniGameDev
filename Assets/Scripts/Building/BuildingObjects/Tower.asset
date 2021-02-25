@@ -21,5 +21,6 @@ MonoBehaviour:
     resourceType: 3
   buildingSize: 1
   maxInstances: 1000
-  description: Building description here!
+  description: Tower - In the event of an invasion, towers will try to attack nearby
+    enemies.
   maxNumberOfWorkers: 5

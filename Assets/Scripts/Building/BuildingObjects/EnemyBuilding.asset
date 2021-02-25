@@ -17,5 +17,6 @@ MonoBehaviour:
   resourcePurchase: []
   buildingSize: 1
   maxInstances: 10000
-  assignedBees: 0
+  description: Enemy Building - Enemy wasps will spawn from this building once the
+    season becomes Autumn.
   maxNumberOfWorkers: 0
