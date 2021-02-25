@@ -29,7 +29,7 @@ public class SettingsPanel : MonoBehaviour {
     private const float CameraPanSpeedDefault = 5f;
     private const bool CanCameraMousePanDefault = true;
     private const float MasterVolumeDefault = 1f;
-    private const float MusicVolumeDefault = 0.21f;
+    private const float MusicVolumeDefault = 0.11f;
     private const float EffectsVolumeDefault = 1f;
     private const float UIVolumeDefault = 1f;
 
