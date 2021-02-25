@@ -21,5 +21,6 @@ MonoBehaviour:
     resourceType: 0
   buildingSize: 1
   maxInstances: 1000
-  description: Building description here!
+  description: Jelly Converter - This building converts pollen into royal jelly.
+    Royal jelly is used to power research activities.
   maxNumberOfWorkers: 5
