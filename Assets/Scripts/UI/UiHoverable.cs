@@ -23,11 +23,16 @@ namespace UI {
 
         [Tooltip("The scriptable object must implement IUiClickableHover, used to call its methods")]
         [SerializeField] protected ScriptableObject _scriptableObject;
+		public bool isLevelEditorOnly;
         private IUiClickableHover _clickableHover;
 		private BuildingData _buildingData;
 
         protected virtual void Awake() {
             Setup();
+			Debug.Log("Current scene type is: " + CurrentSceneType.sceneType.ToString());
+			if (isLevelEditorOnly && CurrentSceneType.sceneType != SceneType.LevelEditor) {
+				gameObject.SetActive(false);
+			}
         }
 
         private void OnValidate() {
