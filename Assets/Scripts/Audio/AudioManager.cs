@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -202,16 +203,47 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void AmbienceFadeTo (Sound ambienceClip)
+    {
+        StartCoroutine(FadeTo(ambienceClip));
+    }
+
+    IEnumerator FadeTo(Sound clip)
+    {
+        clip.source.volume = 0f;
+
+        float fadeSpeed = 1f;
+        float t = 0;
+        float v = currentAmbience.volume;
+        clip.source.Play();
+
+        while (t < 0.98f)
+        {
+            t = Mathf.Lerp(t, 1f, Time.deltaTime * fadeSpeed);
+            currentAmbience.source.volume = Mathf.Lerp(v, 0f, t);
+            clip.source.volume = Mathf.Lerp(0f, clip.volume, t);
+            Debug.Log(clip.source.volume.ToString());
+            yield return null;
+        }
+        clip.source.volume = clip.volume;
+
+        currentAmbience.source.Stop();
+        currentAmbience = clip;
+        yield break;
+    }
+
     public void PlayAmbienceTrack(Seasons season)
     {
         if (currentAmbience != null && currentAmbience.source.isPlaying)
         {
-            currentAmbience.source.Stop();
+            AmbienceFadeTo(ambienceTracks.Find(sound => sound.name == season.ToString()));
         }
-
-        currentAmbience = ambienceTracks.Find(sound => sound.name == season.ToString());
-        Debug.Log("Playing " + season.ToString());
-        currentAmbience.source.Play();
+        else
+        {
+            currentAmbience = ambienceTracks.Find(sound => sound.name == season.ToString());
+            Debug.Log("Playing " + season.ToString());
+            currentAmbience.source.Play();
+        }
     }
 }
 

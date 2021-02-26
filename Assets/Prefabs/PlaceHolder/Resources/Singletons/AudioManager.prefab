@@ -156,7 +156,7 @@ MonoBehaviour:
   ambienceTracks:
   - name: Spring
     soundClip: {fileID: 8300000, guid: 6b7b7233ede2381439408c018938a23e, type: 3}
-    volume: 0.05
+    volume: 0.3
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -165,7 +165,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Summer
     soundClip: {fileID: 8300000, guid: 7e4cde92fbe0733498efaee5c050ebf6, type: 3}
-    volume: 0.1
+    volume: 0.3
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -174,7 +174,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Autumn
     soundClip: {fileID: 8300000, guid: ef35971f1695a4d409c75bbc308b953f, type: 3}
-    volume: 0.3
+    volume: 0.5
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -183,7 +183,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Winter
     soundClip: {fileID: 8300000, guid: 8c29df86d91992f4d82f817fb7b082fa, type: 3}
-    volume: 0.4
+    volume: 0.5
     pitch: 1
     loop: 1
     autoModulation: 0
