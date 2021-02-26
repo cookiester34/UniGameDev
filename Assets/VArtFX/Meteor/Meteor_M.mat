@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Meteor_M
+  m_Shader: {fileID: -6465566751694194690, guid: d89dbec2326fe9c45b685a6428b08e7e,
+    type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _MainTexture:
+        m_Texture: {fileID: 2800000, guid: 503fa6f23a5119d4d8ef536ef5055aaf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Metallic: 0
+    - _NormalStrength: 0.9
+    - _Smoothness: 0
+    - _VoronoiDissolve: 4.89
+    - _VoronoiScale: 6
+    m_Colors:
+    - _MainColor: {r: 0.6039216, g: 0.4835904, b: 0.3063813, a: 0}
+    - _VoronoiColor: {r: 47.937256, g: 19.827452, b: 7.780392, a: 0}
+    - _VoronoiSpeed: {r: 0.1, g: 0, b: 0, a: 0}
