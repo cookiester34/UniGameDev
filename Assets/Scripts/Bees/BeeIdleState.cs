@@ -26,31 +26,34 @@ public class BeeIdleState : BeeState {
     /// chance to go to some random building 
     /// </summary>
     private void GoToRandomBuilding() {
-        List<Building> possibleBuildings = new List<Building>();
+        List<Vector3> possiblePositions = new List<Vector3>();
         if (_stateMachine.Bee.Home != null && !_stateMachine.NearBuilding(_stateMachine.Bee.Home)) {
-            possibleBuildings.Add(_stateMachine.Bee.Home);
-            possibleBuildings.Add(_stateMachine.Bee.Home);
+            possiblePositions.Add(_stateMachine.Bee.Home.transform.position);
+            possiblePositions.Add(_stateMachine.Bee.Home.transform.position);
         }
 
         if (_stateMachine.Bee.Work != null && !_stateMachine.NearBuilding(_stateMachine.Bee.Work)) {
-            possibleBuildings.Add(_stateMachine.Bee.Work);
-            possibleBuildings.Add(_stateMachine.Bee.Work);
+            possiblePositions.Add(_stateMachine.Bee.transform.position);
+            possiblePositions.Add(_stateMachine.Bee.transform.position);
         }
 
         if (BuildingManager.Instance.Buildings.Count > 0) {
-            possibleBuildings.Add(BuildingManager.Instance.Buildings.Random());
+            possiblePositions.Add(BuildingManager.Instance.Buildings.Random().transform.position);
         }
+        
+        // Random direction
+        Vector3 randomPosition =
+            _stateMachine.transform.position + new Vector3(Random.Range(0f, 5f), 0f, Random.Range(0f, 5f));
+        possiblePositions.Add(randomPosition);
 
-        if (possibleBuildings.Count > 0) {
-            GoToBuilding(possibleBuildings.Random());
+        if (possiblePositions.Count > 0) {
+            GoToPosition(possiblePositions.Random());
         }
     }
 
-    private void GoToBuilding(Building building) {
-        if (building != null) {
-            _stateMachine.TargetBuilding = building;
-            _stateMachine.ChangeState(BeeStates.Move);
-        }
+    private void GoToPosition(Vector3 position) {
+        _stateMachine.TargetPosition = position;
+        _stateMachine.ChangeState(BeeStates.Move);
     }
 
 }

@@ -21,7 +21,6 @@ public class BeeSleepState : BeeState {
     }
 
     public void WakeUp() {
-        _stateMachine.TargetBuilding = _stateMachine.Bee.Work;
-        _stateMachine.ChangeState(BeeStates.Move);
+        _stateMachine.ChangeState(BeeStates.Idle);
     }
 }

@@ -10,6 +10,8 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class BeeManager : MonoBehaviour {
     private List<Bee> _bees = new List<Bee>();
+    private int spawnQueue = 0;
+    private Timer spawnTimer = new Timer(0.5f);
     [SerializeField] private GameObject beePrefab;
     [SerializeField] private GameObject beeSpawn;
 
@@ -44,6 +46,12 @@ public class BeeManager : MonoBehaviour {
         Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
         _cachedPopulation = Mathf.FloorToInt(population.CurrentResourceAmount);
         population.OnCurrentValueChanged += OnPopulationChange;
+        spawnTimer.OnTimerFinish += SpawnBee;
+        spawnTimer.Start();
+    }
+
+    private void Update() {
+        spawnTimer.Tick(Time.deltaTime);
     }
 
     private void OnDestroy() {
@@ -56,14 +64,20 @@ public class BeeManager : MonoBehaviour {
     public void OnPopulationChange(float populationNewValue) {
         int populationChange = Mathf.FloorToInt(populationNewValue - _cachedPopulation);
         if (populationChange > 0) {
-            for (int i = 0; i < populationChange; i++) {
-                GameObject go = Instantiate(beePrefab, beeSpawn.transform.position, beeSpawn.transform.rotation);
-                Bee bee = go.GetComponent<Bee>();
-                _bees.Add(bee);
-            }
+            spawnQueue += populationChange;
         }
         ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);
         _cachedPopulation += populationChange;
+    }
+
+    private void SpawnBee() {
+        if (spawnQueue > 0) {
+            GameObject go = Instantiate(beePrefab, beeSpawn.transform.position, beeSpawn.transform.rotation);
+            Bee bee = go.GetComponent<Bee>();
+            _bees.Add(bee);
+            spawnQueue--;
+        }
+        spawnTimer.Reset(true);
     }
 
     public void AssignBeeToBuilding(Building building) {

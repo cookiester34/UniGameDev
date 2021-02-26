@@ -9,13 +9,13 @@ using UnityEngine.PlayerLoop;
 public class BeeStateMachine : MonoBehaviour {
     private Bee _bee;
     private BeeState _currentState = null;
-    private Building targetBuilding;
+    private Vector3 _targetPosition;
 
     public Bee Bee => _bee;
 
-    public Building TargetBuilding {
-        get => targetBuilding;
-        set => targetBuilding = value;
+    public Vector3 TargetPosition {
+        get => _targetPosition;
+        set => _targetPosition = value;
     }
 
     #region states
@@ -77,7 +77,7 @@ public class BeeStateMachine : MonoBehaviour {
         bool nearBuilding = false;
 
         if (building != null) {
-            if (Vector3.Distance(transform.position, building.transform.position) < 2f) {
+            if (Vector3.Distance(transform.position, building.transform.position) < 3.5f) {
                 nearBuilding = true;
             }
         }

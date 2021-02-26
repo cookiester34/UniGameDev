@@ -59,9 +59,12 @@ namespace Util {
             }
         }
 
-        public void Reset() {
+        public void Reset(bool setactive = false) {
             timeRunning = 0;
             progressPercent = 0;
+            if (setactive) {
+                active = true;
+            }
         }
 
         public void Start() {

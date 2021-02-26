@@ -114,6 +114,6 @@ public class Building : MonoBehaviour {
         foreach (BuildingFoundation foundation in usedFoundations) {
             foundation.CanBuild = true;
         }
-        BuildingManager.Instance.Buildings.Add(this);
+        BuildingManager.Instance.Buildings.Remove(this);
     }
 }
