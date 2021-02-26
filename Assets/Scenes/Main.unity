@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -519,6 +519,7 @@ GameObject:
   - component: {fileID: 52675265}
   - component: {fileID: 52675264}
   - component: {fileID: 52675263}
+  - component: {fileID: 52675266}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -567,12 +568,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -648,6 +649,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 52675261}
   m_CullTransparentMesh: 0
+--- !u!114 &52675266
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52675261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67333857ebd39e54f8b310a4dc2294d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playSoundOnHover: 1
+  hoverSound: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
 --- !u!1 &70500903
 GameObject:
   m_ObjectHideFlags: 0
@@ -2511,6 +2526,11 @@ PrefabInstance:
       propertyPath: startingMusicType
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 345207262248793613, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
+        type: 3}
+      propertyPath: mainMenuMusic.volume
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1714416664458419524, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
         type: 3}
       propertyPath: m_Name
@@ -4137,6 +4157,7 @@ GameObject:
   - component: {fileID: 835724170}
   - component: {fileID: 835724169}
   - component: {fileID: 835724168}
+  - component: {fileID: 835724172}
   m_Layer: 5
   m_Name: LevelEditorButton
   m_TagString: Untagged
@@ -4199,12 +4220,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -4232,12 +4253,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: PlaySound
-        m_Mode: 5
+      - m_Target: {fileID: 1712387101}
+        m_MethodName: PlaySoundClip
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: UIPressed
@@ -4280,6 +4302,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 835724166}
   m_CullTransparentMesh: 0
+--- !u!114 &835724172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 835724166}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67333857ebd39e54f8b310a4dc2294d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playSoundOnHover: 1
+  hoverSound: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
 --- !u!1 &839495699
 GameObject:
   m_ObjectHideFlags: 0
@@ -6407,6 +6443,7 @@ GameObject:
   - component: {fileID: 1268061284}
   - component: {fileID: 1268061283}
   - component: {fileID: 1268061286}
+  - component: {fileID: 1268061287}
   m_Layer: 5
   m_Name: DebugButton
   m_TagString: Untagged
@@ -6456,12 +6493,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -6489,12 +6526,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: PlaySound
-        m_Mode: 5
+      - m_Target: {fileID: 1712387101}
+        m_MethodName: PlaySoundClip
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: UIPressed
@@ -6550,6 +6588,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 70500903}
+--- !u!114 &1268061287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1268061281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67333857ebd39e54f8b310a4dc2294d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playSoundOnHover: 1
+  hoverSound: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
 --- !u!1 &1313527670
 GameObject:
   m_ObjectHideFlags: 0
@@ -6677,6 +6729,7 @@ GameObject:
   - component: {fileID: 1330276597}
   - component: {fileID: 1330276596}
   - component: {fileID: 1330276595}
+  - component: {fileID: 1330276599}
   m_Layer: 5
   m_Name: LoadSaveButton
   m_TagString: Untagged
@@ -6739,12 +6792,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -6772,12 +6825,13 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_MethodName: PlaySound
-        m_Mode: 5
+      - m_Target: {fileID: 1712387101}
+        m_MethodName: PlaySoundClip
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: UIPressed
@@ -6820,6 +6874,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1330276593}
   m_CullTransparentMesh: 0
+--- !u!114 &1330276599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1330276593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67333857ebd39e54f8b310a4dc2294d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playSoundOnHover: 1
+  hoverSound: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
 --- !u!1 &1331657471
 GameObject:
   m_ObjectHideFlags: 0
@@ -8914,6 +8982,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1712387101 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 345207262248793613, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
+    type: 3}
+  m_PrefabInstance: {fileID: 474199442}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c8f54514bac1647b2ed65d74c7359f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1739202357
 GameObject:
   m_ObjectHideFlags: 0
@@ -9140,6 +9220,7 @@ GameObject:
   - component: {fileID: 1793606250}
   - component: {fileID: 1793606249}
   - component: {fileID: 1793606248}
+  - component: {fileID: 1793606252}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -9202,12 +9283,12 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 0.5019608}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
+    m_FadeDuration: 0
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
@@ -9230,6 +9311,18 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 1793606248}
           m_ObjectArgumentAssemblyTypeName: UI.UIBottomBarButton, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1712387101}
+        m_MethodName: PlaySoundClip
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -9272,6 +9365,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1793606246}
   m_CullTransparentMesh: 0
+--- !u!114 &1793606252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1793606246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67333857ebd39e54f8b310a4dc2294d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playSoundOnHover: 1
+  hoverSound: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
 --- !u!1 &1822172009
 GameObject:
   m_ObjectHideFlags: 0

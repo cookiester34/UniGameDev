@@ -11,14 +11,16 @@ public class AudioManager : MonoBehaviour
     public List<Music> combatMusic;
     public Music mainMenuMusic;
     public SceneMusicType startingMusicType;
+    public Sound[] ambienceTracks;
 
     private Music currentTrack;
     private float currentTrackLength;
     private Coroutine musicLoop;
-
     private AudioSource musicSource;
-
     private MusicQueue musicQueue;
+
+    private Dictionary<string, Sound> currentAmbience;
+
 
     #region SINGLETON PATTERN
 
@@ -79,6 +81,16 @@ public class AudioManager : MonoBehaviour
             m.source.volume = m.volume;
             m.source.pitch = m.pitch;
             m.source.outputAudioMixerGroup = m.output;
+        }
+
+        foreach(Sound s in ambienceTracks)
+        {
+            s.source = gameObject.AddComponent<AudioSource>();
+            s.source.clip = s.soundClip;
+            s.source.volume = s.volume;
+            s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
+            s.source.outputAudioMixerGroup = s.output;
         }
 
         mainMenuMusic.source = gameObject.AddComponent<AudioSource>();

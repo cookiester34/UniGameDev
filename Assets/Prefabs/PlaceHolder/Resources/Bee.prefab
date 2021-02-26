@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productionTime: 2
   baseProductionAmount: 1
+  actualProductionAmount: 0
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
 --- !u!114 &-5077826352974351252
 MonoBehaviour:
@@ -181,10 +182,10 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 200
   DopplerLevel: 0.5
   MinDistance: 1
-  MaxDistance: 10
+  MaxDistance: 12
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0
@@ -261,7 +262,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 0.0027777778
       inSlope: 0
       outSlope: 0
       tangentMode: 0
