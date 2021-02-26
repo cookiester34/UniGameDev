@@ -41,6 +41,7 @@ public class SeasonManager : MonoBehaviour
     private void Start()
     {
         currentSeason = Seasons.Spring;
+        AudioManager.Instance.PlayAmbienceTrack(Seasons.Spring);
         seasonTimer = seasonLength;
         if (SeasonChange != null)
             SeasonChange();
@@ -52,6 +53,7 @@ public class SeasonManager : MonoBehaviour
         {
             seasonTimer = seasonLength;
             UpdateSeason(currentSeason);
+            AudioManager.Instance.PlayAmbienceTrack(currentSeason);
             if (SeasonChange != null)
                 SeasonChange();
         }

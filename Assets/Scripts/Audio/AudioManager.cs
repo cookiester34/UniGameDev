@@ -9,9 +9,9 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public List<Music> peaceMusic;
     public List<Music> combatMusic;
+    public List<Sound> ambienceTracks;
     public Music mainMenuMusic;
     public SceneMusicType startingMusicType;
-    public Sound[] ambienceTracks;
 
     private Music currentTrack;
     private float currentTrackLength;
@@ -19,7 +19,7 @@ public class AudioManager : MonoBehaviour
     private AudioSource musicSource;
     private MusicQueue musicQueue;
 
-    private Dictionary<string, Sound> currentAmbience;
+    private Sound currentAmbience;
 
 
     #region SINGLETON PATTERN
@@ -200,6 +200,18 @@ public class AudioManager : MonoBehaviour
                 musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
                 break;
         }
+    }
+
+    public void PlayAmbienceTrack(Seasons season)
+    {
+        if (currentAmbience != null && currentAmbience.source.isPlaying)
+        {
+            currentAmbience.source.Stop();
+        }
+
+        currentAmbience = ambienceTracks.Find(sound => sound.name == season.ToString());
+        Debug.Log("Playing " + season.ToString());
+        currentAmbience.source.Play();
     }
 }
 
