@@ -81,7 +81,13 @@ public static class SaveLoad {
     /// <param name="savename">Name of the save to load</param>
     public static void Load(string savename) {
         string savePath = Path.Combine(saveDirectoryPath, savename);
-        string json = File.ReadAllText(savePath + saveExtension);
+        string json;
+        if (File.Exists(savePath)) {
+            json = File.ReadAllText(savePath + saveExtension);
+        } else {
+            // missing, most likely a save provided with the game
+            json = Resources.Load<TextAsset>("Saves/" + savename).text;
+        }
         Save save = JsonUtility.FromJson<Save>(json);
         _currentSave = save;
 
@@ -158,7 +164,7 @@ public static class SaveLoad {
     /// </summary>
     public static void CheckExistingSaves() {
         SetupSaveDirectory();
-        var jsonSaves = Resources.LoadAll<TextAsset>("/Saves/");
+        var jsonSaves = Resources.LoadAll<TextAsset>("Saves");
         foreach (TextAsset jsonSave in jsonSaves) {
             Save save = JsonUtility.FromJson<Save>(jsonSave.text);
             if (save != null) {
