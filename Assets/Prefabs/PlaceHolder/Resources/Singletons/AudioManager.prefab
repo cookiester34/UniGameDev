@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62c8f54514bac1647b2ed65d74c7359f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
   sounds:
   - name: PlaceBuilding
     soundClip: {fileID: 8300000, guid: c19ae64e939198e4f987efff6d8a7ff9, type: 3}

@@ -2,11 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Audio;
 using Util;
 
-public class AudioManager : MonoBehaviour
-{
+public class AudioManager : MonoBehaviour {
+    [SerializeField] private AudioMixer mixer;
     public Sound[] sounds;
     public List<Music> peaceMusic;
     public List<Music> combatMusic;
@@ -106,10 +106,18 @@ public class AudioManager : MonoBehaviour
     // Start is called before the first frame update.
     void Start()
     {
+        UpdateAudioLevels();
         // Music playback can be started here.
         //StartPeaceMusic();
         StartMusic(startingMusicType);
 
+    }
+
+    public void UpdateAudioLevels() {
+        mixer.SetFloat("MasterVol", ConvertLevel(Settings.MasterVolume.Value));
+        mixer.SetFloat("MusicVol", ConvertLevel(Settings.MusicVolume.Value));
+        mixer.SetFloat("EffectsVol", ConvertLevel(Settings.EffectsVolume.Value));
+        mixer.SetFloat("UIVol", ConvertLevel(Settings.UiVolume.Value));
     }
 
     // Offset the pitch and volume by 5% from its setting in soundlist. Could promote the ranges to a variable but isn't required as it's a subtle effect.
@@ -244,6 +252,15 @@ public class AudioManager : MonoBehaviour
             Debug.Log("Playing " + season.ToString());
             currentAmbience.source.Play();
         }
+    }
+    
+    /// <summary>
+    /// Converts the saved value to log scale
+    /// </summary>
+    /// <param name="value">Saved setting value</param>
+    /// <returns>Converted value</returns>
+    private float ConvertLevel(float value) {
+        return Mathf.Log10(value) * 20;
     }
 }
 
