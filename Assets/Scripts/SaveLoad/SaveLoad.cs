@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 /// Class that handles saving and loading functionality
 /// </summary>
 public static class SaveLoad {
-    public delegate void SaveAdded(string savename);
+    public delegate void SaveAdded(Save save);
     public static event SaveAdded OnSaveAdded;
     
     /// <summary>
@@ -34,7 +34,7 @@ public static class SaveLoad {
     /// <param name="savename">Name of the scene</param>
     public static void CreateSaveFromScene(string savename) {
         SetupSaveDirectory();
-        Save save = new Save {terrainSceneName = SceneManager.GetActiveScene().name};
+        Save save = new Save(savename, SceneManager.GetActiveScene().name, true);
 
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
@@ -72,7 +72,7 @@ public static class SaveLoad {
         string json = JsonUtility.ToJson(save);
         string savePath = Path.Combine(saveDirectoryPath, savename);
         File.WriteAllText(savePath + saveExtension, json);
-        OnSaveAdded?.Invoke(savename);
+        OnSaveAdded?.Invoke(save);
     }
 
     /// <summary>
@@ -158,12 +158,22 @@ public static class SaveLoad {
     /// </summary>
     public static void CheckExistingSaves() {
         SetupSaveDirectory();
+        var jsonSaves = Resources.LoadAll<TextAsset>("/Saves/");
+        foreach (TextAsset jsonSave in jsonSaves) {
+            Save save = JsonUtility.FromJson<Save>(jsonSave.text);
+            if (save != null) {
+                OnSaveAdded?.Invoke(save);
+            }
+        }
+
         string[] savedFiles = Directory.GetFiles(saveDirectoryPath);
         foreach (string savedFile in savedFiles) {
             if (savedFile.EndsWith(saveExtension)) {
-                string strippedSavedFile = savedFile.Replace(saveExtension, "");
-                string[] splitPath = strippedSavedFile.Split(Path.DirectorySeparatorChar);
-                OnSaveAdded?.Invoke(splitPath[splitPath.Length - 1]);
+                string json = File.ReadAllText(savedFile);
+                Save save = JsonUtility.FromJson<Save>(json);
+                if (save != null) {
+                    OnSaveAdded?.Invoke(save);
+                }
             }
         }
     }

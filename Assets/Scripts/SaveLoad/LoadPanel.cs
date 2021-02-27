@@ -9,6 +9,16 @@ public class LoadPanel : MonoBehaviour {
     [SerializeField] private Text text;
     [SerializeField] private Button loadButton;
     [SerializeField] private Button deleteButton;
+    private bool _includeDeleteButton = true;
+
+    public bool IncludeDeleteButton {
+        set {
+            _includeDeleteButton = value;
+            if (!_includeDeleteButton) {
+                Destroy(deleteButton.gameObject);
+            }
+        }
+    }
 
     private string _savename;
     public string Savename => _savename;
@@ -22,7 +32,7 @@ public class LoadPanel : MonoBehaviour {
             Debug.LogError("LoadPanel is missing its load button component");
         }
 
-        if (deleteButton == null) {
+        if (_includeDeleteButton && deleteButton == null) {
             Debug.LogError("LoadPanel is missing its delete button component");
         }
         
@@ -38,11 +48,15 @@ public class LoadPanel : MonoBehaviour {
     /// Sets up button listeners
     /// </summary>
     void SetupButtonListeners() {
-        loadButton.onClick.RemoveAllListeners();
-        loadButton.onClick.AddListener(OnLoadButtonClick);
-        
-        deleteButton.onClick.RemoveAllListeners();
-        deleteButton.onClick.AddListener(OnDeleteButtonClick);
+        if (loadButton != null) {
+            loadButton.onClick.RemoveAllListeners();
+            loadButton.onClick.AddListener(OnLoadButtonClick);
+        }
+
+        if (deleteButton != null) {
+            deleteButton.onClick.RemoveAllListeners();
+            deleteButton.onClick.AddListener(OnDeleteButtonClick);
+        }
     }
 
     /// <summary>

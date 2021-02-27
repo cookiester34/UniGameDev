@@ -12,7 +12,9 @@ using Object = UnityEngine.Object;
 /// </summary>s
 [Serializable]
 public class Save {
+    public string name;
     public string terrainSceneName;
+    public bool playerMade;
 
     public List<SavedBuilding> buildings = new List<SavedBuilding>();
     public List<SavedBee> bees = new List<SavedBee>();
@@ -28,4 +30,10 @@ public class Save {
 
     public int currentSeason;
     public int waveNumber;
+
+    public Save(string name, string terrainSceneName, bool playerMade) {
+        this.name = name;
+        this.terrainSceneName = terrainSceneName;
+        this.playerMade = playerMade;
+    }
 }
