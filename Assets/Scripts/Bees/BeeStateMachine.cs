@@ -108,4 +108,9 @@ public class BeeStateMachine : MonoBehaviour {
                 + _currentState);
         }
     }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(_targetPosition, 0.5f);
+    }
 }
