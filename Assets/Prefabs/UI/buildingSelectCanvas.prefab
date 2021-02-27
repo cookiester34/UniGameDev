@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 488718049441807381}
   - component: {fileID: 488718049441807386}
   - component: {fileID: 488718049441807387}
+  - component: {fileID: 1331627286}
   m_Layer: 5
   m_Name: buildingSelectCanvas
   m_TagString: Untagged
@@ -120,6 +121,19 @@ MonoBehaviour:
   removeBee: {fileID: 488718050340235695}
   toolTipObject: {fileID: 488718051104403975}
   toolTip: {fileID: 488718050248465451}
+--- !u!65 &1331627286
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488718049441807384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 145.01328, y: 202.352, z: 5.2741866}
+  m_Center: {x: 0.83692575, y: 0.06135288, z: 0.10889188}
 --- !u!1 &488718049713626362
 GameObject:
   m_ObjectHideFlags: 0

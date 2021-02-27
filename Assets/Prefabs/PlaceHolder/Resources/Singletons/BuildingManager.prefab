@@ -46,7 +46,7 @@ MonoBehaviour:
   numBuildingTypes: 
   buildingMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 544
   tileMask:
     serializedVersion: 2
     m_Bits: 256
