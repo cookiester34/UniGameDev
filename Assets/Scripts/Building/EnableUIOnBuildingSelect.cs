@@ -21,8 +21,14 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
     public GameObject toolTipObject;
     public Text toolTip;
 
+    private Building selectedBuilding;
+    public GameObject displayBonus;
+    public Text bonusText;
+
+
     private void Awake() 
     {
+        displayBonus.SetActive(false);
         gameObject.SetActive(false);
         BuildingManager.Instance.OnBuildingSelected += DataChanged;
     }
@@ -84,6 +90,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
     private void DataChanged(Building building) {
         if (building != null) 
         {
+            selectedBuilding = building;
             Camera camera = Camera.main;
             transform.LookAt(transform.position + camera.transform.rotation * Vector3.forward, camera.transform.rotation * Vector3.up);
             
@@ -114,13 +121,60 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
         BuildingManager.Instance.UpgradeBuilding();
     }
 
+    public void OnHoverUpgrade()
+    {
+        displayBonus.SetActive(true);
+        switch (selectedBuilding.GetBuildingTeir()) 
+        {
+            case 1:
+                bonusText.text = "Upgrading building will result in double production";
+                break;
+            case 2:
+                bonusText.text = "Upgrading building will behave like 3 buildings";
+                break;
+            case 3:
+                displayBonus.SetActive(false);
+                break;
+        }
+    }
+
+    public void OnHoverExitUpgrade()
+    {
+        displayBonus.SetActive(false);
+        bonusText.text = "";
+    }
+
     public void AddBee()
     {
         BuildingManager.Instance.AddBeeToBuilding();
     }
 
+    public void OnHoverAddBee()
+    {
+        displayBonus.SetActive(true);
+        bonusText.text = "Effect of adding bee " + (100f / selectedBuilding.BuildingData.maxNumberOfWorkers) + "% increase to production";
+    }
+
+    public void OnHoverExitAddBee()
+    {
+        displayBonus.SetActive(false);
+        bonusText.text = "";
+    }
+
     public void RemoveBeeFromBuilding()
     {
         BuildingManager.Instance.RemoveBeeFromBuilding();
+    }
+
+    public void OnHoverRemoveBee()
+    {
+        displayBonus.SetActive(true);
+        bonusText.text = "Effect of removing bee " + (100f / selectedBuilding.BuildingData.maxNumberOfWorkers) + "% Decrease to production";
+    }
+
+    public void OnHoverExitRemoveBee()
+    {
+        displayBonus.SetActive(false);
+        bonusText.text = "";
     }
 }
