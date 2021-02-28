@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c758787798db88649b66b67829663dae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seasonLength: 10
+  seasonLength: 90
   springEffect: {fileID: 0}
   summerEffect: {fileID: 0}
   autumnEffect: {fileID: 0}

@@ -87,25 +87,19 @@ public class BeeStateMachine : MonoBehaviour {
 
 
     public void SleepTime(float timeSeconds) {
-        StartCoroutine(Sleep(timeSeconds));
+        gameObject.Disable(timeSeconds);
     }
 
-    private IEnumerator Sleep(float timeSeconds) {
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<Collider>().enabled = false;
-        gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        yield return new WaitForSeconds(timeSeconds);
-        gameObject.GetComponent<NavMeshAgent>().enabled = true;
-        gameObject.GetComponent<MeshRenderer>().enabled = true;
-        gameObject.GetComponent<Collider>().enabled = true;
+    private void OnEnable() {
         if (_currentState is BeeWorkState workState) {
             workState.WakeUp();
         } else if (_currentState is BeeSleepState sleepState) {
             sleepState.WakeUp();
-        } else {
-            Debug.LogError(
-                "Bee AI confused, waking up from sleep should either be in sleep or work state but is in: " 
-                + _currentState);
         }
+    }
+
+    private void OnDrawGizmosSelected() {
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawSphere(_targetPosition, 0.5f);
     }
 }

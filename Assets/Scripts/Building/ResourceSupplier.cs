@@ -51,7 +51,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         if (building.numAssignedBees == 0)
             actualProductionAmount = 0;
         else
-            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees;
+            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.GetBuildingTeir();
     }
 
     public void BeforeDestroy() {

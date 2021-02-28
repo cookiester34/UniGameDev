@@ -8,12 +8,13 @@ using CameraNameSpace;
 using Research;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Util;
 
 /// <summary>
 /// Class that handles saving and loading functionality
 /// </summary>
 public static class SaveLoad {
-    public delegate void SaveAdded(string savename);
+    public delegate void SaveAdded(Save save);
     public static event SaveAdded OnSaveAdded;
     
     /// <summary>
@@ -34,7 +35,7 @@ public static class SaveLoad {
     /// <param name="savename">Name of the scene</param>
     public static void CreateSaveFromScene(string savename) {
         SetupSaveDirectory();
-        Save save = new Save {terrainSceneName = SceneManager.GetActiveScene().name};
+        Save save = new Save(savename, SceneManager.GetActiveScene().name, true);
 
         Building[] buildings = Object.FindObjectsOfType<Building>().ToArray();
         foreach (Building building in buildings) {
@@ -46,6 +47,10 @@ public static class SaveLoad {
             savedBees.Add(new SavedBee(bee));
         }
         save.bees = savedBees;
+
+        foreach (EnemyBuilding building in Object.FindObjectsOfType<EnemyBuilding>()) {
+            save.enemyBuildings.Add(new SavedTransform(building.transform));
+        }
 
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
             SavedResource savedResource = new SavedResource(resource);
@@ -69,10 +74,10 @@ public static class SaveLoad {
         save.cameraTransform = new SavedTransform(gameCamera.transform);
         save.cameraTarget = gameCamera.TargetPositon;
 
-        string json = JsonUtility.ToJson(save);
+        string json = JsonUtility.ToJson(save, true);
         string savePath = Path.Combine(saveDirectoryPath, savename);
         File.WriteAllText(savePath + saveExtension, json);
-        OnSaveAdded?.Invoke(savename);
+        OnSaveAdded?.Invoke(save);
     }
 
     /// <summary>
@@ -80,8 +85,14 @@ public static class SaveLoad {
     /// </summary>
     /// <param name="savename">Name of the save to load</param>
     public static void Load(string savename) {
-        string savePath = Path.Combine(saveDirectoryPath, savename);
-        string json = File.ReadAllText(savePath + saveExtension);
+        string savePath = Path.Combine(saveDirectoryPath, savename + saveExtension);
+        string json;
+        if (File.Exists(savePath)) {
+            json = File.ReadAllText(savePath);
+        } else {
+            // missing, most likely a save provided with the game
+            json = Resources.Load<TextAsset>("Saves/" + savename).text;
+        }
         Save save = JsonUtility.FromJson<Save>(json);
         _currentSave = save;
 
@@ -102,6 +113,13 @@ public static class SaveLoad {
 
         foreach (SavedBuilding building in _currentSave.buildings) {
             building.Instantiate(loadedBees);
+        }
+
+        BeeManager.Instance.OnLoad(loadedBees);
+
+        foreach (SavedTransform savedTransform in _currentSave.enemyBuildings) {
+            GameObject go = Resources.Load<GameObject>(ResourceLoad.EnemyBuilding);
+            Object.Instantiate(go, savedTransform.Position, savedTransform.Rotation);
         }
 
         for (int i = 0; i < _currentSave.resources.Count; i++) {
@@ -158,12 +176,22 @@ public static class SaveLoad {
     /// </summary>
     public static void CheckExistingSaves() {
         SetupSaveDirectory();
+        var jsonSaves = Resources.LoadAll<TextAsset>("Saves");
+        foreach (TextAsset jsonSave in jsonSaves) {
+            Save save = JsonUtility.FromJson<Save>(jsonSave.text);
+            if (save != null) {
+                OnSaveAdded?.Invoke(save);
+            }
+        }
+
         string[] savedFiles = Directory.GetFiles(saveDirectoryPath);
         foreach (string savedFile in savedFiles) {
             if (savedFile.EndsWith(saveExtension)) {
-                string strippedSavedFile = savedFile.Replace(saveExtension, "");
-                string[] splitPath = strippedSavedFile.Split(Path.DirectorySeparatorChar);
-                OnSaveAdded?.Invoke(splitPath[splitPath.Length - 1]);
+                string json = File.ReadAllText(savedFile);
+                Save save = JsonUtility.FromJson<Save>(json);
+                if (save != null) {
+                    OnSaveAdded?.Invoke(save);
+                }
             }
         }
     }

@@ -95,9 +95,9 @@ public class Health : MonoBehaviour {
     }
 
     private void CreateParticles(GameObject particlePrefab) {
-        GameObject go = Instantiate(particlePrefab, transform, false);
+        GameObject go = Instantiate(particlePrefab, transform.position, transform.rotation);
         ParticleSystem particles = go.GetComponent<ParticleSystem>();
         particles.Play();
-        Destroy(particles, particles.time);
+        //Destroy(particles.gameObject);
     }
 }

@@ -6,13 +6,14 @@ using UnityEngine.AI;
 public class BeeMoveState : BeeState {
     private NavMeshAgent _agent;
     private NavMeshPath _path;
+    private Vector3 _lastTarget;
 
     public BeeMoveState(BeeStateMachine stateMachine) : base(stateMachine) {
         _agent = stateMachine.Bee.Agent;
     }
     
     public override void Enter() {
-        if (_stateMachine.TargetPosition == Vector3.zero) {
+        if (_stateMachine.TargetPosition == Vector3.zero || _stateMachine.TargetPosition == _lastTarget) {
             _stateMachine.ChangeState(BeeStates.Idle);
             return;
         }
@@ -37,12 +38,12 @@ public class BeeMoveState : BeeState {
     }
 
     public override void Exit() {
-
+        _lastTarget = _stateMachine.TargetPosition;
     }
     
     private bool PathComplete() {
         if (!_agent.hasPath ||
-            Vector3.Distance( _agent.destination, _agent.transform.position) <= _agent.stoppingDistance - 0.2f) {
+            Vector3.Distance( _agent.destination, _agent.transform.position) <= 0.3f) {
             return true;
         }
  

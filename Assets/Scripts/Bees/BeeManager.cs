@@ -152,4 +152,9 @@ public class BeeManager : MonoBehaviour {
         }
         AssignedBeeUpdated?.Invoke();
     }
+
+    public void OnLoad(List<Bee> bees) {
+        _bees = bees;
+        _cachedPopulation = bees.Count;
+    }
 }

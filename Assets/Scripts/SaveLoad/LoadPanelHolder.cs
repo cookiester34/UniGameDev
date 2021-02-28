@@ -10,6 +10,9 @@ public class LoadPanelHolder : MonoBehaviour {
     /// Prefab to instantiate for saves
     /// </summary>
     [SerializeField] private GameObject loadPanelPrefab;
+
+    [SerializeField] private RectTransform levelsTitle;
+    [SerializeField] private RectTransform playersTitle;
     
     /// <summary>
     /// Rect transform component, used to update layout
@@ -37,13 +40,16 @@ public class LoadPanelHolder : MonoBehaviour {
     /// Adds a load panel to the scrollable so that the save may be loaded if there is no loadPanel with its name
     /// </summary>
     /// <param name="savename">Name of the save</param>
-    void AddLoadPanel(string savename) {
-        LoadPanel loadPanel = _loadPanels.Find(panel => panel.Savename == savename);
+    void AddLoadPanel(Save save) {
+        LoadPanel loadPanel = _loadPanels.Find(panel => panel.Savename == save.name);
         if (loadPanel == null) {
-            GameObject go = Instantiate(loadPanelPrefab, _rectTransform);
+            // TODO: differentiate between a player save and in game save for the prefab, an in game save should not support delete
+            RectTransform parent = save.playerMade ? playersTitle : levelsTitle;
+            GameObject go = Instantiate(loadPanelPrefab, parent);
             loadPanel = go.GetComponent<LoadPanel>();
+            loadPanel.IncludeDeleteButton = save.playerMade;
             _loadPanels.Add(loadPanel);
-            loadPanel.SetText(savename);
+            loadPanel.SetText(save.name);
             LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
         }
     }

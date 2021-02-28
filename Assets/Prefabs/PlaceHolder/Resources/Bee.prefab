@@ -305,9 +305,11 @@ MonoBehaviour:
   shouldDestroyOnDeath: 1
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
-  healthLostParticles: {fileID: 0}
+  healthLostParticles: {fileID: 4920491332634800603, guid: 63345c62da8005c449b04992742a82d9,
+    type: 3}
   healthLostAudio: {fileID: 0}
-  deathParticles: {fileID: 0}
+  deathParticles: {fileID: 325289575595182778, guid: 8543d490924f4f248b11901ea61c5e53,
+    type: 3}
   deathAudio: {fileID: 0}
 --- !u!65 &5540302586420343944
 BoxCollider:

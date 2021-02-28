@@ -42,5 +42,7 @@ public class SettingsPanel : MonoBehaviour {
         Settings.MusicVolume.SetValue(musicSlider.value);
         Settings.EffectsVolume.SetValue(effectsSlider.value);
         Settings.UiVolume.SetValue(uiSlider.value);
+
+        AudioManager.Instance.UpdateAudioLevels();
     }
 }
