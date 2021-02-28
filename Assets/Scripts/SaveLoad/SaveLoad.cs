@@ -115,6 +115,8 @@ public static class SaveLoad {
             building.Instantiate(loadedBees);
         }
 
+        BeeManager.Instance.OnLoad(loadedBees);
+
         foreach (SavedTransform savedTransform in _currentSave.enemyBuildings) {
             GameObject go = Resources.Load<GameObject>(ResourceLoad.EnemyBuilding);
             Object.Instantiate(go, savedTransform.Position, savedTransform.Rotation);
