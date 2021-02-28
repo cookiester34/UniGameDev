@@ -18,6 +18,7 @@ public class Save {
 
     public List<SavedBuilding> buildings = new List<SavedBuilding>();
     public List<SavedBee> bees = new List<SavedBee>();
+    public List<SavedTransform> enemyBuildings = new List<SavedTransform>();
 
     public List<SavedResource> resources = new List<SavedResource>();
     

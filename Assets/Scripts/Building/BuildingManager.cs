@@ -34,6 +34,8 @@ public class BuildingManager : MonoBehaviour {
     public Image selectedBuildingUI;
     public Text selectedBuildingText;
 
+    public Sprite DestroyUISprite;
+
     /// <summary>
     /// List of buildings that have been placed in the level
     /// </summary>

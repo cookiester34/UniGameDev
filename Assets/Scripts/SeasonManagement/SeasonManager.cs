@@ -70,6 +70,7 @@ public class SeasonManager : MonoBehaviour
                 break;
             case Seasons.Summer:
                 currentSeason = Seasons.Autumn;
+                UIEventAnnounceManager.Instance.AnnounceEvent("Autumn begins, man the defenses");
                 break;
             case Seasons.Autumn:
                 currentSeason = Seasons.Winter;

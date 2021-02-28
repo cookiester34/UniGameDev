@@ -8,6 +8,7 @@ using CameraNameSpace;
 using Research;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Util;
 
 /// <summary>
 /// Class that handles saving and loading functionality
@@ -47,6 +48,10 @@ public static class SaveLoad {
         }
         save.bees = savedBees;
 
+        foreach (EnemyBuilding building in Object.FindObjectsOfType<EnemyBuilding>()) {
+            save.enemyBuildings.Add(new SavedTransform(building.transform));
+        }
+
         foreach (Resource resource in ResourceManagement.Instance.resourceList) {
             SavedResource savedResource = new SavedResource(resource);
             save.resources.Add(savedResource);
@@ -69,7 +74,7 @@ public static class SaveLoad {
         save.cameraTransform = new SavedTransform(gameCamera.transform);
         save.cameraTarget = gameCamera.TargetPositon;
 
-        string json = JsonUtility.ToJson(save);
+        string json = JsonUtility.ToJson(save, true);
         string savePath = Path.Combine(saveDirectoryPath, savename);
         File.WriteAllText(savePath + saveExtension, json);
         OnSaveAdded?.Invoke(save);
@@ -80,10 +85,10 @@ public static class SaveLoad {
     /// </summary>
     /// <param name="savename">Name of the save to load</param>
     public static void Load(string savename) {
-        string savePath = Path.Combine(saveDirectoryPath, savename);
+        string savePath = Path.Combine(saveDirectoryPath, savename + saveExtension);
         string json;
         if (File.Exists(savePath)) {
-            json = File.ReadAllText(savePath + saveExtension);
+            json = File.ReadAllText(savePath);
         } else {
             // missing, most likely a save provided with the game
             json = Resources.Load<TextAsset>("Saves/" + savename).text;
@@ -108,6 +113,11 @@ public static class SaveLoad {
 
         foreach (SavedBuilding building in _currentSave.buildings) {
             building.Instantiate(loadedBees);
+        }
+
+        foreach (SavedTransform savedTransform in _currentSave.enemyBuildings) {
+            GameObject go = Resources.Load<GameObject>(ResourceLoad.EnemyBuilding);
+            Object.Instantiate(go, savedTransform.Position, savedTransform.Rotation);
         }
 
         for (int i = 0; i < _currentSave.resources.Count; i++) {
