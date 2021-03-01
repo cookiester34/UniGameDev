@@ -132,7 +132,7 @@ public class Building : MonoBehaviour {
             foundation.CanBuild = true;
         }
 
-        if (ApplicationUtil.IsQuitting) {
+        if (!ApplicationUtil.IsQuitting) {
             BuildingManager.Instance.Buildings.Remove(this);
         }
     }
