@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 [Serializable]
@@ -17,6 +18,8 @@ public class Building : MonoBehaviour {
     public GameObject buildingTeir1;
     public GameObject buildingTeir2;
     public GameObject buildingTeir3;
+
+    private MaterialPropertyBlock _propertyBlock;
 
     public BuildingData BuildingData => buildingData;
 
@@ -130,4 +133,22 @@ public class Building : MonoBehaviour {
         }
         BuildingManager.Instance.Buildings.Remove(this);
     }
+
+    // TODO This is some stuff for animating in the dissolve which may be useful down the line, for now though the
+    // dissolve will draw over the base shader causing us to lose the red/green placement however. 
+    // private float time = -1;
+    // private void Animate() {
+    //     if (_propertyBlock == null) {
+    //         _propertyBlock = new MaterialPropertyBlock();
+    //     }
+    //
+    //     DOTween.To(() => time, x => time = x, 1, 4).OnUpdate(UpdateAnimate);
+    // }
+    //
+    // private void UpdateAnimate() {
+    //     var renderer = GetComponentInChildren<Renderer>();
+    //     renderer.GetPropertyBlock(_propertyBlock);
+    //     _propertyBlock.SetFloat("_TimeFloat", time);
+    //     renderer.SetPropertyBlock(_propertyBlock);
+    // }
 }
