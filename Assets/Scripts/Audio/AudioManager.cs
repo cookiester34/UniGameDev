@@ -286,7 +286,10 @@ public class AudioManager : MonoBehaviour {
 
     private void GetValueChanged(Resource resource)
     {
-        resource.OnCurrentValueChanged += PlayResourceAlert;
+        if (resource.resourceType != ResourceType.AssignedPop)
+        {
+            resource.OnCurrentValueChanged += PlayResourceAlert;
+        }
     }
 
     public void PlayResourceAlert(float value)
