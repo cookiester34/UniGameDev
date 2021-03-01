@@ -216,6 +216,7 @@ public class AudioManager : MonoBehaviour {
         StartCoroutine(FadeTo(ambienceClip));
     }
 
+    // Pass in the next sound as clip, volume stars at 0 and begine playing.
     IEnumerator FadeTo(Sound clip)
     {
         clip.source.volume = 0f;
@@ -225,14 +226,17 @@ public class AudioManager : MonoBehaviour {
         float v = currentAmbience.volume;
         clip.source.Play();
 
+        // Swap volume values by lerping exponentially. Smaller fadespeed value results in quicker fade. Cannot fade shorter than 0.1s. 
         while (t < 0.98f)
         {
             t = Mathf.Lerp(t, 1f, Time.deltaTime * fadeSpeed);
             currentAmbience.source.volume = Mathf.Lerp(v, 0f, t);
             clip.source.volume = Mathf.Lerp(0f, clip.volume, t);
-            Debug.Log(clip.source.volume.ToString());
+            //Debug.Log(clip.source.volume.ToString()); - For debugging.
             yield return null;
         }
+
+        // Finally set the volume of the new clip, stop the old clip, and make the new clip the current clip to be used next time.
         clip.source.volume = clip.volume;
 
         currentAmbience.source.Stop();
@@ -242,6 +246,7 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayAmbienceTrack(Seasons season)
     {
+        // Ambient Season tracks must be named correctly. Could possibly be a better way to do this, however not really necessary.
         if (currentAmbience != null && currentAmbience.source.isPlaying)
         {
             AmbienceFadeTo(ambienceTracks.Find(sound => sound.name == season.ToString()));

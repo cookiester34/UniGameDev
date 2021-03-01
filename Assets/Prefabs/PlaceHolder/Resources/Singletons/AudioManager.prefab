@@ -72,6 +72,33 @@ MonoBehaviour:
     output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
+  - name: UIUp
+    soundClip: {fileID: 8300000, guid: 3e9de13ab4bce3c418fabf92ae62966f, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIDown
+    soundClip: {fileID: 8300000, guid: d67f0a21af86e6b498e6a8ca3e8b274b, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UISelect
+    soundClip: {fileID: 8300000, guid: 66e032d6d1068994a95aa35765b7ab7d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
   - name: UIHovered
     soundClip: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
     volume: 1
@@ -157,7 +184,7 @@ MonoBehaviour:
   ambienceTracks:
   - name: Spring
     soundClip: {fileID: 8300000, guid: 6b7b7233ede2381439408c018938a23e, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -166,7 +193,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Summer
     soundClip: {fileID: 8300000, guid: 7e4cde92fbe0733498efaee5c050ebf6, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -175,7 +202,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Autumn
     soundClip: {fileID: 8300000, guid: ef35971f1695a4d409c75bbc308b953f, type: 3}
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -184,7 +211,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Winter
     soundClip: {fileID: 8300000, guid: 8c29df86d91992f4d82f817fb7b082fa, type: 3}
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     loop: 1
     autoModulation: 0
