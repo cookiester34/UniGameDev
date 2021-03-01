@@ -131,7 +131,10 @@ public class Building : MonoBehaviour {
         foreach (BuildingFoundation foundation in usedFoundations) {
             foundation.CanBuild = true;
         }
-        BuildingManager.Instance.Buildings.Remove(this);
+
+        if (ApplicationUtil.IsQuitting) {
+            BuildingManager.Instance.Buildings.Remove(this);
+        }
     }
 
     // TODO This is some stuff for animating in the dissolve which may be useful down the line, for now though the
