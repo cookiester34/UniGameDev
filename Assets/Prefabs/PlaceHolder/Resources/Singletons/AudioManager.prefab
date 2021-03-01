@@ -63,6 +63,14 @@ MonoBehaviour:
     output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
+  - name: UpgradeBuilding
+    soundClip: {fileID: 8300000, guid: 051a680c4b83ec24b9135f74f7c30a84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
   - name: SeasonChange
     soundClip: {fileID: 8300000, guid: 0b29b131a826b1b4c93e3334aa2e0284, type: 3}
     volume: 1
@@ -252,3 +260,4 @@ MonoBehaviour:
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
   startingMusicType: 2
+  lowResourceThreshold: 0
