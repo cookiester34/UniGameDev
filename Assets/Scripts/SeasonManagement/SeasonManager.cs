@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net;
 using UnityEngine;
 using Util;
 
@@ -80,11 +81,18 @@ public class SeasonManager : MonoBehaviour
                 break;
         }
 
-        //change the effect depending on the season
-        //springEffect.SetActive(currentSeason == Seasons.Spring);
-        //summerEffect.SetActive(currentSeason == Seasons.Summer);
-        //autumnEffect.SetActive(currentSeason == Seasons.Autumn);
-        //winterEffect.SetActive(currentSeason == Seasons.Winter);
+        if (summerEffect != null) {
+            summerEffect.SetActive(currentSeason == Seasons.Summer);
+        }
+        if (springEffect != null) {
+            springEffect.SetActive(currentSeason == Seasons.Spring);
+        }
+        if (autumnEffect != null) {
+            autumnEffect.SetActive(currentSeason == Seasons.Autumn);
+        }
+        if (winterEffect != null) {
+            winterEffect.SetActive(currentSeason == Seasons.Winter);
+        }
 
         AudioManager.Instance.PlaySound("SeasonChange");
     }
