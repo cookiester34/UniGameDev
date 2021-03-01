@@ -12,6 +12,8 @@ public class AudioManager : MonoBehaviour {
     public List<Music> combatMusic;
     public List<Sound> ambienceTracks;
     public Music mainMenuMusic;
+
+    public Sound buildingSelectSound;
     public SceneMusicType startingMusicType;
 
     private Music currentTrack;
@@ -54,53 +56,34 @@ public class AudioManager : MonoBehaviour {
             return;
         }
 
+        #region AUDIO SOURCE INITIALISATION
         // Apply settings chosen in list to sound sources.
-
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.soundClip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = s.output;
+            InitialiseSound(s);
         }
 
         foreach(Music m in peaceMusic)
         {
-            m.source = gameObject.AddComponent<AudioSource>();
-            m.source.clip = m.musicClip;
-            m.source.volume = m.volume;
-            m.source.pitch = m.pitch;
-            m.source.outputAudioMixerGroup = m.output;
+            InitialiseMusic(m);
         }
 
         foreach(Music m in combatMusic)
         {
-            m.source = gameObject.AddComponent<AudioSource>();
-            m.source.clip = m.musicClip;
-            m.source.volume = m.volume;
-            m.source.pitch = m.pitch;
-            m.source.outputAudioMixerGroup = m.output;
+            InitialiseMusic(m);
         }
 
         foreach(Sound s in ambienceTracks)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.soundClip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = s.output;
+            InitialiseSound(s);
         }
 
-        mainMenuMusic.source = gameObject.AddComponent<AudioSource>();
-        mainMenuMusic.source.clip = mainMenuMusic.musicClip;
-        mainMenuMusic.source.volume = mainMenuMusic.volume;
-        mainMenuMusic.source.pitch = mainMenuMusic.pitch;
-        mainMenuMusic.source.outputAudioMixerGroup = mainMenuMusic.output;
-        mainMenuMusic.source.loop = true;
+        InitialiseMusic(mainMenuMusic);
 
+        InitialiseSound(buildingSelectSound);
+        #endregion
+
+        BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
     }
 
     // Start is called before the first frame update.
@@ -111,6 +94,25 @@ public class AudioManager : MonoBehaviour {
         //StartPeaceMusic();
         StartMusic(startingMusicType);
 
+    }
+
+    private void InitialiseSound(Sound s)
+    {
+        s.source = gameObject.AddComponent<AudioSource>();
+        s.source.clip = s.soundClip;
+        s.source.volume = s.volume;
+        s.source.pitch = s.pitch;
+        s.source.loop = s.loop;
+        s.source.outputAudioMixerGroup = s.output;
+    }
+
+    private void InitialiseMusic(Music m)
+    {
+        m.source = gameObject.AddComponent<AudioSource>();
+        m.source.clip = m.musicClip;
+        m.source.volume = m.volume;
+        m.source.pitch = m.pitch;
+        m.source.outputAudioMixerGroup = m.output;
     }
 
     public void UpdateAudioLevels() {
@@ -266,6 +268,14 @@ public class AudioManager : MonoBehaviour {
     /// <returns>Converted value</returns>
     private float ConvertLevel(float value) {
         return Mathf.Log10(value) * 20;
+    }
+
+    public void PlayBuildingClip(Building building)
+    {
+        if (!buildingSelectSound.source.isPlaying)
+        {
+            buildingSelectSound.source.Play();
+        }        
     }
 }
 
