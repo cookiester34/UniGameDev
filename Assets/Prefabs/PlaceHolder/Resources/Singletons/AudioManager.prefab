@@ -115,6 +115,22 @@ MonoBehaviour:
     autoModulation: 0
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
+  - name: ResourceDepleted
+    soundClip: {fileID: 8300000, guid: 32d96654a5b40fd4bb9fc7197327be4c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: ResourceLow
+    soundClip: {fileID: 8300000, guid: 47d60c0b7af7454478504489deb14af1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
   - name: Error
     soundClip: {fileID: 8300000, guid: b0f142031001ba441b7f9202bd250dd0, type: 3}
     volume: 1
@@ -228,7 +244,7 @@ MonoBehaviour:
     source: {fileID: 0}
   buildingSelectSound:
     name: BuildingSelect
-    soundClip: {fileID: 8300000, guid: 2863163ea02ab7349a03664974f6eb68, type: 3}
+    soundClip: {fileID: 8300000, guid: d5a369ffe56085b42a4d2fd811fbbdfe, type: 3}
     volume: 1
     pitch: 1
     loop: 0

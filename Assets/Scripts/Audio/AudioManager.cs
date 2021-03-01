@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour {
 
     public Sound buildingSelectSound;
     public SceneMusicType startingMusicType;
+    public float lowResourceThreshold;
 
     private Music currentTrack;
     private float currentTrackLength;
@@ -23,6 +24,8 @@ public class AudioManager : MonoBehaviour {
     private MusicQueue musicQueue;
 
     private Sound currentAmbience;
+
+    private Building lastSelectedBuilding;
 
 
     #region SINGLETON PATTERN
@@ -84,6 +87,8 @@ public class AudioManager : MonoBehaviour {
         #endregion
 
         BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
+
+        ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
     }
 
     // Start is called before the first frame update.
@@ -272,10 +277,32 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayBuildingClip(Building building)
     {
-        if (!buildingSelectSound.source.isPlaying)
+        if (!buildingSelectSound.source.isPlaying && building != null && building != lastSelectedBuilding)
         {
             buildingSelectSound.source.Play();
-        }        
+        }
+        lastSelectedBuilding = building;        
+    }
+
+    private void GetValueChanged(Resource resource)
+    {
+        resource.OnCurrentValueChanged += PlayResourceAlert;
+    }
+
+    public void PlayResourceAlert(float value)
+    {
+        if (value <= 0f)
+        {
+            PlaySound("ResourceDepleted");
+        }
+        else if (value <= lowResourceThreshold)
+        {
+            PlaySound("ResourceLow");
+        }
+        else
+        {
+
+        }
     }
 }
 
