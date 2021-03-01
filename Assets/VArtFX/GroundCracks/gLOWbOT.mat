@@ -71,7 +71,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_DBA3585F: {r: 3.1553311, g: 0.95786846, b: 10.311172, a: 0}
+    - Color_DBA3585F: {r: 1.1970017, g: 0.5472008, b: 3.2661047, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
