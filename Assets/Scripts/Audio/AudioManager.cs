@@ -89,6 +89,10 @@ public class AudioManager : MonoBehaviour {
         BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
 
         ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
+
+        SceneManagement.Instance.SceneLoaded += StartGameplayMusic;
+
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     // Start is called before the first frame update.
@@ -216,6 +220,11 @@ public class AudioManager : MonoBehaviour {
                 musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
                 break;
         }
+    }
+
+    public void StartGameplayMusic()
+    {
+        StartMusic(SceneMusicType.peace);
     }
 
     public void AmbienceFadeTo (Sound ambienceClip)
