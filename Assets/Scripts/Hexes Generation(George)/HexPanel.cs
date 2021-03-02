@@ -144,9 +144,10 @@ public class HexPanel : MonoBehaviour
 	}
 
 	private void OnDrawGizmosSelected() {
-		foreach (HexPanel neighbour in neighbours) {
-			Gizmos.color = Color.cyan;
-			Gizmos.DrawCube(neighbour.transform.position, new Vector3(0.5f, 0.5f, 0.5f));
-		}
+		// Allows visualization of selected neighbours, slows down performance loads though, reintroduce if needed
+		// foreach (HexPanel neighbour in neighbours) {
+		// 	Gizmos.color = Color.cyan;
+		// 	Gizmos.DrawCube(neighbour.transform.position, new Vector3(0.5f, 0.5f, 0.5f));
+		// }
 	}
 }

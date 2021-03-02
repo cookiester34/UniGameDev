@@ -85,6 +85,7 @@ public static class SaveLoad {
     /// </summary>
     /// <param name="savename">Name of the save to load</param>
     public static void Load(string savename) {
+        CurrentSceneType.SceneType = SceneType.GameLevel;
         string savePath = Path.Combine(saveDirectoryPath, savename + saveExtension);
         string json;
         if (File.Exists(savePath)) {

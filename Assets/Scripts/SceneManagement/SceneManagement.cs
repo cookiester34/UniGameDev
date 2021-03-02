@@ -43,7 +43,9 @@ public class SceneManagement : MonoBehaviour {
         var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
         ao.completed += delegate {
-            CurrentSceneType.sceneType.FromScene(sceneName);
+            SceneType newType = SceneType.Main;
+            newType.FromScene(sceneName);
+            CurrentSceneType.SceneType = newType;
             SceneLoaded?.Invoke();
         };
 

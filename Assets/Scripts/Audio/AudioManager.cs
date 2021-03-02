@@ -49,7 +49,6 @@ public class AudioManager : MonoBehaviour {
     // Loop through our list of sounds and add an audio source for each.
     void Awake()
     {
-        Debug.Log(GetHashCode());
         if (_instance == null)
             _instance = this;
         else
