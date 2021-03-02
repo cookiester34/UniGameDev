@@ -89,7 +89,7 @@ public class AudioManager : MonoBehaviour {
 
         ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
 
-        SceneManagement.Instance.SceneLoaded += StartGameplayMusic;
+        SceneManagement.Instance.SceneLoaded += MatchMusicToScene;
 
         DontDestroyOnLoad(transform.gameObject);
     }
@@ -100,7 +100,7 @@ public class AudioManager : MonoBehaviour {
         UpdateAudioLevels();
         // Music playback can be started here.
         //StartPeaceMusic();
-        StartMusic(startingMusicType);
+        MatchMusicToScene();
 
     }
 
@@ -221,9 +221,18 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void StartGameplayMusic()
+    public void MatchMusicToScene()
     {
-        StartMusic(SceneMusicType.peace);
+        Debug.Log("Changing scene type to " + CurrentSceneType.SceneType);
+
+        if (CurrentSceneType.SceneType == SceneType.Main)
+        {
+            StartMusic(SceneMusicType.mainMenu);
+        }
+        else
+        {
+            StartMusic(SceneMusicType.peace);
+        }
     }
 
     public void AmbienceFadeTo (Sound ambienceClip)
