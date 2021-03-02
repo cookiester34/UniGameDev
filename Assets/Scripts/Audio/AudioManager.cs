@@ -154,7 +154,7 @@ public class AudioManager : MonoBehaviour {
             AutoModulate(s);
         }
 
-        //s.source.Play();
+        s.source.Play();
     }
 
     public void PlaySoundClip (AudioClip sound)
@@ -223,7 +223,7 @@ public class AudioManager : MonoBehaviour {
 
     public void MatchMusicToScene()
     {
-        Debug.Log("Changing scene type to " + CurrentSceneType.SceneType);
+        //Debug.Log("Changing scene type to " + CurrentSceneType.SceneType);
 
         if (CurrentSceneType.SceneType == SceneType.Main)
         {

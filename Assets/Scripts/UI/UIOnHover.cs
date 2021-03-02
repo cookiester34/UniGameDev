@@ -14,7 +14,7 @@ public class UIOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        Debug.Log("Mouse Enter");
+        //Debug.Log("Mouse Enter");
 
         if (playSoundOnHover)
         {
@@ -24,14 +24,14 @@ public class UIOnHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("Mouse Exit");
+        //Debug.Log("Mouse Exit");
     }
 
     void Update()
     {
         if (mouseOver)
         {
-            Debug.Log("Mouse Over");
+            //Debug.Log("Mouse Over");
         }
     }
 }
