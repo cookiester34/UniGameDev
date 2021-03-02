@@ -28,6 +28,8 @@ public class DestroyState : BuildingManagerState {
                         }
                     }
 
+                    GameObject dissolver = new GameObject("dissolver", typeof(Dissolver));
+                    dissolver.GetComponent<Dissolver>().Setup(hit.transform.gameObject);
                     Object.Destroy(hit.transform.gameObject, 0.2f);
                     AudioManager.Instance.PlaySound("DestroyBuilding");
                 }
