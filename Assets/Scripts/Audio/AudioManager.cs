@@ -150,7 +150,7 @@ public class AudioManager : MonoBehaviour {
             AutoModulate(s);
         }
 
-        s.source.Play();
+        //s.source.Play();
     }
 
     public void PlaySoundClip (AudioClip sound)

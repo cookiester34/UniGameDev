@@ -12,6 +12,10 @@ public static class CurrentSceneType {
     public static SceneType SceneType {
         get => _sceneType;
         set {
+            if (_sceneType == SceneType.GameLevel && value == SceneType.LevelEditor) {
+                Debug.Log("Cannot change from game level to level editor");
+                return;
+            }
             _sceneType = value;
             Debug.Log("Scene type changed to: " + _sceneType);
         }

@@ -58,6 +58,10 @@ public class BeeManager : MonoBehaviour {
         if (!ApplicationUtil.IsQuitting) {
             Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
             population.OnCurrentValueChanged -= OnPopulationChange;
+
+            if (CurrentSceneType.SceneType == SceneType.GameLevel) {
+                GameUI.Instance.ShowGameOver();
+            }
         }
     }
 
