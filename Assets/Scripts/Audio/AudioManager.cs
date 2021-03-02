@@ -12,7 +12,10 @@ public class AudioManager : MonoBehaviour {
     public List<Music> combatMusic;
     public List<Sound> ambienceTracks;
     public Music mainMenuMusic;
+
+    public Sound buildingSelectSound;
     public SceneMusicType startingMusicType;
+    public float lowResourceThreshold;
 
     private Music currentTrack;
     private float currentTrackLength;
@@ -21,6 +24,8 @@ public class AudioManager : MonoBehaviour {
     private MusicQueue musicQueue;
 
     private Sound currentAmbience;
+
+    private Building lastSelectedBuilding;
 
 
     #region SINGLETON PATTERN
@@ -44,7 +49,6 @@ public class AudioManager : MonoBehaviour {
     // Loop through our list of sounds and add an audio source for each.
     void Awake()
     {
-        Debug.Log(GetHashCode());
         if (_instance == null)
             _instance = this;
         else
@@ -54,53 +58,40 @@ public class AudioManager : MonoBehaviour {
             return;
         }
 
+        #region AUDIO SOURCE INITIALISATION
         // Apply settings chosen in list to sound sources.
-
-        foreach(Sound s in sounds)
+        foreach (Sound s in sounds)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.soundClip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = s.output;
+            InitialiseSound(s);
         }
 
         foreach(Music m in peaceMusic)
         {
-            m.source = gameObject.AddComponent<AudioSource>();
-            m.source.clip = m.musicClip;
-            m.source.volume = m.volume;
-            m.source.pitch = m.pitch;
-            m.source.outputAudioMixerGroup = m.output;
+            InitialiseMusic(m);
         }
 
         foreach(Music m in combatMusic)
         {
-            m.source = gameObject.AddComponent<AudioSource>();
-            m.source.clip = m.musicClip;
-            m.source.volume = m.volume;
-            m.source.pitch = m.pitch;
-            m.source.outputAudioMixerGroup = m.output;
+            InitialiseMusic(m);
         }
 
         foreach(Sound s in ambienceTracks)
         {
-            s.source = gameObject.AddComponent<AudioSource>();
-            s.source.clip = s.soundClip;
-            s.source.volume = s.volume;
-            s.source.pitch = s.pitch;
-            s.source.loop = s.loop;
-            s.source.outputAudioMixerGroup = s.output;
+            InitialiseSound(s);
         }
 
-        mainMenuMusic.source = gameObject.AddComponent<AudioSource>();
-        mainMenuMusic.source.clip = mainMenuMusic.musicClip;
-        mainMenuMusic.source.volume = mainMenuMusic.volume;
-        mainMenuMusic.source.pitch = mainMenuMusic.pitch;
-        mainMenuMusic.source.outputAudioMixerGroup = mainMenuMusic.output;
-        mainMenuMusic.source.loop = true;
+        InitialiseMusic(mainMenuMusic);
 
+        InitialiseSound(buildingSelectSound);
+        #endregion
+
+        BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
+
+        ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
+
+        SceneManagement.Instance.SceneLoaded += MatchMusicToScene;
+
+        DontDestroyOnLoad(transform.gameObject);
     }
 
     // Start is called before the first frame update.
@@ -109,8 +100,27 @@ public class AudioManager : MonoBehaviour {
         UpdateAudioLevels();
         // Music playback can be started here.
         //StartPeaceMusic();
-        StartMusic(startingMusicType);
+        MatchMusicToScene();
 
+    }
+
+    private void InitialiseSound(Sound s)
+    {
+        s.source = gameObject.AddComponent<AudioSource>();
+        s.source.clip = s.soundClip;
+        s.source.volume = s.volume;
+        s.source.pitch = s.pitch;
+        s.source.loop = s.loop;
+        s.source.outputAudioMixerGroup = s.output;
+    }
+
+    private void InitialiseMusic(Music m)
+    {
+        m.source = gameObject.AddComponent<AudioSource>();
+        m.source.clip = m.musicClip;
+        m.source.volume = m.volume;
+        m.source.pitch = m.pitch;
+        m.source.outputAudioMixerGroup = m.output;
     }
 
     public void UpdateAudioLevels() {
@@ -144,7 +154,7 @@ public class AudioManager : MonoBehaviour {
             AutoModulate(s);
         }
 
-        s.source.Play();
+        //s.source.Play();
     }
 
     public void PlaySoundClip (AudioClip sound)
@@ -211,11 +221,26 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    public void MatchMusicToScene()
+    {
+        Debug.Log("Changing scene type to " + CurrentSceneType.SceneType);
+
+        if (CurrentSceneType.SceneType == SceneType.Main)
+        {
+            StartMusic(SceneMusicType.mainMenu);
+        }
+        else
+        {
+            StartMusic(SceneMusicType.peace);
+        }
+    }
+
     public void AmbienceFadeTo (Sound ambienceClip)
     {
         StartCoroutine(FadeTo(ambienceClip));
     }
 
+    // Pass in the next sound as clip, volume stars at 0 and begine playing.
     IEnumerator FadeTo(Sound clip)
     {
         clip.source.volume = 0f;
@@ -225,14 +250,17 @@ public class AudioManager : MonoBehaviour {
         float v = currentAmbience.volume;
         clip.source.Play();
 
+        // Swap volume values by lerping exponentially. Smaller fadespeed value results in quicker fade. Cannot fade shorter than 0.1s. 
         while (t < 0.98f)
         {
             t = Mathf.Lerp(t, 1f, Time.deltaTime * fadeSpeed);
             currentAmbience.source.volume = Mathf.Lerp(v, 0f, t);
             clip.source.volume = Mathf.Lerp(0f, clip.volume, t);
-            Debug.Log(clip.source.volume.ToString());
+            //Debug.Log(clip.source.volume.ToString()); - For debugging.
             yield return null;
         }
+
+        // Finally set the volume of the new clip, stop the old clip, and make the new clip the current clip to be used next time.
         clip.source.volume = clip.volume;
 
         currentAmbience.source.Stop();
@@ -242,6 +270,7 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayAmbienceTrack(Seasons season)
     {
+        // Ambient Season tracks must be named correctly. Could possibly be a better way to do this, however not really necessary.
         if (currentAmbience != null && currentAmbience.source.isPlaying)
         {
             AmbienceFadeTo(ambienceTracks.Find(sound => sound.name == season.ToString()));
@@ -261,6 +290,39 @@ public class AudioManager : MonoBehaviour {
     /// <returns>Converted value</returns>
     private float ConvertLevel(float value) {
         return Mathf.Log10(value) * 20;
+    }
+
+    public void PlayBuildingClip(Building building)
+    {
+        if (!buildingSelectSound.source.isPlaying && building != null && building != lastSelectedBuilding)
+        {
+            buildingSelectSound.source.Play();
+        }
+        lastSelectedBuilding = building;        
+    }
+
+    private void GetValueChanged(Resource resource)
+    {
+        if (resource.resourceType != ResourceType.AssignedPop)
+        {
+            resource.OnCurrentValueChanged += PlayResourceAlert;
+        }
+    }
+
+    public void PlayResourceAlert(float value)
+    {
+        if (value <= 0f)
+        {
+            PlaySound("ResourceDepleted");
+        }
+        else if (value <= lowResourceThreshold)
+        {
+            PlaySound("ResourceLow");
+        }
+        else
+        {
+
+        }
     }
 }
 

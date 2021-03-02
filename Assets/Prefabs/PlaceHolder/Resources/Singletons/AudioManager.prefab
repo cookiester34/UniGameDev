@@ -63,12 +63,47 @@ MonoBehaviour:
     output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
+  - name: UpgradeBuilding
+    soundClip: {fileID: 8300000, guid: 051a680c4b83ec24b9135f74f7c30a84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
   - name: SeasonChange
     soundClip: {fileID: 8300000, guid: 0b29b131a826b1b4c93e3334aa2e0284, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIUp
+    soundClip: {fileID: 8300000, guid: 3e9de13ab4bce3c418fabf92ae62966f, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIDown
+    soundClip: {fileID: 8300000, guid: d67f0a21af86e6b498e6a8ca3e8b274b, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UISelect
+    soundClip: {fileID: 8300000, guid: 66e032d6d1068994a95aa35765b7ab7d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
     output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
@@ -82,6 +117,22 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: UIPressed
     soundClip: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: ResourceDepleted
+    soundClip: {fileID: 8300000, guid: 32d96654a5b40fd4bb9fc7197327be4c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: ResourceLow
+    soundClip: {fileID: 8300000, guid: 47d60c0b7af7454478504489deb14af1, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -157,7 +208,7 @@ MonoBehaviour:
   ambienceTracks:
   - name: Spring
     soundClip: {fileID: 8300000, guid: 6b7b7233ede2381439408c018938a23e, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -166,7 +217,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Summer
     soundClip: {fileID: 8300000, guid: 7e4cde92fbe0733498efaee5c050ebf6, type: 3}
-    volume: 0.3
+    volume: 0.4
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -175,7 +226,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Autumn
     soundClip: {fileID: 8300000, guid: ef35971f1695a4d409c75bbc308b953f, type: 3}
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -184,7 +235,7 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Winter
     soundClip: {fileID: 8300000, guid: 8c29df86d91992f4d82f817fb7b082fa, type: 3}
-    volume: 0.5
+    volume: 0.6
     pitch: 1
     loop: 1
     autoModulation: 0
@@ -199,4 +250,14 @@ MonoBehaviour:
     output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
     source: {fileID: 0}
+  buildingSelectSound:
+    name: BuildingSelect
+    soundClip: {fileID: 8300000, guid: d5a369ffe56085b42a4d2fd811fbbdfe, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
   startingMusicType: 2
+  lowResourceThreshold: 0

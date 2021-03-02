@@ -226,7 +226,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b796ee89e08f30a4f88a773595c153b6, type: 2}
+  - {fileID: 2100000, guid: 59f314e7e356e154fb387b9f0b3c32c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 50
   maxHealth: 50
-  shouldDestroyOnDeath: 0
+  shouldDestroyOnDeath: 1
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
   healthLostParticles: {fileID: 0}

@@ -18,18 +18,20 @@ public static class SceneTypeExtensions {
             case "Peter":
             case "Sam":
             case "Ryan":
+            case "Flat":
+            case "CornerHills":
+            case "SmoothHills":
                 sceneType = SceneType.LevelEditor;
                 break;
             case "Main":
                 sceneType = SceneType.Main;
-                break;
-            case "Flat":
-                sceneType = SceneType.GameLevel;
                 break;
             default:
                 sceneType = SceneType.GameLevel;
                 Debug.LogWarning("Scene name: " + sceneName + " not recognised, will class as a game level");
                 break;
         }
+        
+        Debug.Log("current scene type is: " + sceneType);
     }
 }

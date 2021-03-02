@@ -3,7 +3,12 @@ guid: 507babde341bf3b4b806d87e4a1176e3
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BeeHouseLv2_BeeHouse_Lvl2Mat
+    second: {fileID: 2100000, guid: 06dd09317a233c045ace36b12efd4db0, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

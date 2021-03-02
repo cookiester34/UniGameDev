@@ -8,10 +8,9 @@ public class UIEventAnnounceManager : MonoBehaviour
 {
 	private static UIEventAnnounceManager inst;
 	public UIAnnounceMessageBox messageBoxPrefab;
-	public Vector2 startPoint; //acts as the first point that the newest message box will spawn at
-	int maxMessageBoxes = 4; //change this depending on how screen space works in the final project
+	int maxMessageBoxes = 3; //change this depending on how screen space works in the final project
 	List<UIAnnounceMessageBox> messageBoxes = new List<UIAnnounceMessageBox>(); //lists all active message boxes
-	GameObject canvas;
+	private GameObject _eventFitter;
 	
 	public static UIEventAnnounceManager Instance {
         get {
@@ -48,25 +47,12 @@ public class UIEventAnnounceManager : MonoBehaviour
 		AnnounceEvent("Final test message");*/
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
-	void InitCanvas() {
-		Canvas[] canvases = GameObject.FindObjectsOfType<Canvas>();
-		if (canvases != null && canvases.Length > 0) {
-			foreach (Canvas canvase in canvases) {
-				if (canvase.renderMode == RenderMode.ScreenSpaceOverlay) {
-					canvas = canvase.gameObject;
-					break;
-				}
-			}
-		}
-		if (!canvas) {
-			Debug.LogWarning("Event announcements require a UI canvas to work.");
-			Destroy(this);
+    void InitCanvas() {
+		_eventFitter = GameObject.Find("EventFitter");
+
+		if (_eventFitter == null) {
+			Debug.LogWarning("Event announcements requires the event fitter to work. ");
+			Destroy(gameObject);
 		}
 	}
 	
@@ -83,19 +69,8 @@ public class UIEventAnnounceManager : MonoBehaviour
 	}
 	
 	void CreateMessageBox(string message) {
-		ShiftMessageBoxes();
-		UIAnnounceMessageBox msgInst = Instantiate(messageBoxPrefab);
-		msgInst.transform.SetParent(canvas.transform);
-		msgInst.GetComponent<RectTransform>().anchoredPosition = startPoint;
+		UIAnnounceMessageBox msgInst = Instantiate(messageBoxPrefab, _eventFitter.transform);
 		msgInst.SetText(message);
 		messageBoxes.Add(msgInst);
-	}
-	
-	void ShiftMessageBoxes() {
-		for (int i = 0; i < messageBoxes.Count; i++) {
-			Vector2 pos = messageBoxes[i].GetComponent<RectTransform>().anchoredPosition;
-			pos.y += 105;
-			messageBoxes[i].GetComponent<RectTransform>().anchoredPosition = pos;
-		}
 	}
 }

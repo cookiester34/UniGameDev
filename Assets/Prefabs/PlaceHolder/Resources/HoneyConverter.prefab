@@ -90,7 +90,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b796ee89e08f30a4f88a773595c153b6, type: 2}
+  - {fileID: 2100000, guid: 59f314e7e356e154fb387b9f0b3c32c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -158,6 +158,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productionTime: 1
   baseProductionAmount: 1
+  actualProductionAmount: 0
   resource: {fileID: 11400000, guid: d12ccc48f246a524f87010e885d9430d, type: 2}
 --- !u!208 &4023672269890005828
 NavMeshObstacle:
@@ -255,7 +256,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b796ee89e08f30a4f88a773595c153b6, type: 2}
+  - {fileID: 2100000, guid: 59f314e7e356e154fb387b9f0b3c32c3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

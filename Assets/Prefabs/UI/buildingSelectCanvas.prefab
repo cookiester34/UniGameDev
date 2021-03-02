@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 488718050340235693}
   - component: {fileID: 488718050340235695}
   - component: {fileID: 9131948890046912877}
+  - component: {fileID: 5385548066039108639}
   m_Layer: 5
   m_Name: RemoveBee
   m_TagString: Untagged
@@ -734,6 +735,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 5385548066039108639}
+        m_MethodName: PlaySoundUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: d67f0a21af86e6b498e6a8ca3e8b274b,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &9131948890046912877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -777,6 +790,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &5385548066039108639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488718050340235699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cc7dc9b22d63d40927700074a4e94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &488718050399127937
 GameObject:
   m_ObjectHideFlags: 0
@@ -910,6 +935,7 @@ GameObject:
   - component: {fileID: 488718050504370737}
   - component: {fileID: 488718050504370739}
   - component: {fileID: 6116029027537088290}
+  - component: {fileID: 4146250207955993941}
   m_Layer: 5
   m_Name: AddBee
   m_TagString: Untagged
@@ -1028,6 +1054,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4146250207955993941}
+        m_MethodName: PlaySoundUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 3e9de13ab4bce3c418fabf92ae62966f,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &6116029027537088290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1071,6 +1109,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &4146250207955993941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488718050504370743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cc7dc9b22d63d40927700074a4e94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &488718050666974601
 GameObject:
   m_ObjectHideFlags: 0
@@ -1084,6 +1134,7 @@ GameObject:
   - component: {fileID: 488718050666974603}
   - component: {fileID: 488718050666974597}
   - component: {fileID: 7777204028783514976}
+  - component: {fileID: 1360291664090582667}
   m_Layer: 5
   m_Name: UpgradeBuilding
   m_TagString: Untagged
@@ -1202,6 +1253,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1360291664090582667}
+        m_MethodName: PlaySoundUI
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 8300000, guid: 051a680c4b83ec24b9135f74f7c30a84,
+            type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.AudioClip, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &7777204028783514976
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1245,6 +1308,18 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1360291664090582667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 488718050666974601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46cc7dc9b22d63d40927700074a4e94b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &488718050688302566
 GameObject:
   m_ObjectHideFlags: 0
