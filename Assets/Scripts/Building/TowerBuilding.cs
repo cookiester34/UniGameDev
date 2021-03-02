@@ -53,6 +53,7 @@ public class TowerBuilding : Building
         {
             if (ResourceManagement.Instance.UseResource(resourcePurchase))
             {
+                gameObject.transform.GetComponent<AudioSource>().Play();
                 GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
                 temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
