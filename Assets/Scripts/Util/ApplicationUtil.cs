@@ -10,10 +10,8 @@ public static class ApplicationUtil {
     public static bool IsQuitting => _isQuitting;
     
     static ApplicationUtil() {
-        Debug.Log("Application util constructed");
         Application.quitting += () => {
             _isQuitting = true;
-            Debug.Log("Quitting");
         };
     }
 }

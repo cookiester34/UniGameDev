@@ -29,8 +29,8 @@ namespace UI {
 
         protected virtual void Awake() {
             Setup();
-			Debug.Log("Current scene type is: " + CurrentSceneType.sceneType.ToString());
-			if (isLevelEditorOnly && CurrentSceneType.sceneType != SceneType.LevelEditor) {
+            Debug.Log(CurrentSceneType.SceneType);
+            if (isLevelEditorOnly && CurrentSceneType.SceneType != SceneType.LevelEditor) {
 				gameObject.SetActive(false);
 			}
         }
