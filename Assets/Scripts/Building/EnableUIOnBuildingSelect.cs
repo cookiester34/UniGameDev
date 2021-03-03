@@ -25,12 +25,44 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
     public GameObject displayBonus;
     public Text bonusText;
 
+    public List<Renderer> points = new List<Renderer>();
+    private float minX, maxX, minY, maxY;
+
+    Vector2 bottomCorner;
+    Vector2 topCorner;
 
     private void Awake() 
     {
         displayBonus.SetActive(false);
         gameObject.SetActive(false);
         BuildingManager.Instance.OnBuildingSelected += DataChanged;
+
+       
+    }
+
+    private void FixedUpdate()
+    {
+        //foreach (Renderer i in points)
+        //{
+        //    if (!i.isVisible)
+        //    {
+        //        float camDistance = Vector3.Distance(transform.position, Camera.main.transform.position);
+        //        bottomCorner = Camera.main.ViewportToWorldPoint(new Vector3(0, camDistance, 0));
+        //        topCorner = Camera.main.ViewportToWorldPoint(new Vector3(1, camDistance, 1));
+
+        //        float objectRadius = 1;
+
+        //        minX = bottomCorner.x + objectRadius;
+        //        maxX = topCorner.x - objectRadius;
+        //        minY = bottomCorner.y + objectRadius;
+        //        maxY = topCorner.y - objectRadius;
+
+        //        transform.position = new Vector3(
+        //        Mathf.Clamp(transform.position.x, minX, maxX),
+        //        transform.position.y,
+        //        Mathf.Clamp(transform.position.z, minY, maxY));
+        //    }
+        //}
     }
 
     private void UpdateAssignedBeesUI(int numAssigned, int maxAssigned, string buildingType, int buildingTeir, Building building) 
