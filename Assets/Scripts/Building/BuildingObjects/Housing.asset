@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Housing
   m_EditorClassIdentifier: 
   buildingType: 1
-  uiImage: {fileID: 21300000, guid: decdd7477cfda494a9b9b97cb95d64db, type: 3}
+  uiImage: {fileID: 21300000, guid: 8ddab7ff90a6d1e4da50c3b032ff29fe, type: 3}
   resourcePurchase:
   - cost: 10
     resourceType: 3

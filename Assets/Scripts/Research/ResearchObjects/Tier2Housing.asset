@@ -30,4 +30,4 @@ MonoBehaviour:
     timeRunning: 0
     progressPercent: 0
     active: 0
-  uiSprite: {fileID: 21300000, guid: decdd7477cfda494a9b9b97cb95d64db, type: 3}
+  uiSprite: {fileID: 21300000, guid: 027e9e918c983be42839a31c13c73165, type: 3}
