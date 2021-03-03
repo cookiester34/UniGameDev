@@ -60,6 +60,10 @@ public class TowerBuilding : Building
                 StartCoroutine(DestroyProjectile(temp, 5f));
             }
         }
+        else
+        {
+            enemiesInRange.RemoveAt(0);
+        }
     }
 
     IEnumerator DestroyProjectile(GameObject projectile, float delay)
