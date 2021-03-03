@@ -11,6 +11,9 @@ public class UIEventAnnounceManager : MonoBehaviour
 	int maxMessageBoxes = 3; //change this depending on how screen space works in the final project
 	List<UIAnnounceMessageBox> messageBoxes = new List<UIAnnounceMessageBox>(); //lists all active message boxes
 	private GameObject _eventFitter;
+
+	public delegate void EventAnnouncement();
+	public static event EventAnnouncement announcement;
 	
 	public static UIEventAnnounceManager Instance {
         get {
@@ -61,6 +64,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 			DismissMessage(messageBoxes[0]);
 		}
 		CreateMessageBox(announceText);
+		announcement?.Invoke();
 	}
 	
 	public void DismissMessage(UIAnnounceMessageBox msgBox) {

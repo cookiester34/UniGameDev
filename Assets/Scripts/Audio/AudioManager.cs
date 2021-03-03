@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Audio;
 using Util;
 
@@ -86,10 +87,10 @@ public class AudioManager : MonoBehaviour {
         #endregion
 
         BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
-
         ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
-
-        SceneManagement.Instance.SceneLoaded += MatchMusicToScene;
+        SceneManager.activeSceneChanged += MatchMusicToScene;
+        SeasonManager.SeasonChange += ChangeAmbienceTrack;
+        UIEventAnnounceManager.announcement += PlayAnnouncementAlert;
 
         DontDestroyOnLoad(transform.gameObject);
     }
@@ -100,8 +101,6 @@ public class AudioManager : MonoBehaviour {
         UpdateAudioLevels();
         // Music playback can be started here.
         //StartPeaceMusic();
-        MatchMusicToScene();
-
     }
 
     private void InitialiseSound(Sound s)
@@ -221,18 +220,27 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void MatchMusicToScene()
+    public void MatchMusicToScene(Scene current, Scene next)
     {
-        //Debug.Log("Changing scene type to " + CurrentSceneType.SceneType);
+        //Debug.Log("Changing scene type to " + CurrentSceneType.SceneType + "WHY DO I NOT CHANGE THE MUSIC!?");
 
-        if (CurrentSceneType.SceneType == SceneType.Main)
+        if (next.name == "Main")
         {
             StartMusic(SceneMusicType.mainMenu);
+            if (currentAmbience != null)
+            {
+                currentAmbience.source.Stop();
+            }
         }
         else
         {
             StartMusic(SceneMusicType.peace);
         }
+    }
+
+    public void ChangeAmbienceTrack()
+    {
+        PlayAmbienceTrack(SeasonManager.Instance.currentSeason);
     }
 
     public void AmbienceFadeTo (Sound ambienceClip)
@@ -323,6 +331,11 @@ public class AudioManager : MonoBehaviour {
         {
 
         }
+    }
+
+    public void PlayAnnouncementAlert()
+    {
+        PlaySound("Announcement");
     }
 }
 

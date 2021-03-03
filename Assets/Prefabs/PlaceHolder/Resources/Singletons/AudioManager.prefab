@@ -139,6 +139,14 @@ MonoBehaviour:
     autoModulation: 0
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
+  - name: Announcement
+    soundClip: {fileID: 8300000, guid: a81f78f03f6f67a49b1b594c213bddcf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
   - name: Error
     soundClip: {fileID: 8300000, guid: b0f142031001ba441b7f9202bd250dd0, type: 3}
     volume: 1
@@ -260,4 +268,4 @@ MonoBehaviour:
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
   startingMusicType: 2
-  lowResourceThreshold: 0
+  lowResourceThreshold: 4

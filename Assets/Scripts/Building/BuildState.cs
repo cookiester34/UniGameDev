@@ -65,11 +65,9 @@ public class BuildState : BuildingManagerState {
 
             if (!canUseResources) {
                 UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
-                AudioManager.Instance.PlaySound("Error");
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else if (!isInBuildingLimit) {
                 UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
-                AudioManager.Instance.PlaySound("Error");
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else {
                 buildingManager.selectedBuildingUI.sprite = buildingData.UiImage;
@@ -91,7 +89,6 @@ public class BuildState : BuildingManagerState {
         if (!foundation.BuildMulti(currentBuilding.BuildingSize)) {
             buildingManager.SetBuildMode(BuildingMode.Selection);
             buildingManager.BuildingAlreadyThere();
-            AudioManager.Instance.PlaySound("Error");
         } else {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
