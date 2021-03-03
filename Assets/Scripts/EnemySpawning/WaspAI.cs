@@ -1,14 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Health))]
+[RequireComponent(typeof(SphereCollider))]
 public class WaspAI : MonoBehaviour
 {
     private List<Transform> targetsInRange = new List<Transform>();
+    private Transform _currentTarget;
 
-    private GameObject queenBeeBuilding;
+    private GameObject _queenBeeBuilding;
 
     //nav
     private NavMeshAgent _agent;
@@ -25,87 +26,120 @@ public class WaspAI : MonoBehaviour
     public float attacktimer = 2;
     private float actualTimer;
 
-    private bool isDead = false;
-
-    void Awake()
-    {
-        health = GetComponentInParent<Health>();
-        queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
-        _agent = GetComponent<NavMeshAgent>();
+    private void OnValidate() {
         GetComponent<SphereCollider>().radius = detectionRange;
+    }
+
+    void Awake() {
+        health = GetComponentInParent<Health>();
+        _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
+        _agent = GetComponent<NavMeshAgent>();
         actualTimer = attacktimer;
     }
 
+    private bool SetupQueenBee() {
+        bool setup = true;
+        if (_queenBeeBuilding == null) {
+            _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
+            if (_queenBeeBuilding == null) {
+                setup = false;
+            }
+        }
 
-    void Update()
-    {
-        if(queenBeeBuilding == null)
-            queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
+        return setup;
+    }
 
-        if (NearTarget())
-        {
-            _agent.destination = targetsInRange[0].position;
-            if (AttackDistance(targetsInRange[0]))
-            {
-                if (actualTimer <= 0)
-                {
-                    targetsInRange[0].GetComponent<Health>().ModifyHealth(-waspDamage);
+    private void Start() {
+        if (SetupQueenBee()) {
+            _agent.destination = _queenBeeBuilding.transform.position;
+            targetsInRange.Add(_queenBeeBuilding.transform);
+        }
+        UpdateTarget();
+    }
+
+
+    void FixedUpdate() {
+        if (NearTarget()) {
+            if (AttackDistance()) {
+                if (actualTimer <= 0) {
+                    Health targetHealth = _currentTarget.GetComponent<Health>();
+                    targetHealth.ModifyHealth(-waspDamage);
+                    if (targetHealth.CurrentHealth <= 0) {
+                        targetsInRange.Remove(_currentTarget);
+                        UpdateTarget();
+                    }
                     actualTimer = attacktimer;
                 }
             }
         }
-        else
-        {
-            _agent.destination = queenBeeBuilding.transform.position;
-        }
-        if (actualTimer >= 0)
+
+        if (actualTimer >= 0) {
             actualTimer -= Time.deltaTime;
-        if (isDead)
-        {
-            _agent.speed = 0;
         }
     }
 
-    public void TakeDamage(float damage)
-    {
+    public void TakeDamage(float damage) {
         health.ModifyHealth(-damage);
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Bee") || other.CompareTag("Building"))
-        {
-            if (other != null)
-            {
-                if (other.GetComponent<Health>().CurrentHealth > 0)
-                    targetsInRange.Add(other.transform);
+    private void UpdateTarget() {
+        _currentTarget = GetClosestTarget();
+        if (_currentTarget != null) {
+            _agent.destination = _currentTarget.position;
+        }
+    }
+
+    private Transform GetClosestTarget() {
+        Transform closestTarget = null;
+        float closestDistance = float.MaxValue;
+        
+        // prioritise queen bee if close
+        if (Vector3.Distance(_queenBeeBuilding.transform.position, transform.position) < 5f) {
+            closestTarget = _queenBeeBuilding.transform;
+        } else {
+            foreach (Transform t in targetsInRange) {
+                if (t != null) {
+                    if (Vector3.Distance(transform.position, t.position) < closestDistance) {
+                        closestTarget = t;
+                    }
+                }
+            }
+        }
+
+        return closestTarget;
+    }
+
+    private void OnTriggerEnter(Collider other) {
+        if (other != null && (other.CompareTag("Bee") || other.CompareTag("Building"))) {
+            if (other.GetComponent<Health>().CurrentHealth > 0) {
+                targetsInRange.Add(other.transform);
+                UpdateTarget();
             }
         }
     }
 
-    private bool NearTarget()
-    {
-        if (targetsInRange.Count > 0)
-        {
-            if (targetsInRange[0] == null || targetsInRange[0].GetComponent<Health>().CurrentHealth <= 0)
-            {
+    private void OnTriggerExit(Collider other) {
+        if (other!= null && other.name != "QueenBeeBuilding(Clone)" &&
+            (other.CompareTag("Bee") || other.CompareTag("Building"))) {
+            targetsInRange.Remove(other.transform);
+            UpdateTarget();
+        }
+    }
+
+    private bool NearTarget() {
+        bool nearTarget = false;
+        if (targetsInRange.Count > 0) {
+            if (targetsInRange[0] == null || targetsInRange[0].GetComponent<Health>().CurrentHealth <= 0) {
                 targetsInRange.RemoveAt(0);
-                return false;
-            }
-            else
-            {
-                return true;
+            } else {
+                nearTarget = true;
             }
         }
-        else
-            return false;
+
+        return nearTarget;
     }
 
-    private bool AttackDistance(Transform target)
-    {
-        if (Vector3.Distance(target.position, transform.position) < attackRange)
-            return true;
-        else
-            return false;
+    private bool AttackDistance() {
+        return _currentTarget != null && Vector3.Distance(_currentTarget.position, transform.position) < attackRange;
     }
 }
