@@ -94,7 +94,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - BaseColor: {r: 1, g: 1, b: 1, a: 1}
+    - BaseColor: {r: 0.7075472, g: 0.7042097, b: 0.7042097, a: 1}
     - CanBuildColor: {r: 0.18397805, g: 0.5566037, b: 0, a: 0.6862745}
     - CannotBuildColor: {r: 0.53773576, g: 0.0228284, b: 0.0228284, a: 0.6862745}
     - Color_762EE56B: {r: 1.9294118, g: 0.9098039, b: 0.28235295, a: 0}
