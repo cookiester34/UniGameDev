@@ -96,7 +96,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_1DB33950: 0
-    - Vector1_5406B5ED: 1.53
+    - Vector1_5406B5ED: 5
     - Vector1_8059ACF2: 1
     - _AddPrecomputedVelocity: 0
     - _BumpScale: 1
