@@ -8,20 +8,30 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Leaf
-  m_Shader: {fileID: 4800000, guid: 0406db5a14f94604a8c57ccfbc9f3b46, type: 3}
-  m_ShaderKeywords: 
+  m_Shader: {fileID: 10720, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALBEDOCONTRIBUTION
   m_LightmapFlags: 6
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
-  stringTagMap:
-    RenderType: Transparent
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
   disabledShaderPasses:
   - ALWAYS
   - SHADOWCASTER
+  - DBufferMesh_M
+  - DBufferMesh_AO
+  - DBufferMesh_MAO
+  - Mesh_Emissive
+  - DBufferMesh_MS
+  - DBufferMesh_AOS
+  - DBufferMesh_MAOS
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _BaseColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BaseMap:
         m_Texture: {fileID: 2800000, guid: c9889246eaf53cc4abba3d2aaf75c162, type: 3}
         m_Scale: {x: 1, y: 1}
@@ -34,11 +44,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _EmissiveColorMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: 0bfbc7a24f3539541ac0546707497e61, type: 3}
+        m_Texture: {fileID: 2800000, guid: c9889246eaf53cc4abba3d2aaf75c162, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MaskMap:
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -51,6 +73,9 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
+    - _AORemapMax: 1
+    - _AORemapMin: 0
+    - _AlbedoMode: 1
     - _AlphaClip: 0
     - _Blend: 0
     - _BlendOp: 0
@@ -61,12 +86,22 @@ Material:
     - _ColorMode: 0
     - _Cull: 2
     - _Cutoff: 0.5
+    - _DecalBlend: 0.5
+    - _DecalMaskMapBlueScale: 1
+    - _DecalMeshDepthBias: 0
+    - _DecalStencilRef: 16
+    - _DecalStencilWriteMask: 16
     - _DistortionBlend: 0.5
     - _DistortionEnabled: 0
     - _DistortionStrength: 1
     - _DistortionStrengthScaled: 0
+    - _DrawOrder: 0
     - _DstBlend: 10
     - _EmissionEnabled: 0
+    - _Emissive: 0
+    - _EmissiveExposureWeight: 1
+    - _EmissiveIntensity: 1
+    - _EmissiveIntensityUnit: 0
     - _EnvironmentReflections: 1
     - _FlipbookBlending: 0
     - _FlipbookMode: 0
@@ -74,12 +109,21 @@ Material:
     - _Glossiness: 0
     - _GlossyReflections: 0
     - _LightingEnabled: 0
+    - _MaskBlendMode: 4
+    - _MaskBlendSrc: 1
+    - _MaskmapAO: 0
+    - _MaskmapMetal: 0
+    - _MaskmapSmoothness: 1
     - _Metallic: 0
+    - _MetallicScale: 1
     - _Mode: 0
+    - _NormalBlendSrc: 0
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.5
+    - _SmoothnessRemapMax: 1
+    - _SmoothnessRemapMin: 0
     - _SmoothnessTextureChannel: 0
     - _SoftParticlesEnabled: 0
     - _SoftParticlesFarFadeDistance: 1
@@ -87,6 +131,7 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _Surface: 1
+    - _UseEmissiveIntensity: 0
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
@@ -96,6 +141,9 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorAddSubDiff: {r: 0, g: 0, b: 0, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColor: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColorHDR: {r: 0, g: 0, b: 0, a: 1}
+    - _EmissiveColorLDR: {r: 0, g: 0, b: 0, a: 1}
     - _SoftParticleFadeParams: {r: 0, g: 0, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
 --- !u!114 &8807930579855716734
