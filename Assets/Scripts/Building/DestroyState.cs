@@ -19,8 +19,11 @@ public class DestroyState : BuildingManagerState {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
                 if (hit.transform.CompareTag("Building")) {
-                    Building destroyedBuilding = hit.transform.GetComponent<Building>();
-                    buildingManager.numBuildingTypes[(int) destroyedBuilding.BuildingData.BuildingType]--;
+                    Building building = hit.transform.gameObject.GetComponent<Building>();
+                    if (CurrentSceneType.SceneType == SceneType.GameLevel && building.BuildingType == BuildingType.QueenBee) {
+                        UIEventAnnounceManager.Instance.AnnounceEvent("Cannot destroy the queen in a level");
+                        return;
+                    }
                     var beforeDestroy = hit.collider.GetComponents<IBeforeDestroy>();
                     if (beforeDestroy != null && beforeDestroy.Length > 0) {
                         foreach (var destroy in beforeDestroy) {
