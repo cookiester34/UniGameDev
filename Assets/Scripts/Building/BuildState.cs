@@ -93,7 +93,6 @@ public class BuildState : BuildingManagerState {
             buildingManager.BuildingAlreadyThere();
             AudioManager.Instance.PlaySound("Error");
         } else {
-            buildingManager.numBuildingTypes[(int)currentBuilding.BuildingType]++;
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
             tempBuilding.GetComponent<Collider>().enabled = true;

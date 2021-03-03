@@ -23,7 +23,7 @@ public class BuildingManager : MonoBehaviour {
     #endregion
 
     public int[] numBuildingTypes;
-    
+
     /// <summary>
     /// Mask to use when placing, destroying, or selecting
     /// </summary>
@@ -143,6 +143,24 @@ public class BuildingManager : MonoBehaviour {
         if (_currentState is SelectionState state) {
             state.UpgradeBuilding();
         }
+    }
+
+    /// <summary>
+    /// Adds the building to the list incrementing the number placed
+    /// </summary>
+    /// <param name="building">The building to add</param>
+    public void AddBuildingToBuildings(Building building) {
+        _buildings.Add(building);
+        numBuildingTypes[(int)building.BuildingType]++;
+    }
+
+    /// <summary>
+    /// Removes the building from the list updating the number placed
+    /// </summary>
+    /// <param name="building">Building to remove</param>
+    public void RemoveFromBuildings(Building building) {
+        _buildings.Remove(building);
+        numBuildingTypes[(int)building.BuildingType]--;
     }
 
     public List<Building> GetAllStorageBuildingsOfType(ResourceType resourceType) {

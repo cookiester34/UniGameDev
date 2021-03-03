@@ -53,7 +53,7 @@ public class Building : MonoBehaviour {
         if (buildingTeir3 != null) {
             buildingTeir3.SetActive(buildingTeir == 2);
         }
-        BuildingManager.Instance.Buildings.Add(this);
+        BuildingManager.Instance.AddBuildingToBuildings(this);
     }
 
     public GameObject GetActiveBuilding()
@@ -133,7 +133,7 @@ public class Building : MonoBehaviour {
         }
 
         if (!ApplicationUtil.IsQuitting) {
-            BuildingManager.Instance.Buildings.Remove(this);
+            BuildingManager.Instance.RemoveFromBuildings(this);
         }
     }
 
