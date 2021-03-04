@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: StorageBuilding
   m_EditorClassIdentifier: 
   buildingType: 0
-  uiImage: {fileID: 21300000, guid: ac23224a8914e1f46b87815fc7561a74, type: 3}
+  uiImage: {fileID: 21300000, guid: 1e60f424598fa974a910a8ccb2e95a4e, type: 3}
   resourcePurchase:
   - cost: 20
     resourceType: 3

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tower
   m_EditorClassIdentifier: 
   buildingType: 6
-  uiImage: {fileID: 21300000, guid: 7fd28ba2ab5bd0e479318fc912d9e766, type: 3}
+  uiImage: {fileID: 21300000, guid: 315ed2288b9b8eb40ae4551fa191aa77, type: 3}
   resourcePurchase:
   - cost: 5
     resourceType: 0
