@@ -11,6 +11,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     [Range(1, 100)]//just to stop it being set to 0;
     [SerializeField] private int productionTime = 1;
     [SerializeField] private float baseProductionAmount = 1;
+    [SerializeField] private RadialProgress progressBar;
     [HideInInspector]
     public float actualProductionAmount;
 
@@ -49,9 +50,23 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     void CalculateProductionAmount()
     {
         if (building.numAssignedBees == 0)
+        {
             actualProductionAmount = 0;
+            if (progressBar != null)
+            {
+                progressBar.active = false;
+                progressBar.progressBar.fillAmount = 0;
+            }
+        }
         else
+        {
             actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.GetBuildingTeir();
+            if (progressBar != null)
+            {
+                progressBar.active = true;
+                progressBar.fillTime = actualProductionAmount;
+            }
+        }
     }
 
     public void BeforeDestroy() {

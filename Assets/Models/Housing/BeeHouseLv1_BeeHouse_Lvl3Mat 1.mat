@@ -71,7 +71,7 @@ Material:
     - UseShader: 0
     - Vector1_1BC76CC2: 25
     - Vector1_386557A1: -1
-    - Vector1_C6321E9F: 5000
+    - Vector1_C6321E9F: 5
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1

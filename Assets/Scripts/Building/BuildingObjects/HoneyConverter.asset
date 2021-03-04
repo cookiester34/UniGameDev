@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HoneyConverter
   m_EditorClassIdentifier: 
   buildingType: 3
-  uiImage: {fileID: 21300000, guid: 1e60f424598fa974a910a8ccb2e95a4e, type: 3}
+  uiImage: {fileID: 21300000, guid: e751488fb77858f419b7b2dbc7568f47, type: 3}
   resourcePurchase:
   - cost: 10
     resourceType: 3

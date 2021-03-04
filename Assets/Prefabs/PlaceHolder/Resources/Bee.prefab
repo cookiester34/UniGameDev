@@ -67,7 +67,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 36a6d1179680beb44afa28aa7897d6c8, type: 2}
+  - {fileID: 2100000, guid: fd7f8e18e93422b4f8390905926749c8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -150,6 +150,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   productionTime: 2
   baseProductionAmount: 1
+  progressBar: {fileID: 0}
   actualProductionAmount: 0
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
 --- !u!114 &-5077826352974351252

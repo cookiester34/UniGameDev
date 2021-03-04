@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaxConverter
   m_EditorClassIdentifier: 
   buildingType: 2
-  uiImage: {fileID: 21300000, guid: a69ffbc3025d7b744bf120f0ad5f197d, type: 3}
+  uiImage: {fileID: 21300000, guid: 2185d591c99a60f42a3f9d46b6cd146a, type: 3}
   resourcePurchase:
   - cost: 10
     resourceType: 0

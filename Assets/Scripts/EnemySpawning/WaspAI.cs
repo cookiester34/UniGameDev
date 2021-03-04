@@ -3,9 +3,10 @@ using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Health))]
-[RequireComponent(typeof(SphereCollider))]
 public class WaspAI : MonoBehaviour
 {
+    public LayerMask mask;
+
     private List<Transform> targetsInRange = new List<Transform>();
     private Transform _currentTarget;
 
@@ -76,6 +77,21 @@ public class WaspAI : MonoBehaviour
         if (actualTimer >= 0) {
             actualTimer -= Time.deltaTime;
         }
+
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7f, mask);
+        foreach (var hitCollider in hitColliders)
+        {
+            if (hitCollider != null && (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")))
+            {
+                if (hitCollider.GetComponent<Health>().CurrentHealth > 0)
+                {
+                    targetsInRange.Add(hitCollider.transform);
+                    UpdateTarget();
+                }
+            }
+        }
+
+        targetsInRange.RemoveAll(x => Vector3.Distance(transform.position, x.position) > 7.1f);
     }
 
     public void TakeDamage(float damage) {
@@ -107,15 +123,6 @@ public class WaspAI : MonoBehaviour
         }
 
         return closestTarget;
-    }
-
-    private void OnTriggerEnter(Collider other) {
-        if (other != null && (other.CompareTag("Bee") || other.CompareTag("Building"))) {
-            if (other.GetComponent<Health>().CurrentHealth > 0) {
-                targetsInRange.Add(other.transform);
-                UpdateTarget();
-            }
-        }
     }
 
     private void OnTriggerExit(Collider other) {

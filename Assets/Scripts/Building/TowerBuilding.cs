@@ -23,6 +23,8 @@ public class TowerBuilding : Building
 
     ResourcePurchase resourcePurchase;
 
+    public ResourceType resourceType;
+
     //set the collider object to the range of the tower
     protected override void Start() {
         base.Start();
@@ -37,7 +39,7 @@ public class TowerBuilding : Building
             if (numAssignedBees > 0)
             {
                 FireAtEnemies();
-                firingSpeed = baseFiringSpeed / BuildingData.maxNumberOfWorkers * numAssignedBees;
+                firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers - numAssignedBees);
             }
             timer = firingSpeed;
         }
