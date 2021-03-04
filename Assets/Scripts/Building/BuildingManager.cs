@@ -188,9 +188,11 @@ public class BuildingManager : MonoBehaviour {
     }
 
     public void SetUIImage(bool visible) {
-        Color color = selectedBuildingUI.color;
-        color.a = visible ? 255 : 0;
-        selectedBuildingUI.color = color;
+        if (selectedBuildingUI != null) {
+            Color color = selectedBuildingUI.color;
+            color.a = visible ? 255 : 0;
+            selectedBuildingUI.color = color;
+        }
     }
 
     #region Debugs
