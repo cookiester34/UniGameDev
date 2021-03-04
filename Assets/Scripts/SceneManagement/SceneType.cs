@@ -19,7 +19,7 @@ public static class SceneTypeExtensions {
             case "Sam":
             case "Ryan":
             case "Flat":
-            case "CornerHills":
+            case "CornerHill":
             case "SmoothHills":
                 sceneType = SceneType.LevelEditor;
                 break;

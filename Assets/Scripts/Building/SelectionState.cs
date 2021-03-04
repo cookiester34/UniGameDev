@@ -12,6 +12,7 @@ public class SelectionState : BuildingManagerState {
     public override void Enter() {
         selectedBuilding = null;
         selectedBuildingData = null;
+        buildingManager.SetUIImage(false);
     }
 
     public override void Exit() {

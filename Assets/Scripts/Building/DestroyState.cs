@@ -6,6 +6,7 @@ public class DestroyState : BuildingManagerState {
     public override void Enter() {
         buildingManager.selectedBuildingText.text = "Destroys buildings on click";
         buildingManager.selectedBuildingUI.sprite = buildingManager.DestroyUISprite;
+        buildingManager.SetUIImage(true);
     }
 
     public override void Exit() {

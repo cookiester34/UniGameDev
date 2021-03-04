@@ -19,6 +19,8 @@ public class BuildState : BuildingManagerState {
         if (_propBlock == null) {
             _propBlock = new MaterialPropertyBlock();
         }
+
+        buildingManager.SetUIImage(true);
     }
 
     public override void Exit() {
