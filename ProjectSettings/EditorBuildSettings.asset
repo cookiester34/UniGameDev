@@ -27,9 +27,6 @@ EditorBuildSettings:
     path: Assets/Scenes/IntermediateLoadScene.unity
     guid: 22597a4ae54788e4ca2ce6e464124c84
   - enabled: 1
-    path: Assets/Scenes/MergeScene.unity
-    guid: e6730ab636bc9ea42b0bffd1c37fcc58
-  - enabled: 1
     path: Assets/Scenes/BaseLevels/Flat.unity
     guid: 9e432c1f9700b9348a48d765db10d165
   - enabled: 1
