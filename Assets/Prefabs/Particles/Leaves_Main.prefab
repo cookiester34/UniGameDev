@@ -25,7 +25,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7641756216830397420}
-  m_LocalRotation: {x: -0.46239552, y: -0.17774789, z: -0.10872755, w: -0.86184365}
+  m_LocalRotation: {x: -0.4623963, y: -0.17774768, z: -0.10872933, w: -0.8618431}
   m_LocalPosition: {x: -8.42, y: 17.84, z: -0.81}
   m_LocalScale: {x: 2.8028738, y: 2.9420547, z: 3.4309}
   m_Children: []
@@ -3554,9 +3554,9 @@ ParticleSystem:
         m_NumAlphaKeys: 2
     range: {x: 0, y: 1}
   CollisionModule:
-    enabled: 0
+    enabled: 1
     serializedVersion: 3
-    type: 0
+    type: 1
     collisionMode: 0
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
@@ -3729,7 +3729,7 @@ ParticleSystem:
         m_RotationOrder: 4
     minKillSpeed: 0
     maxKillSpeed: 10000
-    radiusScale: 1
+    radiusScale: 0.1
     collidesWith:
       serializedVersion: 2
       m_Bits: 4294967295
