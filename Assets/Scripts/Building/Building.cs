@@ -11,7 +11,6 @@ public class Building : MonoBehaviour {
 
     [SerializeField] private BuildingType buildingType;
 
-    public ResourceType resourceType;
     [SerializeField] private BuildingData buildingData;
     [HideInInspector]
     public int buildingTeir = 0;
