@@ -158,6 +158,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e38320ccd4f391458d34a5f1ecec47d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mask:
+    serializedVersion: 2
+    m_Bits: 513
   waspDamage: 1
   attackRange: 2.62
   detectionRange: 13.8
