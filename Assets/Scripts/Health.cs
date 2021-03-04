@@ -90,6 +90,8 @@ public class Health : MonoBehaviour {
         }
 
         if (shouldDestroyOnDeath) {
+            GameObject dissolver = new GameObject("dissolver", typeof(Dissolver));
+            dissolver.GetComponent<Dissolver>().Setup(gameObject);
             Destroy(gameObject);
         }
     }
@@ -98,6 +100,6 @@ public class Health : MonoBehaviour {
         GameObject go = Instantiate(particlePrefab, transform.position, transform.rotation);
         ParticleSystem particles = go.GetComponent<ParticleSystem>();
         particles.Play();
-        //Destroy(particles.gameObject);
+        Destroy(particles.gameObject, particles.time);
     }
 }

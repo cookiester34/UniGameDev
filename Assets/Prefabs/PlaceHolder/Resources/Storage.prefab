@@ -286,7 +286,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 5
   maxHealth: 5
-  shouldDestroyOnDeath: 0
+  shouldDestroyOnDeath: 1
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
   healthLostParticles: {fileID: 0}
