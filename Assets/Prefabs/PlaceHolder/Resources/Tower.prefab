@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8cb34537292604dbeaf328d069dfe3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: {fileID: 0}
+  health: {fileID: 7550903448618770643}
 --- !u!114 &8867703212723492498
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +267,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 9067410519182552090, guid: 5896ed14a20942e468ab6bf63bbf03ca, type: 3}
+  - {fileID: 2100000, guid: 994d2515f0b868a4e8ecd8877a3644d0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -500,12 +500,12 @@ PrefabInstance:
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.05
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.05
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
@@ -555,7 +555,7 @@ PrefabInstance:
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0.7869873
+      value: 0.9760132
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}

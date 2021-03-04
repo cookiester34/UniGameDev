@@ -3,7 +3,12 @@ guid: e33c40fa19e46974e9c75a2f659b9ba8
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Maya_pasted__Conveyor_lowMat
+    second: {fileID: 2100000, guid: 32e7211f1f918a9478a040aa36c6671d, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
