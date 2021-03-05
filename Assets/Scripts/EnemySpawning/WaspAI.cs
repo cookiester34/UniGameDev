@@ -46,11 +46,11 @@ public class WaspAI : MonoBehaviour
 
 
     void FixedUpdate() {
-        var colliders = Physics.OverlapSphere(transform.position, detectionRange, mask);
-        if (colliders.Length > 0) {
+        sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);
+        if (sphereAlloc.Length > 0) {
             float closestDist = float.MaxValue;
             GameObject targetObject = null;
-            foreach (Collider hitCollider in colliders) {
+            foreach (Collider hitCollider in sphereAlloc) {
                 float currentDistance = Vector3.Distance(transform.position, hitCollider.transform.position);
                 if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
                     && currentDistance < closestDist) {

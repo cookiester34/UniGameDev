@@ -157,6 +157,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: QueenBee
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bb7980560093cd44a8d03766fb295447,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4559553968307991164, guid: bb7980560093cd44a8d03766fb295447,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bb7980560093cd44a8d03766fb295447, type: 3}
 --- !u!4 &4427438342092117690 stripped

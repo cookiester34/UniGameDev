@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5017920266862173970}
   - component: {fileID: 4732445709679031396}
   - component: {fileID: 5594373203866081987}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Wasp
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mask:
     serializedVersion: 2
-    m_Bits: 513
+    m_Bits: 16896
   waspDamage: 1
   attackRange: 2.62
   detectionRange: 13.8
@@ -190,7 +190,7 @@ GameObject:
   - component: {fileID: 5201189667308860538}
   - component: {fileID: 7969246734013698601}
   - component: {fileID: 4536067208168745239}
-  m_Layer: 9
+  m_Layer: 15
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -429,6 +429,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 841048733743218709, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3894907031294210986, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5672234629467394254, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -441,8 +451,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6265315638745023936, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6265315638745023936, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7812722819756250962, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7812722819756250962, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
