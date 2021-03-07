@@ -13,10 +13,10 @@ public class BuildingFoundation : MonoBehaviour {
 
     [SerializeField] private bool _canBuild = true;
 
-    private static Color canBuildColor = new Color(0.2f, 0.8f, 0.2f, 0.6f);
+    private static Color canBuildColor = new Color(0.78f, 0.99f, 0.11f, 1f);
     private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f, 0.6f);
     private static Color invisibleColor = new Color(0f, 0f, 0f, 0f);
-    private static Color defaultColor = new Color(0.5f, 0.5f, 0.5f, 0.2f);
+    private static Color defaultColor = new Color(0.78f, 0.99f, 0.11f, 1f);
     private MaterialPropertyBlock _propBlock;
 
     public bool CanBuild {

@@ -3,7 +3,67 @@ guid: 2ff4008e133b54f408fd0b4b2a42b051
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Geyser_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Honey_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf1_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf2_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf3_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Leaf4_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Legs_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock1_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock2_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Rock3_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Tap_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vine_lowMat
+    second: {fileID: 2100000, guid: 2e834cd9067f2e04d86de26267c2b7cd, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

@@ -25,7 +25,7 @@ Material:
     type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 2
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap:
@@ -37,11 +37,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_109E56C2:
-        m_Texture: {fileID: 2800000, guid: 7efbcea3fee427d41a7bd1e34e0a73e2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 11f3ff1ebf9481646961ab9cef9f13b3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_E9F4290F:
-        m_Texture: {fileID: 2800000, guid: 91503469c98ebd7488e5b9dbdfcc1294, type: 3}
+        m_Texture: {fileID: 2800000, guid: ec1c97c7091c53d468f8b2fa431267be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -89,7 +89,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_709768E0: 5
+    - Vector1_709768E0: 34
     - _AlphaClip: 0
     - _Blend: 1
     - _BumpScale: 1
@@ -122,7 +122,7 @@ Material:
     m_Colors:
     - Color_7DDE9322: {r: 0.6698113, g: 0.6161, b: 0.6161, a: 0.57254905}
     - Color_C70831BF: {r: 0.6037736, g: 0.6037736, b: 0.6037736, a: 1}
-    - _BaseColor: {r: 0.57547164, g: 0.57547164, b: 0.57547164, a: 0.09803922}
-    - _Color: {r: 0.16862738, g: 0.7921569, b: 0.20610452, a: 1}
+    - _BaseColor: {r: 0.2196078, g: 0.2196078, b: 0.2196078, a: 0.007843138}
+    - _Color: {r: 0.7811684, g: 0.99215686, b: 0.117647044, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
