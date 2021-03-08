@@ -1183,8 +1183,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1215696515210924456}
   m_HandleRect: {fileID: 1215696515210924462}
   m_Direction: 2
-  m_Value: 1.0000046
-  m_Size: 0.74000007
+  m_Value: 1.0000051
+  m_Size: 0.74
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -3013,8 +3013,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1215696515618862059}
-  - {fileID: 1215696516742195661}
   - {fileID: 1215696516424867378}
+  - {fileID: 1215696516742195661}
   m_Father: {fileID: 1215696515448509384}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5770,7 +5770,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1215696515771429313}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -7577,7 +7577,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1215696515771429313}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
