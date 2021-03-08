@@ -230,7 +230,7 @@ MonoBehaviour:
   active: 1
   m_AdvancedMode: 0
   enabled:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: 1
   colorMode:
     m_OverrideState: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
     showAlpha: 0
     showEyeDropper: 1
   maxFogDistance:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 5000
     min: 0
   mipFogMaxMip:
@@ -266,10 +266,10 @@ MonoBehaviour:
     min: 0
   baseHeight:
     m_OverrideState: 0
-    m_Value: 100
+    m_Value: 10000
   maximumHeight:
     m_OverrideState: 0
-    m_Value: 100
+    m_Value: 10000
   albedo:
     m_OverrideState: 1
     m_Value: {r: 0, g: 0.24705884, b: 0.39607847, a: 1}

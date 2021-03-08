@@ -11,29 +11,23 @@ namespace CameraNameSpace {
         /// </summary>
         [Tooltip("The offset at which the camera will stay above its target position")]
         [SerializeField] private Vector3 offset;
-        
-        /// <summary>
-        /// A value to change to increase/decrease the speed of panning
-        /// </summary>
-        [Tooltip("The speed at which the camera will pan")]
-        [SerializeField] private float panSpeed;
+        [SerializeField] private Transform target;
 
-        private bool allowMousePan;
-
-        private float timeMoving = 0;
-        
         /// <summary>
         /// The position that the camera will attempt to target
         /// </summary>
         private Vector3 _targetPosition;
+
+        private float rotateSpeed = 0f;
+        private const float rotateStrength = 35f;
 
         /// <summary>
         /// Mask for the terrain
         /// </summary>
         [SerializeField] private LayerMask terrainMask;
         
-        private Vector3 MAX_ZOOM = new Vector3(5f, 15f, 5f);
-        private Vector3 MIN_ZOOM = new Vector3(-5f, 5f, -5f);
+        private Vector3 MAX_ZOOM = new Vector3(0f, 15f, 0f);
+        private Vector3 MIN_ZOOM = new Vector3(0f, 5f, 0f);
 
         public Vector3 TargetPositon {
             get => _targetPosition;
@@ -45,8 +39,6 @@ namespace CameraNameSpace {
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
-            panSpeed = Settings.CameraPanSpeed.Value;
-            allowMousePan = Settings.CanMousePan.Value;
             UpdateHeight();
         }
 
@@ -54,39 +46,32 @@ namespace CameraNameSpace {
         /// Gets the inputs to determine whether to pan
         /// </summary>
         void Update() {
-            float x = Input.GetAxis("Horizontal");
-            float y = Input.GetAxis("Vertical");
-            Vector2 panDirection = new Vector2(x, y);
-            if (panDirection != Vector2.zero) {
-                timeMoving += Time.deltaTime;
-                Pan(panDirection.normalized * Time.deltaTime);
-            } else {
-                timeMoving = 0;
-            }
-
             float scroll = Input.GetAxis("Mouse ScrollWheel");
             if (Math.Abs(scroll) > 0.05f) {
                 Vector3 newOffset = offset + (transform.forward * (scroll * Time.deltaTime * 500f));
-                if (newOffset.x > MIN_ZOOM.x && newOffset.y > MIN_ZOOM.y && newOffset.z > MIN_ZOOM.z &&
-                    newOffset.x < MAX_ZOOM.x && newOffset.y < MAX_ZOOM.y && newOffset.z < MAX_ZOOM.z ) {
+                if (newOffset.y > MIN_ZOOM.y && newOffset.y < MAX_ZOOM.y) {
                     offset = newOffset;
                 }
             }
 
-            if (allowMousePan) {
-                AttemptMousePan();
+            if (Input.GetKey(KeyCode.Q)) {
+                rotateSpeed = rotateStrength;
+            } else if (Input.GetKey(KeyCode.E)) {
+                rotateSpeed = -rotateStrength;
+            } else {
+                rotateSpeed = 0f;
             }
+            
         }
 
         /// <summary>
         /// Moves the camera if required, as well as its target Y height
         /// </summary>
         void FixedUpdate() {
-            if (transform.position != _targetPosition) {
-                UpdateHeight();
-                transform.position =
-                    Vector3.Lerp(transform.position, _targetPosition + offset, 1f);
-            }
+            Vector3 oldPosition = transform.position;
+            transform.RotateAround(target.position, Vector3.up, rotateSpeed * Time.deltaTime);
+            offset += transform.position - oldPosition;
+            transform.position = Vector3.Lerp(transform.position, target.position + offset, 1f);
         }
 
         /// <summary>
@@ -111,55 +96,6 @@ namespace CameraNameSpace {
             }
 
             return hitPoint;
-        }
-
-        private void AttemptMousePan() {
-            Vector2 mousePos = Input.mousePosition;
-            float xNormalized = (Screen.width - mousePos.x) / Screen.width;
-            float yNormalized = (Screen.height - mousePos.y) / Screen.height;
-            float panX = 0;
-            if (xNormalized > 0.99f) {
-                panX = -0.1f;
-            } else if (xNormalized < 0.01f) {
-                panX = 0.1f;
-            }
-            float panY = 0;
-            if (yNormalized > 0.99f) {
-                panY = -0.1f;
-            } else if (yNormalized < 0.01f) {
-                panY = 0.1f;
-            }
-            Vector2 pan = new Vector2(panX, panY);
-            if (pan != Vector2.zero) {
-                Pan(pan);
-            }
-        }
-
-        /// <summary>
-        /// Updates the target position by modifying its value
-        /// </summary>
-        /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
-        private void Pan(Vector2 inputDirection) {
-            inputDirection *= panSpeed * ConvertTimeToExtraSpeedMultiplier();
-            Vector3 transformRight = transform.right;
-            
-            // Get the forward flattened for height
-            Vector3 transformForwardsFlattened = transform.forward;
-            transformForwardsFlattened.y = 0;
-            transformForwardsFlattened.Normalize();
-
-            Vector3 movement = (transformRight * inputDirection.x) + (transformForwardsFlattened * inputDirection.y);
-            _targetPosition += movement;
-        }
-
-        private float ConvertTimeToExtraSpeedMultiplier() {
-            float extraSpeed = 1;
-
-            if (timeMoving > 1) {
-                extraSpeed = Mathf.Min(3, timeMoving);
-            }
-
-            return extraSpeed;
         }
     }
 }
