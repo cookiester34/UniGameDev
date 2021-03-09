@@ -21,6 +21,8 @@ namespace UI {
         /// </summary>
         private Text _tooltipText;
 
+        [SerializeField] private GameObject _panel;
+
         [Tooltip("The scriptable object must implement IUiClickableHover, used to call its methods")]
         [SerializeField] protected ScriptableObject _scriptableObject;
 		public bool isLevelEditorOnly;
@@ -59,6 +61,11 @@ namespace UI {
                 } else {
                     _tooltipText.gameObject.SetActive(false);
                 }
+            }
+
+            if (_panel == null) {
+                Debug.LogError(
+                        "Something has gone wrong in setting up the button components, ensure there is a child with image for the panel");
             }
 
             if (_scriptableObject == null) {
@@ -104,6 +111,7 @@ namespace UI {
         /// <param name="eventData"></param>
         public void OnPointerEnter(PointerEventData eventData) {
             _tooltipText.gameObject.SetActive(true);
+            _panel.gameObject.SetActive(true);
         }
 
         /// <summary>
@@ -112,6 +120,7 @@ namespace UI {
         /// <param name="eventData"></param>
         public void OnPointerExit(PointerEventData eventData) {
             _tooltipText.gameObject.SetActive(false);
+            _panel.gameObject.SetActive(false);
         }
     }
 }

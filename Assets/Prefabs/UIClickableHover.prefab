@@ -211,6 +211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd7d822cede1ef42869c83925222ac8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _panel: {fileID: 6221313263399571726}
   _scriptableObject: {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   isLevelEditorOnly: 0
 --- !u!1 &6221313263399571726

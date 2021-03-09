@@ -13,6 +13,7 @@ public class BuildingFoundation : MonoBehaviour {
 
     [SerializeField] private bool _canBuild = true;
 
+    private Color currentColor;
     private static Color canBuildColor = new Color(0.78f, 0.99f, 0.11f, 1f);
     private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f, 0.6f);
     private static Color invisibleColor = new Color(0f, 0f, 0f, 0f);
@@ -25,7 +26,9 @@ public class BuildingFoundation : MonoBehaviour {
         get => _canBuild;
         set {
             _canBuild = value;
-            UpdateVisibleColour();
+            if (currentColor != invisibleColor) {
+                UpdateVisibleColour();
+            }
         }
     }
 
@@ -160,6 +163,7 @@ public class BuildingFoundation : MonoBehaviour {
     }
 
     public void UpdateVisibleColour(Color color) {
+        currentColor = color;
         if (ApplicationUtil.IsQuitting) {
             return;
         }
