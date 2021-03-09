@@ -73,7 +73,7 @@ public class CameraTarget : MonoBehaviour {
 
         Vector3 movement = (transformRight * inputDirection.x) + (transformForwardsFlattened * inputDirection.y);
         Vector3 newPos = transform.position + movement;
-        newPos.y = _terrain.SampleHeight(newPos);
+        newPos.y = _terrain.SampleHeight(newPos) + _terrain.transform.position.y;
         if (_terrain.terrainData.bounds.Contains(newPos - _terrain.transform.position)) {
             transform.position = newPos;
         }
