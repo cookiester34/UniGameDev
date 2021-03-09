@@ -8,10 +8,10 @@ public class CameraTarget : MonoBehaviour {
     private float timeMoving = 0;
     private bool allowMousePan;
     [SerializeField] private float panSpeed;
-    private Terrain _terrain;
+    [SerializeField] private MeshRenderer terrain;
+    [SerializeField] private LayerMask terrainMask;
 
     private void Awake() {
-        _terrain = FindObjectOfType<Terrain>();
         panSpeed = Settings.CameraPanSpeed.Value;
         allowMousePan = Settings.CanMousePan.Value;
     }
@@ -75,8 +75,12 @@ public class CameraTarget : MonoBehaviour {
 
         Vector3 movement = (transformRight * inputDirection.x) + (transformForwardsFlattened * inputDirection.y);
         Vector3 newPos = transform.position + movement;
-        newPos.y = _terrain.SampleHeight(newPos) + _terrain.transform.position.y;
-        if (_terrain.terrainData.bounds.Contains(newPos - _terrain.transform.position)) {
+        newPos.y += 100f;
+        if (Physics.Raycast(new Ray(newPos, Vector3.down), out var hitInfo, float.MaxValue, terrainMask)) {
+            newPos.y = hitInfo.point.y;
+        }
+
+        if (terrain.bounds.Contains(newPos)) {
             transform.position = newPos;
         }
     }
