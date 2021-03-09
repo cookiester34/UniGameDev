@@ -1,14 +1,9 @@
 fileFormatVersion: 2
-guid: 77ba55aeb3aeb0942933b9924ca918a3
+guid: 4127bede67801074ab61cffe62bff19f
 ModelImporter:
   serializedVersion: 19301
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Jed_20210219_1437_pCylinder25Mat
-    second: {fileID: 2100000, guid: 3c208b65e4750624b96667e1db50ea1a, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
