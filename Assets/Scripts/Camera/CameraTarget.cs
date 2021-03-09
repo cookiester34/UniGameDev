@@ -31,9 +31,9 @@ public class CameraTarget : MonoBehaviour {
             AttemptMousePan();
         }
 
-        Vector3 currentPosition = transform.position;
-        currentPosition.y = _terrain.SampleHeight(currentPosition);
-        transform.position = currentPosition;
+        // Vector3 currentPosition = transform.position;
+        // currentPosition.y = _terrain.SampleHeight(currentPosition);
+        // transform.position = currentPosition;
     }
     
     private void AttemptMousePan() {
@@ -72,10 +72,11 @@ public class CameraTarget : MonoBehaviour {
         transformForwardsFlattened.Normalize();
 
         Vector3 movement = (transformRight * inputDirection.x) + (transformForwardsFlattened * inputDirection.y);
-        // Vector3 newPos = transform.position + movement;
-        // if (_terrain.terrainData.bounds.Contains(newPos - _terrain.transform.position)) {
-            transform.position += movement;
-        // }
+        Vector3 newPos = transform.position + movement;
+        newPos.y = _terrain.SampleHeight(newPos);
+        if (_terrain.terrainData.bounds.Contains(newPos - _terrain.transform.position)) {
+            transform.position = newPos;
+        }
     }
 
     private float ConvertTimeToExtraSpeedMultiplier() {
