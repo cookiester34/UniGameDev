@@ -18,9 +18,9 @@ public class GenerateHexMap : MonoBehaviour
 	float smallRadius = 1.035f;
 	bool shouldOffsetRow = true;
 	public GameObject defaultHex;
-	public Material baseMat;
+	public Material hexMaterial;
 	public Color[] colours;
-	[SerializeField] private bool hexesVisible;
+	[HideInInspector][SerializeField] private bool hexesVisible;
 	
 	public InputField widthInputField;
 	public InputField lengthInputField;
@@ -96,13 +96,15 @@ public class GenerateHexMap : MonoBehaviour
 	}
 	
 	public void ToggleVisibility() {
-		hexesVisible = !hexesVisible;
-		List<HexPanel> hexes = Object.FindObjectsOfType<HexPanel>().ToArray().ToList();
-		for (int i = 0; i < hexes.Count; i++) {
-			hexes[i].ToggleVisibility(hexesVisible);
+		if (hexMaterial == null) {
+			Debug.LogError("The hex material is null, please drag the hex material into the HexMapParent");
+			return;
 		}
+		hexesVisible = !hexesVisible;
+		Color color = hexesVisible ? Color.cyan : new Color(0f, 0f, 0f, 0f);
+		hexMaterial.SetColor("_Color", color);
 	}
-	
+
 	public void SetGeneratorHeight() {
 		Terrain terrain = GameObject.FindObjectOfType<Terrain>();
 		Vector3 pos = transform.position;
@@ -164,12 +166,5 @@ public class GenerateHexMap : MonoBehaviour
         foreach (HexPanel HP in panels) {
             Object.Destroy(HP.gameObject);
         }
-	}
-
-	public void SetRandColour(GameObject go) {
-		Material mat = new Material(baseMat);
-		mat.color = colours[Random.Range(0, colours.Length)];
-		MeshRenderer mr = go.transform.GetChild(0).GetComponent<MeshRenderer>();
-		mr.material = mat;
 	}
 }

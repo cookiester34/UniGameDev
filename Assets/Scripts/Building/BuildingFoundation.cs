@@ -16,8 +16,10 @@ public class BuildingFoundation : MonoBehaviour {
     private static Color canBuildColor = new Color(0.78f, 0.99f, 0.11f, 1f);
     private static Color cannotBuildColor = new Color(0.8f, 0.2f, 0.2f, 0.6f);
     private static Color invisibleColor = new Color(0f, 0f, 0f, 0f);
-    private static Color defaultColor = new Color(0.78f, 0.99f, 0.11f, 1f);
     private MaterialPropertyBlock _propBlock;
+    static List<BuildingFoundation> _foundations = new List<BuildingFoundation>();
+
+    public static Color InvisibleColor => invisibleColor;
 
     public bool CanBuild {
         get => _canBuild;
@@ -31,7 +33,19 @@ public class BuildingFoundation : MonoBehaviour {
         _hexPanel = GetComponent<HexPanel>();
         _renderer = GetComponentInChildren<Renderer>();
         _propBlock = new MaterialPropertyBlock();
-        UpdateVisibleColour();
+        _foundations.Add(this);
+    }
+
+    public static void Hide() {
+        foreach (BuildingFoundation foundation in _foundations) {
+            foundation.UpdateVisibleColour(invisibleColor);
+        }
+    }
+
+    public static void Show() {
+        foreach (BuildingFoundation foundation in _foundations) {
+            foundation.UpdateVisibleColour();
+        }
     }
 
     /// <summary>
@@ -141,13 +155,13 @@ public class BuildingFoundation : MonoBehaviour {
     }
 
 
-    private void UpdateVisibleColour() {
+    public void UpdateVisibleColour() {
         UpdateVisibleColour(_canBuild ? canBuildColor : cannotBuildColor);
     }
 
-    private void UpdateVisibleColour(Color color) {
+    public void UpdateVisibleColour(Color color) {
         if (_renderer == null) {
-            return;
+            _renderer = GetComponentInChildren<Renderer>();
         }
 
         if (_propBlock == null) {

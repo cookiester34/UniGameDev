@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
@@ -30,17 +31,15 @@ public class GenerateFromEditor : Editor
 		if (GUILayout.Button("Toggle Hex Visibility")) {
 			myScript.ToggleVisibility();
 		}
-        serializedObject.ApplyModifiedProperties();
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+		if (GUILayout.Button("Clear hex with no visual")) {
+			List<BuildingFoundation> hexes = FindObjectsOfType<BuildingFoundation>().ToList();
+			foreach (BuildingFoundation foundation in hexes) {
+				if (foundation.transform.childCount < 1) {
+					DestroyImmediate(foundation.gameObject);
+				}
+			}
+		}
+        serializedObject.ApplyModifiedProperties();
     }
 }

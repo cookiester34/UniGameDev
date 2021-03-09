@@ -21,12 +21,14 @@ public class BuildState : BuildingManagerState {
         }
 
         buildingManager.SetUIImage(true);
+        BuildingFoundation.Show();
     }
 
     public override void Exit() {
         GameObject.Destroy(tempBuilding);
         buildingManager.selectedBuildingText.text = "No building is selected";
         buildingManager.selectedBuildingUI.sprite = null;
+        BuildingFoundation.Hide();
     }
 
     public override void Update() {
