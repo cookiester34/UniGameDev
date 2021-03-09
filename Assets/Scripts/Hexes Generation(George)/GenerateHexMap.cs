@@ -9,9 +9,9 @@ using Object = UnityEngine.Object;
 
 public class GenerateHexMap : MonoBehaviour
 {
-	[Range(1, 100)]
+	[Range(1, 500)]
 	public int width = 1;
-	[Range(1, 100)]
+	[Range(1, 500)]
 	public int length = 1;
 	float stepheight = 5f;
 	float bigRadius = 1.195f;
@@ -75,7 +75,6 @@ public class GenerateHexMap : MonoBehaviour
 		}
 		foreach (Transform child in transform) {
 			HexPanel HP = child.GetComponent<HexPanel>();
-			HP.ToggleVisibility(hexesVisible);
 			HP.CalculateNeighbours();
 			HP.SetToTerrain();
 		}

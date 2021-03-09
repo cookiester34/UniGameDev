@@ -10,19 +10,18 @@ public class HexPanel : MonoBehaviour
 	[SerializeField] List<HexPanel> neighbours = new List<HexPanel>();
 	bool scaleModifiedByCode;
 	bool shouldBeDestroyed = true;
-	MeshRenderer mr;
 	private BuildingFoundation _buildingFoundation;
 
 	public BuildingFoundation BuildingFoundation => _buildingFoundation;
 
 	private void Awake() {
 		_buildingFoundation = GetComponent<BuildingFoundation>();
-		mr = GetComponentInChildren<MeshRenderer>();
 	}
 
 	public void SetToTerrain() {
 		RaycastHit rayHit;
 		LayerMask mask = LayerMask.GetMask("Environment");
+		// shouldBeDestroyed = false;
 		if (Physics.Raycast(transform.position, Vector3.down, out rayHit, Mathf.Infinity, mask)) { //can only be fired below since firing upwards does not seem to interact with the Terrain's collider
 			AdjustYPos(rayHit.point.y + 0.05f);
 			shouldBeDestroyed = false;
@@ -46,14 +45,7 @@ public class HexPanel : MonoBehaviour
 			}
 		}
 	}
-	
-	public void ToggleVisibility(bool val) {
-		if (!mr) {
-			mr = GetComponentInChildren<MeshRenderer>();
-		}
-		mr.enabled = val;
-	}
-	
+
 	void SortNeighboursByHeight() {
 		neighbours = neighbours.OrderBy(x => x.transform.position.y).ToList();
 	}
