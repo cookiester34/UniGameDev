@@ -90,6 +90,10 @@ public class BuildingManager : MonoBehaviour {
         _selectionState = new SelectionState(this);
         _destroyState = new DestroyState(this);
     }
+	
+	public bool GetIsBuildingOrDestroying() {
+		return _currentState != _selectionState;
+	}
 
     public void SetBuildMode(BuildingMode mode, BuildingData buildingData = null) {
         _currentState?.Exit();

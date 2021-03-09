@@ -47,21 +47,23 @@ namespace CameraNameSpace {
         /// Gets the inputs to determine whether to pan
         /// </summary>
         void Update() {
-            float scroll = Input.GetAxis("Mouse ScrollWheel");
-            if (Math.Abs(scroll) > 0.05f) {
-                Vector3 newOffset = offset + (transform.forward * (scroll * Time.deltaTime * 500f));
-                if (newOffset.y > MIN_ZOOM.y && newOffset.y < MAX_ZOOM.y) {
-                    offset = newOffset;
-                }
-            }
+			if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
+				float scroll = Input.GetAxis("Mouse ScrollWheel");
+				if (Math.Abs(scroll) > 0.05f) {
+					Vector3 newOffset = offset + (transform.forward * (scroll * Time.deltaTime * 500f));
+					if (newOffset.y > MIN_ZOOM.y && newOffset.y < MAX_ZOOM.y) {
+						offset = newOffset;
+					}
+				}
 
-            if (Input.GetKey(KeyCode.Q)) {
-                rotateSpeed = rotateStrength;
-            } else if (Input.GetKey(KeyCode.E)) {
-                rotateSpeed = -rotateStrength;
-            } else {
-                rotateSpeed = 0f;
-            }
+				if (Input.GetKey(KeyCode.Q)) {
+					rotateSpeed = rotateStrength;
+				} else if (Input.GetKey(KeyCode.E)) {
+					rotateSpeed = -rotateStrength;
+				} else {
+					rotateSpeed = 0f;
+				}
+			}
             
         }
 

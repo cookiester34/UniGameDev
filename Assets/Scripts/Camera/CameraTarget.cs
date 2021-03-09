@@ -17,23 +17,25 @@ public class CameraTarget : MonoBehaviour {
     }
 
     void Update() {
-        float x = Input.GetAxis("Horizontal");
-        float y = Input.GetAxis("Vertical");
-        Vector2 panDirection = new Vector2(x, y);
-        if (panDirection != Vector2.zero) {
-            timeMoving += Time.deltaTime;
-            Pan(panDirection.normalized * Time.deltaTime);
-        } else {
-            timeMoving = 0;
-        }
+		if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
+			float x = Input.GetAxis("Horizontal");
+			float y = Input.GetAxis("Vertical");
+			Vector2 panDirection = new Vector2(x, y);
+			if (panDirection != Vector2.zero) {
+				timeMoving += Time.deltaTime;
+				Pan(panDirection.normalized * Time.deltaTime);
+			} else {
+				timeMoving = 0;
+			}
 
-        if (allowMousePan) {
-            AttemptMousePan();
-        }
+			if (allowMousePan) {
+				AttemptMousePan();
+			}
 
-        // Vector3 currentPosition = transform.position;
-        // currentPosition.y = _terrain.SampleHeight(currentPosition);
-        // transform.position = currentPosition;
+			// Vector3 currentPosition = transform.position;
+			// currentPosition.y = _terrain.SampleHeight(currentPosition);
+			// transform.position = currentPosition;
+		}
     }
     
     private void AttemptMousePan() {
