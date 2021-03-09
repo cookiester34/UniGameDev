@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraTarget : MonoBehaviour {
-    [SerializeField] private Transform camera;
+    [SerializeField] private Transform cameraTransform;
     private float timeMoving = 0;
     private bool allowMousePan;
     [SerializeField] private float panSpeed;
@@ -64,10 +64,10 @@ public class CameraTarget : MonoBehaviour {
     /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
     private void Pan(Vector2 inputDirection) {
         inputDirection *= panSpeed * ConvertTimeToExtraSpeedMultiplier();
-        Vector3 transformRight = camera.right;
+        Vector3 transformRight = cameraTransform.right;
 
         // Get the forward flattened for height
-        Vector3 transformForwardsFlattened = camera.forward;
+        Vector3 transformForwardsFlattened = cameraTransform.forward;
         transformForwardsFlattened.y = 0;
         transformForwardsFlattened.Normalize();
 

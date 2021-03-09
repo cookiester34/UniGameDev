@@ -160,6 +160,10 @@ public class BuildingFoundation : MonoBehaviour {
     }
 
     public void UpdateVisibleColour(Color color) {
+        if (ApplicationUtil.IsQuitting) {
+            return;
+        }
+
         if (_renderer == null) {
             _renderer = GetComponentInChildren<Renderer>();
         }
