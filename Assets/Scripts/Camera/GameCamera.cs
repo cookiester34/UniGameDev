@@ -19,7 +19,7 @@ namespace CameraNameSpace {
         private Vector3 _targetPosition;
 
         private float rotateSpeed = 0f;
-        private const float rotateStrength = 35f;
+        private float rotateStrength;
 
         /// <summary>
         /// Mask for the terrain
@@ -39,6 +39,7 @@ namespace CameraNameSpace {
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
+            rotateStrength = Settings.CameraRotateStrength.Value;
             UpdateHeight();
         }
 

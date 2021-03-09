@@ -10,6 +10,7 @@ using UnityEngine.UI;
 public class SettingsPanel : MonoBehaviour {
     
     [SerializeField] private Slider cameraSpeedSlider;
+    [SerializeField] private Slider cameraRotateStrengthSlider;
     [SerializeField] private Toggle cameraMousePan;
     [SerializeField] private Slider masterSlider;
     [SerializeField] private Slider musicSlider;
@@ -25,6 +26,7 @@ public class SettingsPanel : MonoBehaviour {
     /// </summary>
     private void InitialiseUiComponents() {
         cameraSpeedSlider.value = Settings.CameraPanSpeed.Value;
+        cameraRotateStrengthSlider.value = Settings.CameraRotateStrength.Value;
         cameraMousePan.isOn = Settings.CanMousePan.Value;
         masterSlider.value = Settings.MasterVolume.Value;
         musicSlider.value = Settings.MusicVolume.Value;
@@ -37,6 +39,7 @@ public class SettingsPanel : MonoBehaviour {
     /// </summary>
     public void SaveSettings() {
         Settings.CameraPanSpeed.SetValue(cameraSpeedSlider.value);
+        Settings.CameraRotateStrength.SetValue(cameraRotateStrengthSlider.value);
         Settings.CanMousePan.SetValue(cameraMousePan.isOn);
         Settings.MasterVolume.SetValue(masterSlider.value);
         Settings.MusicVolume.SetValue(musicSlider.value);

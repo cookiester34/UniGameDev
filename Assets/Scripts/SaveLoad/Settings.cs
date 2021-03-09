@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 public static class Settings {
     public static FloatSetting CameraPanSpeed = new FloatSetting("CameraPanSpeed", 5f);
+    public static FloatSetting CameraRotateStrength = new FloatSetting("CameraRotateStrength", 35f);
     public static BoolSetting CanMousePan = new BoolSetting("CanMousePan", true);
     public static FloatSetting MasterVolume = new FloatSetting("MasterVolume", 1f);
     public static FloatSetting MusicVolume = new FloatSetting("MusicVolume", 0.11f);
