@@ -9,6 +9,9 @@ public class PauseMenu : MonoBehaviour
 	private static PauseMenu inst;
 	//public GameObject pauseObject;
 	private bool _isPaused;
+	private GameObject _mainContainer;
+	private GameObject _saveLoadMenu;
+	private GameObject _settingsMenu;
 	
     public static PauseMenu Instance {
         get {
@@ -27,7 +30,14 @@ public class PauseMenu : MonoBehaviour
             return;
         }
         inst = this;
-		gameObject.SetActive(false);
+		
+		//probably a more efficient way to handle this
+		_mainContainer = transform.Find("Container").gameObject;
+		_saveLoadMenu = transform.Find("SaveLoadPanel").gameObject;
+		_settingsMenu = transform.Find("SettingsPanel").gameObject;
+		_mainContainer.SetActive(false);
+		_saveLoadMenu.SetActive(false);
+		_settingsMenu.SetActive(false);
 	}
 	
     // Start is called before the first frame update
@@ -50,11 +60,25 @@ public class PauseMenu : MonoBehaviour
 		_isPaused = !_isPaused;
 		if (_isPaused) {
 			Time.timeScale = 0f;
-			gameObject.SetActive(true);
+			_mainContainer.SetActive(true);
 		}
 		else {
 			Time.timeScale = 1f;
-			gameObject.SetActive(false);
+			_mainContainer.SetActive(false);
+			_saveLoadMenu.SetActive(false);
+			_settingsMenu.SetActive(false);
 		}
+	}
+	
+	public void ToggleSaveLoad() {
+		_saveLoadMenu.SetActive(!_saveLoadMenu.activeSelf);
+	}
+	
+	public void ToggleSettings() {
+		_settingsMenu.SetActive(!_settingsMenu.activeSelf);
+	}
+	
+	void OnDestroy() {
+		Time.timeScale = 1f;
 	}
 }
