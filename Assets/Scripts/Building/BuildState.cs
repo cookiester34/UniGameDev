@@ -21,7 +21,6 @@ public class BuildState : BuildingManagerState {
         }
 
         buildingManager.SetUIImage(true);
-        BuildingFoundation.Show();
     }
 
     public override void Exit() {

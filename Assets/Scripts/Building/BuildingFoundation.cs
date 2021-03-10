@@ -51,6 +51,11 @@ public class BuildingFoundation : MonoBehaviour {
         }
     }
 
+    private void Update() {
+        Vector3 viewPortPos = Camera.main.WorldToViewportPoint(transform.position);
+        Vector3 mousePortPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
+    }
+
     /// <summary>
     /// Gets the central position for the building
     /// </summary>
@@ -157,9 +162,10 @@ public class BuildingFoundation : MonoBehaviour {
         return foundations;
     }
 
-
-    public void UpdateVisibleColour() {
-        UpdateVisibleColour(_canBuild ? canBuildColor : cannotBuildColor);
+    public void UpdateVisibleColour(float distance = 1, float maxDistance = 1) {
+        Color usedColor = _canBuild ? canBuildColor : cannotBuildColor;
+        Color lerpedColor = Color.Lerp(invisibleColor, usedColor, distance / maxDistance);
+        UpdateVisibleColour(lerpedColor);
     }
 
     public void UpdateVisibleColour(Color color) {

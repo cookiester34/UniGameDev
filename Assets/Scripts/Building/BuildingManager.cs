@@ -52,6 +52,8 @@ public class BuildingManager : MonoBehaviour {
     public GameObject BuildingPlaceParticles => buildingPlaceParticles;
     public List<Building> Buildings => _buildings;
 
+    public BuildingManagerState CurrentState => _currentState;
+
     public static BuildingManager Instance {
         get {
             if (_instance == null) {
