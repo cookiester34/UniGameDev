@@ -31,48 +31,53 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
     Vector2 bottomCorner;
     Vector2 topCorner;
 
+    Vector3 pos;
+    Vector3 origScale;
+    public LayerMask terrainMask;
+    float uiPosEdit = 5;
+
     private void Awake() 
     {
         displayBonus.SetActive(false);
         gameObject.SetActive(false);
         BuildingManager.Instance.OnBuildingSelected += DataChanged;
-
-       
+        origScale = transform.localScale;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        //foreach (Renderer i in points)
-        //{
-        //    if (!i.isVisible)
-        //    {
-        //        float camDistance = Vector3.Distance(transform.position, Camera.main.transform.position);
-        //        bottomCorner = Camera.main.ViewportToWorldPoint(new Vector3(0, camDistance, 0));
-        //        topCorner = Camera.main.ViewportToWorldPoint(new Vector3(1, camDistance, 1));
+        if (Vector3.Distance(pos, Camera.main.transform.position) > 17)
+        {
+            transform.position = new Vector3(Camera.main.transform.position.x + 1, Camera.main.transform.position.y - 1, Camera.main.transform.position.z + 1);
+            transform.localScale = new Vector3(0.004f, 0.004f, 0.004f);
+        }
+        else
+        {
+            transform.position = pos;
+            transform.localScale = origScale;
+        }
 
-        //        float objectRadius = 1;
-
-        //        minX = bottomCorner.x + objectRadius;
-        //        maxX = topCorner.x - objectRadius;
-        //        minY = bottomCorner.y + objectRadius;
-        //        maxY = topCorner.y - objectRadius;
-
-        //        transform.position = new Vector3(
-        //        Mathf.Clamp(transform.position.x, minX, maxX),
-        //        transform.position.y,
-        //        Mathf.Clamp(transform.position.z, minY, maxY));
-        //    }
-        //}
+        //note sure if we have controls grouped somewhere or not
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            gameObject.SetActive(false);
+        }
     }
 
-    private void UpdateAssignedBeesUI(int numAssigned, int maxAssigned, string buildingType, int buildingTeir, Building building) 
+    IEnumerator waitToUpdateUI(Building building)
+    {
+        yield return new WaitForSeconds(0.1f);
+        UpdateAssignedBeesUI(building);
+    }
+
+    private void UpdateAssignedBeesUI(Building building) 
     {
         toolTip.text = "";
         toolTipObject.SetActive(false);
         buildingResource.text = "";
-        buildingsAssignedBees.text = "Assigned Bees: " + numAssigned + " / " + maxAssigned + "\n" + "Unassigned Bees: " + 
+        buildingsAssignedBees.text = "Assigned Bees: " + building.numAssignedBees + " / " + building.BuildingData.maxNumberOfWorkers + "\n" + "Unassigned Bees: " + 
             (ResourceManagement.Instance.GetResource(ResourceType.Population).ResourceCap - (int)ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
-        buildingName.text = buildingType;
+        buildingName.text = building.BuildingType.ToString();
         foreach (ResourceSupplier i in resources)
         {
             buildingResource.text += "Supplying " + i.Resource.name + ": " + i.actualProductionAmount + "\n";
@@ -83,7 +88,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
         }
 
         #region UI Cases
-        if (buildingTeir >= 2 || building.BuildingType == BuildingType.QueenBee)
+        if (building.buildingTeir >= 2 || building.BuildingType == BuildingType.QueenBee)
         {
             upgradeBuilding.interactable = false;
             toolTip.text += "This Building cannot be upgraded \n \n";
@@ -94,7 +99,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
             upgradeBuilding.interactable = true;
         }
 
-        if(numAssigned >= maxAssigned)
+        if(building.numAssignedBees >= building.BuildingData.maxNumberOfWorkers)
         {
             addBee.interactable = false;
             toolTip.text += "This building has the max assigned bees \n \n";
@@ -105,7 +110,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
             addBee.interactable = true;
         }
 
-        if(numAssigned <= 0)
+        if(building.numAssignedBees <= 0)
         {
             removeBee.interactable = false;
             toolTip.text += "This building has no Bees Assigned";
@@ -129,10 +134,12 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
             GameObject buildingObject = building.GetActiveBuilding();
             if (buildingObject != null)
             {
-                transform.position = building.gameObject.transform.position + new Vector3(0, buildingObject.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y * 4f);
+                pos = building.gameObject.transform.position + new Vector3(0, buildingObject.transform.GetChild(0).GetComponent<Renderer>().bounds.size.y * 4f);
             }
             else
-                transform.position = building.gameObject.transform.position + new Vector3(0, 5);
+                pos = building.gameObject.transform.position + new Vector3(0, 5);
+
+            transform.position = pos;
             gameObject.SetActive(true);
 
             resources.Clear();
@@ -140,7 +147,8 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
             storage.Clear();
             storage = new List<ResourceStorage>(building.gameObject.GetComponents<ResourceStorage>());
 
-            UpdateAssignedBeesUI(building.numAssignedBees, building.BuildingData.maxNumberOfWorkers, building.BuildingData.name, building.buildingTeir, building);
+            //UpdateAssignedBeesUI(building);
+            StartCoroutine(waitToUpdateUI(building));
         } 
         else 
         {
