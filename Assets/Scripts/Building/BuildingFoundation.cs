@@ -51,11 +51,6 @@ public class BuildingFoundation : MonoBehaviour {
         }
     }
 
-    private void Update() {
-        Vector3 viewPortPos = Camera.main.WorldToViewportPoint(transform.position);
-        Vector3 mousePortPos = Camera.main.ScreenToViewportPoint(Input.mousePosition);
-    }
-
     /// <summary>
     /// Gets the central position for the building
     /// </summary>
