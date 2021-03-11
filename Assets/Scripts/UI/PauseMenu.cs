@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
 	private GameObject _mainContainer;
 	private GameObject _saveLoadMenu;
 	private GameObject _settingsMenu;
+	private SettingsPanel _settingsScript;
 	
     public static PauseMenu Instance {
         get {
@@ -35,6 +36,7 @@ public class PauseMenu : MonoBehaviour
 		_mainContainer = transform.Find("Container").gameObject;
 		_saveLoadMenu = transform.Find("SaveLoadPanel").gameObject;
 		_settingsMenu = transform.Find("SettingsPanel").gameObject;
+		_settingsScript = _settingsMenu.GetComponent<SettingsPanel>();
 		_mainContainer.SetActive(false);
 		_saveLoadMenu.SetActive(false);
 		_settingsMenu.SetActive(false);
@@ -67,15 +69,23 @@ public class PauseMenu : MonoBehaviour
 			_mainContainer.SetActive(false);
 			_saveLoadMenu.SetActive(false);
 			_settingsMenu.SetActive(false);
+			_settingsScript.SaveSettings();
 		}
 	}
 	
 	public void ToggleSaveLoad() {
 		_saveLoadMenu.SetActive(!_saveLoadMenu.activeSelf);
+		if (_settingsMenu.activeSelf) {
+			_settingsMenu.SetActive(false);
+		}
 	}
 	
 	public void ToggleSettings() {
 		_settingsMenu.SetActive(!_settingsMenu.activeSelf);
+		_settingsScript.SaveSettings();
+		if (_saveLoadMenu.activeSelf) {
+			_saveLoadMenu.SetActive(false);
+		}
 	}
 	
 	void OnDestroy() {
