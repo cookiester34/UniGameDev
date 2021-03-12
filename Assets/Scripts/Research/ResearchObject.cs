@@ -108,7 +108,14 @@ namespace Research {
         }
 
         public string GetHoverText() {
-            return researchName;
+            string hoverText = researchName + "\n";
+            foreach (ResourcePurchase purchase in resources) {
+                hoverText = hoverText + purchase.resourceType + ": " + purchase.cost + " ";
+            }
+            if (hoverText != "\n") {
+                return hoverText;
+            }
+            return "\nNo cost";
         }
 
         public void OnClick() {

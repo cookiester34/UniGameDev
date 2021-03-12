@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4222e2329316b4092c95d942fc8469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _panel: {fileID: 6003045455294153966}
   _scriptableObject: {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   isLevelEditorOnly: 0
   progressBar: {fileID: 5832331830330045324}
@@ -34,6 +35,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6221313261983263101, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Pivot.x
@@ -179,6 +185,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResearchTopicUI Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6221313263399571726, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8661945757749957740, guid: 361cd233dbf870a458f9d35c597b6312, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 361cd233dbf870a458f9d35c597b6312, type: 3}
@@ -191,6 +202,12 @@ GameObject:
 --- !u!224 &6003045456184528740 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
+    type: 3}
+  m_PrefabInstance: {fileID: 367484798854190560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6003045455294153966 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6221313263399571726, guid: 361cd233dbf870a458f9d35c597b6312,
     type: 3}
   m_PrefabInstance: {fileID: 367484798854190560}
   m_PrefabAsset: {fileID: 0}

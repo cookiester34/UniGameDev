@@ -76,15 +76,19 @@ public class SelectionState : BuildingManagerState {
     }
 
     public void UpgradeBuilding() {
-        if(selectedBuildingData != null) {
+        if (selectedBuildingData != null) {
+            if (!selectedBuildingData.CanUpgrade()) {
+                UIEventAnnounceManager.Instance.AnnounceEvent("Cannot upgrade prerequisites not met");
+                return;
+            }
             bool canUse = true;
             List<ResourcePurchase> temp = selectedBuildingData.BuildingData.ResourcePurchase.ToList();
             for(int i = 0; i < selectedBuildingData.BuildingData.ResourcePurchase.Count; i++) {
-                if (selectedBuildingData.buildingTeir == 0)
+                if (selectedBuildingData.BuildingTier == 0)
                     temp[i].cost *= tier1UpgradeCost;
-                else if (selectedBuildingData.buildingTeir == 1)
+                else if (selectedBuildingData.BuildingTier == 1)
                     temp[i].cost *= tier2UpgradeCost;
-                else if (selectedBuildingData.buildingTeir > 1)//if is max teir can't uprgrade
+                else if (selectedBuildingData.BuildingTier > 1)//if is max teir can't uprgrade
                     canUse = false;
                 if (!ResourceManagement.Instance.CanUseResource(temp[i]))//if doesn't have the resources can't upgrade
                 {
@@ -94,18 +98,8 @@ public class SelectionState : BuildingManagerState {
             }
             if (canUse) {
                 PlayBuildingPlaceParticles(selectedBuildingData.transform);
-                selectedBuildingData.buildingTeir++;
+                selectedBuildingData.Upgrade();
                 ResourceManagement.Instance.UseResources(temp);
-                if (selectedBuildingData.buildingTeir == 1)
-                {
-                    selectedBuildingData.buildingTeir1.SetActive(false);
-                    selectedBuildingData.buildingTeir2.SetActive(true);
-                }
-                else if(selectedBuildingData.buildingTeir == 2)
-                {
-                    selectedBuildingData.buildingTeir2.SetActive(false);
-                    selectedBuildingData.buildingTeir3.SetActive(true);
-                }
             }
         }
     }

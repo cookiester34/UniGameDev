@@ -60,7 +60,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         }
         else
         {
-            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.GetBuildingTeir();
+            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.BuildingTier;
             if (progressBar != null)
             {
                 progressBar.active = true;

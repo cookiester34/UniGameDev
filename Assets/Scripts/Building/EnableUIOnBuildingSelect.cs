@@ -88,7 +88,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
         }
 
         #region UI Cases
-        if (building.buildingTeir >= 2 || building.BuildingType == BuildingType.QueenBee)
+        if (building.BuildingTier == 3 || building.BuildingType == BuildingType.QueenBee)
         {
             upgradeBuilding.interactable = false;
             toolTip.text += "This Building cannot be upgraded \n \n";
@@ -164,7 +164,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
     public void OnHoverUpgrade()
     {
         displayBonus.SetActive(true);
-        switch (selectedBuilding.GetBuildingTeir()) 
+        switch (selectedBuilding.BuildingTier) 
         {
             case 1:
                 bonusText.text = "Upgrading building will result in double production";

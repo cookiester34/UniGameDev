@@ -39,7 +39,6 @@ namespace CameraNameSpace {
         /// </summary>
         private void Awake() {
             _targetPosition = transform.position;
-            rotateStrength = Settings.CameraRotateStrength.Value;
             UpdateHeight();
         }
 
@@ -57,9 +56,9 @@ namespace CameraNameSpace {
 				}
 
 				if (Input.GetKey(KeyCode.Q)) {
-					rotateSpeed = rotateStrength;
+					rotateSpeed =  Settings.CameraRotateStrength.Value;
 				} else if (Input.GetKey(KeyCode.E)) {
-					rotateSpeed = -rotateStrength;
+					rotateSpeed = - Settings.CameraRotateStrength.Value;
 				} else {
 					rotateSpeed = 0f;
 				}

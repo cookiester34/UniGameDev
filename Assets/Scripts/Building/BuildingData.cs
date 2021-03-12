@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Research;
 using UI;
 using UnityEngine;
 using Random = System.Random;
@@ -47,6 +48,10 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     /// </summary>
     [Range(0,10)]
     public int maxNumberOfWorkers;
+    
+    [SerializeField] private List<ResearchObject> tier1RequiredResearch;
+    [SerializeField] private List<ResearchObject> tier2RequiredResearch;
+    [SerializeField] private List<ResearchObject> tier3RequiredResearch;
 
     public Sprite UiImage => uiImage;
 
@@ -67,6 +72,35 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     public void CopySavedData(SavedBuildingData savedData) {
         buildingType = savedData.buildingType;
         resourcePurchase = savedData.resourcePurchase;
+    }
+
+    public bool CanUpgrade(int newTier) {
+        bool canUpgrade = true;
+        List<ResearchObject> researchList = null;
+        switch (newTier) {
+            case 1:
+                researchList = tier1RequiredResearch;
+                break;
+            
+            case 2:
+                researchList = tier2RequiredResearch;
+                break;
+            
+            case 3:
+                researchList = tier3RequiredResearch;
+                break;
+        }
+        
+        if (researchList != null) {
+            foreach (ResearchObject o in researchList) {
+                if (!o.Researched) {
+                    canUpgrade = false;
+                    break;
+                }
+            }
+        }
+
+        return canUpgrade;
     }
 
     public Sprite GetSprite() {

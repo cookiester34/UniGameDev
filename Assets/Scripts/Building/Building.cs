@@ -2,7 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using Research;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [Serializable]
 public class Building : MonoBehaviour {
@@ -12,22 +14,22 @@ public class Building : MonoBehaviour {
     [SerializeField] private BuildingType buildingType;
 
     [SerializeField] private BuildingData buildingData;
-    [HideInInspector]
-    public int buildingTeir = 0;
-    public GameObject buildingTeir1;
-    public GameObject buildingTeir2;
-    public GameObject buildingTeir3;
-
-    private MaterialPropertyBlock _propertyBlock;
+    private int buildingTier = 1;
+    [FormerlySerializedAs("buildingTeir1")] public GameObject buildingTier1;
+    [FormerlySerializedAs("buildingTeir2")] public GameObject buildingTier2;
+    [FormerlySerializedAs("buildingTeir3")] public GameObject buildingTier3;
 
     public BuildingData BuildingData => buildingData;
 
     public BuildingType BuildingType => buildingType;
+    public int BuildingTier => buildingTier;
 
     /// <summary>
     /// number of bees assigned to this building
     /// </summary>
     [HideInInspector]
+
+
     public int numAssignedBees;
     private List<Bee> _assignedBees;
     private List<BuildingFoundation> usedFoundations = new List<BuildingFoundation>();
@@ -41,46 +43,32 @@ public class Building : MonoBehaviour {
 
     protected virtual void Start()
     {
-        if (buildingTeir1 != null) {
-            buildingTeir1.SetActive(buildingTeir == 0);
+        if (buildingTier1 != null) {
+            buildingTier1.SetActive(buildingTier == 0);
         }
 
-        if (buildingTeir2 != null) {
-            buildingTeir2.SetActive(buildingTeir == 1);
+        if (buildingTier2 != null) {
+            buildingTier2.SetActive(buildingTier == 1);
         }
 
-        if (buildingTeir3 != null) {
-            buildingTeir3.SetActive(buildingTeir == 2);
+        if (buildingTier3 != null) {
+            buildingTier3.SetActive(buildingTier == 2);
         }
         BuildingManager.Instance.AddBuildingToBuildings(this);
     }
 
     public GameObject GetActiveBuilding()
     {
-        switch (buildingTeir)
+        switch (buildingTier)
         {
             case 0:
-                return buildingTeir1;
+                return buildingTier1;
             case 1:
-                return buildingTeir2;
+                return buildingTier2;
             case 2:
-                return buildingTeir3;
+                return buildingTier3;
         }
         return null;
-    }
-
-    public int GetBuildingTeir()
-    {
-        switch (buildingTeir)
-        {
-            case 0:
-                return 1;
-            case 1:
-                return 2;
-            case 2:
-                return 3;
-        }
-        return 0;
     }
 
     public void PlaceBuilding() {
@@ -136,21 +124,14 @@ public class Building : MonoBehaviour {
         }
     }
 
-    // TODO This is some stuff for animating in the dissolve which may be useful down the line, for now though the
-    // dissolve will draw over the base shader causing us to lose the red/green placement however. 
-    // private float time = -1;
-    // private void Animate() {
-    //     if (_propertyBlock == null) {
-    //         _propertyBlock = new MaterialPropertyBlock();
-    //     }
-    //
-    //     DOTween.To(() => time, x => time = x, 1, 4).OnUpdate(UpdateAnimate);
-    // }
-    //
-    // private void UpdateAnimate() {
-    //     var renderer = GetComponentInChildren<Renderer>();
-    //     renderer.GetPropertyBlock(_propertyBlock);
-    //     _propertyBlock.SetFloat("_TimeFloat", time);
-    //     renderer.SetPropertyBlock(_propertyBlock);
-    // }
+    public bool CanUpgrade() {
+        return buildingData.CanUpgrade(buildingTier + 1);
+    }
+
+    public void Upgrade() {
+        buildingTier++;
+        buildingTier1.SetActive(buildingTier == 1);
+        buildingTier2.SetActive(buildingTier == 2);
+        buildingTier3.SetActive(buildingTier == 3);
+    }
 }

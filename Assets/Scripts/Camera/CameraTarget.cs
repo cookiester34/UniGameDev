@@ -6,15 +6,8 @@ using UnityEngine;
 public class CameraTarget : MonoBehaviour {
     [SerializeField] private Transform cameraTransform;
     private float timeMoving = 0;
-    private bool allowMousePan;
-    [SerializeField] private float panSpeed;
     [SerializeField] private Terrain terrain;
     [SerializeField] private LayerMask terrainMask;
-
-    private void Awake() {
-        panSpeed = Settings.CameraPanSpeed.Value;
-        allowMousePan = Settings.CanMousePan.Value;
-    }
 
     void Update() {
 		if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
@@ -28,7 +21,7 @@ public class CameraTarget : MonoBehaviour {
 				timeMoving = 0;
 			}
 
-			if (allowMousePan) {
+			if (Settings.CanMousePan.Value) {
 				AttemptMousePan();
 			}
         }
@@ -61,7 +54,7 @@ public class CameraTarget : MonoBehaviour {
     /// </summary>
     /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
     private void Pan(Vector2 inputDirection) {
-        inputDirection *= panSpeed * ConvertTimeToExtraSpeedMultiplier();
+        inputDirection *= Settings.CameraPanSpeed.Value * ConvertTimeToExtraSpeedMultiplier();
         Vector3 transformRight = cameraTransform.right;
 
         // Get the forward flattened for height
