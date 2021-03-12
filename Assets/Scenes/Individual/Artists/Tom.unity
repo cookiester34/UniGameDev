@@ -121,6 +121,55 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &78865922
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78865924}
+  - component: {fileID: 78865923}
+  m_Layer: 0
+  m_Name: CameraTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &78865923
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78865922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0d50ede1675ed9499334d414e90c3fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cameraTransform: {fileID: 1011104523}
+  panSpeed: 0
+  terrain: {fileID: 1034040127}
+  terrainMask:
+    serializedVersion: 2
+    m_Bits: 1024
+--- !u!4 &78865924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78865922}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -4.45, y: 0, z: 26.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &198140351
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222,6 +271,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: VFX_MetoerHit
       objectReference: {fileID: 0}
+    - target: {fileID: 4712339840199091618, guid: 87b6dd714667b6f47a6b3713dca3fd1d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4712339840199091619, guid: 87b6dd714667b6f47a6b3713dca3fd1d,
         type: 3}
       propertyPath: m_RootOrder
@@ -276,6 +330,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4712339841454202732, guid: 87b6dd714667b6f47a6b3713dca3fd1d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4712339841521304189, guid: 87b6dd714667b6f47a6b3713dca3fd1d,
+        type: 3}
+      propertyPath: CollisionModule.m_Bounce.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 87b6dd714667b6f47a6b3713dca3fd1d, type: 3}
@@ -5341,7 +5405,6 @@ GameObject:
   - component: {fileID: 1011104522}
   - component: {fileID: 1011104521}
   - component: {fileID: 1011104520}
-  - component: {fileID: 1011104519}
   - component: {fileID: 1011104518}
   - component: {fileID: 1011104524}
   m_Layer: 0
@@ -5411,18 +5474,6 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
---- !u!114 &1011104519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1011104517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1011104520
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5436,7 +5487,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 10, z: 0}
-  target: {fileID: 0}
+  target: {fileID: 78865924}
   terrainMask:
     serializedVersion: 2
     m_Bits: 1024
@@ -20512,6 +20563,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4980053369610422934, guid: ec3eb3dc5f8824641acd71583f03da17,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980053369610422934, guid: ec3eb3dc5f8824641acd71583f03da17,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980053369610422934, guid: ec3eb3dc5f8824641acd71583f03da17,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980053369610422934, guid: ec3eb3dc5f8824641acd71583f03da17,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 2.8811264
       objectReference: {fileID: 0}
@@ -20569,6 +20635,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: MeteorUV'd 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4980053369610423021, guid: ec3eb3dc5f8824641acd71583f03da17,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec3eb3dc5f8824641acd71583f03da17, type: 3}

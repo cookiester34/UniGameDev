@@ -8,8 +8,11 @@ public class SpawnMeteor : MonoBehaviour
     public Transform startPoint;
     public Transform endPoint;
 
-    void Start()
-    {
+    void Start() {
+        if (startPoint == null) {
+            return;
+        }
+
         var startPos = startPoint.position;
         GameObject objVFX = Instantiate(vfx, startPos, Quaternion.identity) as GameObject;
 
