@@ -76,7 +76,7 @@ public class EnableUIOnBuildingSelect : MonoBehaviour
         toolTipObject.SetActive(false);
         buildingResource.text = "";
         buildingsAssignedBees.text = "Assigned Bees: " + building.numAssignedBees + " / " + building.BuildingData.maxNumberOfWorkers + "\n" + "Unassigned Bees: " + 
-            (ResourceManagement.Instance.GetResource(ResourceType.Population).ResourceCap - (int)ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
+            (ResourceManagement.Instance.GetResource(ResourceType.Population).CurrentResourceAmount - (int)ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
         buildingName.text = building.BuildingType.ToString();
         foreach (ResourceSupplier i in resources)
         {

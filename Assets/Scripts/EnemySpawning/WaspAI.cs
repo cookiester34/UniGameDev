@@ -27,70 +27,127 @@ public class WaspAI : MonoBehaviour
     
     private Collider[] sphereAlloc = new Collider[100];
 
-    void Awake() {
+    public bool masterWasp = false;
+    public Transform masterWaspObject;
+    public int WaspGroupID;
+
+    public EnemySpawnManager spawnManager;
+
+    void Awake() 
+    {
         health = GetComponentInParent<Health>();
         _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
         _agent = GetComponent<NavMeshAgent>();
         actualTimer = attacktimer;
     }
 
-    private void SetupQueenBee() {
-        if (_queenBeeBuilding == null) {
+    private void SetupQueenBee()
+    {
+        if (_queenBeeBuilding == null) 
+        {
             _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
         }
     }
 
-    private void Start() {
+    private void Start() 
+    {
         SetupQueenBee();
     }
 
 
-    void FixedUpdate() {
+    void FixedUpdate() 
+    {
         sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);
-        if (sphereAlloc.Length > 0) {
+        if (sphereAlloc.Length > 0) 
+        {
             float closestDist = float.MaxValue;
             GameObject targetObject = null;
-            foreach (Collider hitCollider in sphereAlloc) {
+            foreach (Collider hitCollider in sphereAlloc) 
+            {
                 float currentDistance = Vector3.Distance(transform.position, hitCollider.transform.position);
                 if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
-                    && currentDistance < closestDist) {
+                    && currentDistance < closestDist) 
+                {
                     targetObject = hitCollider.gameObject;
                     closestDist = currentDistance;
                 }
             }
 
-            if (targetObject != null && targetObject.transform != null) {
-                SetDestination(targetObject);
+            if (targetObject != null && targetObject.transform != null) 
+            {
+                if(masterWasp)
+                    SetDestination(targetObject);
+                else
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, 0.05f);
+                    transform.LookAt(targetObject.transform.position);
+                    _currentTarget = targetObject;
+                }
             }
-        } else {
-            SetDestination(_queenBeeBuilding);
+        }
+        else 
+        {
+            if (masterWasp)
+                SetDestination(_queenBeeBuilding);
+            else
+                followMaster();
         }
 
-        if (AttackDistance() && actualTimer <= 0) {
+        if (AttackDistance() && actualTimer <= 0) 
+        {
             Health targetHealth = _currentTarget.GetComponent<Health>();
             targetHealth.ModifyHealth(-waspDamage);
-            if (targetHealth.CurrentHealth <= 0) {
-            }
             actualTimer = attacktimer;
         }
 
         actualTimer -= Time.deltaTime;
     }
 
-    void SetDestination(GameObject destinationObject) {
-        Vector3 destination = destinationObject.transform.position;
-        if (destination != _previousDestination) {
-            _agent.destination = destination;
-            _previousDestination = destination;
-            _currentTarget = destinationObject;
+    void followMaster()
+    {
+        if (masterWaspObject != null)
+        {
+            if (Vector3.Distance(transform.position, masterWaspObject.position) > 2f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, masterWaspObject.position, 0.05f);
+                transform.LookAt(masterWaspObject);
+            }
+        }
+        else
+        {
+            masterWaspObject = spawnManager.waspGroupList[WaspGroupID].wasps[0];
+            if (masterWaspObject == this.transform)
+                masterWasp = true;
         }
     }
 
-    public void TakeDamage(float damage) {
+    void SetDestination(GameObject destinationObject) 
+    {
+        if (destinationObject != null)
+        {
+            Vector3 destination = destinationObject.transform.position;
+            if (destination != _previousDestination)
+            {
+                _agent.destination = destination;
+                _previousDestination = destination;
+                _currentTarget = destinationObject;
+            }
+        }
+    }
+
+    public void TakeDamage(float damage) 
+    {
         health.ModifyHealth(-damage);
     }
 
-    private bool AttackDistance() {
+    private bool AttackDistance() 
+    {
         return _currentTarget != null && Vector3.Distance(_currentTarget.transform.position, transform.position) < attackRange;
+    }
+
+    private void OnDestroy()
+    {
+        if(transform != null)
+            spawnManager.waspGroupList[WaspGroupID].wasps.Remove(this.transform);
     }
 }
