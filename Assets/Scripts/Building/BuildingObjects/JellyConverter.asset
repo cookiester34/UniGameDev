@@ -19,7 +19,7 @@ MonoBehaviour:
     resourceType: 3
   - cost: 10
     resourceType: 0
-  buildingSize: 1
+  buildingShape: 3
   maxInstances: 1000
   description: Jelly Converter - This building converts pollen into royal jelly.
     Royal jelly is used to power research activities.

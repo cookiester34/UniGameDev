@@ -40,13 +40,13 @@ public class BuildState : BuildingManagerState {
             tempBuilding.SetActive(true);
             BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
             if (foundation != null) {
-                Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingSize);
+                Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingShape);
                 tempBuilding.transform.position = buildPosition;
 
                 if (Input.GetMouseButtonDown(0)) {
                     PlaceBuilding(buildPosition, foundation);
                 } else {
-                    bool canBuild = foundation.BuildMulti(currentBuilding.BuildingSize, false);
+                    bool canBuild = foundation.BuildMulti(currentBuilding.BuildingShape, false);
                     UpdateBuildingShader(true, canBuild);
                 }
             } else {
@@ -89,7 +89,7 @@ public class BuildState : BuildingManagerState {
     /// <param name="position"></param>
     private void PlaceBuilding(Vector3 position, BuildingFoundation foundation)
     {
-        if (!foundation.BuildMulti(currentBuilding.BuildingSize)) {
+        if (!foundation.BuildMulti(currentBuilding.BuildingShape)) {
             buildingManager.SetBuildMode(BuildingMode.Selection);
             buildingManager.BuildingAlreadyThere();
         } else {
@@ -100,7 +100,7 @@ public class BuildState : BuildingManagerState {
 
             Building placedBuilding = tempBuilding.GetComponent<Building>();
             if (placedBuilding != null) {
-                placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingSize);
+                placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingShape);
                 placedBuilding.PlaceBuilding();
             }
             UpdateBuildingShader(false, false);

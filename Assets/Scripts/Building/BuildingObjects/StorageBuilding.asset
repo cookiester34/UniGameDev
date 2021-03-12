@@ -17,7 +17,7 @@ MonoBehaviour:
   resourcePurchase:
   - cost: 20
     resourceType: 3
-  buildingSize: 2
+  buildingShape: 1
   maxInstances: 1000
   description: Storage - This building is used to increase the maximum capacity of
     various resource types.

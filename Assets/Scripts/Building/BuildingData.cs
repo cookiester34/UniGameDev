@@ -27,10 +27,10 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     [SerializeField] private List<ResourcePurchase> resourcePurchase;
 
     /// <summary>
-    /// The size of the building, 1 means it will take one tile, 2 will be a patch of 3, no consideration for greater
+    /// The building shape
     /// sizes yet
     /// </summary>
-    [SerializeField] private int buildingSize;
+    [SerializeField] private BuildingShape buildingShape;
 	
 	/// <summary>
     /// How many instances of this type of building can exist at once
@@ -54,7 +54,7 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
 
     public List<ResourcePurchase> ResourcePurchase => resourcePurchase;
 
-    public int BuildingSize => buildingSize;
+    public BuildingShape BuildingShape => buildingShape;
 	
 	public int MaxInstances => maxInstances;
 	
