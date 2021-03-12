@@ -69,7 +69,6 @@ public class EnemySpawnManager : MonoBehaviour
         {
             waspGroupList.Add(new WaspGroup());
         }
-        Debug.Log("Update Spawn shit " + waspGroupList.Count);
     }
 
 
