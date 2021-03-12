@@ -15,7 +15,7 @@ MonoBehaviour:
   buildingType: 7
   uiImage: {fileID: 21300000, guid: 8b6957b15786ab041897292b6ce70391, type: 3}
   resourcePurchase: []
-  buildingSize: 3
+  buildingShape: 2
   maxInstances: 1
   description: Queen Bee - The heart of the hive, generates population when bees
     are assigned and stores a small amount of all resources. Without the queen the

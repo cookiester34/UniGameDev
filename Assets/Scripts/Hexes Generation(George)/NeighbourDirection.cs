@@ -38,7 +38,7 @@ public static class NeighbourDirectionExtension {
                 inDirection = (comparedPosition.x < position.x) && (comparedPosition.z < position.z);
                 break;
             case NeighbourDirection.AboveLeft:
-                inDirection = (comparedPosition.x > position.x) && (comparedPosition.z < position.z);
+                inDirection = (comparedPosition.x > position.x) && (comparedPosition.z > position.z);
                 break;
             case NeighbourDirection.AboveRight:
                 inDirection = (comparedPosition.x > position.x) && (comparedPosition.z < position.z);

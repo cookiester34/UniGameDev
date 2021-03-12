@@ -54,11 +54,11 @@ public class BuildingFoundation : MonoBehaviour {
     /// <summary>
     /// Gets the central position for the building
     /// </summary>
-    /// <param name="buildingSize">Number of tiles the building uses</param>
+    /// <param name="shape">The building shape</param>
     /// <returns>The central position for the building</returns>
-    public Vector3 BuildingPosition(int buildingSize) {
+    public Vector3 BuildingPosition(BuildingShape shape) {
         Vector3 buildingCenter = Vector3.zero;
-        List<BuildingFoundation> foundations = GetFoundations(buildingSize);
+        List<BuildingFoundation> foundations = GetFoundations(shape);
         foreach (BuildingFoundation foundation in foundations) {
             buildingCenter += foundation._renderer.bounds.center;
         }
@@ -72,12 +72,12 @@ public class BuildingFoundation : MonoBehaviour {
     /// </summary>
     /// <param name="buildTiles">Size of tiles that the building will take</param>
     /// <returns>Whether the building can be built</returns>
-    public bool BuildMulti(int buildTiles, bool updateBuildStatus = true) {
+    public bool BuildMulti(BuildingShape shape, bool updateBuildStatus = true) {
         bool canBuild = false;
-        List<BuildingFoundation> foundations = GetFoundations(buildTiles);
+        List<BuildingFoundation> foundations = GetFoundations(shape);
 
-        switch (buildTiles) {
-            case 1:
+        switch (shape) {
+            case BuildingShape.OneTile:
                 canBuild = _canBuild;
                 if (updateBuildStatus) {
                     CanBuild = false;
@@ -85,7 +85,7 @@ public class BuildingFoundation : MonoBehaviour {
 
                 break;
 
-            case 2:
+            case BuildingShape.ThreeTile:
                 if (foundations.Count == 3) {
                     foreach (BuildingFoundation foundation in foundations) {
                         canBuild = foundation.CanBuild;
@@ -103,8 +103,26 @@ public class BuildingFoundation : MonoBehaviour {
                 }
                 break;
 
-            case 3:
+            case BuildingShape.SevenTile:
                 if (foundations.Count == 7) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+
+            case BuildingShape.ThreeThreeTile:
+                if (foundations.Count == 9) {
                     foreach (BuildingFoundation foundation in foundations) {
                         canBuild = foundation.CanBuild;
                         if (!canBuild) {
@@ -125,14 +143,14 @@ public class BuildingFoundation : MonoBehaviour {
         return canBuild;
     }
 
-    public List<BuildingFoundation> GetFoundations(int buildTiles) {
+    public List<BuildingFoundation> GetFoundations(BuildingShape shape) {
         List<BuildingFoundation> foundations = new List<BuildingFoundation>();
-        switch (buildTiles) {
-            case 1:
+        switch (shape) {
+            case BuildingShape.OneTile:
                 foundations.Add(this);
                 break;
-            
-            case 2:
+
+            case BuildingShape.ThreeTile:
                 foundations.Add(this);
                 HexPanel br = _hexPanel.GetNeighbour(NeighbourDirection.BelowRight);
                 HexPanel ar = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
@@ -146,11 +164,52 @@ public class BuildingFoundation : MonoBehaviour {
 
                 break;
 
-            case 3:
+            case BuildingShape.SevenTile:
                 foundations.Add(this);
                 foreach (HexPanel neighbour in _hexPanel.GetNeighbours()) {
                     foundations.Add(neighbour.BuildingFoundation);
                 }
+                break;
+
+            case BuildingShape.ThreeThreeTile:
+                foundations.Add(this);
+                var above = _hexPanel.GetNeighbour(NeighbourDirection.Above);
+                var below = _hexPanel.GetNeighbour(NeighbourDirection.Below);
+
+                var belowLeft = _hexPanel.GetNeighbour(NeighbourDirection.BelowLeft);
+                if (belowLeft != null) {
+                    foundations.Add(belowLeft.BuildingFoundation);
+                }
+                var aboveLeft = _hexPanel.GetNeighbour(NeighbourDirection.AboveLeft);
+                if (aboveLeft != null) {
+                    foundations.Add(aboveLeft.BuildingFoundation);
+                }
+
+                if (above != null) {
+                    foundations.Add(above.BuildingFoundation);
+                    var twoAbove = above.GetNeighbour(NeighbourDirection.Above);
+                    if (twoAbove != null) {
+                        foundations.Add(twoAbove.BuildingFoundation);
+                    }
+
+                    var aboveAboveRight = above.GetNeighbour(NeighbourDirection.AboveRight);
+                    if (aboveAboveRight) {
+                        foundations.Add(aboveAboveRight.BuildingFoundation);
+                    }
+                }
+                
+                if (below != null) {
+                    foundations.Add(below.BuildingFoundation);
+                    var twoBelow = below.GetNeighbour(NeighbourDirection.Below);
+                    if (twoBelow != null) {
+                        foundations.Add(twoBelow.BuildingFoundation);
+                    }
+                    var belowBelowRight = below.GetNeighbour(NeighbourDirection.BelowRight);
+                    if (belowBelowRight != null) {
+                        foundations.Add(belowBelowRight.BuildingFoundation);
+                    }
+                }
+
                 break;
         }
 
