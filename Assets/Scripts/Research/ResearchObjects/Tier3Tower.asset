@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier2Tower
+  m_Name: Tier3Tower
   m_EditorClassIdentifier: 
-  researchName: Tier 2 Tower
-  description: ' Allows towers to be upgraded to tier 2.'
+  researchName: Tier 3 Tower
+  description: ' Allows towers to be upgraded to tier 3.'
   resources:
   - cost: 10
     resourceType: 0
-  - cost: 5
+  - cost: 25
     resourceType: 2
   Prerequisites:
-  - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
+  - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
   researched: 0
   researchProgress: 0
   timer:

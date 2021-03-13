@@ -125,7 +125,17 @@ public class Building : MonoBehaviour {
     }
 
     public bool CanUpgrade() {
-        return buildingData.CanUpgrade(buildingTier + 1);
+        bool canUpgrade = true;
+        int newTier = buildingTier + 1;
+        switch (newTier) {
+            case 2:
+                canUpgrade = buildingTier2 != null;
+                break;
+            case 3:
+                canUpgrade = buildingTier3 != null;
+                break;
+        }
+        return canUpgrade && buildingData.CanUpgrade(buildingTier + 1);
     }
 
     public void Upgrade() {

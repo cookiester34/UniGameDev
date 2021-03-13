@@ -17,8 +17,13 @@ MonoBehaviour:
   resourcePurchase:
   - cost: 10
     resourceType: 0
-  buildingSize: 1
+  buildingShape: 0
   maxInstances: 1000
   description: Wax Converter - This building converts pollen into wax. Wax is used
     as a resource to build new buildings.
   maxNumberOfWorkers: 5
+  tier1RequiredResearch: []
+  tier2RequiredResearch:
+  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
+  tier3RequiredResearch:
+  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}

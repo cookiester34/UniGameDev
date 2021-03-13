@@ -19,8 +19,13 @@ MonoBehaviour:
     resourceType: 0
   - cost: 10
     resourceType: 3
-  buildingSize: 1
+  buildingShape: 0
   maxInstances: 1000
   description: Tower - In the event of an invasion, towers will try to attack nearby
     enemies.
   maxNumberOfWorkers: 5
+  tier1RequiredResearch: []
+  tier2RequiredResearch:
+  - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
+  tier3RequiredResearch:
+  - {fileID: 11400000, guid: d84f50ae6d307754c9d3f649fc944f64, type: 2}

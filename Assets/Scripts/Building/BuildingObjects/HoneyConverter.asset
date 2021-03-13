@@ -19,8 +19,13 @@ MonoBehaviour:
     resourceType: 3
   - cost: 10
     resourceType: 0
-  buildingSize: 1
+  buildingShape: 0
   maxInstances: 1000
   description: Honey Converter - This building converts pollen into honey, that can
     then be used as food for your bees.
   maxNumberOfWorkers: 5
+  tier1RequiredResearch: []
+  tier2RequiredResearch:
+  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
+  tier3RequiredResearch:
+  - {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633, type: 2}
