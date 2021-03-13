@@ -31,9 +31,11 @@ public class HealthUI : MonoBehaviour {
 
     private void Start() {
         _progressBar.SetSliderValue(health.NormalizedHealth, true);
+        _progressBar.gameObject.SetActive(health.NormalizedHealth < 1 && health.NormalizedHealth > 0);
     }
 
     private void UpdateHealthBar() {
         _progressBar.TargetProgress = health.NormalizedHealth;
+        _progressBar.gameObject.SetActive(health.NormalizedHealth < 1 && health.NormalizedHealth > 0);
     }
 }
