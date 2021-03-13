@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
 	private GameObject _mainContainer;
 	private GameObject _saveLoadMenu;
 	private GameObject _settingsMenu;
+	private bool _hasSettingsLoaded;
 	private SettingsPanel _settingsScript;
 	
     public static PauseMenu Instance {
@@ -69,7 +70,9 @@ public class PauseMenu : MonoBehaviour
 			_mainContainer.SetActive(false);
 			_saveLoadMenu.SetActive(false);
 			_settingsMenu.SetActive(false);
-			_settingsScript.SaveSettings();
+			if (_hasSettingsLoaded) {
+				_settingsScript.SaveSettings();
+			}
 		}
 	}
 	
@@ -82,6 +85,7 @@ public class PauseMenu : MonoBehaviour
 	
 	public void ToggleSettings() {
 		_settingsMenu.SetActive(!_settingsMenu.activeSelf);
+		_hasSettingsLoaded = true;
 		_settingsScript.SaveSettings();
 		if (_saveLoadMenu.activeSelf) {
 			_saveLoadMenu.SetActive(false);
