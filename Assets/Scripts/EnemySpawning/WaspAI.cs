@@ -67,7 +67,7 @@ public class WaspAI : MonoBehaviour
                 GameObject targetObject = null;
                 foreach (Collider hitCollider in sphereAlloc)
                 {
-                    float currentDistance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                    float currentDistance = FastMath.SqrDistance(transform.position, hitCollider.transform.position);
                     if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
                         && currentDistance < closestDist)
                     {
@@ -122,7 +122,7 @@ public class WaspAI : MonoBehaviour
     {
         if (masterWaspObject != null)
         {
-            if (Vector3.Distance(transform.position, masterWaspObject.position) > 2f)
+            if (FastMath.SqrDistance(transform.position, masterWaspObject.position) > 4f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, masterWaspObject.position, 0.05f);
                 transform.LookAt(masterWaspObject);
@@ -159,7 +159,7 @@ public class WaspAI : MonoBehaviour
 
     private bool AttackDistance() 
     {
-        return _currentTarget != null && Vector3.Distance(_currentTarget.transform.position, transform.position) < attackRange;
+        return _currentTarget != null && FastMath.SqrDistance(_currentTarget.transform.position, transform.position) < attackRange * attackRange;
     }
 
     private void OnDestroy()
