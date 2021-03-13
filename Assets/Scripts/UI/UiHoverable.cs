@@ -109,7 +109,7 @@ namespace UI {
         /// Displays the tooltip on hover
         /// </summary>
         /// <param name="eventData"></param>
-        public void OnPointerEnter(PointerEventData eventData) {
+        public virtual void OnPointerEnter(PointerEventData eventData) {
             _tooltipText.gameObject.SetActive(true);
             _panel.gameObject.SetActive(true);
         }

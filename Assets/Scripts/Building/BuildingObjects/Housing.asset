@@ -17,8 +17,13 @@ MonoBehaviour:
   resourcePurchase:
   - cost: 10
     resourceType: 3
-  buildingSize: 1
+  buildingShape: 0
   maxInstances: 1000
   description: Housing - A place for bees to rest up and raise their happiness. Bees
     with higher happiness will work more efficiently.
   maxNumberOfWorkers: 5
+  tier1RequiredResearch: []
+  tier2RequiredResearch:
+  - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
+  tier3RequiredResearch:
+  - {fileID: 11400000, guid: bbd54cab746591c499d0f65321b4b680, type: 2}

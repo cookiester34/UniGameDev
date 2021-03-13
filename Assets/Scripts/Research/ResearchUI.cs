@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Research;
+﻿using Research;
 using UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class ResearchUI : UiHoverable {
+    [SerializeField] private Text descriptionText;
     [SerializeField] private ProgressBar progressBar;
     private ResearchObject _researchObject;
 
@@ -24,6 +24,10 @@ public class ResearchUI : UiHoverable {
         if (progressBar == null) {
             Debug.Log("Research UI is missing its progress bar, will not show progress.");
         }
+
+        if (descriptionText == null) {
+            Debug.LogError("Research UI is missing a reference to the description text, its description will not be shown");
+        }
     }
 
     private void OnResearchStart() {
@@ -39,5 +43,10 @@ public class ResearchUI : UiHoverable {
         if (progressBar.isActiveAndEnabled) {
             progressBar.TargetProgress = _researchObject.ResearchProgress / 100;
         }
+    }
+
+    public override void OnPointerEnter(PointerEventData eventData) {
+        base.OnPointerEnter(eventData);
+        descriptionText.text = _researchObject.Description;
     }
 }

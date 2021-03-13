@@ -10,24 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier2Housing
+  m_Name: Tier2Converters
   m_EditorClassIdentifier: 
-  researchName: Tier 2 Housing
-  description: 'Allows housing to be upgraded to Tier 2.
-
-    Tier 2 housing can
-    house more bees in the same space.'
+  researchName: Tier 2 Converters
+  description: This new technology will allow converter type buildings to be upgraded
+    to tier 2.
   resources:
   - cost: 10
+    resourceType: 0
+  - cost: 15
     resourceType: 2
-  - cost: 10
-    resourceType: 1
   Prerequisites: []
   researched: 0
-  researchProgress: 99.03507
+  researchProgress: 0
   timer:
     runTime: 10
     timeRunning: 0
     progressPercent: 0
     active: 0
-  uiSprite: {fileID: 21300000, guid: 027e9e918c983be42839a31c13c73165, type: 3}
+  uiSprite: {fileID: 21300000, guid: 2185d591c99a60f42a3f9d46b6cd146a, type: 3}

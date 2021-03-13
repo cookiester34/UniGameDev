@@ -18,12 +18,13 @@ MonoBehaviour:
     Tier 3 housing can
     house even more bees in the same space.'
   resources:
-  - cost: 100
+  - cost: 25
     resourceType: 2
   - cost: 50
     resourceType: 0
   Prerequisites:
   - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
+  - {fileID: 11400000, guid: cb1174f483f42514b9c5dea559f8069c, type: 2}
   researched: 0
   researchProgress: 0
   timer:

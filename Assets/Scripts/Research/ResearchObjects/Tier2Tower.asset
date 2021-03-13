@@ -10,24 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier2Housing
+  m_Name: Tier2Tower
   m_EditorClassIdentifier: 
-  researchName: Tier 2 Housing
-  description: 'Allows housing to be upgraded to Tier 2.
-
-    Tier 2 housing can
-    house more bees in the same space.'
+  researchName: Tier 2 Tower
+  description: ' Allows towers to be upgraded to tier 2.'
   resources:
   - cost: 10
+    resourceType: 0
+  - cost: 5
     resourceType: 2
-  - cost: 10
-    resourceType: 1
-  Prerequisites: []
+  Prerequisites:
+  - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   researched: 0
-  researchProgress: 99.03507
+  researchProgress: 0
   timer:
-    runTime: 10
+    runTime: 0
     timeRunning: 0
     progressPercent: 0
     active: 0
-  uiSprite: {fileID: 21300000, guid: 027e9e918c983be42839a31c13c73165, type: 3}
+  uiSprite: {fileID: 21300000, guid: 315ed2288b9b8eb40ae4551fa191aa77, type: 3}
