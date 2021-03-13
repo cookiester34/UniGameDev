@@ -124,16 +124,20 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 GameObject wasp = Instantiate(enemyPrefab, building.position, Quaternion.identity);
                 waspGroupList[group].wasps.Add(wasp.transform);
-                wasp.GetComponent<WaspAI>().spawnManager = this;
-                wasp.GetComponent<WaspAI>().WaspGroupID = group;
+                WaspAI waspAI = wasp.GetComponent<WaspAI>();
+                waspAI.spawnManager = this;
+                waspAI.WaspGroupID = group;
                 if (!masterSet)
                 {
-                    wasp.GetComponent<WaspAI>().masterWasp = true;
+                    waspAI.masterWasp = true;
                     masterWasp = wasp.transform;
                     masterSet = true;
                 }
                 else
-                    wasp.GetComponent<WaspAI>().masterWaspObject = masterWasp;
+                {
+                    waspAI.masterWaspObject = masterWasp;
+                    waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
+                }
             }
         }
     }

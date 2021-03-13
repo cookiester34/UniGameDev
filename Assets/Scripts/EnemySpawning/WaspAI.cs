@@ -30,6 +30,7 @@ public class WaspAI : MonoBehaviour
     public bool masterWasp = false;
     public Transform masterWaspObject;
     public int WaspGroupID;
+    public WaspAI masterWaspAI;
 
     public EnemySpawnManager spawnManager;
 
@@ -57,49 +58,63 @@ public class WaspAI : MonoBehaviour
 
     void FixedUpdate() 
     {
-        sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);
-        if (sphereAlloc.Length > 0) 
+        if (masterWasp)
         {
-            float closestDist = float.MaxValue;
-            GameObject targetObject = null;
-            foreach (Collider hitCollider in sphereAlloc) 
+            sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);
+            if (sphereAlloc.Length > 0)
             {
-                float currentDistance = Vector3.Distance(transform.position, hitCollider.transform.position);
-                if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
-                    && currentDistance < closestDist) 
+                float closestDist = float.MaxValue;
+                GameObject targetObject = null;
+                foreach (Collider hitCollider in sphereAlloc)
                 {
-                    targetObject = hitCollider.gameObject;
-                    closestDist = currentDistance;
+                    float currentDistance = Vector3.Distance(transform.position, hitCollider.transform.position);
+                    if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
+                        && currentDistance < closestDist)
+                    {
+                        targetObject = hitCollider.gameObject;
+                        closestDist = currentDistance;
+                    }
                 }
-            }
 
-            if (targetObject != null && targetObject.transform != null) 
-            {
-                if(masterWasp)
-                    SetDestination(targetObject);
-                else
+                if (targetObject != null && targetObject.transform != null)
                 {
-                    transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, 0.05f);
-                    transform.LookAt(targetObject.transform.position);
-                    _currentTarget = targetObject;
+                    //if (masterWasp)
+                        SetDestination(targetObject);
+                    //else
+                    //{
+                    //    transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, 0.05f);
+                    //    transform.LookAt(targetObject.transform.position);
+                    //    _currentTarget = targetObject;
+                    //}
                 }
             }
-        }
-        else 
-        {
-            if (masterWasp)
-                SetDestination(_queenBeeBuilding);
             else
-                followMaster();
+            {
+                //if (masterWasp)
+                    SetDestination(_queenBeeBuilding);
+                //else
+                //    followMaster();
+            }
         }
-
+        else
+        {
+            if(masterWaspAI._currentTarget != null)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, masterWaspAI._currentTarget.transform.position, 0.05f);
+                transform.LookAt(masterWaspAI._currentTarget.transform.position);
+                _currentTarget = masterWaspAI._currentTarget;
+            }
+            else
+            {
+                followMaster();
+            }
+        }
         if (AttackDistance() && actualTimer <= 0) 
         {
             Health targetHealth = _currentTarget.GetComponent<Health>();
             targetHealth.ModifyHealth(-waspDamage);
             actualTimer = attacktimer;
         }
-
         actualTimer -= Time.deltaTime;
     }
 
@@ -118,6 +133,8 @@ public class WaspAI : MonoBehaviour
             masterWaspObject = spawnManager.waspGroupList[WaspGroupID].wasps[0];
             if (masterWaspObject == this.transform)
                 masterWasp = true;
+            else
+                masterWaspAI = masterWaspObject.GetComponent<WaspAI>();
         }
     }
 
