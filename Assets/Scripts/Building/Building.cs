@@ -44,15 +44,15 @@ public class Building : MonoBehaviour {
     protected virtual void Start()
     {
         if (buildingTier1 != null) {
-            buildingTier1.SetActive(buildingTier == 0);
+            buildingTier1.SetActive(buildingTier == 1);
         }
 
         if (buildingTier2 != null) {
-            buildingTier2.SetActive(buildingTier == 1);
+            buildingTier2.SetActive(buildingTier == 2);
         }
 
         if (buildingTier3 != null) {
-            buildingTier3.SetActive(buildingTier == 2);
+            buildingTier3.SetActive(buildingTier == 3);
         }
         BuildingManager.Instance.AddBuildingToBuildings(this);
     }
@@ -86,6 +86,13 @@ public class Building : MonoBehaviour {
 
         _assignedBees.Add(bee);
         numAssignedBees = _assignedBees.Count;
+        
+        var suppliers = GetComponents<ResourceSupplier>();
+        if (suppliers != null && suppliers.Length > 1) {
+            foreach (var supplier in suppliers) {
+                supplier.CalculateProductionAmount();
+            }
+        }
     }
 
     /// <summary>
@@ -110,6 +117,13 @@ public class Building : MonoBehaviour {
             _assignedBees.Remove(beeUnassigned);
         }
         numAssignedBees = _assignedBees.Count;
+        
+        var suppliers = GetComponents<ResourceSupplier>();
+        if (suppliers != null && suppliers.Length > 1) {
+            foreach (var supplier in suppliers) {
+                supplier.CalculateProductionAmount();
+            }
+        }
 
         return beeUnassigned;
     }
@@ -143,5 +157,12 @@ public class Building : MonoBehaviour {
         buildingTier1.SetActive(buildingTier == 1);
         buildingTier2.SetActive(buildingTier == 2);
         buildingTier3.SetActive(buildingTier == 3);
+
+        var suppliers = GetComponents<ResourceSupplier>();
+        if (suppliers != null && suppliers.Length > 1) {
+            foreach (var supplier in suppliers) {
+                supplier.CalculateProductionAmount();
+            }
+        }
     }
 }

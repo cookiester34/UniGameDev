@@ -25,7 +25,7 @@ namespace UI {
         /// <param name="force">Whether the active should be used as is, disallows hiding the contents if active is
         /// called whilst already active</param>
         public void ActivateContents(bool active, bool force = false) {
-			BuildingManager.Instance.SetBuildMode(BuildingMode.Selection);
+			//BuildingManager.Instance.SetBuildMode(BuildingMode.Selection);
             if (force) {
                 content.SetActive(active);
             } else {
@@ -35,6 +35,10 @@ namespace UI {
                     content.SetActive(active);
                 }
             }
+        }
+
+        public bool ContentsActive() {
+            return content.activeSelf;
         }
     }
 }

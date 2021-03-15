@@ -33,7 +33,13 @@ namespace UI {
         /// <param name="activeButton"></param>
         public void MakeContentsActive(UIBottomBarButton activeButton) {
             foreach (UIBottomBarButton button in _buttons) {
-                button.ActivateContents(button == activeButton);
+                button.ActivateContents(button == activeButton, true);
+            }
+        }
+
+        public void HideContents(UIBottomBarButton activeButton) {
+            if (activeButton.ContentsActive()) {
+                activeButton.ActivateContents(false);
             }
         }
     }

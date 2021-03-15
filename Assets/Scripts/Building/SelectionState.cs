@@ -32,7 +32,7 @@ public class SelectionState : BuildingManagerState {
                     buildingManager.BuildingSelected(selectedBuildingData);
                 }
             }
-        } else if (Input.GetKeyDown(KeyCode.Escape)) {
+        } else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) {
             selectedBuilding = null;
             selectedBuildingData = null;
             buildingManager.BuildingSelected(null);
@@ -52,7 +52,6 @@ public class SelectionState : BuildingManagerState {
                     {
                         BeeManager.Instance.AssignBeeToBuilding(selectedBuildingData);
                         temp.ModifyAmount(1);
-                        buildingManager.BuildingSelected(selectedBuildingData);
                     }
                 }
                 else
