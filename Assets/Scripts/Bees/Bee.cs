@@ -12,7 +12,8 @@ public class Bee : MonoBehaviour {
     private BeeStateMachine _stateMachine;
     private NavMeshAgent _agent;
 
-    public float _soundLoopBasePitch;
+
+    private float _soundLoopBasePitch;
     private float _soundLoopVolume;
 
     private int id;

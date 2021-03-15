@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1242464776936744839, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
       propertyPath: m_Name
-      value: RiverSFX
+      value: RiverSFX Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5160900246160859305, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
@@ -69,11 +69,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6187276343971364310, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
-      propertyPath: MaxDistance
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6187276343971364310, guid: 200506368b73885439d1d589b8af87db,
-        type: 3}
       propertyPath: m_audioClip
       value: 
       objectReference: {fileID: 8300000, guid: 6e3d721495913984ab221af02a8085ff, type: 3}
@@ -81,11 +76,6 @@ PrefabInstance:
         type: 3}
       propertyPath: DopplerLevel
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6187276343971364310, guid: 200506368b73885439d1d589b8af87db,
-        type: 3}
-      propertyPath: spreadCustomCurve.m_Curve.Array.data[0].value
-      value: 0.027777778
       objectReference: {fileID: 0}
     - target: {fileID: 6187276343971364310, guid: 200506368b73885439d1d589b8af87db,
         type: 3}

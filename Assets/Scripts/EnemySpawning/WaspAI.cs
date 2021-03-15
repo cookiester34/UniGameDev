@@ -34,12 +34,19 @@ public class WaspAI : MonoBehaviour
 
     public EnemySpawnManager spawnManager;
 
+    private float _soundLoopBasePitch;
+    private float _soundLoopVolume;
+
     void Awake() 
     {
         health = GetComponentInParent<Health>();
         _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
         _agent = GetComponent<NavMeshAgent>();
         actualTimer = attacktimer;
+        _soundLoopBasePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
+        _soundLoopVolume = 0.7f + UnityEngine.Random.Range(-.05f, 0.05f);
+        transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
+        transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
     }
 
     private void SetupQueenBee()

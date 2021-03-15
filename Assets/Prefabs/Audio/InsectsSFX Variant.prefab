@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1242464776936744839, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
       propertyPath: m_Name
-      value: InsectsSFX
+      value: InsectsSFX Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5160900246160859305, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
@@ -75,7 +75,7 @@ PrefabInstance:
     - target: {fileID: 6187276343971364310, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
       propertyPath: MaxDistance
-      value: 10
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 6187276343971364310, guid: 200506368b73885439d1d589b8af87db,
         type: 3}
