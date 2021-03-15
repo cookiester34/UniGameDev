@@ -115,6 +115,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OutlineSubGraph_8610F9C3_Texture2DADBC218B_797265521:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecularColorMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -143,6 +147,7 @@ Material:
     - CanBuild: 0
     - UseShader: 0
     - Vector1_1BC76CC2: 25
+    - Vector1_287EDC53: 1
     - Vector1_C6321E9F: 100
     - _AORemapMax: 1
     - _AORemapMin: 0
@@ -269,6 +274,7 @@ Material:
     - CanBuildColor: {r: 0.18397805, g: 0.5566037, b: 0, a: 0.6862745}
     - CannotBuildColor: {r: 0.53773576, g: 0.0228284, b: 0.0228284, a: 0.6862745}
     - Color_762EE56B: {r: 1.929412, g: 0.9098039, b: 0.282353, a: 0}
+    - Color_B0CAA98A: {r: 2.2198951, g: 4.2722507, b: 4.7748685, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 0, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 0, a: 1}

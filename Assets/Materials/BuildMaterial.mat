@@ -23,19 +23,19 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1E8131C6:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: a422d3d4eec98a54ab56a40ed62f82b7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_455C37C1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 81ff733cd9c551847aacd0b5fb3c0881, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_68DE0B3F:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 248ce3f8b0e223545a36a164088196ae, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_7C644DCD:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: b2fc93330547e734db7fd0d0098526be, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -62,6 +62,10 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _OutlineSubGraph_8610F9C3_Texture2DADBC218B_797265521:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _SpecGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -70,6 +74,7 @@ Material:
     - CanBuild: 0
     - UseShader: 0
     - Vector1_1BC76CC2: 100
+    - Vector1_287EDC53: 1.5
     - Vector1_C6321E9F: 100
     - _AlphaClip: 0
     - _Blend: 0
@@ -98,6 +103,7 @@ Material:
     - CanBuildColor: {r: 0.18397805, g: 0.5566037, b: 0, a: 0.6862745}
     - CannotBuildColor: {r: 0.53773576, g: 0.0228284, b: 0.0228284, a: 0.6862745}
     - Color_762EE56B: {r: 1.9294118, g: 0.9098039, b: 0.28235295, a: 0}
+    - Color_B0CAA98A: {r: 0, g: 42.803814, b: 48.538143, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
