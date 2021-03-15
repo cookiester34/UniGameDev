@@ -8,6 +8,7 @@ public class Health : MonoBehaviour {
     public event EmptyEvent OnHealthLost;
     public event EmptyEvent OnHealthGain;
     public event EmptyEvent OnDeath;
+    public event EmptyEvent OnWaspKilled;
     [SerializeField] private float currentHealth;
     [SerializeField] private float maxHealth;
     [SerializeField] private bool shouldDestroyOnDeath = false;
@@ -93,6 +94,11 @@ public class Health : MonoBehaviour {
             GameObject dissolver = new GameObject("dissolver", typeof(Dissolver));
             dissolver.GetComponent<Dissolver>().Setup(gameObject);
             Destroy(gameObject);
+        }
+        if (gameObject.CompareTag("Enemy"))
+        {
+            Debug.Log("WASP DED");
+            EnemySpawnManager.Instance.UpdateLiveWasps();
         }
     }
 
