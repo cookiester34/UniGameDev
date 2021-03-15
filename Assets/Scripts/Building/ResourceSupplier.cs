@@ -41,14 +41,13 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         if(building != null &&_lastAssignedBees != building.numAssignedBees)
         {
             _lastAssignedBees = building.numAssignedBees;
-            resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
             CalculateProductionAmount();
-            resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
     }
 
     public void CalculateProductionAmount()
     {
+        resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
         if (building.numAssignedBees == 0)
         {
             actualProductionAmount = 0;
@@ -67,6 +66,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
                 progressBar.fillTime = actualProductionAmount;
             }
         }
+        resource.ModifyTickDrain(actualProductionAmount, productionTime);
     }
 
     public void BeforeDestroy() {

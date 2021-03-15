@@ -23,6 +23,8 @@ public class EnemySpawnManager : MonoBehaviour
             return;
         }
         _instance = this;
+        OnWaspsDefeated += AudioManager.Instance.StartPeaceMusic;
+        OnWaspsSpawn += AudioManager.Instance.StartCombatMusic;
     }
     #endregion
 
@@ -42,6 +44,7 @@ public class EnemySpawnManager : MonoBehaviour
 
     [HideInInspector]
     public int waveNumber = 0;
+    public int liveWasps = 0;
 
     [Range(1,5)]
     public int numberOfEnemiesSpawnableMin;
@@ -52,6 +55,11 @@ public class EnemySpawnManager : MonoBehaviour
     int enemyBuildingListOldCount;
 
     public GameObject enemyPrefab;
+
+    public delegate void WaspEvent();
+    public event WaspEvent OnWaspsDefeated;
+    public event WaspEvent OnWaspsSpawn;
+
 
     public class WaspGroup
     {
@@ -71,6 +79,14 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    public void UpdateLiveWasps()
+    {
+        liveWasps--;
+        if (liveWasps <= 0)
+        {
+            OnWaspsDefeated?.Invoke();
+        }
+    }
 
     void SpawnWave()
     {
@@ -110,6 +126,7 @@ public class EnemySpawnManager : MonoBehaviour
                     }
                 }
             }
+            OnWaspsSpawn?.Invoke();
         }
     }
 
@@ -138,6 +155,7 @@ public class EnemySpawnManager : MonoBehaviour
                     waspAI.masterWaspObject = masterWasp;
                     waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
                 }
+                liveWasps++;
             }
         }
     }
