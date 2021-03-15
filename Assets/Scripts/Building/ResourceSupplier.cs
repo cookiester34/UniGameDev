@@ -47,7 +47,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         }
     }
 
-    void CalculateProductionAmount()
+    public void CalculateProductionAmount()
     {
         if (building.numAssignedBees == 0)
         {
