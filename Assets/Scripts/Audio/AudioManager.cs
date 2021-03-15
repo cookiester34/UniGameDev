@@ -238,6 +238,16 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
+    public void StartCombatMusic()
+    {
+        StartMusic(SceneMusicType.combat);
+    }
+
+    public void StartPeaceMusic()
+    {
+        StartMusic(SceneMusicType.peace);
+    }
+
     public void ChangeAmbienceTrack()
     {
         PlayAmbienceTrack(SeasonManager.Instance.currentSeason);
