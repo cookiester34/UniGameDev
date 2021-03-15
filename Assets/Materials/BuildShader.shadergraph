@@ -88,13 +88,13 @@
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"4cf1a133-3c00-4ca4-8ee5-b8d89a1b69a5\"\n    },\n    \"m_Name\": \"Glow Color\",\n    \"m_DefaultReferenceName\": \"Color_B0CAA98A\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": {\n        \"r\": 4.0,\n        \"g\": 0.3764705955982208,\n        \"b\": 0.0,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 1\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"4cf1a133-3c00-4ca4-8ee5-b8d89a1b69a5\"\n    },\n    \"m_Name\": \"Glow Color\",\n    \"m_DefaultReferenceName\": \"Color_B0CAA98A\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": {\n        \"r\": 2.219895124435425,\n        \"g\": 4.272250652313232,\n        \"b\": 4.774868488311768,\n        \"a\": 0.0\n    },\n    \"m_ColorMode\": 1\n}"
         },
         {
             "typeInfo": {
                 "fullName": "UnityEditor.ShaderGraph.Internal.BooleanShaderProperty"
             },
-            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"e49bb497-9acd-4b8f-9255-6fa84af14d1c\"\n    },\n    \"m_Name\": \"Glow Off / On\",\n    \"m_DefaultReferenceName\": \"Boolean_9AD1418E\",\n    \"m_OverrideReferenceName\": \"\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": false\n}"
+            "JSONnodeData": "{\n    \"m_Guid\": {\n        \"m_GuidSerialized\": \"e49bb497-9acd-4b8f-9255-6fa84af14d1c\"\n    },\n    \"m_Name\": \"Glow Off / On\",\n    \"m_DefaultReferenceName\": \"Boolean_9AD1418E\",\n    \"m_OverrideReferenceName\": \"_GlowOn\",\n    \"m_GeneratePropertyBlock\": true,\n    \"m_Precision\": 0,\n    \"m_GPUInstanced\": false,\n    \"m_Hidden\": false,\n    \"m_Value\": false\n}"
         }
     ],
     "m_SerializedKeywords": [],
