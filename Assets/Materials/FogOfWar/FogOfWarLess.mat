@@ -21,7 +21,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: FogOfWarLess
-  m_Shader: {fileID: -6465566751694194690, guid: 6c57cfd3b18332942a1ba284565835a0,
+  m_Shader: {fileID: -6465566751694194690, guid: 625e0523a2f86a14d866c6907a1f0c38,
     type: 3}
   m_ShaderKeywords: _BLENDMODE_PRE_MULTIPLY _DOUBLESIDED_ON _ENABLE_FOG_ON_TRANSPARENT
     _SURFACE_TYPE_TRANSPARENT
@@ -147,14 +147,14 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_216B6587: 1
-    - Vector1_23F7266B: 0.06
+    - Vector1_23F7266B: 0.03
     - Vector1_4C6EF63: -2.13
     - Vector1_80204F7F: 0.5
     - Vector1_8ED1EA40: 0.013
     - Vector1_AA1C463E: 14.99
-    - Vector1_B1AF56C9: 0.08
+    - Vector1_B1AF56C9: 0.01
     - Vector1_D632FD56: -4.56
-    - Vector1_E221987C: -0.45
+    - Vector1_E221987C: 0.04
     - Vector1_FBD9E64: 0.003
     - _AORemapMax: 1
     - _AORemapMin: 0
