@@ -155,6 +155,33 @@ MonoBehaviour:
     autoModulation: 0
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
+  - name: FleshHit
+    soundClip: {fileID: 8300000, guid: f52416b913c93e742b64b44e91f6e205, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: SolidHit
+    soundClip: {fileID: 8300000, guid: 538d86202b391d54fa3219e1931709e8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: Death
+    soundClip: {fileID: 8300000, guid: 5fb537ad1c995e44b819d4cdb367a57f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
   peaceMusic:
   - name: PeaceMusic0
     musicClip: {fileID: 8300000, guid: df11f8b5e148a1d4dbc00c18788cf1e1, type: 3}

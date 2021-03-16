@@ -125,8 +125,7 @@ public class EnemySpawnManager : MonoBehaviour
                         }
                     }
                 }
-            }
-            OnWaspsSpawn?.Invoke();
+            }            
         }
     }
 
@@ -158,5 +157,6 @@ public class EnemySpawnManager : MonoBehaviour
                 liveWasps++;
             }
         }
+        OnWaspsSpawn?.Invoke();
     }
 }

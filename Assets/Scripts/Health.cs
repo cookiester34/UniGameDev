@@ -14,13 +14,13 @@ public class Health : MonoBehaviour {
 
     [Header("Optional common things")]
     [SerializeField] private GameObject healthGainParticles;
-    [SerializeField] private AudioClip healthGainAudio;
+    [SerializeField] private AudioSource healthGainAudio;
 
     [SerializeField] private GameObject healthLostParticles;
-    [SerializeField] private AudioClip healthLostAudio;
+    [SerializeField] private AudioSource healthLostAudio;
 
     [SerializeField] private GameObject deathParticles;
-    [SerializeField] private AudioClip deathAudio;
+    [SerializeField] private AudioSource deathAudio;
 
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
@@ -60,9 +60,17 @@ public class Health : MonoBehaviour {
         }
     }
 
+    public void ModulateSound(AudioSource source) {
+        float pitchOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        float volumeOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        source.pitch = 1 + pitchOffset;
+        source.volume = 1 + volumeOffset;
+    }
+
     private void HealthGained() {
         if (healthGainAudio != null) {
-            AudioManager.Instance.PlaySound(healthGainAudio.name);
+            ModulateSound(healthGainAudio);
+            healthGainAudio.Play();
         }
 
         if (healthGainParticles != null) {
@@ -72,7 +80,8 @@ public class Health : MonoBehaviour {
 
     private void HealthLost() {
         if (healthLostAudio != null) {
-            AudioManager.Instance.PlaySound(healthLostAudio.name);
+            ModulateSound(healthLostAudio);
+            healthLostAudio.Play();
         }
 
         if (healthLostParticles != null) {
@@ -82,7 +91,8 @@ public class Health : MonoBehaviour {
 
     private void Death() {
         if (deathAudio != null) {
-            AudioManager.Instance.PlaySound(deathAudio.name);
+            ModulateSound(deathAudio);
+            deathAudio.Play();
         }
 
         if (deathParticles != null) {
