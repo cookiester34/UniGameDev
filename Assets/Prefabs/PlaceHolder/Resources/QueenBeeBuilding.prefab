@@ -4966,6 +4966,7 @@ Transform:
   - {fileID: 286187829411123275}
   - {fileID: 5748630950157105691}
   - {fileID: 892308645801130707}
+  - {fileID: 7413431198100362065}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5359,6 +5360,66 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d477ee300c4260d42a5a03de22f6bac0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &8816436337832454289
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1019907913518373587}
+    m_Modifications:
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552601271516103940, guid: d95a35de25ab6e344bc248cf3ae06c76,
+        type: 3}
+      propertyPath: m_Name
+      value: QueenBeeMinimapIcon
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: d95a35de25ab6e344bc248cf3ae06c76, type: 3}
+--- !u!4 &7413431198100362065 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2070400490395106240, guid: d95a35de25ab6e344bc248cf3ae06c76,
+    type: 3}
+  m_PrefabInstance: {fileID: 8816436337832454289}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8867015834709741743
 PrefabInstance:
   m_ObjectHideFlags: 0
