@@ -20,6 +20,10 @@ public class BuildingFoundation : MonoBehaviour {
     private MaterialPropertyBlock _propBlock;
     static List<BuildingFoundation> _foundations = new List<BuildingFoundation>();
 
+    private int _id;
+    private static int idCounter;
+
+    public int Id => _id;
     public static Color InvisibleColor => invisibleColor;
 
     public bool CanBuild {
@@ -37,6 +41,8 @@ public class BuildingFoundation : MonoBehaviour {
         _renderer = GetComponentInChildren<Renderer>();
         _propBlock = new MaterialPropertyBlock();
         _foundations.Add(this);
+        _id = idCounter;
+        idCounter++;
     }
 
     public static void Hide() {

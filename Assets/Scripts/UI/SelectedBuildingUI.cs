@@ -49,7 +49,7 @@ public class SelectedBuildingUI : MonoBehaviour {
             return;
         }
 
-        bar.MakeContentsActive(thisTabbableButton);
+        bar.MakeContentsActive(thisTabbableButton, true);
         
         upgradeBuildingButton.interactable = _selectedBuilding.CanUpgrade();
         assignBeeButton.interactable =

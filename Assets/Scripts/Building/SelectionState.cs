@@ -16,6 +16,7 @@ public class SelectionState : BuildingManagerState {
     }
 
     public override void Exit() {
+        EnableGlow(false);
         buildingManager.BuildingSelected(null);
         selectedBuilding = null;
         selectedBuildingData = null;
@@ -27,12 +28,15 @@ public class SelectionState : BuildingManagerState {
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
                 if (hit.transform.CompareTag("Building")) {
+                    EnableGlow(false);
                     selectedBuilding = hit.transform.gameObject;
                     selectedBuildingData = selectedBuilding.GetComponent<Building>();
                     buildingManager.BuildingSelected(selectedBuildingData);
+                    EnableGlow(true);
                 }
             }
         } else if (Input.GetKeyDown(KeyCode.Escape) || Input.GetMouseButtonDown(1)) {
+            EnableGlow(false);
             selectedBuilding = null;
             selectedBuildingData = null;
             buildingManager.BuildingSelected(null);
@@ -108,6 +112,15 @@ public class SelectionState : BuildingManagerState {
         GameObject go = Object.Instantiate(buildingManager.BuildingPlaceParticles, parent, false);
         ParticleSystem particles = go.GetComponent<ParticleSystem>();
         particles.Play();
+    }
+
+    private void EnableGlow(bool enable) {
+        if (selectedBuilding != null) {
+            var glowEnabler = selectedBuilding.GetComponent<GlowEnabler>();
+            if (glowEnabler != null) {
+                glowEnabler.EnableGlow(enable);
+            }
+        }
     }
 
     public SelectionState(BuildingManager buildingManager) : base(buildingManager) { }

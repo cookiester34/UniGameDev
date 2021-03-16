@@ -61,10 +61,11 @@ public static class SaveLoad {
             SavedResearch savedResearch = new SavedResearch(researchObject);
             save.researches.Add(savedResearch);
         }
-		
-		HexPanel[] panels = Object.FindObjectsOfType<HexPanel>().ToArray();
-        foreach (HexPanel HP in panels) {
-            save.hexesTransforms.Add(new SavedTransform(HP.gameObject.transform));
+
+        foreach (BuildingFoundation bf in Object.FindObjectsOfType<BuildingFoundation>()) {
+            if (!bf.CanBuild) {
+                save.buildingFoundations.Add(new SavedBuildingFoundation(bf));
+            }
         }
 
         save.currentSeason = (int)SeasonManager.Instance.GetCurrentSeason();//save current season
@@ -137,17 +138,15 @@ public static class SaveLoad {
                 ResearchManager.Instance.ResearchTopic(obj, false);
             }
         }
-		
-        GenerateHexMap generatorInst = Object.FindObjectOfType<GenerateHexMap>(); //need this to get an easy reference to the hex prefab (and to set the colour)
-        List<HexPanel> panels = new List<HexPanel>();
-        for (int i = 0; i < _currentSave.hexesTransforms.Count; i++) {
-            SavedTransform transform = _currentSave.hexesTransforms[i];
-            GameObject go = Object.Instantiate(generatorInst.defaultHex, transform.Position, transform.Rotation);
-            panels.Add(go.GetComponent<HexPanel>());
-        }
 
-        foreach (HexPanel panel in panels) {
-            panel.CalculateNeighbours();
+        List<BuildingFoundation> foundations = Object.FindObjectsOfType<BuildingFoundation>().ToList();
+        foreach (var bf in _currentSave.buildingFoundations) {
+            var match = foundations.Find(x => x.Id == bf.id);
+            if (match == null) {
+                Debug.LogWarning("During load of save could not find building foundation with matching id");
+            } else {
+                match.CanBuild = false;
+            }
         }
 
         SeasonManager.Instance.SetCurrentSeason((Seasons)_currentSave.currentSeason);//set currrent season
