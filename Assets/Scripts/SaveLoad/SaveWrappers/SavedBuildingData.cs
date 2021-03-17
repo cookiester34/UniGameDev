@@ -20,6 +20,6 @@ public class SavedBuildingData {
 
     public SavedBuildingData(BuildingData buildingData) {
         buildingType = buildingData.BuildingType;
-        resourcePurchase = buildingData.ResourcePurchase;
+        resourcePurchase = buildingData.Tier1Cost;
     }
 }
