@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MinimapIconHeightAdjustment : MonoBehaviour
 {
-	private float _height = -10f;
+	private float _height = 40f;
     // Start is called before the first frame update
     void Start()
     {
