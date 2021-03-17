@@ -69,6 +69,18 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         resource.ModifyTickDrain(actualProductionAmount, productionTime);
     }
 
+    public string BeeBenefitText(bool assign) {
+        string text = "+ ";
+        float increaseAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.BuildingTier;
+        if (!assign) {
+            increaseAmount *= -1;
+            text = "- ";
+        }
+
+        text += resource + ": " + increaseAmount + " per bee\n";
+        return text;
+    }
+
     public void BeforeDestroy() {
         resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
     }

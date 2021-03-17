@@ -15,6 +15,9 @@ public class SelectedBuildingUI : MonoBehaviour {
     [SerializeField] private Button upgradeBuildingButton;
     [SerializeField] private Button assignBeeButton;
     [SerializeField] private Button unassignBeeButton;
+    private TooltipEnabler _upgradeBuildingTooltip;
+    private TooltipEnabler _assignBeeTooltip;
+    private TooltipEnabler _unassignBeeTooltip;
     private Building _selectedBuilding;
 
     private void Awake() {
@@ -38,6 +41,9 @@ public class SelectedBuildingUI : MonoBehaviour {
             Debug.LogWarning("Selected Building UI upgrade building button not assigned");
         }
 
+        _assignBeeTooltip = assignBeeButton.GetComponent<TooltipEnabler>();
+        _unassignBeeTooltip = unassignBeeButton.GetComponent<TooltipEnabler>();
+        _upgradeBuildingTooltip = upgradeBuildingButton.GetComponent<TooltipEnabler>();
         BuildingManager.Instance.OnBuildingSelected += UpdateDisplay;
     }
 
@@ -64,8 +70,12 @@ public class SelectedBuildingUI : MonoBehaviour {
                                 - (int)ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
 
         resourcesText.text = "";
+        string assignText = "";
+        string unassignText = "";
         var resources = building.gameObject.GetComponents<ResourceSupplier>();
         foreach (ResourceSupplier i in resources) {
+            assignText += i.BeeBenefitText(true);
+            unassignText += i.BeeBenefitText(false);
             resourcesText.text += "Supplying " + i.Resource.name + ": " + i.actualProductionAmount + "\n";
         }
 
@@ -73,11 +83,17 @@ public class SelectedBuildingUI : MonoBehaviour {
         foreach (ResourceStorage i in storage) {
             resourcesText.text += "Max " + i.Resource.name + " storage: " + i.GetStorage() + "\n";
         }
+
+        _assignBeeTooltip.TooltipText = assignText;
+        _unassignBeeTooltip.TooltipText = unassignText;
+        _upgradeBuildingTooltip.TooltipText = building.CanUpgrade()
+            ? building.BuildingData.UpgradeCost(building.BuildingTier + 1) : "Missing research to upgrade";
     }
 
     public void UpgradeBuilding() {
         if (_selectedBuilding.CanUpgrade()) {
             BuildingManager.Instance.UpgradeBuilding();
+            UpdateDisplay(_selectedBuilding);
         }
     }
 

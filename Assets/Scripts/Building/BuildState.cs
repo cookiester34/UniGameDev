@@ -64,7 +64,7 @@ public class BuildState : BuildingManagerState {
             buildingManager.SetBuildMode(BuildingMode.Selection);
         } else {
             bool isInBuildingLimit = GetIsInBuildingLimit(buildingData);
-            bool canUseResources = ResourceManagement.Instance.CanUseResources(buildingData.ResourcePurchase);
+            bool canUseResources = ResourceManagement.Instance.CanUseResources(buildingData.Tier1Cost);
 
             if (!canUseResources) {
                 UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
@@ -94,7 +94,7 @@ public class BuildState : BuildingManagerState {
             buildingManager.BuildingAlreadyThere();
         } else {
             tempBuilding.transform.position = position;
-            ResourceManagement.Instance.UseResources(currentBuilding.ResourcePurchase);
+            ResourceManagement.Instance.UseResources(currentBuilding.Tier1Cost);
             tempBuilding.GetComponent<Collider>().enabled = true;
             PlayBuildingPlaceParticles(tempBuilding.transform);
 
@@ -107,7 +107,7 @@ public class BuildState : BuildingManagerState {
 
             AudioManager.Instance.PlaySound("PlaceBuilding");
             tempBuilding = null;
-            if (ResourceManagement.Instance.CanUseResources(currentBuilding.ResourcePurchase) &&
+            if (ResourceManagement.Instance.CanUseResources(currentBuilding.Tier1Cost) &&
                 GetIsInBuildingLimit(currentBuilding)) {
                 SetupBuilding(currentBuilding);
             } else {

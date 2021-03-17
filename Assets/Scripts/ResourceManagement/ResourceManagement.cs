@@ -2,8 +2,8 @@
 using UnityEngine;
 using Util;
 
-public class ResourceManagement : MonoBehaviour
-{
+public class ResourceManagement : MonoBehaviour {
+
     public List<Resource> resourceList = new List<Resource>();
     [Header("Options")]
     [Tooltip("This sets how often the resoources get updated in seconds")]

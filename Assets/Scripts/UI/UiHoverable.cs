@@ -96,7 +96,7 @@ namespace UI {
 		
 		private string CalculateCostString() {
 			string builder = "\n";
-			foreach (ResourcePurchase cost in _buildingData.ResourcePurchase) {
+			foreach (ResourcePurchase cost in _buildingData.Tier1Cost) {
 				builder = builder + cost.resourceType.ToString() + ": " + cost.cost.ToString() + " ";
 			}
 			if (builder != "\n") {
