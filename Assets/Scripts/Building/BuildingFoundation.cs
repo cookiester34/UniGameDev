@@ -57,6 +57,11 @@ public class BuildingFoundation : MonoBehaviour {
         }
     }
 
+    public void OnDestroy() {
+        _foundations.Remove(this);
+        idCounter--;
+    }
+
     /// <summary>
     /// Gets the central position for the building
     /// </summary>
