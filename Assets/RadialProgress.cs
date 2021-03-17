@@ -8,13 +8,12 @@ public class RadialProgress : MonoBehaviour
 {
     public Image progressBar;
     float currentValue;
-    public float fillTime;
+    public float fillSpeed;
     public bool active;
 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -24,7 +23,7 @@ public class RadialProgress : MonoBehaviour
         {
             if (currentValue < 1f)
             {
-            currentValue +=  Time.deltaTime * fillTime;
+                currentValue += Time.deltaTime * fillSpeed;
             }
             else
             {

@@ -63,7 +63,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             if (progressBar != null)
             {
                 progressBar.active = true;
-                progressBar.fillTime = actualProductionAmount / productionTime;
+                progressBar.fillSpeed = actualProductionAmount / productionTime / ResourceManagement.Instance.resourceTickTime;
             }
         }
         resource.ModifyTickDrain(actualProductionAmount, productionTime);
