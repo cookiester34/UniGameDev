@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(BeeStateMachine))]
 [RequireComponent(typeof(NavMeshAgent))]
@@ -49,6 +50,12 @@ public class Bee : MonoBehaviour {
         _soundLoopVolume = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
         transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
         transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
+
+        _agent.height = Random.Range(0.2f, 2f);
+        _agent.baseOffset = _agent.height / 2f;
+
+        var scale = Random.Range(0.6f, 0.9f);
+        transform.localScale = new Vector3(scale, scale, scale);
     }
 
     private void OnDestroy() {
