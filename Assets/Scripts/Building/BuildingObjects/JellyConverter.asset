@@ -14,11 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 4
   uiImage: {fileID: 21300000, guid: 04760f0491299434e922f79374491ccd, type: 3}
-  resourcePurchase:
-  - cost: 15
-    resourceType: 3
-  - cost: 10
-    resourceType: 0
   buildingShape: 3
   maxInstances: 1000
   description: Jelly Converter - This building converts pollen into royal jelly.
@@ -29,3 +24,18 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
   tier3RequiredResearch:
   - {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633, type: 2}
+  tier1Cost:
+  - cost: 15
+    resourceType: 3
+  - cost: 10
+    resourceType: 0
+  tier2Cost:
+  - cost: 25
+    resourceType: 3
+  - cost: 20
+    resourceType: 0
+  tier3Cost:
+  - cost: 35
+    resourceType: 3
+  - cost: 30
+    resourceType: 0

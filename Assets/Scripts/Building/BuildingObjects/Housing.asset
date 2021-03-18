@@ -14,9 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 1
   uiImage: {fileID: 21300000, guid: 8ddab7ff90a6d1e4da50c3b032ff29fe, type: 3}
-  resourcePurchase:
-  - cost: 10
-    resourceType: 3
   buildingShape: 0
   maxInstances: 1000
   description: Housing - A place for bees to rest up and raise their happiness. Bees
@@ -27,3 +24,12 @@ MonoBehaviour:
   - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   tier3RequiredResearch:
   - {fileID: 11400000, guid: bbd54cab746591c499d0f65321b4b680, type: 2}
+  tier1Cost:
+  - cost: 10
+    resourceType: 3
+  tier2Cost:
+  - cost: 15
+    resourceType: 3
+  tier3Cost:
+  - cost: 30
+    resourceType: 3
