@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.PackageManager;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Quick attempt at highlighting hexes near mouse when in build mode
