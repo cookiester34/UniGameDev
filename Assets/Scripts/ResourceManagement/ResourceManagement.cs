@@ -117,6 +117,7 @@ public class ResourceManagement : MonoBehaviour {
             if (Mathf.Abs(i.ResourceTickAmount) > 0.005f) {
                 i.ModifyAmount(i.ResourceTickAmount);
             }
+            i.ResourceCapReached();
         }
     }
 

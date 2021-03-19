@@ -34,6 +34,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         } else {
             resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
+        resource.OnCapReached += SupplyCapped; // Event from resource in supplier when cap is reached.
     }
 
     void Update()
@@ -48,23 +49,15 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     public void CalculateProductionAmount()
     {
         resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
-        if (building.numAssignedBees == 0)
+        if (building.numAssignedBees == 0 || resource.ResourceCapReached())
         {
             actualProductionAmount = 0;
-            if (progressBar != null)
-            {
-                progressBar.active = false;
-                progressBar.progressBar.fillAmount = 0;
-            }
+            StopProductionBar();
         }
         else
         {
             actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.BuildingTier;
-            if (progressBar != null)
-            {
-                progressBar.active = true;
-                progressBar.fillSpeed = actualProductionAmount / productionTime / ResourceManagement.Instance.resourceTickTime;
-            }
+            StartProductionBar();
         }
         resource.ModifyTickDrain(actualProductionAmount, productionTime);
     }
@@ -79,6 +72,32 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
 
         text += resource + ": " + increaseAmount + " per bee\n";
         return text;
+    }
+
+
+    // Halts the Progress bar an sets it to 0
+    public void StopProductionBar()
+    {
+        if (progressBar != null)
+        {
+            progressBar.Deactivate();
+        }
+    }
+
+    // Starts the bar filling at the same rate as production
+    public void StartProductionBar()
+    {
+        if (progressBar != null)
+        {
+            progressBar.Activate(actualProductionAmount / productionTime / ResourceManagement.Instance.resourceTickTime);
+        }
+    }
+
+    // Called when the resource from the supplier hits cap.
+    public void SupplyCapped()
+    {
+        StopProductionBar();
+    /// Here is where we can enable some way to show the cap is reached ///
     }
 
     public void BeforeDestroy() {

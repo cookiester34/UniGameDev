@@ -7,14 +7,9 @@ using UnityEngine.UI;
 public class RadialProgress : MonoBehaviour
 {
     public Image progressBar;
-    float currentValue;
-    public float fillSpeed;
-    public bool active;
-
-    // Start is called before the first frame update
-    void Start()
-    {
-    }
+    private float currentValue;
+    private float fillSpeed;
+    private bool active;
 
     // Update is called once per frame
     void Update()
@@ -31,5 +26,17 @@ public class RadialProgress : MonoBehaviour
             }
             progressBar.fillAmount = currentValue;
         }
+    }
+
+    public void Deactivate()
+    {
+        active = false;
+        progressBar.fillAmount = 0;
+    }
+
+    public void Activate(float speed)
+    {
+        active = true;
+        fillSpeed = speed;
     }
 }

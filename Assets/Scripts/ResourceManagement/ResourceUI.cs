@@ -30,6 +30,6 @@ public class ResourceUI : MonoBehaviour {
 
     void UpdateText(float newValue) {
         _text.text =
-            String.Format("{0}: {1:0} / {2}", resource.name, resource.CurrentResourceAmount, resource.ResourceCap);
+            String.Format("{0}: {1:0} / {2}", resource.name, resource.GetFloorCurrentAmount(), resource.ResourceCap);
     }
 }
