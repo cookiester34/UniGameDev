@@ -18,7 +18,7 @@ MonoBehaviour:
   maxInstances: 1000
   description: Housing - A place for bees to rest up and raise their happiness. Bees
     with higher happiness will work more efficiently.
-  maxNumberOfWorkers: 5
+  maxNumberOfWorkers: 10
   tier1RequiredResearch: []
   tier2RequiredResearch:
   - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
