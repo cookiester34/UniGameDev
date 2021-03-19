@@ -34,13 +34,42 @@ public class FogOfWarBuildBounds : MonoBehaviour
         RaycastHit hit;
         Physics.Raycast(ray, out hit, maxDistance, mask);
 
-        foreach(CapsuleCollider i in buildBounds)
+        var tempList = buildBounds;
+        foreach(CapsuleCollider i in tempList)
         {
+            if(i == null)
+            {
+                buildBounds.Remove(i);
+                continue;
+            }
             if (i.bounds.Contains(hit.point))
             {
                 return hit.collider.gameObject;
             }
         }
         return null;
+    }
+
+    /// <summary>
+    /// Pass wasp position to check if it is visible
+    /// </summary>
+    /// <param name="position"></param>
+    /// <returns></returns>
+    public bool IsWaspVisible(Vector3 position)
+    {
+        var tempList = buildBounds;
+        foreach (CapsuleCollider i in tempList)
+        {
+            if (i == null)
+            {
+                buildBounds.Remove(i);
+                continue;
+            }
+            if (i.bounds.Contains(position))
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
