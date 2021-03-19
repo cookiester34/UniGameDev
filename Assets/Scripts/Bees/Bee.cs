@@ -58,6 +58,26 @@ public class Bee : MonoBehaviour {
         transform.localScale = new Vector3(scale, scale, scale);
     }
 
+    private void Start() {
+        _home = GetValidHouse();
+        if (_home != null) {
+            _home.AssignBee(this);
+        }
+    }
+
+    private Building GetValidHouse() {
+        Building validHouse = null;
+        var housing = BuildingManager.Instance.GetAllStorageBuildingsOfType(ResourceType.Population);
+        foreach (var building in housing) {
+            if (building.numAssignedBees < building.BuildingData.maxNumberOfWorkers) {
+                validHouse = building;
+                break;
+            }
+        }
+
+        return validHouse;
+    }
+
     private void OnDestroy() {
         if (!ApplicationUtil.IsQuitting) {
             ResourceManagement.Instance.GetResource(ResourceType.Population).ModifyAmount(-1);
