@@ -9,12 +9,14 @@ public class Resource : ScriptableObject {
     /// Delegate for the current value change event
     /// </summary>
     public delegate void CurrentValueChanged(float currentValue);
+    public delegate void CapReached();
     
     /// <summary>
     /// Event to be fired whenever the value of the resource changes
     /// </summary>
     public event CurrentValueChanged OnCurrentValueChanged;
     public event CurrentValueChanged OnCapChanged;
+    public event CapReached OnCapReached;
     
     [Header("Resource Options")]
     public ResourceType resourceType;
@@ -108,6 +110,7 @@ public class Resource : ScriptableObject {
         if (currentResourceAmount >= resourceCap)
         {
             currentResourceAmount = Mathf.Clamp(currentResourceAmount, 0, resourceCap);
+            OnCapReached?.Invoke();
             return true;
         }
         else
@@ -123,5 +126,14 @@ public class Resource : ScriptableObject {
         }
         else
             return false;
+    }
+
+    /// <summary>
+    /// Gets the floor of the current value
+    /// For use in the UI (We can't have half a resource)
+    /// </summary>
+    public int GetFloorCurrentAmount()
+    {
+        return Mathf.FloorToInt(currentResourceAmount);
     }
 }
