@@ -4,9 +4,9 @@ using UnityEngine;
 using System.Linq;
 
 
-public class FogOfWarBuildBounds : MonoBehaviour
+public class FogOfWarBounds : MonoBehaviour
 {
-    public static FogOfWarBuildBounds instance;
+    public static FogOfWarBounds instance;
     private void Start()
     {
         if (instance != null)
@@ -58,7 +58,7 @@ public class FogOfWarBuildBounds : MonoBehaviour
     public bool IsWaspVisible(Vector3 position)
     {
         var tempList = buildBounds;
-        foreach (CapsuleCollider i in tempList)
+        foreach (CapsuleCollider i in tempList.ToList())
         {
             if (i == null)
             {

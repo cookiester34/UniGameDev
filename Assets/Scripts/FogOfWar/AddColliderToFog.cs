@@ -10,6 +10,6 @@ public class AddColliderToFog : MonoBehaviour
     void Start()
     {
         //add the colliders to the fog bounds
-        FogOfWarBuildBounds.instance.buildBounds.Add(GetComponent<CapsuleCollider>());
+        FogOfWarBounds.instance.buildBounds.Add(GetComponent<CapsuleCollider>());
     }
 }

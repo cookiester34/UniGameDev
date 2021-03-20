@@ -4907,7 +4907,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6162327771345779894}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.49999997
   m_Height: 2
@@ -5604,7 +5604,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 34f0ce0a0e16fe14f87abe08ae00b506, type: 2}
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 40ed61987810fae4787cf63bd6301b5f, type: 3}
 --- !u!4 &4412530458133384963 stripped
