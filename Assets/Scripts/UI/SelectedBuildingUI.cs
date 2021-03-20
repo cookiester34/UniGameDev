@@ -70,24 +70,36 @@ public class SelectedBuildingUI : MonoBehaviour {
                                 - (int)ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
 
         resourcesText.text = "";
-        string assignText = "";
-        string unassignText = "";
-        var resources = building.gameObject.GetComponents<ResourceSupplier>();
-        foreach (ResourceSupplier i in resources) {
-            assignText += i.BeeBenefitText(true);
-            unassignText += i.BeeBenefitText(false);
-            resourcesText.text += "Supplying " + i.Resource.name + ": " + i.actualProductionAmount + "\n";
-        }
-
-        var storage = building.gameObject.GetComponents<ResourceStorage>();
-        foreach (ResourceStorage i in storage) {
-            resourcesText.text += "Max " + i.Resource.name + " storage: " + i.GetStorage() + "\n";
-        }
-
-        _assignBeeTooltip.TooltipText = assignText;
-        _unassignBeeTooltip.TooltipText = unassignText;
         _upgradeBuildingTooltip.TooltipText = building.CanUpgrade()
             ? building.BuildingData.UpgradeCost(building.BuildingTier + 1) : "Missing research to upgrade";
+        
+        if (building is TowerBuilding tower) {
+            SetupFromTower(tower);
+        } else {
+            string assignText = "";
+            string unassignText = "";
+            var resources = building.gameObject.GetComponents<ResourceSupplier>();
+            foreach (ResourceSupplier i in resources) {
+                assignText += i.BeeBenefitText(true);
+                unassignText += i.BeeBenefitText(false);
+                resourcesText.text += "Supplying " + i.Resource.name + ": " + i.actualProductionAmount + "\n";
+            }
+
+            var storage = building.gameObject.GetComponents<ResourceStorage>();
+            foreach (ResourceStorage i in storage) {
+                resourcesText.text += "Max " + i.Resource.name + " storage: " + i.GetStorage() + "\n";
+            }
+
+            if (building.BuildingType == BuildingType.Housing) {
+                assignText = unassignText = "Bees autoassign selves to housing as needed";
+                unassignBeeButton.interactable = false;
+                assignBeeButton.interactable = false;
+            }
+            _assignBeeTooltip.TooltipText = assignText;
+            _unassignBeeTooltip.TooltipText = unassignText;
+
+        }
+
     }
 
     public void UpgradeBuilding() {
@@ -105,5 +117,16 @@ public class SelectedBuildingUI : MonoBehaviour {
     public void UnassignBee() {
         BuildingManager.Instance.RemoveBeeFromBuilding();
         UpdateDisplay(_selectedBuilding);
+    }
+
+    private void SetupFromTower(TowerBuilding tower) {
+        if (tower.numAssignedBees == 0) {
+            resourcesText.text = "Time between shots: infinite";
+        } else {
+            resourcesText.text = "Time between shots: " + tower.firingSpeed;
+        }
+
+        _assignBeeTooltip.TooltipText = "Decreases the time between shots of the tower";
+        _unassignBeeTooltip.TooltipText = "Decreases the time between shots of the tower";
     }
 }

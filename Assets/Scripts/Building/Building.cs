@@ -75,7 +75,7 @@ public class Building : MonoBehaviour {
         OnBuildingPlaced?.Invoke();
     }
 
-    public void AssignBee(Bee bee) {
+    public virtual void AssignBee(Bee bee) {
         if (_assignedBees == null) {
             _assignedBees = new List<Bee>();
         }
@@ -100,7 +100,7 @@ public class Building : MonoBehaviour {
     /// </summary>
     /// <param name="bee">A specific bee to remove, or null for a random one</param>
     /// <returns>The bee removed</returns>
-    public Bee UnassignBee(Bee bee = null) {
+    public virtual Bee UnassignBee(Bee bee = null) {
         if (_assignedBees == null) {
             _assignedBees = new List<Bee>();
         }

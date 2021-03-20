@@ -29,7 +29,6 @@ public class TowerBuilding : Building
         if (enemiesInRange.Count > 0 && timer <= 0) {
             if (numAssignedBees > 0) {
                 FireAtEnemies();
-                firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers + 1 - numAssignedBees);
             }
             timer = firingSpeed;
         }
@@ -50,6 +49,17 @@ public class TowerBuilding : Building
         {
             enemiesInRange.RemoveAt(0);
         }
+    }
+
+    public override void AssignBee(Bee bee) {
+        base.AssignBee(bee);
+        firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers + 1 - numAssignedBees);
+    }
+
+    public override Bee UnassignBee(Bee bee = null) {
+        Bee returnBee = base.UnassignBee(bee);
+        firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers + 1 - numAssignedBees);
+        return returnBee;
     }
 
     IEnumerator DestroyProjectile(GameObject projectile, float delay)

@@ -1,21 +1,13 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
-using Object = UnityEngine.Object;
 
 public class BuildState : BuildingManagerState {
-    private EventSystem eventSys;
     GameObject tempBuilding;
     private BuildingData currentBuilding;
     private MaterialPropertyBlock _propBlock;
 
     public override void Enter() {
-        if (eventSys == null) {
-            eventSys = GameObject.FindObjectOfType<EventSystem>();
-        }
-
         if (_propBlock == null) {
             _propBlock = new MaterialPropertyBlock();
         }
@@ -33,7 +25,7 @@ public class BuildState : BuildingManagerState {
     public override void Update() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (eventSys.IsPointerOverGameObject()) {
+        if (EventSystem.current.IsPointerOverGameObject()) {
             //this checks if the mouse is over a UI element
             tempBuilding.SetActive(false);
         } else if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.tileMask)) {
