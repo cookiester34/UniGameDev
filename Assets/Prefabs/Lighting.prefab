@@ -71,7 +71,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7101374502915440692}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 13.935196, y: -50.11973, z: -5.550403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -106,13 +106,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7101374503079488590}
-  m_LocalRotation: {x: 0.6400417, y: 0.19384405, z: -0.1714987, w: 0.72343576}
+  m_LocalRotation: {x: 0.60787684, y: 0.20114021, z: -0.16288014, w: 0.75066537}
   m_LocalPosition: {x: -13.935196, y: 53.119736, z: 5.550403}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7101374502915440695}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 57.025, y: 86.087006, z: 0}
+  m_LocalEulerAnglesHint: {x: 78, y: 30, z: 0}
 --- !u!108 &7101374503079488585
 Light:
   m_ObjectHideFlags: 0
@@ -125,7 +125,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 75
+  m_Intensity: 45
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -194,7 +194,7 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
-  m_Intensity: 50
+  m_Intensity: 45
   m_EnableSpotReflector: 0
   m_LuxAtDistance: 1
   m_InnerSpotPercent: 0
@@ -281,7 +281,7 @@ MonoBehaviour:
   useOldInspector: 0
   useVolumetric: 0
   featuresFoldout: 1
-  showAdditionalSettings: 0
+  showAdditionalSettings: 8
   m_AreaLightEmissiveMeshShadowCastingMode: 0
   m_AreaLightEmissiveMeshMotionVectorGenerationMode: 0
   m_AreaLightEmissiveMeshLayer: -1

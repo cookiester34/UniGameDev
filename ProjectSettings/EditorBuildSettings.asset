@@ -8,19 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Individual/Programmers/George.unity
     guid: 14621505d4f53ee4eae55a02141de770
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Individual/Programmers/Joe.unity
     guid: ca754159e45996d43bc718ffc0fbec8e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Individual/Programmers/Ryan.unity
     guid: 88bead26bfe23c543b2b2909ac79795b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Individual/Programmers/Peter.unity
     guid: 758b06d3363110d40a7c788affc1985e
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Individual/Programmers/Sam.unity
     guid: 13f7a6a876dd9e545b3e17e2e6e5ba81
   - enabled: 1
