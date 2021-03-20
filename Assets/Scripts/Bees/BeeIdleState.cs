@@ -64,11 +64,11 @@ public class BeeIdleState : BeeState {
         // Random direction
         bool posX = Random.Range(0, 2) == 0;
         bool posZ = Random.Range(0, 2) == 0;
-        var x = Random.Range(3.5f, 5f);
+        var x = Random.Range(2.5f, 4f);
         if (!posX) {
             x *= -1;
         }
-        var z = Random.Range(3.5f, 4f);
+        var z = Random.Range(2.5f, 4f);
         if (!posZ) {
             z *= -1;
         }
