@@ -16,6 +16,8 @@ public class TowerBuilding : Building
     private float timer = 1f;
     private AudioSource fireSound;
 
+    private Animator anim;
+
     [HideInInspector]
     public List<Transform> enemiesInRange = new List<Transform>();
 
@@ -24,15 +26,22 @@ public class TowerBuilding : Building
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
         fireSound = gameObject.transform.GetComponent<AudioSource>();
+        anim = GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if (enemiesInRange.Count > 0 && timer <= 0) {
-            if (numAssignedBees > 0) {
-                FireAtEnemies();
+        if (enemiesInRange.Count > 0) {
+            if (timer <= 0) 
+            {
+                if (numAssignedBees > 0) {
+                    FireAtEnemies();
+                }
+                timer = firingSpeed;
             }
-            timer = firingSpeed;
+            //Quaternion _lookRotation = Quaternion.LookRotation((enemiesInRange[0].position - transform.position).normalized);
+            ////over time
+            //transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 10);
         }
 
         timer -= Time.deltaTime;
@@ -43,10 +52,14 @@ public class TowerBuilding : Building
         if (enemiesInRange[0] != null) {
             AudioManager.Instance.ModulateAudioSource(fireSound);
             fireSound.Play();
+            anim.SetTrigger("Attack");
+            transform.LookAt(enemiesInRange[0].position);
+            transform.Rotate(new Vector3(0, -90, 0));
             GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
             temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
             StartCoroutine(DestroyProjectile(temp, 5f));
+            //anim.ResetTrigger("Attack");
         }
         else
         {

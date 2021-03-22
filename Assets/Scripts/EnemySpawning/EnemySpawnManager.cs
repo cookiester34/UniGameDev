@@ -25,6 +25,7 @@ public class EnemySpawnManager : MonoBehaviour
         _instance = this;
         OnWaspsDefeated += AudioManager.Instance.StartPeaceMusic;
         OnWaspsSpawn += AudioManager.Instance.StartCombatMusic;
+        renderer = GetComponent<Renderer>();
     }
     #endregion
 
@@ -60,6 +61,8 @@ public class EnemySpawnManager : MonoBehaviour
     public event WaspEvent OnWaspsDefeated;
     public event WaspEvent OnWaspsSpawn;
 
+    private Renderer renderer;
+
 
     public class WaspGroup
     {
@@ -67,6 +70,27 @@ public class EnemySpawnManager : MonoBehaviour
     }
 
     public List<WaspGroup> waspGroupList = new List<WaspGroup>();
+
+
+    private void FixedUpdate()
+    {
+        checkVisible();//not sure if there's a better place for this
+    }
+
+    void checkVisible()
+    {
+        foreach (Transform i in enemyBuildingsList)
+        {
+            if (FogOfWarBounds.instance.IsWaspVisible(i.position))
+            {
+                i.gameObject.GetComponent<Renderer>().enabled = true;
+            }
+            else
+            {
+                i.gameObject.GetComponent<Renderer>().enabled = false;
+            }
+        }
+    }
 
     void UpdateWaspGroups()
     {
