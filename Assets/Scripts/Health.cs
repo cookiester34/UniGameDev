@@ -69,7 +69,7 @@ public class Health : MonoBehaviour {
 
     private void HealthGained() {
         if (healthGainAudio != null) {
-            ModulateSound(healthGainAudio);
+            AudioManager.Instance.ModulateAudioSource(healthGainAudio);
             healthGainAudio.Play();
         }
 
@@ -80,7 +80,7 @@ public class Health : MonoBehaviour {
 
     private void HealthLost() {
         if (healthLostAudio != null) {
-            ModulateSound(healthLostAudio);
+            AudioManager.Instance.ModulateAudioSource(healthLostAudio);
             healthLostAudio.Play();
         }
 
@@ -91,7 +91,7 @@ public class Health : MonoBehaviour {
 
     private void Death() {
         if (deathAudio != null) {
-            ModulateSound(deathAudio);
+            AudioManager.Instance.ModulateAudioSource(deathAudio);
             deathAudio.Play();
         }
 

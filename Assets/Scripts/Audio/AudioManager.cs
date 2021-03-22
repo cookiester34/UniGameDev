@@ -138,6 +138,14 @@ public class AudioManager : MonoBehaviour {
         sound.source.volume = sound.volume + volumeOffset;
     }
 
+    public void ModulateAudioSource(AudioSource source)
+    {
+        float pitchOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        float volumeOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        source.pitch = 1 + pitchOffset;
+        source.volume = 1 + volumeOffset;
+    }
+
     // This is what is used to play the sound in code.
     public void PlaySound (string name)
     {

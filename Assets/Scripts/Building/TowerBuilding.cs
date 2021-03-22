@@ -14,6 +14,7 @@ public class TowerBuilding : Building
     public float baseFiringSpeed;
     public float firingSpeed;
     private float timer = 1f;
+    private AudioSource fireSound;
 
     [HideInInspector]
     public List<Transform> enemiesInRange = new List<Transform>();
@@ -22,6 +23,7 @@ public class TowerBuilding : Building
     protected override void Start() {
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
+        fireSound = gameObject.transform.GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -39,7 +41,8 @@ public class TowerBuilding : Building
     private void FireAtEnemies()
     {
         if (enemiesInRange[0] != null) {
-            gameObject.transform.GetComponent<AudioSource>().Play();
+            AudioManager.Instance.ModulateAudioSource(fireSound);
+            fireSound.Play();
             GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
             Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
             temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
