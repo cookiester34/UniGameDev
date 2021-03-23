@@ -16,7 +16,7 @@ public class HexHighlighter : MonoBehaviour {
             }
 
             Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(mouseRay, out var hit, float.MaxValue, terrain)) {
+            if (PhysicsUtil.Raycast(mouseRay, out var hit, float.MaxValue, terrain, false)) {
                 Vector3 mouseTerrainPos = hit.point;
                 size = Physics.OverlapSphereNonAlloc(mouseTerrainPos, 5f, colliders, grid);
                 if (size > 0) {

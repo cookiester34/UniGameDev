@@ -28,7 +28,7 @@ public class BuildState : BuildingManagerState {
         if (EventSystem.current.IsPointerOverGameObject()) {
             //this checks if the mouse is over a UI element
             tempBuilding.SetActive(false);
-        } else if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.tileMask)) {
+        } else if (PhysicsUtil.Raycast(ray, out hit, Mathf.Infinity, buildingManager.tileMask, false)) {
             tempBuilding.SetActive(true);
             BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
             if (foundation != null) {

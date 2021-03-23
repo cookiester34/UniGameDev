@@ -50,6 +50,25 @@ public class FogOfWarBounds : MonoBehaviour
         return null;
     }
 
+    public bool IsInFog(Vector3 position) {
+        bool inFog = true;
+
+        if (CurrentSceneType.SceneType == SceneType.LevelEditor) {
+            return false;
+        }
+
+        foreach(CapsuleCollider i in buildBounds) {
+            if (i != null) {
+                if (i.bounds.Contains(position)) {
+                    inFog = false;
+                    break;
+                }
+            }
+        }
+
+        return inFog;
+    }
+
     /// <summary>
     /// Pass wasp position to check if it is visible
     /// </summary>
