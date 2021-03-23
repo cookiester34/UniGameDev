@@ -8,10 +8,10 @@ public class Dissolver : MonoBehaviour {
     private float dissolve;
     private MaterialPropertyBlock _propertyBlock;
     private static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
-    private List<MeshRenderer> toDissolve = new List<MeshRenderer>();
+    private List<Renderer> toDissolve = new List<Renderer>();
 
     public void Setup(GameObject other) {
-        var mrs = other.GetComponentsInChildren<MeshRenderer>();
+        var mrs = other.GetComponentsInChildren<Renderer>();
         if (mrs == null || mrs.Length < 1) {
             Destroy(gameObject);
             Debug.LogWarning("Attempted to setup dissolver but missing meshrenderer on base object");
@@ -42,7 +42,15 @@ public class Dissolver : MonoBehaviour {
             child.transform.rotation = mrs[i].transform.rotation;
             child.transform.localScale = mrs[i].transform.localScale;
 
-            child.GetComponent<MeshFilter>().mesh = mfs[i].mesh;
+            var mf = child.GetComponent<MeshFilter>();
+            if (mrs[i] is SkinnedMeshRenderer) {
+                mf.mesh = ((SkinnedMeshRenderer) mrs[i]).sharedMesh;
+            } else {
+                if (i < mfs.Length) {
+                    mf.mesh = mfs[i].mesh;
+                }
+            }
+
             var mr = child.GetComponent<MeshRenderer>();
             mr.material = mrs[i].material;
             mr.GetPropertyBlock(_propertyBlock);
@@ -57,10 +65,10 @@ public class Dissolver : MonoBehaviour {
     }
 
     private void UpdateAnimate() {
-        foreach (MeshRenderer meshRenderer in toDissolve) {
-            meshRenderer.GetPropertyBlock(_propertyBlock);
+        foreach (Renderer objRenderer in toDissolve) {
+            objRenderer.GetPropertyBlock(_propertyBlock);
             _propertyBlock.SetFloat(Dissolve, dissolve);
-            meshRenderer.SetPropertyBlock(_propertyBlock);
+            objRenderer.SetPropertyBlock(_propertyBlock);
         }
     }
 }
