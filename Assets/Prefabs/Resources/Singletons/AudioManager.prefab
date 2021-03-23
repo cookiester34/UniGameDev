@@ -1,0 +1,298 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1714416664458419524
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7513036419181782114}
+  - component: {fileID: 345207262248793613}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7513036419181782114
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714416664458419524}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &345207262248793613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1714416664458419524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62c8f54514bac1647b2ed65d74c7359f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mixer: {fileID: 24100000, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+  sounds:
+  - name: PlaceBuilding
+    soundClip: {fileID: 8300000, guid: c19ae64e939198e4f987efff6d8a7ff9, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: DestroyBuilding
+    soundClip: {fileID: 8300000, guid: a45428ecafe57934488fc816cced3c98, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UpgradeBuilding
+    soundClip: {fileID: 8300000, guid: 051a680c4b83ec24b9135f74f7c30a84, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: SeasonChange
+    soundClip: {fileID: 8300000, guid: 0b29b131a826b1b4c93e3334aa2e0284, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIUp
+    soundClip: {fileID: 8300000, guid: 3e9de13ab4bce3c418fabf92ae62966f, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIDown
+    soundClip: {fileID: 8300000, guid: d67f0a21af86e6b498e6a8ca3e8b274b, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UISelect
+    soundClip: {fileID: 8300000, guid: 66e032d6d1068994a95aa35765b7ab7d, type: 3}
+    volume: 0.7
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: UIHovered
+    soundClip: {fileID: 8300000, guid: 220e175ea758e5141be7c25654badfdb, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: UIPressed
+    soundClip: {fileID: 8300000, guid: 155c5e4e039a30b44bde366533f37b66, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: ResourceDepleted
+    soundClip: {fileID: 8300000, guid: 32d96654a5b40fd4bb9fc7197327be4c, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: ResourceLow
+    soundClip: {fileID: 8300000, guid: 47d60c0b7af7454478504489deb14af1, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: Announcement
+    soundClip: {fileID: 8300000, guid: a81f78f03f6f67a49b1b594c213bddcf, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: Error
+    soundClip: {fileID: 8300000, guid: b0f142031001ba441b7f9202bd250dd0, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  - name: FleshHit
+    soundClip: {fileID: 8300000, guid: f52416b913c93e742b64b44e91f6e205, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: SolidHit
+    soundClip: {fileID: 8300000, guid: 538d86202b391d54fa3219e1931709e8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: Death
+    soundClip: {fileID: 8300000, guid: 5fb537ad1c995e44b819d4cdb367a57f, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 1
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  peaceMusic:
+  - name: PeaceMusic0
+    musicClip: {fileID: 8300000, guid: df11f8b5e148a1d4dbc00c18788cf1e1, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: PeaceMusic1
+    musicClip: {fileID: 8300000, guid: fb86fd711be8d704c964022c0a49bb13, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: PeaceMusic2
+    musicClip: {fileID: 8300000, guid: 29bf3639f8cdbc34b859cfe6993ad79f, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: PeaceMusic3
+    musicClip: {fileID: 8300000, guid: 2e05534fd65cca343b5d32f0fda93c86, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  combatMusic:
+  - name: CombatTrack0
+    musicClip: {fileID: 8300000, guid: 2c348a1bd17ace940a1a1f69c5baafd3, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: CombatTrack1
+    musicClip: {fileID: 8300000, guid: b4c3dcf0d76773b45b7507e25801baec, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: CombatTrack2
+    musicClip: {fileID: 8300000, guid: 1aff85f7a3822884c890d7a377377a16, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: CombatTrack3
+    musicClip: {fileID: 8300000, guid: 968888e723e39a949aca6a547dce27bc, type: 3}
+    volume: 0.5
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  ambienceTracks:
+  - name: Spring
+    soundClip: {fileID: 8300000, guid: 6b7b7233ede2381439408c018938a23e, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: Summer
+    soundClip: {fileID: 8300000, guid: 7e4cde92fbe0733498efaee5c050ebf6, type: 3}
+    volume: 0.4
+    pitch: 1
+    loop: 1
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: Autumn
+    soundClip: {fileID: 8300000, guid: ef35971f1695a4d409c75bbc308b953f, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  - name: Winter
+    soundClip: {fileID: 8300000, guid: 8c29df86d91992f4d82f817fb7b082fa, type: 3}
+    volume: 0.6
+    pitch: 1
+    loop: 1
+    autoModulation: 0
+    output: {fileID: 6795677900520328299, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  mainMenuMusic:
+    name: MainMenuTheme
+    musicClip: {fileID: 8300000, guid: f34e48c37fa62a54ea84dc72d08d8f37, type: 3}
+    volume: 1
+    pitch: 1
+    output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
+      type: 2}
+    source: {fileID: 0}
+  buildingSelectSound:
+    name: BuildingSelect
+    soundClip: {fileID: 8300000, guid: d5a369ffe56085b42a4d2fd811fbbdfe, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    autoModulation: 0
+    output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
+    source: {fileID: 0}
+  startingMusicType: 2
+  lowResourceThreshold: 4

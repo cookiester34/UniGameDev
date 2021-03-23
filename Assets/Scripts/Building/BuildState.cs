@@ -68,9 +68,9 @@ public class BuildState : BuildingManagerState {
                 buildingManager.selectedBuildingUI.sprite = buildingData.UiImage;
                 buildingManager.selectedBuildingText.text = buildingData.Description;
                 currentBuilding = buildingData;
-                tempBuilding = GameObject.Instantiate(currentBuilding.BuildingType.GetPrefab(),
-                    new Vector3(0, 0, 0),
-                    currentBuilding.BuildingType.GetPrefab().transform.rotation);
+                var buildingModel = currentBuilding.BuildingType.GetModel();
+                tempBuilding = GameObject.Instantiate(buildingModel,
+                    new Vector3(0, 0, 0), buildingModel.transform.rotation);
             }
         }
     }
@@ -87,10 +87,13 @@ public class BuildState : BuildingManagerState {
         } else {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.Tier1Cost);
-            tempBuilding.GetComponent<Collider>().enabled = true;
-            PlayBuildingPlaceParticles(tempBuilding.transform);
 
-            Building placedBuilding = tempBuilding.GetComponent<Building>();
+            Object.Destroy(tempBuilding);
+            var prefab = currentBuilding.BuildingType.GetPrefab();
+            GameObject go = Object.Instantiate(prefab, position, prefab.transform.rotation);
+            PlayBuildingPlaceParticles(go.transform);
+
+            Building placedBuilding = go.GetComponent<Building>();
             if (placedBuilding != null) {
                 placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingShape);
                 placedBuilding.PlaceBuilding();

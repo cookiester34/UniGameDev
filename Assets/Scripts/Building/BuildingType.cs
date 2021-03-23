@@ -33,34 +33,78 @@ public static class BuildingTypeExtension {
         GameObject obj = null;
         switch (type) {
             case BuildingType.Storage:
-                obj = Resources.Load<GameObject>("Storage");
+                obj = Resources.Load<GameObject>("Buildings/Storage");
                 break;
 
             case BuildingType.Housing:
-                obj = Resources.Load<GameObject>("Housing");
+                obj = Resources.Load<GameObject>("Buildings/Housing");
                 break;
 
             case BuildingType.Tower:
-                obj = Resources.Load<GameObject>("Tower");
+                obj = Resources.Load<GameObject>("Buildings/Tower");
                 break;
 
             case BuildingType.HoneyConverter:
-                obj = Resources.Load<GameObject>("HoneyConverter");
+                obj = Resources.Load<GameObject>("Buildings/HoneyConverter");
                 break;
 
             case BuildingType.WaxConverter:
-                obj = Resources.Load<GameObject>("WaxConverter");
+                obj = Resources.Load<GameObject>("Buildings/WaxConverter");
                 break;
 
             case BuildingType.JellyConverter:
-                obj = Resources.Load<GameObject>("JellyConverter");
+                obj = Resources.Load<GameObject>("Buildings/JellyConverter");
                 break;
 
             case BuildingType.QueenBee:
-                obj = Resources.Load<GameObject>("QueenBeeBuilding");
+                obj = Resources.Load<GameObject>("Buildings/QueenBeeBuilding");
                 break;
+
             case BuildingType.EnemyBuilding:
-                obj = Resources.Load<GameObject>("EnemyBuilding");
+                obj = Resources.Load<GameObject>("Buildings/EnemyBuilding");
+                break;
+        }
+
+        if (obj == null) {
+            Debug.LogError(type + " has no matching prefab in building type enum");
+        }
+
+        return obj;
+    }
+    
+    public static GameObject GetModel(this BuildingType type) {
+        GameObject obj = null;
+        switch (type) {
+            case BuildingType.Storage:
+                obj = Resources.Load<GameObject>("BuildingModels/Storage");
+                break;
+
+            case BuildingType.Housing:
+                obj = Resources.Load<GameObject>("BuildingModels/Housing");
+                break;
+
+            case BuildingType.Tower:
+                obj = Resources.Load<GameObject>("BuildingModels/Tower");
+                break;
+
+            case BuildingType.HoneyConverter:
+                obj = Resources.Load<GameObject>("BuildingModels/HoneyConverter");
+                break;
+
+            case BuildingType.WaxConverter:
+                obj = Resources.Load<GameObject>("BuildingModels/WaxConverter");
+                break;
+
+            case BuildingType.JellyConverter:
+                obj = Resources.Load<GameObject>("BuildingModels/JellyConverter");
+                break;
+
+            case BuildingType.QueenBee:
+                obj = Resources.Load<GameObject>("BuildingModels/QueenBeeBuilding");
+                break;
+
+            case BuildingType.EnemyBuilding:
+                obj = Resources.Load<GameObject>("BuildingModels/EnemyBuilding");
                 break;
         }
 
