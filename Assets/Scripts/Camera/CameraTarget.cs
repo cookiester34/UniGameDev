@@ -9,6 +9,8 @@ public class CameraTarget : MonoBehaviour {
     [SerializeField] private Terrain terrain;
     [SerializeField] private LayerMask terrainMask;
 
+    private Vector3 lastMousePos;
+
     void Update() {
 		if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
 			float x = Input.GetAxis("Horizontal");
@@ -24,7 +26,14 @@ public class CameraTarget : MonoBehaviour {
 			if (Settings.CanMousePan.Value) {
 				AttemptMousePan();
 			}
+
+            if (Input.GetMouseButton(2)) {
+                var difference = Input.mousePosition - lastMousePos;
+                Pan(difference * Time.deltaTime);
+            }
         }
+
+        lastMousePos = Input.mousePosition;
     }
     
     private void AttemptMousePan() {
@@ -54,7 +63,11 @@ public class CameraTarget : MonoBehaviour {
     /// </summary>
     /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
     private void Pan(Vector2 inputDirection) {
-        inputDirection *= Settings.CameraPanSpeed.Value * ConvertTimeToExtraSpeedMultiplier();
+        inputDirection *= Settings.CameraPanSpeed.Value;
+        if (Settings.CanMouseAccelerate.Value) {
+            inputDirection *= ConvertTimeToExtraSpeedMultiplier();
+        }
+
         Vector3 transformRight = cameraTransform.right;
 
         // Get the forward flattened for height

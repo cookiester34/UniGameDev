@@ -73,7 +73,7 @@ namespace CameraNameSpace {
             Vector3 oldPosition = transform.position;
             transform.RotateAround(target.position, Vector3.up, rotateSpeed * Time.deltaTime);
             offset += transform.position - oldPosition;
-            transform.position = Vector3.Lerp(transform.position, target.position + offset, 1f);
+            transform.position = Vector3.Lerp(transform.position, target.position + offset, 0.3f);
         }
 
         /// <summary>

@@ -9,6 +9,7 @@ public static class Settings {
     public static FloatSetting CameraPanSpeed = new FloatSetting("CameraPanSpeed", 5f);
     public static FloatSetting CameraRotateStrength = new FloatSetting("CameraRotateStrength", 35f);
     public static BoolSetting CanMousePan = new BoolSetting("CanMousePan", true);
+    public static BoolSetting CanMouseAccelerate = new BoolSetting("CanMousePanAccelerate", false);
     public static FloatSetting MasterVolume = new FloatSetting("MasterVolume", 1f);
     public static FloatSetting MusicVolume = new FloatSetting("MusicVolume", 0.11f);
     public static FloatSetting EffectsVolume = new FloatSetting("EffectsVolume", 1f);
