@@ -73,8 +73,12 @@ public class BeeIdleState : BeeState {
             z *= -1;
         }
         Vector3 randomPosition = _stateMachine.transform.position + new Vector3(x, 0f, z);
-        if (NavMesh.SamplePosition(randomPosition, out var hit, 5f, NavMesh.AllAreas)) {
-            possiblePositions.Add(hit.position);
+        if (FogOfWarBounds.instance.IsInFog(randomPosition))
+        {
+            if (NavMesh.SamplePosition(randomPosition, out var hit, 5f, NavMesh.AllAreas))
+            {
+                possiblePositions.Add(hit.position);
+            }
         }
 
         if (possiblePositions.Count > 0) {
