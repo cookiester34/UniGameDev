@@ -81,7 +81,7 @@ public class SelectionState : BuildingManagerState {
     public void UpgradeBuilding() {
         if (selectedBuildingData != null) {
             if (!selectedBuildingData.CanUpgrade()) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Cannot upgrade prerequisites not met");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Cannot upgrade prerequisites not met", AnnounceEventType.Misc);
                 return;
             }
             bool canUse = true;

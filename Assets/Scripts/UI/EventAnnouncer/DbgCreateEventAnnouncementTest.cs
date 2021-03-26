@@ -21,18 +21,18 @@ public class DbgCreateEventAnnouncementTest : MonoBehaviour
     }
 	IEnumerator TestMessages() {
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("This is a test message!");
+		UIEventAnnounceManager.Instance.AnnounceEvent("This is a test message!", AnnounceEventType.Alert);
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("This is also a test message!");
+		UIEventAnnounceManager.Instance.AnnounceEvent("This is also a test message!", AnnounceEventType.Alert);
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("Another test message");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Another test message", AnnounceEventType.Misc);
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("Test message 4");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Test message 4", AnnounceEventType.Misc);
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("Nearly done with these test messages");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Nearly done with these test messages", AnnounceEventType.Tutorial);
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("Final test message");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Final test message", AnnounceEventType.Tutorial);
 		yield return new WaitForSeconds(0.5f);
-		UIEventAnnounceManager.Instance.AnnounceEvent("too many. First one should not appear anymore");
+		UIEventAnnounceManager.Instance.AnnounceEvent("too many. First one should not appear anymore", AnnounceEventType.Tutorial);
 	}
 }

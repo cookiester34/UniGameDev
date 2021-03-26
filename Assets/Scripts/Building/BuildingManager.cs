@@ -209,7 +209,7 @@ public class BuildingManager : MonoBehaviour {
     public void BuildingAlreadyThere()
     {
         Debug.LogWarning("Building is already there");
-		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.", AnnounceEventType.Misc);
     }
 
     public void NoResourceFound(ResourceType resourceType)

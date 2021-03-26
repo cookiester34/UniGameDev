@@ -59,10 +59,10 @@ public class BuildState : BuildingManagerState {
             bool canUseResources = ResourceManagement.Instance.CanUseResources(buildingData.Tier1Cost);
 
             if (!canUseResources) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!", AnnounceEventType.Misc);
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else if (!isInBuildingLimit) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!", AnnounceEventType.Misc);
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else {
                 buildingManager.selectedBuildingUI.sprite = buildingData.UiImage;

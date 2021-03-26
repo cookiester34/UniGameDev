@@ -96,17 +96,17 @@ namespace Research {
 
             if (!researchObject.PrerequisitesMet()) {
                 UIEventAnnounceManager.Instance.AnnounceEvent("Attempting to research " +
-                    researchObject.ResearchName + " when its prerequisites have not been met");
+                    researchObject.ResearchName + " when its prerequisites have not been met", AnnounceEventType.Misc);
                 return;
             }
 
             if (useResources && !ResourceManagement.Instance.UseResources(researchObject.Resources)) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to start the research");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to start the research", AnnounceEventType.Misc);
                 return;
             }
 
             UIEventAnnounceManager.Instance.AnnounceEvent(
-                researchObject.name + " has started being researched");
+                researchObject.name + " has started being researched", AnnounceEventType.Misc);
             ongoingResearch.Add(researchObject);
             researchObject.BeginResearch();
             researchObject.OnResearchFinished += () => tempFinishedResearch.Add(researchObject);

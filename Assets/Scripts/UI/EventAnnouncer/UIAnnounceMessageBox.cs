@@ -3,26 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIAnnounceMessageBox : MonoBehaviour
-{
-	public Image thisImage;
+public class UIAnnounceMessageBox : MonoBehaviour {
+	[SerializeField] private Image eventTypeImage;
 	public Text eventTextbox;
 	float lifetime = 5f;
-    // Start is called before the first frame update
+
     void Start()
     {
         StartCoroutine(Expire());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
-	public void SetText(string text) {
+    public void Setup(string text, Sprite image) {
 		eventTextbox.text = text;
-	}
+		eventTypeImage.sprite = image;
+    }
 	
 	IEnumerator Expire() {
 		yield return new WaitForSeconds(lifetime);

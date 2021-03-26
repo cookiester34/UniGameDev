@@ -12,6 +12,10 @@ public class UIEventAnnounceManager : MonoBehaviour
 	List<UIAnnounceMessageBox> messageBoxes = new List<UIAnnounceMessageBox>(); //lists all active message boxes
 	private GameObject _eventFitter;
 
+	[SerializeField] private Sprite miscSprite;
+	[SerializeField] private Sprite tutSprite;
+	[SerializeField] private Sprite alertSprite;
+
 	public delegate void EventAnnouncement();
 	public static event EventAnnouncement announcement;
 	
@@ -36,21 +40,8 @@ public class UIEventAnnounceManager : MonoBehaviour
         inst = this;
 		InitCanvas();
 	}
-	
-    void Start()
-    {
-		
-		//just going to leave these here in case they are needed to test again
-		
-		/*AnnounceEvent("This is a test message!");
-		AnnounceEvent("This is also a test message!");
-		AnnounceEvent("Another test message");
-		AnnounceEvent("Test message 4");
-		AnnounceEvent("Nearly done with these test messages");
-		AnnounceEvent("Final test message");*/
-    }
 
-    void InitCanvas() {
+	void InitCanvas() {
 		_eventFitter = GameObject.Find("EventFitter");
 
 		if (_eventFitter == null) {
@@ -59,11 +50,11 @@ public class UIEventAnnounceManager : MonoBehaviour
 		}
 	}
 	
-	public void AnnounceEvent(string announceText) {
+	public void AnnounceEvent(string announceText, AnnounceEventType eventType) {
 		while (messageBoxes.Count >= maxMessageBoxes) {
 			DismissMessage(messageBoxes[0]);
 		}
-		CreateMessageBox(announceText);
+		CreateMessageBox(announceText, eventType);
 		announcement?.Invoke();
 	}
 	
@@ -72,9 +63,29 @@ public class UIEventAnnounceManager : MonoBehaviour
 		Destroy(msgBox.gameObject);
 	}
 	
-	void CreateMessageBox(string message) {
+	void CreateMessageBox(string message, AnnounceEventType eventType) {
 		UIAnnounceMessageBox msgInst = Instantiate(messageBoxPrefab, _eventFitter.transform);
-		msgInst.SetText(message);
+		msgInst.Setup(message, GetMatchingSprite(eventType));
 		messageBoxes.Add(msgInst);
+	}
+
+	Sprite GetMatchingSprite(AnnounceEventType eventType) {
+		Sprite sprite = null;
+		switch (eventType) {
+			case AnnounceEventType.Alert:
+				sprite = alertSprite;
+				break;
+			case AnnounceEventType.Misc:
+				sprite = miscSprite;
+				break;
+			case AnnounceEventType.Tutorial:
+				sprite = tutSprite;
+				break;
+			default:
+				Debug.LogError("No matching sprite found");
+				break;
+		}
+
+		return sprite;
 	}
 }
