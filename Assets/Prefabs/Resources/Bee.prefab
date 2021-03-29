@@ -201,32 +201,32 @@ AudioSource:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0.112077326
-      value: 0.7074814
-      inSlope: -3.8583238
-      outSlope: -3.8583238
+      time: 0.107934564
+      value: 0.36925507
+      inSlope: -0.5516036
+      outSlope: -0.5516036
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.34205356
+      outWeight: 0.6491118
     - serializedVersion: 3
-      time: 0.3818161
-      value: 0.22824097
-      inSlope: -0.81189805
-      outSlope: -0.81189805
+      time: 0.37768096
+      value: 0.20690918
+      inSlope: -0.57914823
+      outSlope: -0.57914823
       tangentMode: 0
       weightedMode: 0
       inWeight: 1
-      outWeight: 0
+      outWeight: 0.5990361
     - serializedVersion: 3
       time: 0.5524963
       value: 0.12490845
-      inSlope: -0.53253347
-      outSlope: -0.53253347
+      inSlope: -0.3971794
+      outSlope: -0.3971794
       tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0.5876716
+      outWeight: 0.40755606
     - serializedVersion: 3
       time: 0.7970703
       value: 0.05166626
