@@ -17,5 +17,6 @@ MonoBehaviour:
   resourceStartingAmount: 0
   currentResourceAmount: 0
   startingTickAmount: 0
-  resourceCap: 5
+  resourceCap: 40
   startingCap: 5
+  resourceLowThreshold: 0

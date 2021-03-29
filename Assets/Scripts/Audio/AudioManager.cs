@@ -341,14 +341,6 @@ public class AudioManager : MonoBehaviour {
         {
             PlaySound("ResourceDepleted");
         }
-        else if (value <= lowResourceThreshold)
-        {
-            PlaySound("ResourceLow");
-        }
-        else
-        {
-
-        }
     }
 
     public void PlayAnnouncementAlert()

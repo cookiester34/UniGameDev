@@ -33,6 +33,8 @@ public class Resource : ScriptableObject {
     [SerializeField] private int resourceCap;
     [SerializeField] private int startingCap;
 
+    [SerializeField] private int resourceLowThreshold;
+
     public float CurrentResourceAmount => currentResourceAmount;
 
     public float ResourceTickAmount => resourceTickAmount;
@@ -44,6 +46,8 @@ public class Resource : ScriptableObject {
     public float StartingTickAmount => startingTickAmount;
 
     public int StartingCap => startingCap;
+
+    public int ResourceLowThreshold => resourceLowThreshold;
 
     void OnEnable() {
         //sets the initial value of this resource
