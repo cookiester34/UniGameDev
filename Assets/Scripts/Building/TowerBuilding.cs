@@ -50,21 +50,26 @@ public class TowerBuilding : Building
     private void FireAtEnemies()
     {
         if (enemiesInRange[0] != null) {
-            AudioManager.Instance.ModulateAudioSource(fireSound);
-            fireSound.Play();
+            
             anim.SetTrigger("Attack");
             transform.LookAt(enemiesInRange[0].position);
             transform.Rotate(new Vector3(0, -90, 0));
-            GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
-            temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
-            StartCoroutine(DestroyProjectile(temp, 5f));
+            
             //anim.ResetTrigger("Attack");
         }
         else
         {
             enemiesInRange.RemoveAt(0);
         }
+    }
+    public void Shoot()
+    {
+        AudioManager.Instance.ModulateAudioSource(fireSound);
+        fireSound.Play();
+        GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
+        temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
+        StartCoroutine(DestroyProjectile(temp, 5f));
     }
 
     public override void AssignBee(Bee bee) {
