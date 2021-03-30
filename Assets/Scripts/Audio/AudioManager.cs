@@ -343,9 +343,17 @@ public class AudioManager : MonoBehaviour {
         }
     }
 
-    public void PlayAnnouncementAlert()
+    public void PlayAnnouncementAlert(AnnounceEventType eventType)
     {
-        PlaySound("Announcement");
+        // TODO - Sam add some short audio clips here, for different event types
+        switch (eventType) {
+            case AnnounceEventType.Alert:
+            case AnnounceEventType.Misc:
+            case AnnounceEventType.Tutorial:
+            default:
+                PlaySound("Announcement");
+                break;
+        }
     }
 }
 

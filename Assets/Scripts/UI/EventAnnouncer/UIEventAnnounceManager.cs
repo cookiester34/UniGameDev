@@ -16,7 +16,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 	[SerializeField] private Sprite tutSprite;
 	[SerializeField] private Sprite alertSprite;
 
-	public delegate void EventAnnouncement();
+	public delegate void EventAnnouncement(AnnounceEventType eventType);
 	public static event EventAnnouncement announcement;
 	
 	public static UIEventAnnounceManager Instance {
@@ -55,7 +55,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 			DismissMessage(messageBoxes[0]);
 		}
 		CreateMessageBox(announceText, eventType);
-		announcement?.Invoke();
+		announcement?.Invoke(eventType);
 	}
 	
 	public void DismissMessage(UIAnnounceMessageBox msgBox) {
