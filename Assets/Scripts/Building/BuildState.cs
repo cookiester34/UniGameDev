@@ -97,6 +97,7 @@ public class BuildState : BuildingManagerState {
             if (placedBuilding != null) {
                 placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingShape);
                 placedBuilding.PlaceBuilding();
+                BuildingManager.Instance.InvokeBuildingPlaced(placedBuilding);
             }
             UpdateBuildingShader(false, false);
 

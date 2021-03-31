@@ -12,6 +12,7 @@ using Random = UnityEngine.Random;
 public class BuildingManager : MonoBehaviour {
     public delegate void BuildingEvent(Building building);
     public event BuildingEvent OnBuildingSelected;
+    public event BuildingEvent OnBuildingPlaced;
 
     #region states
     
@@ -124,6 +125,10 @@ public class BuildingManager : MonoBehaviour {
 
     public void BuildingSelected(Building building) {
         OnBuildingSelected?.Invoke(building);
+    }
+
+    public void InvokeBuildingPlaced(Building building) {
+        OnBuildingPlaced?.Invoke(building);
     }
 
     /// <summary>
