@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
 
 /// <summary>
@@ -17,8 +18,11 @@ public class SettingsPanel : MonoBehaviour {
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider effectsSlider;
     [SerializeField] private Slider uiSlider;
+    [SerializeField] private Dropdown quality;
+    [SerializeField] private Toggle fullscreen;
+    [SerializeField] private ResolutionDropdown resolution;
 
-    private void Awake() {
+    private void Start() {
         InitialiseUiComponents();
     }
 
@@ -34,6 +38,9 @@ public class SettingsPanel : MonoBehaviour {
         musicSlider.value = Settings.MusicVolume.Value;
         effectsSlider.value = Settings.EffectsVolume.Value;
         uiSlider.value = Settings.UiVolume.Value;
+        quality.value = Settings.Quality.Value;
+        fullscreen.isOn = Settings.Fullscreen.Value;
+        resolution.SetToResolution(Settings.xResolution.Value, Settings.yResolution.Value);
     }
 
     /// <summary>
@@ -48,7 +55,17 @@ public class SettingsPanel : MonoBehaviour {
         Settings.MusicVolume.SetValue(musicSlider.value);
         Settings.EffectsVolume.SetValue(effectsSlider.value);
         Settings.UiVolume.SetValue(uiSlider.value);
+        Settings.Quality.SetValue(quality.value);
+        Settings.Fullscreen.SetValue(fullscreen.isOn);
+        Tuple<int, int> currentResolution = resolution.GetCurrentResolution();
+        Settings.xResolution.SetValue(currentResolution.Item1);
+        Settings.yResolution.SetValue(currentResolution.Item2);
 
         AudioManager.Instance.UpdateAudioLevels();
+        LoadSavedSettings.LoadSettings();
+    }
+
+    public void ApplySettings() {
+        QualitySettings.SetQualityLevel(Settings.Quality.Value, true);
     }
 }

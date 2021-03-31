@@ -42,19 +42,7 @@ public class PauseMenu : MonoBehaviour
 		_saveLoadMenu.SetActive(false);
 		_settingsMenu.SetActive(false);
 	}
-	
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
 	public bool GetIsPaused(){
 		return _isPaused;
 	}
@@ -86,7 +74,6 @@ public class PauseMenu : MonoBehaviour
 	public void ToggleSettings() {
 		_settingsMenu.SetActive(!_settingsMenu.activeSelf);
 		_hasSettingsLoaded = true;
-		_settingsScript.SaveSettings();
 		if (_saveLoadMenu.activeSelf) {
 			_saveLoadMenu.SetActive(false);
 		}

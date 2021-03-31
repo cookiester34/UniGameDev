@@ -14,6 +14,10 @@ public static class Settings {
     public static FloatSetting MusicVolume = new FloatSetting("MusicVolume", 0.11f);
     public static FloatSetting EffectsVolume = new FloatSetting("EffectsVolume", 1f);
     public static FloatSetting UiVolume = new FloatSetting("UIVolume", 1f);
+    public static IntSetting Quality = new IntSetting("Quality", 5);
+    public static BoolSetting Fullscreen = new BoolSetting("Fullscreen", true);
+    public static IntSetting xResolution = new IntSetting("xResolution", 1920);
+    public static IntSetting yResolution = new IntSetting("yResolution", 1080);
 }
 
 public abstract class Setting<T> {
@@ -66,7 +70,6 @@ public class FloatSetting : Setting<float> {
         PlayerPrefs.SetFloat(settingId, newValue);
         Value = newValue;
     }
-
 }
 
 public class BoolSetting : Setting<bool> {
@@ -83,6 +86,24 @@ public class BoolSetting : Setting<bool> {
 
     public override void SetValue(bool newValue) {
         PlayerPrefsBool.SetBool(settingId, newValue);
+        Value = newValue;
+    }
+}
+
+public class IntSetting : Setting<int> {
+    public IntSetting(string settingId, int initialValue) : base(settingId, initialValue) { }
+
+    public override void InitValue() {
+        if (!PlayerPrefs.HasKey(settingId)) {
+            PlayerPrefs.SetInt(settingId, initialValue);
+            Value = initialValue;
+        } else {
+            Value = PlayerPrefs.GetInt(settingId);
+        }
+    }
+
+    public override void SetValue(int newValue) {
+        PlayerPrefs.SetInt(settingId, newValue);
         Value = newValue;
     }
 }
