@@ -135,6 +135,10 @@ public class HexPanel : MonoBehaviour
 		return null;
 	}
 
+	private void OnValidate() {
+		neighbours.RemoveAll(x => x == null);
+	}
+
 	private void OnDrawGizmosSelected() {
 		// Allows visualization of selected neighbours, slows down performance loads though, reintroduce if needed
 		// foreach (HexPanel neighbour in neighbours) {
