@@ -59,6 +59,18 @@ public class CameraTarget : MonoBehaviour {
     }
 
     /// <summary>
+    /// Moves the targets x and z position to the specified position
+    /// </summary>
+    /// <param name="position">The position to move the camera to</param>
+    public void PanToPosition(Vector2 position) {
+        var transPosition = transform.position;
+        transPosition.x = position.x;
+        transPosition.z = position.y;
+        transPosition.y = terrain.SampleHeight(transPosition);
+        transform.position = terrain.terrainData.bounds.ClosestPoint(transPosition);
+    }
+
+    /// <summary>
     /// Updates the target position by modifying its value
     /// </summary>
     /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
