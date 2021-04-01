@@ -24,8 +24,6 @@ public class Save {
     
     public List<SavedResearch> researches = new List<SavedResearch>();
 
-	public List<SavedBuildingFoundation> buildingFoundations = new List<SavedBuildingFoundation>();
-
     public SavedTransform cameraTransform;
     public Vector3 cameraTarget;
 

@@ -20,10 +20,6 @@ public class BuildingFoundation : MonoBehaviour {
     private MaterialPropertyBlock _propBlock;
     static List<BuildingFoundation> _foundations = new List<BuildingFoundation>();
 
-    private int _id;
-    private static int idCounter;
-
-    public int Id => _id;
     public static Color InvisibleColor => invisibleColor;
 
     public bool CanBuild {
@@ -41,8 +37,6 @@ public class BuildingFoundation : MonoBehaviour {
         _renderer = GetComponentInChildren<Renderer>();
         _propBlock = new MaterialPropertyBlock();
         _foundations.Add(this);
-        _id = idCounter;
-        idCounter++;
     }
 
     public static void Hide() {
@@ -59,7 +53,6 @@ public class BuildingFoundation : MonoBehaviour {
 
     public void OnDestroy() {
         _foundations.Remove(this);
-        idCounter--;
     }
 
     /// <summary>
@@ -81,7 +74,8 @@ public class BuildingFoundation : MonoBehaviour {
     /// <summary>
     /// Checks if the tiles are available for building and changes them to not available if they can
     /// </summary>
-    /// <param name="buildTiles">Size of tiles that the building will take</param>
+    /// <param name="shape">The shape of tiles that the building will take</param>
+    /// <param name="updateBuildStatus">Whether the can build flag should be switched</param>
     /// <returns>Whether the building can be built</returns>
     public bool BuildMulti(BuildingShape shape, bool updateBuildStatus = true) {
         bool canBuild = false;
