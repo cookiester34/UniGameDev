@@ -87,7 +87,7 @@ public class SelectedBuildingUI : MonoBehaviour {
 
             var storage = building.gameObject.GetComponents<ResourceStorage>();
             foreach (ResourceStorage i in storage) {
-                resourcesText.text += "Max " + i.Resource.name + " storage: " + i.GetStorage() + "\n";
+                resourcesText.text += "Max " + i.Resource.name + " storage: " + i.CurrentStorage + "\n";
             }
 
             if (building.BuildingType == BuildingType.Housing) {

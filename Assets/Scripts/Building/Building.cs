@@ -159,9 +159,16 @@ public class Building : MonoBehaviour {
         buildingTier3.SetActive(buildingTier == 3);
 
         var suppliers = GetComponents<ResourceSupplier>();
-        if (suppliers != null && suppliers.Length > 1) {
+        if (suppliers != null && suppliers.Length > 0) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
+            }
+        }
+
+        var storages = GetComponents<ResourceStorage>();
+        if (storages != null && storages.Length > 0) {
+            foreach (ResourceStorage storage in storages) {
+                storage.RecalculateStorage();
             }
         }
     }

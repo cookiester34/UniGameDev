@@ -84,10 +84,17 @@ public class Resource : ScriptableObject {
         return (currentResourceAmount - value >= 0);
     }
 
-    public void ModifyCap(int amount) {
+    /// <summary>
+    /// Modifies the resource cap by the amount. If the new cap is lower than the current amount of resource than will
+    /// additionally lower the amount of resource unless overflow is allowed
+    /// </summary>
+    /// <param name="amount">The amount to modify by</param>
+    /// <param name="allowOverflow">Optional, used to allow the current amount to be greater than the cap,
+    /// intended to be used where it will momentarily go down but then come back up higher</param>
+    public void ModifyCap(int amount, bool allowOverflow = false) {
         resourceCap += amount;
 
-        if (currentResourceAmount > resourceCap) {
+        if (!allowOverflow && currentResourceAmount > resourceCap) {
             ModifyAmount(resourceCap - currentResourceAmount);
         }
 

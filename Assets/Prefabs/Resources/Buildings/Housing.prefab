@@ -5073,8 +5073,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59b77dbb3b9b2a14baea2573b5de7108, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  amount: 10
   resource: {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
+  tier1Amount: 10
+  tier2Increase: 5
+  tier3Increase: 10
   fillOnPlace: 0
 --- !u!208 &-7766972306021319815
 NavMeshObstacle:

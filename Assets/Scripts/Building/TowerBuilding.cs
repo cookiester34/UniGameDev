@@ -16,7 +16,7 @@ public class TowerBuilding : Building
     private float timer = 1f;
     private AudioSource fireSound;
 
-    private Animator anim;
+    private Animator[] anim;
 
     [HideInInspector]
     public List<Transform> enemiesInRange = new List<Transform>();
@@ -26,7 +26,7 @@ public class TowerBuilding : Building
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
         fireSound = gameObject.transform.GetComponent<AudioSource>();
-        anim = GetComponent<Animator>();
+        anim = GetComponentsInChildren<Animator>();
     }
 
     private void Update()
@@ -50,8 +50,9 @@ public class TowerBuilding : Building
     private void FireAtEnemies()
     {
         if (enemiesInRange[0] != null) {
-            
-            anim.SetTrigger("Attack");
+            foreach (Animator animator in anim) {
+                animator.SetTrigger("Attack");
+            }
             transform.LookAt(enemiesInRange[0].position);
             transform.Rotate(new Vector3(0, -90, 0));
             
