@@ -348,10 +348,16 @@ public class AudioManager : MonoBehaviour {
         // TODO - Sam add some short audio clips here, for different event types
         switch (eventType) {
             case AnnounceEventType.Alert:
+                PlaySound("AnnouncementAlert");
+                break;
             case AnnounceEventType.Misc:
+                PlaySound("AnnouncementMisc");
+                break;
             case AnnounceEventType.Tutorial:
+                PlaySound("AnnouncementTutorial");
+                break;
             default:
-                PlaySound("Announcement");
+                PlaySound("AnnouncementMisc");
                 break;
         }
     }
