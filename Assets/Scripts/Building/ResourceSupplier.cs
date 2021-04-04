@@ -21,6 +21,8 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     Building building;
     int _lastAssignedBees = 0;
 
+    bool buildingCatergoryManagerSet = false;
+
     void Awake() {
         if (resource == null) {
             Debug.LogError("A resource supplier has been created with no resource set");
@@ -35,6 +37,22 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
         resource.OnCapReached += SupplyCapped; // Event from resource in supplier when cap is reached.
+
+        SetCatergory();
+    }
+
+    void SetCatergory()
+    {
+        if (transform.name == "Bee(Clone)")
+            return;
+        if (!buildingCatergoryManagerSet)
+        {
+            if (BuildingResourceCatergoriesManager.instance != null)
+            {
+                BuildingResourceCatergoriesManager.instance.catergories.Add(this);
+                buildingCatergoryManagerSet = true;
+            }
+        }
     }
 
     void Update()
@@ -44,6 +62,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             _lastAssignedBees = building.numAssignedBees;
             CalculateProductionAmount();
         }
+        SetCatergory();
     }
 
     public void CalculateProductionAmount()
