@@ -39,5 +39,16 @@ public class ResourceUI : MonoBehaviour {
         {
             _text.color = Color.black;
         }
+
+        float currentResourceTickAmount = resource.GetResourceTickAmount();
+
+        //rounding to 2 decimal places
+        float mult = Mathf.Pow(10f, 2f);
+        currentResourceTickAmount = Mathf.Round(currentResourceTickAmount * mult) / mult;
+
+        if (currentResourceTickAmount > 0)
+            _text.text += "   +" + currentResourceTickAmount + " per tick";
+        else
+            _text.text += "   " + currentResourceTickAmount + " per tick";
     }
 }

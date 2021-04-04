@@ -147,4 +147,14 @@ public class Resource : ScriptableObject {
     {
         return Mathf.FloorToInt(currentResourceAmount);
     }
+
+    /// <summary>
+    /// Gets the current resource tick amount
+    /// use for UI
+    /// </summary>
+    /// <returns></returns>
+    public float GetResourceTickAmount()
+    {
+        return resourceTickAmount;
+    }
 }
