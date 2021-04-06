@@ -64,10 +64,7 @@ public class SelectedBuildingUI : MonoBehaviour {
 
         icon.sprite = _selectedBuilding.BuildingData.UiImage;
         nameText.text = _selectedBuilding.BuildingData.name;
-        assignedBeesText.text = "Assigned Bees: " + building.numAssignedBees + " / " + 
-                                building.BuildingData.maxNumberOfWorkers + "\n" + "Unassigned Bees: " +
-                                (int)(ResourceManagement.Instance.GetResource(ResourceType.Population).CurrentResourceAmount
-                                - (int)ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
+        assignedBeesText.text = building.GetAssignedBeesText();
 
         resourcesText.text = "";
         _upgradeBuildingTooltip.TooltipText = building.CanUpgrade()

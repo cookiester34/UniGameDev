@@ -69,7 +69,7 @@ public class Bee : MonoBehaviour {
         Building validHouse = null;
         var housing = BuildingManager.Instance.GetAllStorageBuildingsOfType(ResourceType.Population);
         foreach (var building in housing) {
-            if (building.numAssignedBees < building.BuildingData.maxNumberOfWorkers) {
+            if (building.CanAssignBee()) {
                 validHouse = building;
                 break;
             }

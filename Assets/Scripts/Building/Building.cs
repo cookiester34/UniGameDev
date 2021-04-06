@@ -14,7 +14,7 @@ public class Building : MonoBehaviour {
     [SerializeField] private BuildingType buildingType;
 
     [SerializeField] private BuildingData buildingData;
-    private int buildingTier = 1;
+    protected int buildingTier = 1;
     [FormerlySerializedAs("buildingTeir1")] public GameObject buildingTier1;
     [FormerlySerializedAs("buildingTeir2")] public GameObject buildingTier2;
     [FormerlySerializedAs("buildingTeir3")] public GameObject buildingTier3;
@@ -73,6 +73,17 @@ public class Building : MonoBehaviour {
 
     public void PlaceBuilding() {
         OnBuildingPlaced?.Invoke();
+    }
+
+    public virtual string GetAssignedBeesText() {
+        return "Assigned Bees: " + numAssignedBees + " / " +
+               BuildingData.maxNumberOfWorkers + "\n" + "Unassigned Bees: " +
+               (int) (ResourceManagement.Instance.GetResource(ResourceType.Population).CurrentResourceAmount
+                      - (int) ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
+    }
+
+    public virtual bool CanAssignBee() {
+        return numAssignedBees < buildingData.maxNumberOfWorkers;
     }
 
     public virtual void AssignBee(Bee bee) {
