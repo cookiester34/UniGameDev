@@ -67,7 +67,10 @@ public class CameraTarget : MonoBehaviour {
         transPosition.x = position.x;
         transPosition.z = position.y;
         transPosition.y = terrain.SampleHeight(transPosition);
-        transform.position = terrain.terrainData.bounds.ClosestPoint(transPosition);
+
+        Bounds worldBounds = terrain.terrainData.bounds;
+        worldBounds.center += terrain.transform.position;
+        transform.position = worldBounds.ClosestPoint(transPosition);
     }
 
     /// <summary>
