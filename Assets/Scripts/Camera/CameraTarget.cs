@@ -70,7 +70,9 @@ public class CameraTarget : MonoBehaviour {
 
         Bounds worldBounds = terrain.terrainData.bounds;
         worldBounds.center += terrain.transform.position;
-        transform.position = worldBounds.ClosestPoint(transPosition);
+        var newPos = worldBounds.ClosestPoint(transPosition);
+        newPos.y = terrain.SampleHeight(newPos) + terrain.transform.position.y;
+        transform.position = newPos;
     }
 
     /// <summary>
