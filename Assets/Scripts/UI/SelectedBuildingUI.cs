@@ -75,14 +75,14 @@ public class SelectedBuildingUI : MonoBehaviour {
         } else {
             string assignText = "";
             string unassignText = "";
-            var resources = building.gameObject.GetComponents<ResourceSupplier>();
+            var resources = building.gameObject.GetComponentsInChildren<ResourceSupplier>();
             foreach (ResourceSupplier i in resources) {
                 assignText += i.BeeBenefitText(true);
                 unassignText += i.BeeBenefitText(false);
-                resourcesText.text += "Supplying " + i.Resource.name + ": " + i.actualProductionAmount + "\n";
+                resourcesText.text += "Supplying " + i.Resource.name + ": " + i.ProductionAmount + "\n";
             }
 
-            var storage = building.gameObject.GetComponents<ResourceStorage>();
+            var storage = building.gameObject.GetComponentsInChildren<ResourceStorage>();
             foreach (ResourceStorage i in storage) {
                 resourcesText.text += "Max " + i.Resource.name + " storage: " + i.CurrentStorage + "\n";
             }

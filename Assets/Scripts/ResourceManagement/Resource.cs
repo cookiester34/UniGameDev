@@ -75,6 +75,7 @@ public class Resource : ScriptableObject {
             currentResourceAmount += value;
             if (currentResourceAmount > resourceCap) {
                 currentResourceAmount = resourceCap;
+                OnCapReached?.Invoke();
             }
             OnCurrentValueChanged?.Invoke(currentResourceAmount);
         }
@@ -116,16 +117,8 @@ public class Resource : ScriptableObject {
         resourceTickAmount += amount / time;
     }
 
-    public bool ResourceCapReached()
-    {
-        if (currentResourceAmount >= resourceCap)
-        {
-            currentResourceAmount = Mathf.Clamp(currentResourceAmount, 0, resourceCap);
-            OnCapReached?.Invoke();
-            return true;
-        }
-        else
-            return false;
+    public bool ResourceCapReached() {
+        return currentResourceAmount >= resourceCap;
     }
 
     public bool tickDrainAmountCap()

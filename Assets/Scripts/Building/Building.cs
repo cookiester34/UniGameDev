@@ -98,7 +98,7 @@ public class Building : MonoBehaviour {
         _assignedBees.Add(bee);
         numAssignedBees = _assignedBees.Count;
         
-        var suppliers = GetComponents<ResourceSupplier>();
+        var suppliers = GetComponentsInChildren<ResourceSupplier>();
         if (suppliers != null && suppliers.Length > 1) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
@@ -129,7 +129,7 @@ public class Building : MonoBehaviour {
         }
         numAssignedBees = _assignedBees.Count;
         
-        var suppliers = GetComponents<ResourceSupplier>();
+        var suppliers = GetComponentsInChildren<ResourceSupplier>();
         if (suppliers != null && suppliers.Length > 1) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
@@ -169,14 +169,14 @@ public class Building : MonoBehaviour {
         buildingTier2.SetActive(buildingTier == 2);
         buildingTier3.SetActive(buildingTier == 3);
 
-        var suppliers = GetComponents<ResourceSupplier>();
+        var suppliers = GetComponentsInChildren<ResourceSupplier>();
         if (suppliers != null && suppliers.Length > 0) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
             }
         }
 
-        var storages = GetComponents<ResourceStorage>();
+        var storages = GetComponentsInChildren<ResourceStorage>();
         if (storages != null && storages.Length > 0) {
             foreach (ResourceStorage storage in storages) {
                 storage.RecalculateStorage();

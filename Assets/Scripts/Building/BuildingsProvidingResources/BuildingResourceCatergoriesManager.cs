@@ -42,7 +42,7 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
                 if (r.Resource.GetResourceTickAmount() > 0)
                 {
                     Debug.Log("hovering ui: " + i);
-                    var glowEnabler = r.transform.GetComponent<GlowEnabler>();
+                    var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
                     if (glowEnabler != null)
                     {
                         glowEnabler.EnableGlow(true);
@@ -61,7 +61,7 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
         selectedResource = -1;
         foreach (ResourceSupplier r in catergories)
         {
-            var glowEnabler = r.transform.GetComponent<GlowEnabler>();
+            var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
             if (glowEnabler != null)
             {
                 glowEnabler.EnableGlow(false);

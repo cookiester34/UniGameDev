@@ -3,12 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(ResourceStorage))]
 public class HouseBuilding : Building {
-    private ResourceStorage populationStorage;
-    private void Awake() {
-        populationStorage = GetComponent<ResourceStorage>();
-    }
+    [SerializeField] private ResourceStorage populationStorage;
 
     public override bool CanAssignBee() {
         return numAssignedBees < populationStorage.CurrentStorage;
