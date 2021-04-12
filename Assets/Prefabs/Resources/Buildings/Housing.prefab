@@ -5103,7 +5103,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e47668ef2d36bbe479a593543939d058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingType: 0
+  buildingType: 1
   buildingData: {fileID: 11400000, guid: 0a8254fbfa9592545ab06b0685e0acf6, type: 2}
   buildingTier1: {fileID: 9186655997937763726}
   buildingTier2: {fileID: 5024755872643916010}
