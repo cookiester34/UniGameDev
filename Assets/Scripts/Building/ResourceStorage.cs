@@ -65,6 +65,9 @@ public class ResourceStorage : MonoBehaviour {
             };
         } else {
             ModifyCap(true);
+            if (fillOnPlace) {
+                resource.ModifyAmount(tier1Amount);
+            }
         }
     }
 

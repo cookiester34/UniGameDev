@@ -16,6 +16,7 @@ public enum BuildingType
     Destroy,
     Tower,
     QueenBee,
+    Research,
     EnemyBuilding
 }
 
@@ -60,6 +61,10 @@ public static class BuildingTypeExtension {
                 obj = Resources.Load<GameObject>("Buildings/QueenBeeBuilding");
                 break;
 
+            case BuildingType.Research:
+                obj = Resources.Load<GameObject>("Buildings/Housing");
+                break;
+
             case BuildingType.EnemyBuilding:
                 obj = Resources.Load<GameObject>("Buildings/EnemyBuilding");
                 break;
@@ -101,6 +106,10 @@ public static class BuildingTypeExtension {
 
             case BuildingType.QueenBee:
                 obj = Resources.Load<GameObject>("BuildingModels/QueenBeeBuilding");
+                break;
+            
+            case BuildingType.Research:
+                obj = Resources.Load<GameObject>("BuildingModels/Housing");
                 break;
 
             case BuildingType.EnemyBuilding:

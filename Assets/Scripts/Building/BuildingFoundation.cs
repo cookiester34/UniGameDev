@@ -143,6 +143,24 @@ public class BuildingFoundation : MonoBehaviour {
                     }
                 }
                 break;
+            
+            case BuildingShape.Square:
+                if (foundations.Count == 4) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
         }
 
         return canBuild;
@@ -176,7 +194,7 @@ public class BuildingFoundation : MonoBehaviour {
                 }
                 break;
 
-            case BuildingShape.ThreeThreeTile:
+            case BuildingShape.ThreeThreeTile: {
                 foundations.Add(this);
                 var above = _hexPanel.GetNeighbour(NeighbourDirection.Above);
                 var below = _hexPanel.GetNeighbour(NeighbourDirection.Below);
@@ -185,6 +203,7 @@ public class BuildingFoundation : MonoBehaviour {
                 if (belowLeft != null) {
                     foundations.Add(belowLeft.BuildingFoundation);
                 }
+
                 var aboveLeft = _hexPanel.GetNeighbour(NeighbourDirection.AboveLeft);
                 if (aboveLeft != null) {
                     foundations.Add(aboveLeft.BuildingFoundation);
@@ -202,13 +221,14 @@ public class BuildingFoundation : MonoBehaviour {
                         foundations.Add(aboveAboveRight.BuildingFoundation);
                     }
                 }
-                
+
                 if (below != null) {
                     foundations.Add(below.BuildingFoundation);
                     var twoBelow = below.GetNeighbour(NeighbourDirection.Below);
                     if (twoBelow != null) {
                         foundations.Add(twoBelow.BuildingFoundation);
                     }
+
                     var belowBelowRight = below.GetNeighbour(NeighbourDirection.BelowRight);
                     if (belowBelowRight != null) {
                         foundations.Add(belowBelowRight.BuildingFoundation);
@@ -216,6 +236,26 @@ public class BuildingFoundation : MonoBehaviour {
                 }
 
                 break;
+            }
+
+            case BuildingShape.Square: {
+                foundations.Add(this);
+                var above = _hexPanel.GetNeighbour(NeighbourDirection.Above);
+                var aboveRight = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
+                if (aboveRight != null) {
+                    foundations.Add(aboveRight.BuildingFoundation);
+                }
+
+                if (above != null) {
+                    foundations.Add(above.BuildingFoundation);
+                    var aboveAboveRight = above.GetNeighbour(NeighbourDirection.AboveRight);
+                    if (aboveAboveRight != null) {
+                        foundations.Add(aboveAboveRight.BuildingFoundation);
+                    }
+                }
+
+                break;
+            }
         }
 
         return foundations;
