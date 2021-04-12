@@ -6,6 +6,8 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class SelectedBuildingUI : MonoBehaviour {
+    [SerializeField] private GameObject researchTree;
+    [SerializeField] private GameObject generalUi;
     [SerializeField] private Text assignedBeesText;
     [SerializeField] private Text resourcesText;
     [SerializeField] private Text nameText;
@@ -49,6 +51,7 @@ public class SelectedBuildingUI : MonoBehaviour {
 
     private void UpdateDisplay(Building building) {
         _selectedBuilding = building;
+        
         thisTabbableButton.gameObject.SetActive(building != null);
         if (building == null) {
             thisTabbableButton.ActivateContents(false);
@@ -56,6 +59,8 @@ public class SelectedBuildingUI : MonoBehaviour {
         }
 
         bar.MakeContentsActive(thisTabbableButton, true);
+        researchTree.SetActive(building.BuildingType == BuildingType.Research);
+        generalUi.SetActive(building.BuildingType != BuildingType.Research);
         
         upgradeBuildingButton.interactable = _selectedBuilding.CanUpgrade();
         assignBeeButton.interactable =
