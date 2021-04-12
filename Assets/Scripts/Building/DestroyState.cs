@@ -22,7 +22,7 @@ public class DestroyState : BuildingManagerState {
                 if (hit.transform.CompareTag("Building")) {
                     Building building = hit.transform.gameObject.GetComponent<Building>();
                     if (CurrentSceneType.SceneType == SceneType.GameLevel && building.BuildingType == BuildingType.QueenBee) {
-                        UIEventAnnounceManager.Instance.AnnounceEvent("Cannot destroy the queen in a level");
+                        UIEventAnnounceManager.Instance.AnnounceEvent("Cannot destroy the queen in a level", AnnounceEventType.Tutorial);
                         return;
                     }
                     var beforeDestroy = hit.collider.GetComponents<IBeforeDestroy>();

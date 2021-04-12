@@ -14,6 +14,9 @@ public class TowerBuilding : Building
     public float baseFiringSpeed;
     public float firingSpeed;
     private float timer = 1f;
+    private AudioSource fireSound;
+
+    private Animator[] anim;
 
     [HideInInspector]
     public List<Transform> enemiesInRange = new List<Transform>();
@@ -22,16 +25,23 @@ public class TowerBuilding : Building
     protected override void Start() {
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
+        fireSound = gameObject.transform.GetComponent<AudioSource>();
+        anim = GetComponentsInChildren<Animator>();
     }
 
     private void Update()
     {
-        if (enemiesInRange.Count > 0 && timer <= 0) {
-            if (numAssignedBees > 0) {
-                FireAtEnemies();
-                firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers + 1 - numAssignedBees);
+        if (enemiesInRange.Count > 0) {
+            if (timer <= 0) 
+            {
+                if (numAssignedBees > 0) {
+                    FireAtEnemies();
+                }
+                timer = firingSpeed;
             }
-            timer = firingSpeed;
+            //Quaternion _lookRotation = Quaternion.LookRotation((enemiesInRange[0].position - transform.position).normalized);
+            ////over time
+            //transform.rotation = Quaternion.Slerp(transform.rotation, _lookRotation, Time.deltaTime * 10);
         }
 
         timer -= Time.deltaTime;
@@ -40,16 +50,38 @@ public class TowerBuilding : Building
     private void FireAtEnemies()
     {
         if (enemiesInRange[0] != null) {
-            gameObject.transform.GetComponent<AudioSource>().Play();
-            GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-            Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
-            temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
-            StartCoroutine(DestroyProjectile(temp, 5f));
+            foreach (Animator animator in anim) {
+                animator.SetTrigger("Attack");
+            }
+            transform.LookAt(enemiesInRange[0].position);
+            transform.Rotate(new Vector3(0, -90, 0));
+            
+            //anim.ResetTrigger("Attack");
         }
         else
         {
             enemiesInRange.RemoveAt(0);
         }
+    }
+    public void Shoot()
+    {
+        AudioManager.Instance.ModulateAudioSource(fireSound);
+        fireSound.Play();
+        GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+        Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
+        temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
+        StartCoroutine(DestroyProjectile(temp, 5f));
+    }
+
+    public override void AssignBee(Bee bee) {
+        base.AssignBee(bee);
+        firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers + 1 - numAssignedBees);
+    }
+
+    public override Bee UnassignBee(Bee bee = null) {
+        Bee returnBee = base.UnassignBee(bee);
+        firingSpeed = baseFiringSpeed * (BuildingData.maxNumberOfWorkers + 1 - numAssignedBees);
+        return returnBee;
     }
 
     IEnumerator DestroyProjectile(GameObject projectile, float delay)

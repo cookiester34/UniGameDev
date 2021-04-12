@@ -68,6 +68,14 @@ public class WaspAI : MonoBehaviour
 
     void FixedUpdate() 
     {
+        if (FogOfWarBounds.instance.IsWaspVisible(transform.position))
+        {
+            waspRenderer.enabled = true;
+        }
+        else
+        {
+            waspRenderer.enabled = false;
+        }
         if (masterWasp)
         {
             sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);

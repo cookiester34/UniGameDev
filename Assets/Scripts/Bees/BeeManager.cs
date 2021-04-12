@@ -16,8 +16,8 @@ public class BeeManager : MonoBehaviour {
     [SerializeField] private GameObject beeSpawn;
 
     private static BeeManager _instance = null;
-    public delegate void AssignedBeeUpdate();
-    public static event AssignedBeeUpdate AssignedBeeUpdated;
+    public delegate void BeeAssignedHandler(Building building);
+    public event BeeAssignedHandler BeeAssigned;
 
     private int _cachedPopulation = 0;
 
@@ -108,6 +108,8 @@ public class BeeManager : MonoBehaviour {
                 }
                 break;
         }
+
+        BeeAssigned?.Invoke(building);
     }
 
     public void UnassignBeeFromBuilding(Building building) {
@@ -154,7 +156,7 @@ public class BeeManager : MonoBehaviour {
                 break;
             
         }
-        AssignedBeeUpdated?.Invoke();
+        BeeAssigned?.Invoke(building);
     }
 
     public void OnLoad(List<Bee> bees) {

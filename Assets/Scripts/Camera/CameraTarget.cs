@@ -9,6 +9,8 @@ public class CameraTarget : MonoBehaviour {
     [SerializeField] private Terrain terrain;
     [SerializeField] private LayerMask terrainMask;
 
+    private Vector3 lastMousePos;
+
     void Update() {
 		if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
 			float x = Input.GetAxis("Horizontal");
@@ -24,7 +26,14 @@ public class CameraTarget : MonoBehaviour {
 			if (Settings.CanMousePan.Value) {
 				AttemptMousePan();
 			}
+
+            if (Input.GetMouseButton(2)) {
+                var difference = Input.mousePosition - lastMousePos;
+                Pan(difference * Time.deltaTime);
+            }
         }
+
+        lastMousePos = Input.mousePosition;
     }
     
     private void AttemptMousePan() {
@@ -50,11 +59,32 @@ public class CameraTarget : MonoBehaviour {
     }
 
     /// <summary>
+    /// Moves the targets x and z position to the specified position
+    /// </summary>
+    /// <param name="position">The position to move the camera to</param>
+    public void PanToPosition(Vector2 position) {
+        var transPosition = transform.position;
+        transPosition.x = position.x;
+        transPosition.z = position.y;
+        transPosition.y = terrain.SampleHeight(transPosition);
+
+        Bounds worldBounds = terrain.terrainData.bounds;
+        worldBounds.center += terrain.transform.position;
+        var newPos = worldBounds.ClosestPoint(transPosition);
+        newPos.y = terrain.SampleHeight(newPos) + terrain.transform.position.y;
+        transform.position = newPos;
+    }
+
+    /// <summary>
     /// Updates the target position by modifying its value
     /// </summary>
     /// <param name="inputDirection">The direction in which to move the camera in the x and z axis</param>
     private void Pan(Vector2 inputDirection) {
-        inputDirection *= Settings.CameraPanSpeed.Value * ConvertTimeToExtraSpeedMultiplier();
+        inputDirection *= Settings.CameraPanSpeed.Value;
+        if (Settings.CanMouseAccelerate.Value) {
+            inputDirection *= ConvertTimeToExtraSpeedMultiplier();
+        }
+
         Vector3 transformRight = cameraTransform.right;
 
         // Get the forward flattened for height

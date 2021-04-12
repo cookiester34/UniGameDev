@@ -46,8 +46,7 @@ public class SelectionState : BuildingManagerState {
     public void AddBeeToBuilding() {
         if(selectedBuilding != null && selectedBuildingData != null)
         {
-            BuildingData buildingData = selectedBuildingData.BuildingData;
-            if (selectedBuildingData.numAssignedBees < buildingData.maxNumberOfWorkers)
+            if (selectedBuildingData.CanAssignBee())
             {
                 Resource temp = ResourceManagement.Instance.GetResource(ResourceType.AssignedPop);
                 if (temp != null)
@@ -81,7 +80,7 @@ public class SelectionState : BuildingManagerState {
     public void UpgradeBuilding() {
         if (selectedBuildingData != null) {
             if (!selectedBuildingData.CanUpgrade()) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Cannot upgrade prerequisites not met");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Cannot upgrade prerequisites not met", AnnounceEventType.Misc);
                 return;
             }
             bool canUse = true;

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6336772474910730985}
   - component: {fileID: 6336772474910730982}
   - component: {fileID: 6336772474910730983}
+  - component: {fileID: 2281979356033526276}
   m_Layer: 5
   m_Name: MinimapUI
   m_TagString: Untagged
@@ -89,6 +90,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 0
+--- !u!114 &2281979356033526276
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6336772474910730981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f51cbe94ae76094ebf0489bea152049, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6336772476751913764
 GameObject:
   m_ObjectHideFlags: 0

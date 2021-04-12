@@ -7,19 +7,19 @@ using UnityEngine.UI;
 public class Dissolver : MonoBehaviour {
     private float dissolve;
     private MaterialPropertyBlock _propertyBlock;
-    private MeshRenderer _renderer;
     private static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
+    private List<Renderer> toDissolve = new List<Renderer>();
 
     public void Setup(GameObject other) {
-        var mr = other.GetComponentInChildren<MeshRenderer>();
-        if (mr == null) {
+        var mrs = other.GetComponentsInChildren<Renderer>();
+        if (mrs == null || mrs.Length < 1) {
             Destroy(gameObject);
             Debug.LogWarning("Attempted to setup dissolver but missing meshrenderer on base object");
             return;
         }
 
-        var mf = other.GetComponentInChildren<MeshFilter>();
-        if (mf == null) {
+        var mfs = other.GetComponentsInChildren<MeshFilter>();
+        if (mfs == null || mfs.Length < 1) {
             Destroy(gameObject);
             Debug.LogWarning("Attempted to setup dissolver but missing meshfilter on base object");
             return;
@@ -29,25 +29,46 @@ public class Dissolver : MonoBehaviour {
         transform.rotation = other.transform.rotation;
         transform.localScale = other.transform.localScale;
 
-        _renderer = gameObject.AddComponent<MeshRenderer>();
-        MeshFilter filter = gameObject.AddComponent<MeshFilter>();
-
         _propertyBlock = new MaterialPropertyBlock();
-        _renderer.material = mr.material;
-        filter.mesh = mf.mesh;
-
         dissolve = -1f;
-        _renderer.GetPropertyBlock(_propertyBlock);
-        _propertyBlock.SetFloat(Dissolve, dissolve);
-        _renderer.SetPropertyBlock(_propertyBlock);
+        for(int i = 0; i < mrs.Length; i++) {
+            if (mrs[i].gameObject.layer == LayerMask.NameToLayer("Trails")
+                || mrs[i].gameObject.layer == LayerMask.NameToLayer("Minimap")) {
+                continue;
+            }
+            GameObject child = new GameObject("dissolvee", typeof(MeshRenderer), typeof(MeshFilter));
+            child.transform.parent = gameObject.transform;
+            child.transform.position = mrs[i].transform.position;
+            child.transform.rotation = mrs[i].transform.rotation;
+            child.transform.localScale = mrs[i].transform.localScale;
+
+            var mf = child.GetComponent<MeshFilter>();
+            if (mrs[i] is SkinnedMeshRenderer) {
+                mf.mesh = ((SkinnedMeshRenderer) mrs[i]).sharedMesh;
+            } else {
+                if (i < mfs.Length) {
+                    mf.mesh = mfs[i].mesh;
+                }
+            }
+
+            var mr = child.GetComponent<MeshRenderer>();
+            mr.material = mrs[i].material;
+            mr.GetPropertyBlock(_propertyBlock);
+            _propertyBlock.SetFloat(Dissolve, dissolve);
+            mr.SetPropertyBlock(_propertyBlock);
+            toDissolve.Add(child.GetComponent<MeshRenderer>());
+        }
+
         Tween tween = DOTween.To(() => dissolve, x => dissolve = x, 1f, 3f);
         tween.OnUpdate(UpdateAnimate);
         tween.OnComplete(() => Destroy(gameObject));
     }
 
     private void UpdateAnimate() {
-        _renderer.GetPropertyBlock(_propertyBlock);
-        _propertyBlock.SetFloat(Dissolve, dissolve);
-        _renderer.SetPropertyBlock(_propertyBlock);
+        foreach (Renderer objRenderer in toDissolve) {
+            objRenderer.GetPropertyBlock(_propertyBlock);
+            _propertyBlock.SetFloat(Dissolve, dissolve);
+            objRenderer.SetPropertyBlock(_propertyBlock);
+        }
     }
 }

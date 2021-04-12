@@ -9,9 +9,9 @@ public class PauseMenu : MonoBehaviour
 	private static PauseMenu inst;
 	//public GameObject pauseObject;
 	private bool _isPaused;
-	private GameObject _mainContainer;
-	private GameObject _saveLoadMenu;
-	private GameObject _settingsMenu;
+	public GameObject _mainContainer;
+	public GameObject _saveLoadMenu;
+	public GameObject _settingsMenu;
 	private bool _hasSettingsLoaded;
 	private SettingsPanel _settingsScript;
 	
@@ -34,27 +34,15 @@ public class PauseMenu : MonoBehaviour
         inst = this;
 		
 		//probably a more efficient way to handle this
-		_mainContainer = transform.Find("Container").gameObject;
-		_saveLoadMenu = transform.Find("SaveLoadPanel").gameObject;
-		_settingsMenu = transform.Find("SettingsPanel").gameObject;
+		//_mainContainer = transform.Find("Container").gameObject;
+		//_saveLoadMenu = transform.Find("SaveLoadPanel").gameObject;
+		//_settingsMenu = transform.Find("SettingsPanel").gameObject;
 		_settingsScript = _settingsMenu.GetComponent<SettingsPanel>();
 		_mainContainer.SetActive(false);
 		_saveLoadMenu.SetActive(false);
 		_settingsMenu.SetActive(false);
 	}
-	
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
 	public bool GetIsPaused(){
 		return _isPaused;
 	}
@@ -86,7 +74,6 @@ public class PauseMenu : MonoBehaviour
 	public void ToggleSettings() {
 		_settingsMenu.SetActive(!_settingsMenu.activeSelf);
 		_hasSettingsLoaded = true;
-		_settingsScript.SaveSettings();
 		if (_saveLoadMenu.activeSelf) {
 			_saveLoadMenu.SetActive(false);
 		}

@@ -77,7 +77,7 @@ public class BeeStateMachine : MonoBehaviour {
         bool nearBuilding = false;
 
         if (building != null) {
-            if (Vector3.Distance(transform.position, building.transform.position) < 3.5f) {
+            if (Vector3.Distance(transform.position, building.transform.position) < 2.5f) {
                 nearBuilding = true;
             }
         }

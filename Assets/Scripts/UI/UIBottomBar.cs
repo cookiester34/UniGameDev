@@ -13,6 +13,9 @@ namespace UI {
 
         private void Awake() {
             _buttons = GetComponentsInChildren<UIBottomBarButton>().ToList();
+        }
+
+        private void Start() {
             ForceBeginActive();
         }
 

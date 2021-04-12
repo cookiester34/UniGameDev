@@ -138,6 +138,14 @@ public class AudioManager : MonoBehaviour {
         sound.source.volume = sound.volume + volumeOffset;
     }
 
+    public void ModulateAudioSource(AudioSource source)
+    {
+        float pitchOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        float volumeOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
+        source.pitch = 1 + pitchOffset;
+        source.volume = 1 + volumeOffset;
+    }
+
     // This is what is used to play the sound in code.
     public void PlaySound (string name)
     {
@@ -333,19 +341,25 @@ public class AudioManager : MonoBehaviour {
         {
             PlaySound("ResourceDepleted");
         }
-        else if (value <= lowResourceThreshold)
-        {
-            PlaySound("ResourceLow");
-        }
-        else
-        {
-
-        }
     }
 
-    public void PlayAnnouncementAlert()
+    public void PlayAnnouncementAlert(AnnounceEventType eventType)
     {
-        PlaySound("Announcement");
+        // TODO - Sam add some short audio clips here, for different event types
+        switch (eventType) {
+            case AnnounceEventType.Alert:
+                PlaySound("AnnouncementAlert");
+                break;
+            case AnnounceEventType.Misc:
+                PlaySound("AnnouncementMisc");
+                break;
+            case AnnounceEventType.Tutorial:
+                PlaySound("AnnouncementTutorial");
+                break;
+            default:
+                PlaySound("AnnouncementMisc");
+                break;
+        }
     }
 }
 

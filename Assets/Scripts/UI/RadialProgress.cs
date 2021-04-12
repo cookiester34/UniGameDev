@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class RadialProgress : MonoBehaviour
 {
     public Image progressBar;
-    private float currentValue;
+    protected float currentValue;
     private float fillSpeed;
     private bool active;
 

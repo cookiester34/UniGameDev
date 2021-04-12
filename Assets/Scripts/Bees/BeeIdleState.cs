@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class BeeIdleState : BeeState {
     private Vector3 _lastDecidedLocation = Vector3.zero;
@@ -61,11 +62,28 @@ public class BeeIdleState : BeeState {
         }
 
         // Random direction
-        Vector3 randomPosition = _stateMachine.transform.position +
-                                 new Vector3(Random.Range(-2.5f, 2.5f), 0f, Random.Range(-2.5f, 2.5f));
-        possiblePositions.Add(randomPosition);
+        bool posX = Random.Range(0, 2) == 0;
+        bool posZ = Random.Range(0, 2) == 0;
+        var x = Random.Range(2.5f, 4f);
+        if (!posX) {
+            x *= -1;
+        }
+        var z = Random.Range(2.5f, 4f);
+        if (!posZ) {
+            z *= -1;
+        }
+        Vector3 randomPosition = _stateMachine.transform.position + new Vector3(x, 0f, z);
+        if (FogOfWarBounds.instance.IsInFog(randomPosition))
+        {
+            if (NavMesh.SamplePosition(randomPosition, out var hit, 5f, NavMesh.AllAreas))
+            {
+                possiblePositions.Add(hit.position);
+            }
+        }
 
-        GoToPosition(possiblePositions.Random());
+        if (possiblePositions.Count > 0) {
+            GoToPosition(possiblePositions.Random());
+        }
     }
 
     private void GoToPosition(Vector3 position) {

@@ -12,6 +12,7 @@ using Random = UnityEngine.Random;
 public class BuildingManager : MonoBehaviour {
     public delegate void BuildingEvent(Building building);
     public event BuildingEvent OnBuildingSelected;
+    public event BuildingEvent OnBuildingPlaced;
 
     #region states
     
@@ -126,6 +127,10 @@ public class BuildingManager : MonoBehaviour {
         OnBuildingSelected?.Invoke(building);
     }
 
+    public void InvokeBuildingPlaced(Building building) {
+        OnBuildingPlaced?.Invoke(building);
+    }
+
     /// <summary>
     /// for ui button to add a bee to the selected building
     /// </summary>
@@ -209,7 +214,7 @@ public class BuildingManager : MonoBehaviour {
     public void BuildingAlreadyThere()
     {
         Debug.LogWarning("Building is already there");
-		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.");
+		UIEventAnnounceManager.Instance.AnnounceEvent("Building already exists here.", AnnounceEventType.Misc);
     }
 
     public void NoResourceFound(ResourceType resourceType)

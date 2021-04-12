@@ -230,7 +230,7 @@ Material:
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
-    - _Radius: -0.01
+    - _Radius: 0.08
     - _ReceivesSSR: 0
     - _RefractionModel: 0
     - _RenderQueueType: 5

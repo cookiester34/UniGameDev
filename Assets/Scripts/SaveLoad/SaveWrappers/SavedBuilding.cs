@@ -23,7 +23,7 @@ public class SavedBuilding {
         }
     }
 
-    public void Instantiate(List<Bee> loadedBees) {
+    public Building Instantiate(List<Bee> loadedBees) {
         GameObject go = Object.Instantiate(
             buildingData.buildingType.GetPrefab(), transform.Position, transform.Rotation);
         go.GetComponent<Health>().LoadSavedHealth(health);
@@ -33,5 +33,7 @@ public class SavedBuilding {
                 go.GetComponent<Building>().AssignBee(matchingBee);
             }
         }
+
+        return go.GetComponent<Building>();
     }
 }

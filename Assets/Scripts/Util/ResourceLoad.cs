@@ -14,6 +14,6 @@
         public const string AudioSingleton = "Singletons/AudioManager";
 		public const string PauseSingleton = "Singletons/PauseMenu";
 
-        public const string EnemyBuilding = "EnemyBuilding";
+        public const string EnemyBuilding = "Buildings/EnemyBuilding";
     }
 }

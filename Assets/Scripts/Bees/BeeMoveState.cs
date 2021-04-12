@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public class BeeMoveState : BeeState {
     private NavMeshAgent _agent;
-    private NavMeshPath _path;
 
     public BeeMoveState(BeeStateMachine stateMachine) : base(stateMachine) {
         _agent = stateMachine.Bee.Agent;
@@ -37,7 +36,7 @@ public class BeeMoveState : BeeState {
     public override void Exit() { }
     
     private bool PathComplete() {
-        if (!_agent.hasPath ||
+        if ((!_agent.pathPending && !_agent.hasPath) ||
             Vector3.Distance( _agent.destination, _agent.transform.position) <= 0.3f) {
             return true;
         }

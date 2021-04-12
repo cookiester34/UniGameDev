@@ -62,12 +62,6 @@ public static class SaveLoad {
             save.researches.Add(savedResearch);
         }
 
-        foreach (BuildingFoundation bf in Object.FindObjectsOfType<BuildingFoundation>()) {
-            if (!bf.CanBuild) {
-                save.buildingFoundations.Add(new SavedBuildingFoundation(bf));
-            }
-        }
-
         save.currentSeason = (int)SeasonManager.Instance.GetCurrentSeason();//save current season
         save.waveNumber = EnemySpawnManager.Instance.waveNumber;
 
@@ -113,8 +107,20 @@ public static class SaveLoad {
             loadedBees.Add(savedBee.Instantiate());
         }
 
-        foreach (SavedBuilding building in _currentSave.buildings) {
-            building.Instantiate(loadedBees);
+        foreach (SavedBuilding savedBuilding in _currentSave.buildings) {
+            var building = savedBuilding.Instantiate(loadedBees);
+            var position = building.transform.position;
+            position.y += 10f;
+            position.x += 0.1f;
+            position.z += 0.1f;
+            var hits = Physics.RaycastAll(new Ray(position, Vector3.down),
+                float.MaxValue);
+            foreach (RaycastHit hit in hits) {
+                var bf = hit.collider.gameObject.GetComponentInParent<BuildingFoundation>();
+                if (bf != null) {
+                    bf.BuildMulti(building.BuildingData.BuildingShape);
+                }
+            }
         }
 
         BeeManager.Instance.OnLoad(loadedBees);
@@ -136,16 +142,6 @@ public static class SaveLoad {
             // If research was being researched begin research again on load
             if (obj.Timer.Active) {
                 ResearchManager.Instance.ResearchTopic(obj, false);
-            }
-        }
-
-        List<BuildingFoundation> foundations = Object.FindObjectsOfType<BuildingFoundation>().ToList();
-        foreach (var bf in _currentSave.buildingFoundations) {
-            var match = foundations.Find(x => x.Id == bf.id);
-            if (match == null) {
-                Debug.LogWarning("During load of save could not find building foundation with matching id");
-            } else {
-                match.CanBuild = false;
             }
         }
 

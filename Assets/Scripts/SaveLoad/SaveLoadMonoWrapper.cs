@@ -41,4 +41,11 @@ public class SaveLoadMonoWrapper : MonoBehaviour {
     public void ToMainMenu() {
         SceneManagement.Instance.LoadScene("Main");
     }
+
+    /// <summary>
+    /// Returns to desktop quitting the game
+    /// </summary>
+    public void ToDesktop() {
+        Application.Quit();
+    }
 }

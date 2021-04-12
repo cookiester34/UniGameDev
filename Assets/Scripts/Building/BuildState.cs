@@ -1,21 +1,13 @@
-﻿using System;
-using DG.Tweening;
+﻿using DG.Tweening;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Rendering;
-using Object = UnityEngine.Object;
 
 public class BuildState : BuildingManagerState {
-    private EventSystem eventSys;
     GameObject tempBuilding;
     private BuildingData currentBuilding;
     private MaterialPropertyBlock _propBlock;
 
     public override void Enter() {
-        if (eventSys == null) {
-            eventSys = GameObject.FindObjectOfType<EventSystem>();
-        }
-
         if (_propBlock == null) {
             _propBlock = new MaterialPropertyBlock();
         }
@@ -33,10 +25,10 @@ public class BuildState : BuildingManagerState {
     public override void Update() {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
-        if (eventSys.IsPointerOverGameObject()) {
+        if (EventSystem.current.IsPointerOverGameObject()) {
             //this checks if the mouse is over a UI element
             tempBuilding.SetActive(false);
-        } else if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.tileMask)) {
+        } else if (PhysicsUtil.Raycast(ray, out hit, Mathf.Infinity, buildingManager.tileMask, false)) {
             tempBuilding.SetActive(true);
             BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
             if (foundation != null) {
@@ -67,18 +59,18 @@ public class BuildState : BuildingManagerState {
             bool canUseResources = ResourceManagement.Instance.CanUseResources(buildingData.Tier1Cost);
 
             if (!canUseResources) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Not enough resources to place building!", AnnounceEventType.Misc);
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else if (!isInBuildingLimit) {
-                UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!");
+                UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!", AnnounceEventType.Misc);
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else {
                 buildingManager.selectedBuildingUI.sprite = buildingData.UiImage;
                 buildingManager.selectedBuildingText.text = buildingData.Description;
                 currentBuilding = buildingData;
-                tempBuilding = GameObject.Instantiate(currentBuilding.BuildingType.GetPrefab(),
-                    new Vector3(0, 0, 0),
-                    currentBuilding.BuildingType.GetPrefab().transform.rotation);
+                var buildingModel = currentBuilding.BuildingType.GetModel();
+                tempBuilding = GameObject.Instantiate(buildingModel,
+                    new Vector3(0, 0, 0), buildingModel.transform.rotation);
             }
         }
     }
@@ -95,13 +87,17 @@ public class BuildState : BuildingManagerState {
         } else {
             tempBuilding.transform.position = position;
             ResourceManagement.Instance.UseResources(currentBuilding.Tier1Cost);
-            tempBuilding.GetComponent<Collider>().enabled = true;
-            PlayBuildingPlaceParticles(tempBuilding.transform);
 
-            Building placedBuilding = tempBuilding.GetComponent<Building>();
+            Object.Destroy(tempBuilding);
+            var prefab = currentBuilding.BuildingType.GetPrefab();
+            GameObject go = Object.Instantiate(prefab, position, prefab.transform.rotation);
+            PlayBuildingPlaceParticles(go.transform);
+
+            Building placedBuilding = go.GetComponent<Building>();
             if (placedBuilding != null) {
                 placedBuilding.UsedFoundations = foundation.GetFoundations(currentBuilding.BuildingShape);
                 placedBuilding.PlaceBuilding();
+                BuildingManager.Instance.InvokeBuildingPlaced(placedBuilding);
             }
             UpdateBuildingShader(false, false);
 

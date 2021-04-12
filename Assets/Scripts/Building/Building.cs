@@ -14,7 +14,7 @@ public class Building : MonoBehaviour {
     [SerializeField] private BuildingType buildingType;
 
     [SerializeField] private BuildingData buildingData;
-    private int buildingTier = 1;
+    protected int buildingTier = 1;
     [FormerlySerializedAs("buildingTeir1")] public GameObject buildingTier1;
     [FormerlySerializedAs("buildingTeir2")] public GameObject buildingTier2;
     [FormerlySerializedAs("buildingTeir3")] public GameObject buildingTier3;
@@ -75,7 +75,18 @@ public class Building : MonoBehaviour {
         OnBuildingPlaced?.Invoke();
     }
 
-    public void AssignBee(Bee bee) {
+    public virtual string GetAssignedBeesText() {
+        return "Assigned Bees: " + numAssignedBees + " / " +
+               BuildingData.maxNumberOfWorkers + "\n" + "Unassigned Bees: " +
+               (int) (ResourceManagement.Instance.GetResource(ResourceType.Population).CurrentResourceAmount
+                      - (int) ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
+    }
+
+    public virtual bool CanAssignBee() {
+        return numAssignedBees < buildingData.maxNumberOfWorkers;
+    }
+
+    public virtual void AssignBee(Bee bee) {
         if (_assignedBees == null) {
             _assignedBees = new List<Bee>();
         }
@@ -87,7 +98,7 @@ public class Building : MonoBehaviour {
         _assignedBees.Add(bee);
         numAssignedBees = _assignedBees.Count;
         
-        var suppliers = GetComponents<ResourceSupplier>();
+        var suppliers = GetComponentsInChildren<ResourceSupplier>();
         if (suppliers != null && suppliers.Length > 1) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
@@ -100,7 +111,7 @@ public class Building : MonoBehaviour {
     /// </summary>
     /// <param name="bee">A specific bee to remove, or null for a random one</param>
     /// <returns>The bee removed</returns>
-    public Bee UnassignBee(Bee bee = null) {
+    public virtual Bee UnassignBee(Bee bee = null) {
         if (_assignedBees == null) {
             _assignedBees = new List<Bee>();
         }
@@ -118,7 +129,7 @@ public class Building : MonoBehaviour {
         }
         numAssignedBees = _assignedBees.Count;
         
-        var suppliers = GetComponents<ResourceSupplier>();
+        var suppliers = GetComponentsInChildren<ResourceSupplier>();
         if (suppliers != null && suppliers.Length > 1) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
@@ -158,10 +169,17 @@ public class Building : MonoBehaviour {
         buildingTier2.SetActive(buildingTier == 2);
         buildingTier3.SetActive(buildingTier == 3);
 
-        var suppliers = GetComponents<ResourceSupplier>();
-        if (suppliers != null && suppliers.Length > 1) {
+        var suppliers = GetComponentsInChildren<ResourceSupplier>();
+        if (suppliers != null && suppliers.Length > 0) {
             foreach (var supplier in suppliers) {
                 supplier.CalculateProductionAmount();
+            }
+        }
+
+        var storages = GetComponentsInChildren<ResourceStorage>();
+        if (storages != null && storages.Length > 0) {
+            foreach (ResourceStorage storage in storages) {
+                storage.RecalculateStorage();
             }
         }
     }
