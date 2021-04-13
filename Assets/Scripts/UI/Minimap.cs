@@ -10,6 +10,7 @@ public class Minimap : MonoBehaviour
 
     private RectTransform _rt;
     private Camera _minimapCam;
+    private Camera _mainCam;
     private CameraTarget _camTarget;
 
     private float _xCentreOffset;
@@ -23,6 +24,7 @@ public class Minimap : MonoBehaviour
     {
         _rt = GetComponent<RectTransform>();
         _minimapCam = GameObject.Find("MinimapCam").GetComponent<Camera>();
+        _mainCam = Camera.main;
         _camTarget = GameObject.FindObjectOfType<CameraTarget>();
 
         _xCentreOffset = _rt.sizeDelta.x / 2f;
@@ -35,7 +37,10 @@ public class Minimap : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 minimapCamRot = _minimapCam.transform.rotation.eulerAngles;
+        minimapCamRot.y = _mainCam.transform.rotation.eulerAngles.y;
+        _minimapCam.transform.rotation = Quaternion.Euler(minimapCamRot);
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
