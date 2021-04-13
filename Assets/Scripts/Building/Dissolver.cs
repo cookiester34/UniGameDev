@@ -52,7 +52,7 @@ public class Dissolver : MonoBehaviour {
             }
 
             var mr = child.GetComponent<MeshRenderer>();
-            mr.material = mrs[i].material;
+            mr.materials = mrs[i].materials;
             mr.GetPropertyBlock(_propertyBlock);
             _propertyBlock.SetFloat(Dissolve, dissolve);
             mr.SetPropertyBlock(_propertyBlock);

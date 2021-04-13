@@ -103,6 +103,17 @@ public class ResourceManagement : MonoBehaviour {
         return canUse;
     }
 
+    /// <summary>
+    /// Increases the resources of the given types by the amount
+    /// </summary>
+    /// <param name="resources">The resources to add to the current totals</param>
+    public void AddResources(List<ResourcePurchase> resources) {
+        foreach (ResourcePurchase purchase in resources) {
+            var resource = GetResource(purchase.resourceType);
+            resource.ModifyAmount(purchase.cost);
+        }
+    }
+
 
     /// all functions below will provide a warning if the resource cannot be found
 
