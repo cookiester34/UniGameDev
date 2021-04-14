@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Util;
 
 public class ResourceManagement : MonoBehaviour {
@@ -9,6 +10,8 @@ public class ResourceManagement : MonoBehaviour {
     [Tooltip("This sets how often the resoources get updated in seconds")]
     [Range(0,30)]
     public int resourceTickTime;
+
+    public UnityEvent resourceTickEvent;
 
     /// <summary>
     /// Singleton instance
@@ -26,6 +29,9 @@ public class ResourceManagement : MonoBehaviour {
         }
 
         _instance = this;
+
+        if (resourceTickEvent == null)
+            resourceTickEvent = new UnityEvent();
     }
 
     public static ResourceManagement Instance {
@@ -130,6 +136,7 @@ public class ResourceManagement : MonoBehaviour {
             }
             i.ResourceCapReached();
         }
+        resourceTickEvent.Invoke();
     }
 
     /// <summary>

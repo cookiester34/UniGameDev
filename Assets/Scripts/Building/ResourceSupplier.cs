@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Building component that allows a building to supply, or use a resource
@@ -24,6 +25,8 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
 
     public delegate void ProductionChangedHandler();
     public event ProductionChangedHandler ProductionChanged;
+
+    
 
     void Awake() {
         if (resource == null) {
@@ -88,6 +91,23 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         text += resource + ": " + increaseAmount + " per bee\n";
         return text;
     }
+
+    public Transform GetBuilding()
+    {
+        return building.transform;
+    }
+
+    public float GetProductionAmount()
+    {
+        if (building.numAssignedBees == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.BuildingTier;
+        }
+    } 
 
     public void BeforeDestroy() {
         resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);

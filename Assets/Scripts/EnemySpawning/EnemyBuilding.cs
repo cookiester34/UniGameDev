@@ -8,5 +8,6 @@ public class EnemyBuilding : MonoBehaviour
     void Start()
     {
         EnemySpawnManager.Instance.enemyBuildingsList.Add(transform);
+        gameObject.GetComponent<Renderer>().enabled = false;
     }
 }
