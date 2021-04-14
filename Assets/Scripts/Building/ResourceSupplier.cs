@@ -38,7 +38,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             building.OnBuildingPlaced += () => resource.ModifyTickDrain(actualProductionAmount, productionTime);
             CalculateProductionAmount();
         } else {
-            resource.ModifyTickDrain(actualProductionAmount, productionTime);
+            resource.ModifyTickDrain(baseProductionAmount, productionTime);
         }
 
         SetCatergory();
@@ -70,13 +70,18 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
 
     public void CalculateProductionAmount()
     {
-        resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
-        if (building.numAssignedBees == 0) {
-            actualProductionAmount = 0;
-        } else {
-            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.BuildingTier;
+        if (building != null) {
+            resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
+            if (building.numAssignedBees == 0) {
+                actualProductionAmount = 0;
+            } else {
+                actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) *
+                                         building.numAssignedBees * building.BuildingTier;
+            }
+
+            resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
-        resource.ModifyTickDrain(actualProductionAmount, productionTime);
+
         ProductionChanged?.Invoke();
     }
 
