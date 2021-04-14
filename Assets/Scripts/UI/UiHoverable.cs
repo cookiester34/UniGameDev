@@ -93,6 +93,14 @@ namespace UI {
                 
             }
         }
+
+        void Update()
+        {
+            if (_buildingData)
+            {
+                _button.interactable = ResourceManagement.Instance.CanUseResources(_buildingData.Tier1Cost);
+            }
+        }
 		
 		private string CalculateCostString() {
 			string builder = "\n";
