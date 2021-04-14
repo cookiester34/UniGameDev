@@ -65,9 +65,8 @@ public static class SaveLoad {
         save.currentSeason = (int)SeasonManager.Instance.GetCurrentSeason();//save current season
         save.waveNumber = EnemySpawnManager.Instance.waveNumber;
 
-        GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
+        CameraTarget gameCamera = Object.FindObjectOfType<CameraTarget>();
         save.cameraTransform = new SavedTransform(gameCamera.transform);
-        save.cameraTarget = gameCamera.TargetPositon;
 
         string json = JsonUtility.ToJson(save, true);
         string savePath = Path.Combine(saveDirectoryPath, savename);
@@ -148,11 +147,10 @@ public static class SaveLoad {
         SeasonManager.Instance.SetCurrentSeason((Seasons)_currentSave.currentSeason);//set currrent season
         EnemySpawnManager.Instance.waveNumber = _currentSave.waveNumber;
 
-        GameCamera gameCamera = Object.FindObjectOfType<GameCamera>();
+        CameraTarget gameCamera = Object.FindObjectOfType<CameraTarget>();
         Transform cameraTransform = gameCamera.transform;
         cameraTransform.position = _currentSave.cameraTransform.Position;
         cameraTransform.rotation = _currentSave.cameraTransform.Rotation;
-        gameCamera.TargetPositon = _currentSave.cameraTarget;
     }
 
     /// <summary>

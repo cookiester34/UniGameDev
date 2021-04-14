@@ -70,7 +70,7 @@ public class BuildState : BuildingManagerState {
                 currentBuilding = buildingData;
                 var buildingModel = currentBuilding.BuildingType.GetModel();
                 tempBuilding = GameObject.Instantiate(buildingModel,
-                    new Vector3(0, 0, 0), buildingModel.transform.rotation);
+                    new Vector3(0, -100, 0), buildingModel.transform.rotation);
             }
         }
     }

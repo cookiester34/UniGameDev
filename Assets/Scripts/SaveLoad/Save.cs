@@ -25,7 +25,6 @@ public class Save {
     public List<SavedResearch> researches = new List<SavedResearch>();
 
     public SavedTransform cameraTransform;
-    public Vector3 cameraTarget;
 
     public int currentSeason;
     public int waveNumber;
