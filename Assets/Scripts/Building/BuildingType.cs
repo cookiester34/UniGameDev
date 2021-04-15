@@ -109,7 +109,7 @@ public static class BuildingTypeExtension {
                 break;
             
             case BuildingType.Research:
-                obj = Resources.Load<GameObject>("BuildingModels/Housing");
+                obj = Resources.Load<GameObject>("BuildingModels/Research");
                 break;
 
             case BuildingType.EnemyBuilding:
