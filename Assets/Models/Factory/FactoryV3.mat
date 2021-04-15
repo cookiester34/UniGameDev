@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Factory
+  m_Name: FactoryV3
   m_Shader: {fileID: -6465566751694194690, guid: 17070b3721e970a49adcb5305c8bbc67,
     type: 3}
   m_ShaderKeywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
@@ -40,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1E8131C6:
-        m_Texture: {fileID: 2800000, guid: acb71ec1612d6a24780572d4f6e84642, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0236dff85d7fc38459250e9586e79946, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_455C37C1:
@@ -267,6 +267,7 @@ Material:
     - _UVBase: 0
     - _UVDetail: 0
     - _UVEmissive: 0
+    - _UseDissolveAlpha: 0
     - _UseEmissiveIntensity: 0
     - _UseShadowThreshold: 0
     - _ZTestDepthEqualForOpaque: 3
@@ -278,6 +279,7 @@ Material:
     - BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - CanBuildColor: {r: 0.18397805, g: 0.5566037, b: 0, a: 0.6862745}
     - CannotBuildColor: {r: 0.53773576, g: 0.0228284, b: 0.0228284, a: 0.6862745}
+    - Color_1DC22CD0: {r: 0, g: 0, b: 0, a: 1}
     - Color_762EE56B: {r: 1.929412, g: 0.9098039, b: 0.282353, a: 0}
     - Color_B0CAA98A: {r: 2.219895, g: 4.272251, b: 4.774868, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
