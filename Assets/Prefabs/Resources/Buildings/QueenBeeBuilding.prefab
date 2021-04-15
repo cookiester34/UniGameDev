@@ -5506,6 +5506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 170ef695898af1040b15ccb60ce3849a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  resourceTickFloatUI: {fileID: 3900803493318949853}
   buildingType: 7
   buildingData: {fileID: 11400000, guid: 5fd12689c90bce44aa2b80341df40761, type: 2}
   buildingTier1: {fileID: 0}
@@ -5815,6 +5816,7 @@ MonoBehaviour:
   allowText: 1
   canvas: {fileID: 2881703195973579962}
   resourceInfoText: {fileID: 1248738560502216626}
+  heightStartPos: 3
   suppliers:
   - {fileID: 5742075351067721524}
 --- !u!114 &7736907296912882422
