@@ -11,7 +11,7 @@ using UnityEngine.Serialization;
 public class Building : MonoBehaviour {
     public delegate void EmptyEvent();
     public event EmptyEvent OnBuildingPlaced;
-
+    public ResourceTickFloatUI resourceTickFloatUI;
     [SerializeField] private BuildingType buildingType;
 
     [SerializeField] private BuildingData buildingData;
@@ -164,7 +164,7 @@ public class Building : MonoBehaviour {
         return canUpgrade && buildingData.CanUpgrade(buildingTier + 1);
     }
 
-    public void Upgrade() {
+    public void Upgrade(List<ResourcePurchase> resourcePurchase) {
         buildingTier++;
         buildingTier1.SetActive(buildingTier == 1);
         buildingTier2.SetActive(buildingTier == 2);
@@ -183,6 +183,8 @@ public class Building : MonoBehaviour {
                 storage.RecalculateStorage();
             }
         }
+        if (resourceTickFloatUI != null)
+            resourceTickFloatUI.TriggerTextEventResourcePurchaseList(false, resourcePurchase);
     }
 
     /// <summary>
@@ -216,7 +218,8 @@ public class Building : MonoBehaviour {
         foreach (ResourcePurchase purchase in copy) {
             purchase.cost = Mathf.FloorToInt(purchase.cost * refundPercent);
         }
-
+        if(resourceTickFloatUI != null)
+            resourceTickFloatUI.TriggerTextEventResourcePurchaseList(true, copy);
         return copy;
     }
 }
