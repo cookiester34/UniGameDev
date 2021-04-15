@@ -79,15 +79,18 @@ public class EnemySpawnManager : MonoBehaviour
 
     void checkVisible()
     {
-        foreach (Transform i in enemyBuildingsList)
+        if (CurrentSceneType.SceneType != SceneType.LevelEditor)
         {
-            if (FogOfWarBounds.instance.IsWaspVisible(i.position))
+            foreach (Transform i in enemyBuildingsList)
             {
-                i.gameObject.GetComponent<Renderer>().enabled = true;
-            }
-            else
-            {
-                i.gameObject.GetComponent<Renderer>().enabled = false;
+                if (FogOfWarBounds.instance.IsWaspVisible(i.position))
+                {
+                    i.gameObject.GetComponent<Renderer>().enabled = true;
+                }
+                else
+                {
+                    i.gameObject.GetComponent<Renderer>().enabled = false;
+                }
             }
         }
     }
