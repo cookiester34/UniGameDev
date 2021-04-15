@@ -23,6 +23,6 @@ public class SeasonUI : MonoBehaviour
 
     void UpdateUI()
     {
-        _text.text = String.Format("{0}: {1}", "Current Season" , SeasonManager.Instance.GetCurrentSeason().ToString());
+        _text.text =SeasonManager.Instance.GetCurrentSeason().ToString();
     }
 }

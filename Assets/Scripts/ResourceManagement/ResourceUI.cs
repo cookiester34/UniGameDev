@@ -7,6 +7,7 @@ using UnityEngine.UI;
 
 public class ResourceUI : MonoBehaviour {
     [SerializeField] private Resource resource;
+    private Color defaultColor = Color.white;
 
     private Text _text;
     // Start is called before the first frame update
@@ -31,14 +32,7 @@ public class ResourceUI : MonoBehaviour {
     void UpdateText(float newValue) {
         _text.text =
             String.Format("{0}: {1:0} / {2}", resource.name, resource.GetFloorCurrentAmount(), resource.ResourceCap);
-        if (newValue <= resource.ResourceLowThreshold)
-        {
-            _text.color = Color.red;
-        }
-        else
-        {
-            _text.color = Color.black;
-        }
+        _text.color = newValue <= resource.ResourceLowThreshold ? Color.red : defaultColor;
 
         float currentResourceTickAmount = resource.GetResourceTickAmount();
 
