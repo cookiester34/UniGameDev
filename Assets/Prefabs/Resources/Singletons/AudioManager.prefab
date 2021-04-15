@@ -64,8 +64,8 @@ MonoBehaviour:
       type: 2}
     source: {fileID: 0}
   - name: UpgradeBuilding
-    soundClip: {fileID: 8300000, guid: 051a680c4b83ec24b9135f74f7c30a84, type: 3}
-    volume: 1
+    soundClip: {fileID: 8300000, guid: 7b4e9f3cc1fa21141835241f516fa161, type: 3}
+    volume: 0.1
     pitch: 1
     loop: 0
     autoModulation: 0
@@ -124,8 +124,8 @@ MonoBehaviour:
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
   - name: ResourceDepleted
-    soundClip: {fileID: 8300000, guid: 32d96654a5b40fd4bb9fc7197327be4c, type: 3}
-    volume: 1
+    soundClip: {fileID: 8300000, guid: e6668f5876b32a24db4c367b1709d2e6, type: 3}
+    volume: 2
     pitch: 1
     loop: 0
     autoModulation: 0
@@ -148,8 +148,8 @@ MonoBehaviour:
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
   - name: AnnouncementTutorial
-    soundClip: {fileID: 8300000, guid: a81f78f03f6f67a49b1b594c213bddcf, type: 3}
-    volume: 1
+    soundClip: {fileID: 8300000, guid: 9c9c4286079de6247a4e45aa45a173cb, type: 3}
+    volume: 1.4
     pitch: 1
     loop: 0
     autoModulation: 0
@@ -287,7 +287,7 @@ MonoBehaviour:
     source: {fileID: 0}
   buildingSelectSound:
     name: BuildingSelect
-    soundClip: {fileID: 8300000, guid: d5a369ffe56085b42a4d2fd811fbbdfe, type: 3}
+    soundClip: {fileID: 8300000, guid: 831bed766a1c9b848803111476cfc4cf, type: 3}
     volume: 1
     pitch: 1
     loop: 0

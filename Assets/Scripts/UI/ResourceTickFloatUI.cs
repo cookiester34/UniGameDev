@@ -12,7 +12,8 @@ public class ResourceTickFloatUI : MonoBehaviour
     float alpha = 1;
     Vector3 pos;
     float newY;
-    float heightStartPos = 0;
+    public float heightStartPos = 0;
+    Vector3 startPos;
 
     public List<ResourceSupplier> suppliers = new List<ResourceSupplier>();
 
@@ -52,23 +53,52 @@ public class ResourceTickFloatUI : MonoBehaviour
 
         foreach (ResourceSupplier i in suppliers)
         {
-            if (i.GetProductionAmount() > 0.05f || i.GetProductionAmount() < -0.05f)
+            if (i != null)
             {
-                if (i.GetProductionAmount() > 0)
+                if (i.GetProductionAmount() > 0.005f || i.GetProductionAmount() < -0.005f)
                 {
-                    resourceInfoText.text += "<color=green>" + "+ " + i.GetProductionAmount() + "</color>" + "\n";
+                    if (i.GetProductionAmount() > 0)
+                    {
+                        resourceInfoText.text += "<color=green>" + "+ " + i.GetProductionAmount() + "</color>" + "\n";
+                    }
+                    else
+                    {
+                        resourceInfoText.text += "<color=red>" + i.GetProductionAmount() + "</color>" + "\n";
+                    }
+                    canvas.position = i.GetBuilding().position;
+                    pos = canvas.position;
+                    newY = pos.y + heightStartPos;
+                    canvas.gameObject.SetActive(true);
+                    alpha = 1;
+                    updateTextPos = true;
                 }
-                else
-                {
-                    resourceInfoText.text += "<color=red>" + i.GetProductionAmount() + "</color>" + "\n";
-                }
-                canvas.position = i.GetBuilding().position;
-                pos = canvas.position;
-                newY = pos.y + heightStartPos;
-                canvas.gameObject.SetActive(true);
-                alpha = 1;
-                updateTextPos = true;
+                if (startPos == null)
+                    startPos = i.GetBuilding().position;
             }
         }
+    }
+
+    public void TriggerTextEventResourcePurchaseList(bool isPositive, List<ResourcePurchase> resourcePurchaseList)
+    {
+        updateTextPos = false;
+        resourceInfoText.text = "";
+
+        foreach (ResourcePurchase i in resourcePurchaseList)
+        {
+            if (isPositive)
+            {
+                resourceInfoText.text += "<color=green>" + "+ " + i.cost + "</color>" + "\n";
+            }
+            else
+            {
+                resourceInfoText.text += "<color=red>" + i.cost + "</color>" + "\n";
+            }
+        }
+        canvas.position = startPos;
+        pos = canvas.position;
+        newY = pos.y + heightStartPos;
+        canvas.gameObject.SetActive(true);
+        alpha = 1;
+        updateTextPos = true;
     }
 }

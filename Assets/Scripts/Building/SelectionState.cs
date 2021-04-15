@@ -100,7 +100,8 @@ public class SelectionState : BuildingManagerState {
 
             if (temp != null && ResourceManagement.Instance.UseResources(temp)) {
                 PlayBuildingPlaceParticles(selectedBuildingData.transform);
-                selectedBuildingData.Upgrade();
+                selectedBuildingData.Upgrade(temp);
+                ResourceManagement.Instance.UseResources(temp);
             }
         }
     }
