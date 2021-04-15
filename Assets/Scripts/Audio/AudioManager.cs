@@ -337,9 +337,13 @@ public class AudioManager : MonoBehaviour {
 
     public void PlayResourceAlert(float value)
     {
+ 
         if (value <= 0f)
         {
-            PlaySound("ResourceDepleted");
+            if (BuildingManager.Instance.Buildings.Count > 0)
+            {
+                PlaySound("ResourceDepleted");
+            }
         }
     }
 

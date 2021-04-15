@@ -10,29 +10,37 @@ public class Minimap : MonoBehaviour
 
     private RectTransform _rt;
     private Camera _minimapCam;
+    private Camera _mainCam;
     private CameraTarget _camTarget;
 
     private float _xCentreOffset;
     private float _yCentreOffset;
     private float _xAdjust;
     private float _yAdjust;
+    private Vector2 _centrePoint;
+    private float _maxRadius = 125f;
     // Start is called before the first frame update
     void Start()
     {
         _rt = GetComponent<RectTransform>();
         _minimapCam = GameObject.Find("MinimapCam").GetComponent<Camera>();
+        _mainCam = Camera.main;
         _camTarget = GameObject.FindObjectOfType<CameraTarget>();
 
         _xCentreOffset = _rt.sizeDelta.x / 2f;
         _yCentreOffset = _rt.sizeDelta.y / 2f;
         _xAdjust = _minimapCam.pixelWidth / _rt.sizeDelta.x;
         _yAdjust = _minimapCam.pixelHeight / _rt.sizeDelta.y;
+        _centrePoint = new Vector2(_xCentreOffset * _xAdjust, _yCentreOffset * _yAdjust);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Vector3 minimapCamRot = _minimapCam.transform.rotation.eulerAngles;
+        minimapCamRot.y = _mainCam.transform.rotation.eulerAngles.y;
+        _minimapCam.transform.rotation = Quaternion.Euler(minimapCamRot);
+
     }
 
     public void OnPointerClick(PointerEventData eventData)
@@ -44,7 +52,7 @@ public class Minimap : MonoBehaviour
         position2d.x = (position2d.x + _xCentreOffset) * _xAdjust;
         position2d.y = (position2d.y + _yCentreOffset) * _yAdjust;
 
-        if (Physics.Raycast(_minimapCam.ScreenPointToRay(position2d), out hit))
+        if (isPointInCircle(position2d) && Physics.Raycast(_minimapCam.ScreenPointToRay(position2d), out hit))
         {
             //GameObject dbgCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
             //dbgCube.transform.position = hit.point;
@@ -53,5 +61,10 @@ public class Minimap : MonoBehaviour
             position2d.y = hit.point.z;
             _camTarget.PanToPosition(position2d);
         }
+    }
+
+    bool isPointInCircle(Vector2 point)
+    {
+        return Vector2.Distance(point, _centrePoint) <= _maxRadius;
     }
 }

@@ -16,9 +16,17 @@ public class SupplierRadialProgress : RadialProgress {
             return;
         }
         supplier.Resource.OnCapReached += ActivateProgressBar; // Event from resource in supplier when cap is reached.
-        supplier.Resource.OnCurrentValueChanged += delegate { ActivateProgressBar(); };
+        supplier.Resource.OnCurrentValueChanged += ActivateProgressBar;
         supplier.ProductionChanged += ActivateProgressBar;
         previouslyCapped = false;
+    }
+
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="unused">Takes a float so it can subscribe to the OnCurrentValueChanged</param>
+    private void ActivateProgressBar(float unused) {
+        ActivateProgressBar();
     }
     
     public void ActivateProgressBar() {
@@ -30,5 +38,11 @@ public class SupplierRadialProgress : RadialProgress {
         }
         Activate(supplier.ProductionAmount / supplier.ProductionTime / ResourceManagement.Instance.resourceTickTime);
         previouslyCapped = capped;
+    }
+
+    private void OnDestroy() {
+        supplier.Resource.OnCapReached -= ActivateProgressBar;
+        supplier.Resource.OnCurrentValueChanged -= ActivateProgressBar;
+        supplier.ProductionChanged -= ActivateProgressBar;
     }
 }

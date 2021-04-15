@@ -8,6 +8,7 @@ public class ResearchUI : UiHoverable {
     [SerializeField] private Text descriptionText;
     [SerializeField] private ProgressBar progressBar;
     private ResearchObject _researchObject;
+    private bool _isResearchStarted = false;
 
     protected override void Awake() {
         base.Awake();
@@ -32,16 +33,23 @@ public class ResearchUI : UiHoverable {
 
     private void OnResearchStart() {
         _button.interactable = false;
+        _isResearchStarted = true;
         progressBar.gameObject.SetActive(true);
     }
 
     private void OnResearchFinish() {
+        _isResearchStarted = false;
         progressBar.gameObject.SetActive(false);
     }
 
     private void Update() {
         if (progressBar.isActiveAndEnabled) {
             progressBar.TargetProgress = _researchObject.ResearchProgress / 100;
+        }
+
+        if (!_isResearchStarted && _researchObject)
+        {
+            _button.interactable = ResourceManagement.Instance.CanUseResources(_researchObject.Resources) && _researchObject.PrerequisitesMet();
         }
     }
 

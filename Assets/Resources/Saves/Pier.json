@@ -1,0 +1,383 @@
+{
+    "name": "Pier",
+    "terrainSceneName": "SmoothHills",
+    "playerMade": false,
+    "buildings": [
+        {
+            "transform": {
+                "Position": {
+                    "x": 54.9699592590332,
+                    "y": -0.4434616267681122,
+                    "z": 57.442623138427737
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            "health": {
+                "currentHealth": 50.0,
+                "maxHealth": 50.0
+            },
+            "buildingData": {
+                "buildingType": 7,
+                "resourcePurchase": []
+            },
+            "assignedBees": []
+        }
+    ],
+    "bees": [
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.377872467041019,
+                    "y": 0.11590650677680969,
+                    "z": 58.44572448730469
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.8574790358543396,
+                    "z": 0.0,
+                    "w": 0.5145189166069031
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 10
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.41820526123047,
+                    "y": -0.07018035650253296,
+                    "z": 57.48957824707031
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.999077558517456,
+                    "z": 0.0,
+                    "w": 0.04294285923242569
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 9
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.55644989013672,
+                    "y": 0.016249269247055055,
+                    "z": 57.295623779296878
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.90916907787323,
+                    "z": 0.0,
+                    "w": -0.4164273142814636
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 8
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.65426254272461,
+                    "y": 0.2870742678642273,
+                    "z": 57.39692306518555
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.6782996654510498,
+                    "z": 0.0,
+                    "w": -0.7347853779792786
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 7
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.7199592590332,
+                    "y": -0.14262157678604127,
+                    "z": 57.3242301940918
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.44565409421920779,
+                    "z": 0.0,
+                    "w": -0.8952053189277649
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 6
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.71996307373047,
+                    "y": 0.1402328610420227,
+                    "z": 57.1838493347168
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.3200482130050659,
+                    "z": 0.0,
+                    "w": -0.947401225566864
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 5
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.5623893737793,
+                    "y": -0.19283241033554078,
+                    "z": 57.50325012207031
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.8680940866470337,
+                    "z": 0.0,
+                    "w": -0.49639979004859927
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 4
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.7199592590332,
+                    "y": 0.1064990758895874,
+                    "z": 57.60695266723633
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.9585731029510498,
+                    "z": 0.0,
+                    "w": -0.2848467230796814
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 3
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.680702209472659,
+                    "y": 0.2680300772190094,
+                    "z": 57.72718048095703
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.9711426496505737,
+                    "z": 0.0,
+                    "w": -0.2384994924068451
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 2
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 53.71995544433594,
+                    "y": 0.08316758275032044,
+                    "z": 57.48314666748047
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.6930348873138428,
+                    "z": 0.0,
+                    "w": -0.7209040522575378
+                }
+            },
+            "health": {
+                "currentHealth": 1.0,
+                "maxHealth": 1.0
+            },
+            "id": 1
+        }
+    ],
+    "enemyBuildings": [
+        {
+            "Position": {
+                "x": 22.704967498779298,
+                "y": -0.44081228971481326,
+                "z": 22.252626419067384
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": 17.924968719482423,
+                "y": -0.40701407194137576,
+                "z": 20.182626724243165
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": 13.74246883392334,
+                "y": -0.42532461881637576,
+                "z": 25.35762596130371
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": 10.157469749450684,
+                "y": -0.44321364164352419,
+                "z": 31.567625045776368
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": 27.484966278076173,
+                "y": -0.4434615969657898,
+                "z": 16.042627334594728
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        }
+    ],
+    "resources": [
+        {
+            "Type": 1,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 30.0,
+            "Cap": 30
+        },
+        {
+            "Type": 0,
+            "StartingAmount": 0,
+            "TickDrainAmount": 1.0000001192092896,
+            "CurrentResourceAmount": 100.0,
+            "Cap": 100
+        },
+        {
+            "Type": 2,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 5.0,
+            "Cap": 5
+        },
+        {
+            "Type": 3,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 50.0,
+            "Cap": 50
+        },
+        {
+            "Type": 4,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 10.0,
+            "Cap": 10
+        },
+        {
+            "Type": 5,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 0.0,
+            "Cap": 10
+        }
+    ],
+    "researches": [
+        {
+            "researched": false,
+            "name": "Tier 2 Housing",
+            "progress": 99.03507232666016,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tier 3 Housing",
+            "progress": 0.0,
+            "timer": {
+                "runTime": 20.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        }
+    ],
+    "cameraTransform": {
+        "Position": {
+            "x": 54.64347457885742,
+            "y": -0.5052008628845215,
+            "z": 57.69538879394531
+        },
+        "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        }
+    },
+    "currentSeason": 0,
+    "waveNumber": 0
+}

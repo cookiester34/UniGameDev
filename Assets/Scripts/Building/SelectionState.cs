@@ -7,8 +7,7 @@ using UnityEngine;
 public class SelectionState : BuildingManagerState {
     private GameObject selectedBuilding;
     public Building selectedBuildingData;
-    public int tier1UpgradeCost = 1;
-    public int tier2UpgradeCost = 1;
+
     public override void Enter() {
         selectedBuilding = null;
         selectedBuildingData = null;
@@ -83,24 +82,25 @@ public class SelectionState : BuildingManagerState {
                 UIEventAnnounceManager.Instance.AnnounceEvent("Cannot upgrade prerequisites not met", AnnounceEventType.Misc);
                 return;
             }
-            bool canUse = true;
-            List<ResourcePurchase> temp = selectedBuildingData.BuildingData.Tier1Cost.ToList();
-            for(int i = 0; i < selectedBuildingData.BuildingData.Tier1Cost.Count; i++) {
-                if (selectedBuildingData.BuildingTier == 0)
-                    temp[i].cost *= tier1UpgradeCost;
-                else if (selectedBuildingData.BuildingTier == 1)
-                    temp[i].cost *= tier2UpgradeCost;
-                else if (selectedBuildingData.BuildingTier > 1)//if is max teir can't uprgrade
-                    canUse = false;
-                if (!ResourceManagement.Instance.CanUseResource(temp[i]))//if doesn't have the resources can't upgrade
-                {
-                    canUse = false;
-                }
-                buildingManager.BuildingSelected(selectedBuildingData);
+
+            List<ResourcePurchase> temp = new List<ResourcePurchase>();
+            switch (selectedBuildingData.BuildingTier) {
+                case 1:
+                    temp = selectedBuildingData.BuildingData.Tier2Cost;
+                    break;
+                
+                case 2:
+                    temp = selectedBuildingData.BuildingData.Tier3Cost;
+                    break;
+                
+                case 3:
+                    temp = null;
+                    break;
             }
-            if (canUse) {
+
+            if (temp != null && ResourceManagement.Instance.UseResources(temp)) {
                 PlayBuildingPlaceParticles(selectedBuildingData.transform);
-                selectedBuildingData.Upgrade();
+                selectedBuildingData.Upgrade(temp);
                 ResourceManagement.Instance.UseResources(temp);
             }
         }

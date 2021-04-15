@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using Research;
 using UnityEngine;
@@ -10,7 +11,7 @@ using UnityEngine.Serialization;
 public class Building : MonoBehaviour {
     public delegate void EmptyEvent();
     public event EmptyEvent OnBuildingPlaced;
-
+    public ResourceTickFloatUI resourceTickFloatUI;
     [SerializeField] private BuildingType buildingType;
 
     [SerializeField] private BuildingData buildingData;
@@ -163,7 +164,7 @@ public class Building : MonoBehaviour {
         return canUpgrade && buildingData.CanUpgrade(buildingTier + 1);
     }
 
-    public void Upgrade() {
+    public void Upgrade(List<ResourcePurchase> resourcePurchase) {
         buildingTier++;
         buildingTier1.SetActive(buildingTier == 1);
         buildingTier2.SetActive(buildingTier == 2);
@@ -182,5 +183,43 @@ public class Building : MonoBehaviour {
                 storage.RecalculateStorage();
             }
         }
+        if (resourceTickFloatUI != null)
+            resourceTickFloatUI.TriggerTextEventResourcePurchaseList(false, resourcePurchase);
+    }
+
+    /// <summary>
+    /// Gets the amount that should be returned for a refund, uses a multiplier to get less than the purchase cost
+    /// </summary>
+    /// <returns>An amount to refund based on the tier of the building, uses an internal multiplier</returns>
+    public List<ResourcePurchase> GetRefundAmount() {
+        List<ResourcePurchase> resourcesUsed = new List<ResourcePurchase>();
+        switch (buildingTier) {
+            case 1:
+                 resourcesUsed.AddRange(buildingData.Tier1Cost);
+                break;
+            case 2:
+                 resourcesUsed.AddRange(buildingData.Tier1Cost);
+                 resourcesUsed.AddRange(buildingData.Tier2Cost);
+                break;
+            case 3:
+                resourcesUsed.AddRange(buildingData.Tier1Cost);
+                resourcesUsed.AddRange(buildingData.Tier2Cost);
+                resourcesUsed.AddRange(buildingData.Tier3Cost);
+                break;
+        }
+        
+        // Little copy dance to avoid modifying the values of the actual purchases
+        List<ResourcePurchase> copy = new List<ResourcePurchase>();
+        foreach (ResourcePurchase purchase in resourcesUsed) {
+            copy.Add(new ResourcePurchase(purchase.resourceType, purchase.cost));
+        }
+
+        float refundPercent = 0.75f;
+        foreach (ResourcePurchase purchase in copy) {
+            purchase.cost = Mathf.FloorToInt(purchase.cost * refundPercent);
+        }
+        if(resourceTickFloatUI != null)
+            resourceTickFloatUI.TriggerTextEventResourcePurchaseList(true, copy);
+        return copy;
     }
 }

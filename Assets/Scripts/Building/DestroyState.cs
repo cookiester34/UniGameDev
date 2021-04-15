@@ -25,6 +25,8 @@ public class DestroyState : BuildingManagerState {
                         UIEventAnnounceManager.Instance.AnnounceEvent("Cannot destroy the queen in a level", AnnounceEventType.Tutorial);
                         return;
                     }
+                    
+                    ResourceManagement.Instance.AddResources(building.GetRefundAmount());
                     var beforeDestroy = hit.collider.GetComponents<IBeforeDestroy>();
                     if (beforeDestroy != null && beforeDestroy.Length > 0) {
                         foreach (var destroy in beforeDestroy) {

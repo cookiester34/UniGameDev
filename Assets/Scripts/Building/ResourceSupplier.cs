@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Building component that allows a building to supply, or use a resource
@@ -25,6 +26,8 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
     public delegate void ProductionChangedHandler();
     public event ProductionChangedHandler ProductionChanged;
 
+    
+
     void Awake() {
         if (resource == null) {
             Debug.LogError("A resource supplier has been created with no resource set");
@@ -35,7 +38,7 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
             building.OnBuildingPlaced += () => resource.ModifyTickDrain(actualProductionAmount, productionTime);
             CalculateProductionAmount();
         } else {
-            resource.ModifyTickDrain(actualProductionAmount, productionTime);
+            resource.ModifyTickDrain(baseProductionAmount, productionTime);
         }
 
         SetCatergory();
@@ -67,13 +70,18 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
 
     public void CalculateProductionAmount()
     {
-        resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
-        if (building.numAssignedBees == 0) {
-            actualProductionAmount = 0;
-        } else {
-            actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.BuildingTier;
+        if (building != null) {
+            resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);
+            if (building.numAssignedBees == 0) {
+                actualProductionAmount = 0;
+            } else {
+                actualProductionAmount = (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) *
+                                         building.numAssignedBees * building.BuildingTier;
+            }
+
+            resource.ModifyTickDrain(actualProductionAmount, productionTime);
         }
-        resource.ModifyTickDrain(actualProductionAmount, productionTime);
+
         ProductionChanged?.Invoke();
     }
 
@@ -88,6 +96,23 @@ public class ResourceSupplier : MonoBehaviour, IBeforeDestroy {
         text += resource + ": " + increaseAmount + " per bee\n";
         return text;
     }
+
+    public Transform GetBuilding()
+    {
+        return building.transform;
+    }
+
+    public float GetProductionAmount()
+    {
+        if (building.numAssignedBees == 0)
+        {
+            return 0;
+        }
+        else
+        {
+            return (baseProductionAmount / building.BuildingData.maxNumberOfWorkers) * building.numAssignedBees * building.BuildingTier;
+        }
+    } 
 
     public void BeforeDestroy() {
         resource.ModifyTickDrain(actualProductionAmount * -1, productionTime);

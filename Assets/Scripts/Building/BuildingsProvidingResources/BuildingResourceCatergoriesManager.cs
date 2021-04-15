@@ -39,9 +39,16 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
         {
             if((int)r.Resource.resourceType == i)
             {
-                if (r.Resource.GetResourceTickAmount() > 0)
+                if (r.Resource.resourceType == ResourceType.Population)
                 {
-                    Debug.Log("hovering ui: " + i);
+                    var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
+                    if (glowEnabler != null)
+                    {
+                        glowEnabler.EnableGlow(true);
+                    }
+                }
+                else if (r.Resource.GetResourceTickAmount() > 0)
+                {
                     var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
                     if (glowEnabler != null)
                     {

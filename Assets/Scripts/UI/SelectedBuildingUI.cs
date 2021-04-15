@@ -47,6 +47,11 @@ public class SelectedBuildingUI : MonoBehaviour {
         _unassignBeeTooltip = unassignBeeButton.GetComponent<TooltipEnabler>();
         _upgradeBuildingTooltip = upgradeBuildingButton.GetComponent<TooltipEnabler>();
         BuildingManager.Instance.OnBuildingSelected += UpdateDisplay;
+        InvokeRepeating(nameof(UpdateDisplay), 0f, 1f);
+    }
+
+    private void UpdateDisplay() {
+        UpdateDisplay(_selectedBuilding);
     }
 
     private void UpdateDisplay(Building building) {
@@ -129,6 +134,6 @@ public class SelectedBuildingUI : MonoBehaviour {
         }
 
         _assignBeeTooltip.TooltipText = "Decreases the time between shots of the tower";
-        _unassignBeeTooltip.TooltipText = "Decreases the time between shots of the tower";
+        _unassignBeeTooltip.TooltipText = "Increases the time between shots of the tower";
     }
 }

@@ -47,8 +47,8 @@ public class ResourceUI : MonoBehaviour {
         currentResourceTickAmount = Mathf.Round(currentResourceTickAmount * mult) / mult;
 
         if (currentResourceTickAmount > 0)
-            _text.text += "   +" + currentResourceTickAmount + " per tick";
+            _text.text += "   +" + currentResourceTickAmount;
         else
-            _text.text += "   " + currentResourceTickAmount + " per tick";
+            _text.text += "   " + currentResourceTickAmount;
     }
 }
