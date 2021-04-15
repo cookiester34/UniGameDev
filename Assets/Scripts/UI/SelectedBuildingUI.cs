@@ -47,6 +47,11 @@ public class SelectedBuildingUI : MonoBehaviour {
         _unassignBeeTooltip = unassignBeeButton.GetComponent<TooltipEnabler>();
         _upgradeBuildingTooltip = upgradeBuildingButton.GetComponent<TooltipEnabler>();
         BuildingManager.Instance.OnBuildingSelected += UpdateDisplay;
+        InvokeRepeating(nameof(UpdateDisplay), 0f, 1f);
+    }
+
+    private void UpdateDisplay() {
+        UpdateDisplay(_selectedBuilding);
     }
 
     private void UpdateDisplay(Building building) {
