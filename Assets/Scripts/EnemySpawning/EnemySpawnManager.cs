@@ -44,7 +44,12 @@ public class EnemySpawnManager : MonoBehaviour
     public Seasons enemySpawnSeason = Seasons.Autumn;
 
     [HideInInspector]
-    public int waveNumber = 0;
+    public int waveNumber = 1;
+
+    /// <summary>
+    /// How many more wasps to spawn per wave
+    /// </summary>
+    private int waveHordeMultiplier = 3;
     public int liveWasps = 0;
 
     [Range(1,5)]
@@ -161,9 +166,9 @@ public class EnemySpawnManager : MonoBehaviour
         bool masterSet = false;
         Transform masterWasp = null;
         yield return new WaitForSeconds(1f);
-        if (Random.Range(0f, 100f) < 80f)
-        {
-            for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin, numberOfEnemiesSpawnableMax + waveNumber); i++)
+        if (Random.Range(0f, 100f) < 80f) {
+            float rangeModifier = waveNumber * waveHordeMultiplier;
+            for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
             {
                 GameObject wasp = Instantiate(enemyPrefab, building.position, Quaternion.identity);
                 waspGroupList[group].wasps.Add(wasp.transform);
