@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FactoryV1
+  m_Name: HoneyFactory
   m_Shader: {fileID: -6465566751694194690, guid: 17070b3721e970a49adcb5305c8bbc67,
     type: 3}
   m_ShaderKeywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE

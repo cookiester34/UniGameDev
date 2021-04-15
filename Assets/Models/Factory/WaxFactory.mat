@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: FactoryV2
+  m_Name: WaxFactory
   m_Shader: {fileID: -6465566751694194690, guid: 17070b3721e970a49adcb5305c8bbc67,
     type: 3}
   m_ShaderKeywords: _MASKMAP _NORMALMAP _NORMALMAP_TANGENT_SPACE
@@ -40,7 +40,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1E8131C6:
-        m_Texture: {fileID: 2800000, guid: 08779dcde9f7e354d99d3e25682af7b9, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0236dff85d7fc38459250e9586e79946, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_455C37C1:

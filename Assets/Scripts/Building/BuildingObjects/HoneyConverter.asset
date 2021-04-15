@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 3
   uiImage: {fileID: 21300000, guid: e751488fb77858f419b7b2dbc7568f47, type: 3}
-  buildingShape: 0
+  buildingShape: 3
   maxInstances: 1000
   description: Honey Converter - This building converts pollen into honey, that can
     then be used as food for your bees.
