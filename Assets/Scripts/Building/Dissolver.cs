@@ -8,6 +8,7 @@ public class Dissolver : MonoBehaviour {
     private float dissolve;
     private MaterialPropertyBlock _propertyBlock;
     private static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
+    private static readonly int DissolveAlpha = Shader.PropertyToID("_UseDissolveAlpha");
     private List<Renderer> toDissolve = new List<Renderer>();
 
     public void Setup(GameObject other) {
@@ -55,6 +56,7 @@ public class Dissolver : MonoBehaviour {
             mr.materials = mrs[i].materials;
             mr.GetPropertyBlock(_propertyBlock);
             _propertyBlock.SetFloat(Dissolve, dissolve);
+            _propertyBlock.SetFloat(DissolveAlpha, 1f);
             mr.SetPropertyBlock(_propertyBlock);
             toDissolve.Add(child.GetComponent<MeshRenderer>());
         }
