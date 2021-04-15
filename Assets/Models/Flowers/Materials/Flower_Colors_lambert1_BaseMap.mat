@@ -31,7 +31,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_455C37C1:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: e95a399aca9d19c49a1f7f4bcb286690, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_68DE0B3F:
@@ -43,7 +43,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_BA25113F:
-        m_Texture: {fileID: 2800000, guid: 5dde9ba2aec8c6e47823fa0089c630b6, type: 3}
+        m_Texture: {fileID: 2800000, guid: 522ea12b8c653a54c8efc1b85181b6ef, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:

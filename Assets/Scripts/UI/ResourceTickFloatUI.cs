@@ -52,22 +52,23 @@ public class ResourceTickFloatUI : MonoBehaviour
 
         foreach (ResourceSupplier i in suppliers)
         {
-            if (i.GetProductionAmount() > 0)
+            if (i.GetProductionAmount() > 0.05f || i.GetProductionAmount() < -0.05f)
             {
-                resourceInfoText.text += "+ " + i.GetProductionAmount() + "\n";
-                resourceInfoText.color = Color.green;
+                if (i.GetProductionAmount() > 0)
+                {
+                    resourceInfoText.text += "<color=green>" + "+ " + i.GetProductionAmount() + "</color>" + "\n";
+                }
+                else
+                {
+                    resourceInfoText.text += "<color=red>" + i.GetProductionAmount() + "</color>" + "\n";
+                }
+                canvas.position = i.GetBuilding().position;
+                pos = canvas.position;
+                newY = pos.y + heightStartPos;
+                canvas.gameObject.SetActive(true);
+                alpha = 1;
+                updateTextPos = true;
             }
-            else
-            {
-                resourceInfoText.text += "- " + i.GetProductionAmount() + "\n";
-                resourceInfoText.color = Color.red;
-            }
-            canvas.position = i.GetBuilding().position;
-            pos = canvas.position;
-            newY = pos.y + heightStartPos;
-            canvas.gameObject.SetActive(true);
-            alpha = 1;
-            updateTextPos = true;
         }
     }
 }
