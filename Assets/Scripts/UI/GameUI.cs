@@ -19,7 +19,9 @@ public class GameUI : MonoBehaviour {
     public void ShowGameOver() {
         gameOver.SetActive(true);
         foreach (GameObject o in hideOnGameOver) {
-            o.SetActive(false);
+            if (o != null) {
+                o.SetActive(false);
+            }
         }
     }
 

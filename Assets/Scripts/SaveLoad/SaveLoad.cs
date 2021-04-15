@@ -108,6 +108,9 @@ public static class SaveLoad {
 
         foreach (SavedBuilding savedBuilding in _currentSave.buildings) {
             var building = savedBuilding.Instantiate(loadedBees);
+            if (building.BuildingType == BuildingType.QueenBee) {
+                BeeManager.Instance.OnLoad(loadedBees);
+            }
             var position = building.transform.position;
             position.y += 10f;
             position.x += 0.1f;
@@ -122,7 +125,6 @@ public static class SaveLoad {
             }
         }
 
-        BeeManager.Instance.OnLoad(loadedBees);
 
         foreach (SavedTransform savedTransform in _currentSave.enemyBuildings) {
             GameObject go = Resources.Load<GameObject>(ResourceLoad.EnemyBuilding);

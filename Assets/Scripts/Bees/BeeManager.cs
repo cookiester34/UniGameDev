@@ -59,7 +59,7 @@ public class BeeManager : MonoBehaviour {
             Resource population = ResourceManagement.Instance.GetResource(ResourceType.Population);
             population.OnCurrentValueChanged -= OnPopulationChange;
 
-            if (CurrentSceneType.SceneType == SceneType.GameLevel) {
+            if (!ApplicationUtil.IsLoading && CurrentSceneType.SceneType == SceneType.GameLevel) {
                 GameUI.Instance.ShowGameOver();
             }
         }
@@ -160,6 +160,7 @@ public class BeeManager : MonoBehaviour {
     }
 
     public void OnLoad(List<Bee> bees) {
+        spawnQueue = 0;
         _bees = bees;
         _cachedPopulation = bees.Count;
     }
