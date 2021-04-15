@@ -6,6 +6,10 @@ public class TowerBuilding : Building
 {
     public GameObject projectile;
     public float projectileSpeed = 10f;
+    public float damage = 2f;
+    public float splashDamageDistance = 2f;
+    [Tooltip("Keep lower than Damage")]
+    public float splahDamageReduction = 1f;
 
     [Range(1,100)] //not sure on what the range values should be
     public int towerRange;
@@ -65,12 +69,31 @@ public class TowerBuilding : Building
     }
     public void Shoot()
     {
-        AudioManager.Instance.ModulateAudioSource(fireSound);
-        fireSound.Play();
-        GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
-        Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
-        temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
-        StartCoroutine(DestroyProjectile(temp, 5f));
+        if (enemiesInRange.Count > 0) {
+            AudioManager.Instance.ModulateAudioSource(fireSound);
+            fireSound.Play();
+            if (enemiesInRange[0] != null)
+            {
+                enemiesInRange[0].GetComponent<WaspAI>().TakeDamage(damage);
+
+
+                ///for visual effect now
+                GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
+                Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
+                temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
+                StartCoroutine(DestroyProjectile(temp, 5f));
+
+                ///play splash effect here
+                foreach (EnemySpawnManager.WaspGroup i in EnemySpawnManager.Instance.waspGroupList)
+                {
+                    foreach (Transform t in i.wasps)
+                    {
+                        if (Vector3.Distance(t.position, enemiesInRange[0].position) < splashDamageDistance)
+                            t.GetComponent<WaspAI>().TakeDamage(damage - splahDamageReduction);
+                    }
+                }
+            }
+        }
     }
 
     public override void AssignBee(Bee bee) {
