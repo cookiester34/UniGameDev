@@ -134,6 +134,6 @@ public class SelectedBuildingUI : MonoBehaviour {
         }
 
         _assignBeeTooltip.TooltipText = "Decreases the time between shots of the tower";
-        _unassignBeeTooltip.TooltipText = "Decreases the time between shots of the tower";
+        _unassignBeeTooltip.TooltipText = "Increases the time between shots of the tower";
     }
 }
