@@ -5090,11 +5090,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3113121313597104684}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4eb5944ca4dc93040abddae914e5dbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flip: 1
 --- !u!114 &4352199211806145268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5107,6 +5108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb5944ca4dc93040abddae914e5dbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flip: 0
 --- !u!208 &3377574483472450668
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -5135,6 +5137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb5944ca4dc93040abddae914e5dbbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flip: 0
 --- !u!114 &8943150528443218613
 MonoBehaviour:
   m_ObjectHideFlags: 0
