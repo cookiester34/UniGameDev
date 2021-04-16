@@ -12,7 +12,7 @@ public class Tooltip : MonoBehaviour {
     Vector3 min, max;
     RectTransform rect;
     [SerializeField] private Text _text;
-    float offset = 5f;
+    float offset = 1f;
  
 
     void Awake() {

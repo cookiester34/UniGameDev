@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class ResourceUI : MonoBehaviour {
     [SerializeField] private Resource resource;
-    private Color defaultColor = Color.white;
+    [SerializeField] private Color defaultColor = Color.white;
 
     private Text _text;
     // Start is called before the first frame update

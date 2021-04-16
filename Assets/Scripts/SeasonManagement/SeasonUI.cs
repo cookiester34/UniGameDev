@@ -4,25 +4,41 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
-public class SeasonUI : MonoBehaviour
-{
+[RequireComponent(typeof(Image))]
+public class SeasonUI : MonoBehaviour {
 
-    private Text _text;
-    private void Awake()
-    {
-        _text = GetComponent<Text>();
-    }
-    private void OnEnable()
-    {
-        SeasonManager.SeasonChange += UpdateUI;
-    }
-    private void OnDisable()
-    {
-        SeasonManager.SeasonChange -= UpdateUI;
+    [SerializeField] private Sprite springSprite;
+    [SerializeField] private Sprite summerSprite;
+    [SerializeField] private Sprite autumnSprite;
+    [SerializeField] private Sprite winterSprite;
+    private Image _image;
+
+    private void Awake() {
+        _image = GetComponent<Image>();
+        UpdateUi();
     }
 
-    void UpdateUI()
-    {
-        _text.text =SeasonManager.Instance.GetCurrentSeason().ToString();
+    private void OnEnable() {
+        SeasonManager.SeasonChange += UpdateUi;
+    }
+    private void OnDisable() {
+        SeasonManager.SeasonChange -= UpdateUi;
+    }
+
+    void UpdateUi() {
+        switch (SeasonManager.Instance.currentSeason) {
+            case Seasons.Spring:
+                _image.sprite = springSprite;
+                break;
+            case Seasons.Summer:
+                _image.sprite = summerSprite;
+                break;
+            case Seasons.Autumn:
+                _image.sprite = autumnSprite;
+                break;
+            case Seasons.Winter:
+                _image.sprite = winterSprite;
+                break;
+        }
     }
 }

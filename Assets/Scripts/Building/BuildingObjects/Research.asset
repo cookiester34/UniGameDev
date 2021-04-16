@@ -16,7 +16,8 @@ MonoBehaviour:
   uiImage: {fileID: 21300000, guid: e1b9ccda2fdf2e64c9d88835a9370f7e, type: 3}
   buildingShape: 4
   maxInstances: 1000
-  description: Building description here!
+  description: Allows researching of new techniques allowing for buildings to be
+    upgraded
   maxNumberOfWorkers: 0
   tier1RequiredResearch: []
   tier2RequiredResearch: []
