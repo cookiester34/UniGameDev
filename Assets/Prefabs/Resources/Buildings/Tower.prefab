@@ -5364,10 +5364,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8c80ac3d5ca64eb5298619435ca1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowText: 1
   canvas: {fileID: 1739757142592171007}
   resourceInfoText1: {fileID: 519670811906683652}
   resourceInfoText2: {fileID: 7851893085356513367}
+  fillRadial: {fileID: 0}
   heightStartPos: 1
   suppliers: []
 --- !u!114 &7006334519606629488
@@ -6381,7 +6381,7 @@ MonoBehaviour:
   numAssignedBees: 0
   projectile: {fileID: 7277737900402773344, guid: e03c7411cb7bd084cb86a6a334a9ada6,
     type: 3}
-  projectileSpeed: 10
+  projectileSpeed: 20
   damage: 2
   splashDamageDistance: 2
   splahDamageReduction: 1

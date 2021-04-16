@@ -39,8 +39,11 @@ public class ResourceTickFloatUI : MonoBehaviour
             }
         }
 
-        if (fillRadial.fillAmount >= 1 && fillRadial != null)
-            TriggerResourceText();
+        if (fillRadial != null)
+        {
+            if (fillRadial.fillAmount >= 1)
+                TriggerResourceText();
+        }
     }
 
     public void TriggerResourceText()
