@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 using UnityEngine.AI;
 
 [RequireComponent(typeof(Health))]
@@ -34,14 +36,14 @@ public class WaspAI : MonoBehaviour
 
     public EnemySpawnManager spawnManager;
 
-    private Renderer waspRenderer;
+    private List<Renderer> waspRenderers;
 
     private float _soundLoopBasePitch;
     private float _soundLoopVolume;
 
     void Awake() 
     {
-        waspRenderer = GetComponentInChildren<Renderer>();
+        waspRenderers = GetComponentsInChildren<Renderer>().ToList();
         health = GetComponentInParent<Health>();
         _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
         _agent = GetComponent<NavMeshAgent>();
@@ -66,16 +68,12 @@ public class WaspAI : MonoBehaviour
     }
 
 
-    void FixedUpdate() 
-    {
-        if (FogOfWarBounds.instance.IsWaspVisible(transform.position))
-        {
-            waspRenderer.enabled = true;
+    void FixedUpdate() {
+        bool visible = FogOfWarBounds.instance.IsWaspVisible(transform.position);
+        foreach (Renderer renderer1 in waspRenderers) {
+            renderer1.enabled = visible;
         }
-        else
-        {
-            waspRenderer.enabled = false;
-        }
+
         if (masterWasp)
         {
             sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);

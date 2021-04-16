@@ -5787,7 +5787,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForGodSakePleaseWork
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1960255042952879418, guid: be307c6015411334f9260c3edb1d97dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1960255042952879418, guid: be307c6015411334f9260c3edb1d97dc, type: 3}
+    - {fileID: -622434666032315455, guid: be307c6015411334f9260c3edb1d97dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: be307c6015411334f9260c3edb1d97dc, type: 3}
 --- !u!1 &3898967599459751736 stripped
 GameObject:
