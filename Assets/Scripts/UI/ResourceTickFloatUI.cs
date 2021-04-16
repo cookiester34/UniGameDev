@@ -7,7 +7,9 @@ public class ResourceTickFloatUI : MonoBehaviour
 {
     public bool allowText = true;
     public Transform canvas;
-    public Text resourceInfoText;
+    public Text resourceInfoText1;
+    public Text resourceInfoText2;
+
     bool updateTextPos = false;
     float alpha = 1;
     Vector3 pos;
@@ -35,36 +37,59 @@ public class ResourceTickFloatUI : MonoBehaviour
             newY += 0.05f;
             canvas.position = new Vector3(pos.x, newY, pos.z);
 
-            //alpha = Mathf.Lerp(1, 0, 3000);
-            //resourceInfoText.color = new Color(resourceInfoText.color.r, resourceInfoText.color.g, resourceInfoText.color.b, alpha);
+            alpha -= 0.03f;
+            resourceInfoText1.color = new Color(resourceInfoText1.color.r, resourceInfoText1.color.g, resourceInfoText1.color.b, alpha);
+            resourceInfoText2.color = new Color(resourceInfoText2.color.r, resourceInfoText2.color.g, resourceInfoText2.color.b, alpha);
 
-            //if ((newY - pos.y) >= 5)
-            //{
-            //    updateTextPos = false;
-            //    //canvas.gameObject.SetActive(false);
-            //}
+            if (alpha <= 0)
+            {
+                updateTextPos = false;
+                //canvas.gameObject.SetActive(false);
+            }
         }
     }
 
     void TriggerResourceText()
     {
         updateTextPos = false;
-        resourceInfoText.text = "";
+        resourceInfoText1.text = "";
+        resourceInfoText2.text = "";
 
+        bool secondUI = false;
         foreach (ResourceSupplier i in suppliers)
         {
             if (i != null)
             {
                 if (i.GetProductionAmount() > 0.005f || i.GetProductionAmount() < -0.005f)
                 {
-                    if (i.GetProductionAmount() > 0)
+                    if (!secondUI)
                     {
-                        resourceInfoText.text += "<color=green>" + "+ " + i.GetProductionAmount() + "</color>" + "\n";
+                        if (i.GetProductionAmount() > 0)
+                        {
+                            resourceInfoText1.text += "+ " + i.GetProductionAmount();
+                            resourceInfoText1.color = Color.green;
+                        }
+                        else
+                        {
+                            resourceInfoText1.text += +i.GetProductionAmount();
+                            resourceInfoText1.color = Color.red;
+                        }
                     }
                     else
                     {
-                        resourceInfoText.text += "<color=red>" + i.GetProductionAmount() + "</color>" + "\n";
+                        if (i.GetProductionAmount() > 0)
+                        {
+                            resourceInfoText2.color = Color.green;
+                            resourceInfoText2.text += "+ " + i.GetProductionAmount();
+                        }
+                        else
+                        {
+                            resourceInfoText2.color = Color.red;
+                            resourceInfoText2.text += +i.GetProductionAmount();
+                        }
                     }
+
+
                     canvas.position = i.GetBuilding().position;
                     pos = canvas.position;
                     newY = pos.y + heightStartPos;
@@ -75,24 +100,45 @@ public class ResourceTickFloatUI : MonoBehaviour
                 if (startPos == null)
                     startPos = i.GetBuilding().position;
             }
+            secondUI = true;
         }
     }
 
     public void TriggerTextEventResourcePurchaseList(bool isPositive, List<ResourcePurchase> resourcePurchaseList)
     {
         updateTextPos = false;
-        resourceInfoText.text = "";
+        resourceInfoText1.text = "";
+        bool secondUI = false;
 
         foreach (ResourcePurchase i in resourcePurchaseList)
         {
-            if (isPositive)
+            if (!secondUI)
             {
-                resourceInfoText.text += "<color=green>" + "+ " + i.cost + "</color>" + "\n";
+                if (isPositive)
+                {
+                    resourceInfoText1.text += "+ " + i.cost;
+                    resourceInfoText1.color = Color.green;
+                }
+                else
+                {
+                    resourceInfoText1.text += +i.cost;
+                    resourceInfoText1.color = Color.red;
+                }
             }
             else
             {
-                resourceInfoText.text += "<color=red>" + i.cost + "</color>" + "\n";
+                if (isPositive)
+                {
+                    resourceInfoText2.text += "+ " + i.cost;
+                    resourceInfoText2.color = Color.green;
+                }
+                else
+                {
+                    resourceInfoText2.text += +i.cost;
+                    resourceInfoText2.color = Color.red;
+                }
             }
+            secondUI = true;
         }
         canvas.position = startPos;
         pos = canvas.position;
