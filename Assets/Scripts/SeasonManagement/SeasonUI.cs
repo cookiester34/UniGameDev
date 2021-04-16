@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 [RequireComponent(typeof(Image))]
 public class SeasonUI : MonoBehaviour {
@@ -15,30 +12,30 @@ public class SeasonUI : MonoBehaviour {
 
     private void Awake() {
         _image = GetComponent<Image>();
-        UpdateUi();
+        // UpdateUi();
     }
 
-    private void OnEnable() {
-        SeasonManager.SeasonChange += UpdateUi;
-    }
-    private void OnDisable() {
-        SeasonManager.SeasonChange -= UpdateUi;
-    }
-
-    void UpdateUi() {
-        switch (SeasonManager.Instance.currentSeason) {
-            case Seasons.Spring:
-                _image.sprite = springSprite;
-                break;
-            case Seasons.Summer:
-                _image.sprite = summerSprite;
-                break;
-            case Seasons.Autumn:
-                _image.sprite = autumnSprite;
-                break;
-            case Seasons.Winter:
-                _image.sprite = winterSprite;
-                break;
-        }
-    }
+    // private void OnEnable() {
+    //     SeasonManager.SeasonChange += UpdateUi;
+    // }
+    // private void OnDisable() {
+    //     SeasonManager.SeasonChange -= UpdateUi;
+    // }
+    //
+    // void UpdateUi() {
+    //     switch (SeasonManager.Instance.currentSeason) {
+    //         case Seasons.Spring:
+    //             _image.sprite = springSprite;
+    //             break;
+    //         case Seasons.Summer:
+    //             _image.sprite = summerSprite;
+    //             break;
+    //         case Seasons.Autumn:
+    //             _image.sprite = autumnSprite;
+    //             break;
+    //         case Seasons.Winter:
+    //             _image.sprite = winterSprite;
+    //             break;
+    //     }
+    // }
 }
