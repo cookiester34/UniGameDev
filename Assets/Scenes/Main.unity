@@ -1859,6 +1859,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0e8568d5670728499ec70e1b717969f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  SnowStorm: {fileID: 6333237575503440945, guid: 59e3539de26aa704a9217cefe145025c,
+    type: 3}
 --- !u!4 &791643661
 Transform:
   m_ObjectHideFlags: 0
