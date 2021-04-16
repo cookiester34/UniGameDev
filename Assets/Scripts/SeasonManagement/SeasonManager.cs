@@ -13,6 +13,11 @@ public class SeasonManager : MonoBehaviour
     {
         get
         {
+            if (_instance == null)
+            {
+                GameObject go = Resources.Load<GameObject>(ResourceLoad.SeasonSingleton);
+                Instantiate(go);
+            }
             return _instance;
         }
     }
@@ -48,12 +53,13 @@ public class SeasonManager : MonoBehaviour
 
     private void Start()
     {
+        seasonLength = 5;
         UpdateSeason(Seasons.Winter);
         seasonTimer = seasonLength;
         SeasonChange?.Invoke();
-    }
+}
 
-    private void Update()
+private void Update()
     {
         if (seasonTimer <= 0)
         {
