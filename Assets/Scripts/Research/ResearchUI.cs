@@ -55,6 +55,6 @@ public class ResearchUI : UiHoverable {
 
     public override void OnPointerEnter(PointerEventData eventData) {
         base.OnPointerEnter(eventData);
-        descriptionText.text = _researchObject.Description;
+        descriptionText.text = _researchObject.ResearchName + ":\n\n" + _researchObject.Description;
     }
 }

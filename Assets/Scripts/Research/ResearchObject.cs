@@ -108,7 +108,7 @@ namespace Research {
         }
 
         public string GetHoverText() {
-            string hoverText = researchName + "\n";
+            string hoverText = "";
             foreach (ResourcePurchase purchase in resources) {
                 hoverText = hoverText + purchase.resourceType + ": " + purchase.cost + " ";
             }

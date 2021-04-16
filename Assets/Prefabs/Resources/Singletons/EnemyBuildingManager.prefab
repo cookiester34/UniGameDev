@@ -45,8 +45,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemySpawnSeason: 2
   waveNumber: 0
-  numberOfEnemiesSpawnableMin: 1
-  numberOfEnemiesSpawnableMax: 5
+  liveWasps: 0
+  numberOfEnemiesSpawnableMin: 5
+  numberOfEnemiesSpawnableMax: 7
   enemyBuildingsList: []
   enemyPrefab: {fileID: 326437159731175180, guid: 2601198968456624192f4cf64c70635c,
     type: 3}

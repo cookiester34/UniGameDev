@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 2
   uiImage: {fileID: 21300000, guid: 2185d591c99a60f42a3f9d46b6cd146a, type: 3}
-  buildingShape: 0
+  buildingShape: 3
   maxInstances: 1000
   description: Wax Converter - This building converts pollen into wax. Wax is used
     as a resource to build new buildings.

@@ -45,6 +45,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   messageBoxPrefab: {fileID: 2302360476238097051, guid: 8d916cdb612eb1e4b8e53c00e2036a08,
     type: 3}
-  miscSprite: {fileID: 21300000, guid: 43749a98857b2ae4b95250083cf38a10, type: 3}
+  miscSprite: {fileID: 21300000, guid: 3fa0b764602828c40ad6ab300ef7b178, type: 3}
   tutSprite: {fileID: 21300000, guid: e1b9ccda2fdf2e64c9d88835a9370f7e, type: 3}
   alertSprite: {fileID: 21300000, guid: 6d39ab8618a4bd44ea6341a533bc7997, type: 3}
