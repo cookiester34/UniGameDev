@@ -5,6 +5,7 @@
     /// </summary>
     public static class ResourceLoad {
         public const string ResourceSingleton = "Singletons/ResourceManager";
+        public const string InputBlockerSingleton = "Singletons/InputBlocker";
         public const string ResearchSingleton = "Singletons/ResearchManager";
         public const string BeeSingleton = "Singletons/QueenBeeBuilding";
         public const string BuildingSingleton = "Singletons/BuildingManager";
