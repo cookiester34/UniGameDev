@@ -41,7 +41,7 @@ public class WaspAI : MonoBehaviour
 
     void Awake() 
     {
-        waspRenderer = GetComponent<Renderer>();
+        waspRenderer = GetComponentInChildren<Renderer>();
         health = GetComponentInParent<Health>();
         _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
         _agent = GetComponent<NavMeshAgent>();

@@ -41,10 +41,9 @@ public class SeasonManager : MonoBehaviour
 
     private void Start()
     {
-        currentSeason = Seasons.Spring;
+        UpdateSeason(Seasons.Winter);
         seasonTimer = seasonLength;
-        if (SeasonChange != null)
-            SeasonChange();
+        SeasonChange?.Invoke();
     }
 
     private void Update()
