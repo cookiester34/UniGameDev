@@ -5205,10 +5205,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8c80ac3d5ca64eb5298619435ca1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowText: 1
   canvas: {fileID: 8335549748182679291}
   resourceInfoText1: {fileID: 4814245080390999621}
   resourceInfoText2: {fileID: 1554645178357701948}
+  fillRadial: {fileID: 8401956813245173125}
   heightStartPos: 3
   suppliers:
   - {fileID: 5742075351067721524}
@@ -5875,6 +5875,11 @@ PrefabInstance:
       propertyPath: supplier
       value: 
       objectReference: {fileID: 5742075351067721524}
+    - target: {fileID: 78356603631741423, guid: e83b57c278b10ca41a2445a4fd23c21e,
+        type: 3}
+      propertyPath: resourceTickFloatUI
+      value: 
+      objectReference: {fileID: 2050311520645538595}
     - target: {fileID: 3071064469484128027, guid: e83b57c278b10ca41a2445a4fd23c21e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -5987,6 +5992,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83b57c278b10ca41a2445a4fd23c21e, type: 3}
+--- !u!114 &8401956813245173125 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7559670000160085053, guid: e83b57c278b10ca41a2445a4fd23c21e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2049393996079225272}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3958228829414235811 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3071064469484128027, guid: e83b57c278b10ca41a2445a4fd23c21e,
@@ -6261,6 +6278,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3835914648279438368, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
+      propertyPath: resourceTickFloatUI
+      value: 
+      objectReference: {fileID: 2050311520645538595}
     - target: {fileID: 5672234629467394254, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_AnchorMax.y

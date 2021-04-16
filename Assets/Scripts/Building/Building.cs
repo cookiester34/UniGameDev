@@ -218,8 +218,10 @@ public class Building : MonoBehaviour {
         foreach (ResourcePurchase purchase in copy) {
             purchase.cost = Mathf.FloorToInt(purchase.cost * refundPercent);
         }
-        if(resourceTickFloatUI != null)
+        if (resourceTickFloatUI != null)
+        {
             resourceTickFloatUI.TriggerTextEventResourcePurchaseList(true, copy);
+        }
         return copy;
     }
 }

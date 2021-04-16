@@ -81,7 +81,7 @@ public class TowerBuilding : Building
                 GameObject temp = Instantiate(projectile, transform.position + new Vector3(0, 1, 0), Quaternion.identity);
                 Vector3 dir = (transform.position + new Vector3(0, 1, 0) - enemiesInRange[0].position).normalized;
                 temp.GetComponent<Rigidbody>().AddForce(-dir * projectileSpeed, ForceMode.Impulse);
-                StartCoroutine(DestroyProjectile(temp, 5f));
+                StartCoroutine(DestroyProjectile(temp, 3f));
 
                 ///play splash effect here
                 foreach (EnemySpawnManager.WaspGroup i in EnemySpawnManager.Instance.waspGroupList)
