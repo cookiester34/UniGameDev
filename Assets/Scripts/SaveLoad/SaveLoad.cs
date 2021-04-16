@@ -29,6 +29,8 @@ public static class SaveLoad {
     /// </summary>
     private static Save _currentSave;
 
+    private static bool _isLoading = false;
+
     /// <summary>
     /// Using the current scene generates a save and stores it
     /// </summary>
@@ -79,22 +81,26 @@ public static class SaveLoad {
     /// </summary>
     /// <param name="savename">Name of the save to load</param>
     public static void Load(string savename) {
-        CurrentSceneType.SceneType = SceneType.GameLevel;
-        string savePath = Path.Combine(saveDirectoryPath, savename + saveExtension);
-        string json;
-        if (File.Exists(savePath)) {
-            json = File.ReadAllText(savePath);
-        } else {
-            // missing, most likely a save provided with the game
-            json = Resources.Load<TextAsset>("Saves/" + savename).text;
-        }
-        Save save = JsonUtility.FromJson<Save>(json);
-        _currentSave = save;
+        if (!_isLoading) {
+            _isLoading = true;
+            CurrentSceneType.SceneType = SceneType.GameLevel;
+            string savePath = Path.Combine(saveDirectoryPath, savename + saveExtension);
+            string json;
+            if (File.Exists(savePath)) {
+                json = File.ReadAllText(savePath);
+            } else {
+                // missing, most likely a save provided with the game
+                json = Resources.Load<TextAsset>("Saves/" + savename).text;
+            }
 
-        // Have to re-register on every load for reasons unbeknown to me, thought registering once in constructor would
-        // work but it is somehow cleared
-        SceneManagement.Instance.SceneLoaded += SceneLoaded;
-        SceneManagement.Instance.LoadScene(save.terrainSceneName);
+            Save save = JsonUtility.FromJson<Save>(json);
+            _currentSave = save;
+
+            // Have to re-register on every load for reasons unbeknown to me, thought registering once in constructor would
+            // work but it is somehow cleared
+            SceneManagement.Instance.SceneLoaded += SceneLoaded;
+            SceneManagement.Instance.LoadScene(save.terrainSceneName);
+        }
     }
 
     /// <summary>
@@ -153,6 +159,8 @@ public static class SaveLoad {
         Transform cameraTransform = gameCamera.transform;
         cameraTransform.position = _currentSave.cameraTransform.Position;
         cameraTransform.rotation = _currentSave.cameraTransform.Rotation;
+
+        _isLoading = false;
     }
 
     /// <summary>

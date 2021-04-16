@@ -11,7 +11,7 @@ public static class Settings {
     public static BoolSetting CanMousePan = new BoolSetting("CanMousePan", true);
     public static BoolSetting CanMouseAccelerate = new BoolSetting("CanMousePanAccelerate", false);
     public static FloatSetting MasterVolume = new FloatSetting("MasterVolume", 1f);
-    public static FloatSetting MusicVolume = new FloatSetting("MusicVolume", 0.11f);
+    public static FloatSetting MusicVolume = new FloatSetting("MusicVolume", 0.3f);
     public static FloatSetting EffectsVolume = new FloatSetting("EffectsVolume", 1f);
     public static FloatSetting UiVolume = new FloatSetting("UIVolume", 1f);
     public static IntSetting Quality = new IntSetting("Quality", 5);

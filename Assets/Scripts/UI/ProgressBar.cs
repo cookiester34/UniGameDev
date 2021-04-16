@@ -32,6 +32,7 @@ public class ProgressBar : MonoBehaviour {
     /// </summary>
     public float fillSpeed = 0.5f;
 
+
     public float TargetProgress {
         get => _targetProgress;
         set => _targetProgress = value;

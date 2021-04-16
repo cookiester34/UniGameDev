@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.UI;
 using Util;
 
 public class SeasonManager : MonoBehaviour
@@ -33,11 +34,17 @@ public class SeasonManager : MonoBehaviour
     public static event SeasonChanged SeasonChange;
     float seasonTimer;
     public int seasonLength;
-
+    
     public GameObject springEffect;
     public GameObject summerEffect;
     public GameObject autumnEffect;
     public GameObject winterEffect;
+
+    [SerializeField] private Image seasonDisplay;
+    [SerializeField] private Sprite springSprite;
+    [SerializeField] private Sprite summerSprite;
+    [SerializeField] private Sprite autumnSprite;
+    [SerializeField] private Sprite winterSprite;
 
     private void Start()
     {
@@ -65,16 +72,20 @@ public class SeasonManager : MonoBehaviour
         {
             case Seasons.Spring:
                 currentSeason = Seasons.Summer;
+                seasonDisplay.sprite = summerSprite;
                 break;
             case Seasons.Summer:
                 currentSeason = Seasons.Autumn;
                 UIEventAnnounceManager.Instance.AnnounceEvent("Autumn begins, man the defenses", AnnounceEventType.Alert);
+                seasonDisplay.sprite = autumnSprite;
                 break;
             case Seasons.Autumn:
                 currentSeason = Seasons.Winter;
+                seasonDisplay.sprite = winterSprite;
                 break;
             case Seasons.Winter:
                 currentSeason = Seasons.Spring;
+                seasonDisplay.sprite = springSprite;
                 break;
         }
 

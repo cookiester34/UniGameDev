@@ -858,6 +858,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -6610846214886882776, guid: be307c6015411334f9260c3edb1d97dc,
         type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6610846214886882776, guid: be307c6015411334f9260c3edb1d97dc,
+        type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 79db67c96c82b584685b25cea4a8e898, type: 2}
@@ -866,7 +871,24 @@ PrefabInstance:
       propertyPath: m_Name
       value: ForGodSakePleaseWork
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1960255042952879418, guid: be307c6015411334f9260c3edb1d97dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8438702404640121169, guid: be307c6015411334f9260c3edb1d97dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8448467313924267395, guid: be307c6015411334f9260c3edb1d97dc,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1960255042952879418, guid: be307c6015411334f9260c3edb1d97dc, type: 3}
+    - {fileID: -622434666032315455, guid: be307c6015411334f9260c3edb1d97dc, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: be307c6015411334f9260c3edb1d97dc, type: 3}
 --- !u!1 &5012289450380710577 stripped
 GameObject:

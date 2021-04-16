@@ -180,7 +180,7 @@ public class Building : MonoBehaviour {
         var storages = GetComponentsInChildren<ResourceStorage>();
         if (storages != null && storages.Length > 0) {
             foreach (ResourceStorage storage in storages) {
-                storage.RecalculateStorage();
+                storage.RecalculateStorage(this);
             }
         }
         if (resourceTickFloatUI != null)
@@ -218,8 +218,10 @@ public class Building : MonoBehaviour {
         foreach (ResourcePurchase purchase in copy) {
             purchase.cost = Mathf.FloorToInt(purchase.cost * refundPercent);
         }
-        if(resourceTickFloatUI != null)
+        if (resourceTickFloatUI != null)
+        {
             resourceTickFloatUI.TriggerTextEventResourcePurchaseList(true, copy);
+        }
         return copy;
     }
 }

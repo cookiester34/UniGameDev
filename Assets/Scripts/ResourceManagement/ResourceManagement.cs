@@ -11,8 +11,6 @@ public class ResourceManagement : MonoBehaviour {
     [Range(0,30)]
     public int resourceTickTime;
 
-    public UnityEvent resourceTickEvent;
-
     /// <summary>
     /// Singleton instance
     /// </summary>
@@ -29,9 +27,6 @@ public class ResourceManagement : MonoBehaviour {
         }
 
         _instance = this;
-
-        if (resourceTickEvent == null)
-            resourceTickEvent = new UnityEvent();
     }
 
     public static ResourceManagement Instance {
@@ -136,7 +131,6 @@ public class ResourceManagement : MonoBehaviour {
             }
             i.ResourceCapReached();
         }
-        resourceTickEvent.Invoke();
     }
 
     /// <summary>

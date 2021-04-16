@@ -4994,7 +4994,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8c80ac3d5ca64eb5298619435ca1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowText: 1
   canvas: {fileID: 9107234170697402057}
   resourceInfoText1: {fileID: 2129469494866663517}
   resourceInfoText2: {fileID: 8186087585109734056}
@@ -5725,6 +5724,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3835914648279438368, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
+      propertyPath: resourceTickFloatUI
+      value: 
+      objectReference: {fileID: 7760608993692719547}
     - target: {fileID: 5672234629467394254, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_AnchorMax.y

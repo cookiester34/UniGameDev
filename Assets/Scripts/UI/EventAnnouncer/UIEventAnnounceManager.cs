@@ -8,7 +8,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 {
 	private static UIEventAnnounceManager inst;
 	public UIAnnounceMessageBox messageBoxPrefab;
-	int maxMessageBoxes = 3; //change this depending on how screen space works in the final project
+	int maxMessageBoxes = 5; //change this depending on how screen space works in the final project
 	List<UIAnnounceMessageBox> messageBoxes = new List<UIAnnounceMessageBox>(); //lists all active message boxes
 	private GameObject _eventFitter;
 

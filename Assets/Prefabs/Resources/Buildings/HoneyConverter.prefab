@@ -140,10 +140,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4af8c80ac3d5ca64eb5298619435ca1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  allowText: 1
   canvas: {fileID: 7328716168992391192}
   resourceInfoText1: {fileID: 262040035553961133}
   resourceInfoText2: {fileID: 7869773745669726359}
+  fillRadial: {fileID: 399284243366855092}
   heightStartPos: 1
   suppliers:
   - {fileID: 4088913957561633906}
@@ -5989,6 +5989,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3835914648279438368, guid: 9802f137e978aee4e968172e9a65ada5,
+        type: 3}
+      propertyPath: resourceTickFloatUI
+      value: 
+      objectReference: {fileID: 3566646468211015417}
     - target: {fileID: 5672234629467394254, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -6098,15 +6103,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7395030001042916111}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &3930296320170964270 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5776811238853293601, guid: f6793ac79d0c36c4fb95fcbad03a874c,
-    type: 3}
-  m_PrefabInstance: {fileID: 7395030001042916111}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8733064238404812335 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2275020662974987552, guid: f6793ac79d0c36c4fb95fcbad03a874c,
+    type: 3}
+  m_PrefabInstance: {fileID: 7395030001042916111}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &3930296320170964270 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5776811238853293601, guid: f6793ac79d0c36c4fb95fcbad03a874c,
     type: 3}
   m_PrefabInstance: {fileID: 7395030001042916111}
   m_PrefabAsset: {fileID: 0}
@@ -6134,6 +6139,11 @@ PrefabInstance:
       propertyPath: supplier
       value: 
       objectReference: {fileID: 4088913957561633906}
+    - target: {fileID: 78356603631741423, guid: e83b57c278b10ca41a2445a4fd23c21e,
+        type: 3}
+      propertyPath: resourceTickFloatUI
+      value: 
+      objectReference: {fileID: 3566646468211015417}
     - target: {fileID: 3071064469484128027, guid: e83b57c278b10ca41a2445a4fd23c21e,
         type: 3}
       propertyPath: m_Pivot.x
@@ -6246,15 +6256,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e83b57c278b10ca41a2445a4fd23c21e, type: 3}
---- !u!1 &3501775698474236833 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6772027739237264936, guid: e83b57c278b10ca41a2445a4fd23c21e,
+--- !u!114 &399284243366855092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7559670000160085053, guid: e83b57c278b10ca41a2445a4fd23c21e,
     type: 3}
   m_PrefabInstance: {fileID: 7882386939128763785}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &5187374869295010450 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3071064469484128027, guid: e83b57c278b10ca41a2445a4fd23c21e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7882386939128763785}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3501775698474236833 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6772027739237264936, guid: e83b57c278b10ca41a2445a4fd23c21e,
     type: 3}
   m_PrefabInstance: {fileID: 7882386939128763785}
   m_PrefabAsset: {fileID: 0}

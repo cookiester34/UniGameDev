@@ -478,7 +478,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5dedf3c8c337b184088579a997b00529, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7bf0b5f493def9f45a6f269409e16164, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1492,7 +1492,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 72acafee8ec37574a854de5826a63793, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f910b239ab1dbf41b338d60050c375a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1635,7 +1635,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8512f6f6c5c5b0e43a1ae54183b4d619, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6effb2ef8ce9724e8409e879862337b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3491,6 +3491,12 @@ PrefabInstance:
       propertyPath: m_FontData.m_Font
       value: 
       objectReference: {fileID: 12800000, guid: ec47dad34802e36429d4b0f01a36772c,
+        type: 3}
+    - target: {fileID: 2359239522514317881, guid: fa09529425fe38042a2dd34eddd08042,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: a5aca004202507c4881919e5341fcb12,
         type: 3}
     - target: {fileID: 2359239522515489661, guid: fa09529425fe38042a2dd34eddd08042,
         type: 3}

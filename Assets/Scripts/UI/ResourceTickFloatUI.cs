@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ResourceTickFloatUI : MonoBehaviour
 {
-    public bool allowText = true;
     public Transform canvas;
     public Text resourceInfoText1;
     public Text resourceInfoText2;
+    public Image fillRadial;
 
     bool updateTextPos = false;
     float alpha = 1;
@@ -19,15 +19,6 @@ public class ResourceTickFloatUI : MonoBehaviour
 
     public List<ResourceSupplier> suppliers = new List<ResourceSupplier>();
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (allowText)
-        {
-            ResourceManagement.Instance.resourceTickEvent.AddListener(TriggerResourceText);
-            canvas.gameObject.SetActive(false);
-        }
-    }
 
     // Update is called once per frame
     void FixedUpdate()
@@ -47,10 +38,17 @@ public class ResourceTickFloatUI : MonoBehaviour
                 //canvas.gameObject.SetActive(false);
             }
         }
+
+        if (fillRadial != null)
+        {
+            if (fillRadial.fillAmount >= 1)
+                TriggerResourceText();
+        }
     }
 
-    void TriggerResourceText()
+    public void TriggerResourceText()
     {
+        Debug.Log("triggered");
         updateTextPos = false;
         resourceInfoText1.text = "";
         resourceInfoText2.text = "";
@@ -106,22 +104,21 @@ public class ResourceTickFloatUI : MonoBehaviour
 
     public void TriggerTextEventResourcePurchaseList(bool isPositive, List<ResourcePurchase> resourcePurchaseList)
     {
-        updateTextPos = false;
-        resourceInfoText1.text = "";
-        bool secondUI = false;
 
+        updateTextPos = false;
+        bool secondUI = false;
         foreach (ResourcePurchase i in resourcePurchaseList)
         {
             if (!secondUI)
             {
                 if (isPositive)
                 {
-                    resourceInfoText1.text += "+ " + i.cost;
+                    resourceInfoText1.text = "+ " + i.cost;
                     resourceInfoText1.color = Color.green;
                 }
                 else
                 {
-                    resourceInfoText1.text += +i.cost;
+                    resourceInfoText1.text = i.cost.ToString();
                     resourceInfoText1.color = Color.red;
                 }
             }
@@ -129,22 +126,23 @@ public class ResourceTickFloatUI : MonoBehaviour
             {
                 if (isPositive)
                 {
-                    resourceInfoText2.text += "+ " + i.cost;
+                    resourceInfoText2.text = "+ " + i.cost;
                     resourceInfoText2.color = Color.green;
                 }
                 else
                 {
-                    resourceInfoText2.text += +i.cost;
+                    resourceInfoText2.text = i.cost.ToString();
                     resourceInfoText2.color = Color.red;
                 }
             }
+            
             secondUI = true;
+            canvas.position = startPos;
+            pos = canvas.position;
+            newY = pos.y + heightStartPos;
+            canvas.gameObject.SetActive(true);
+            alpha = 1;
+            updateTextPos = true;
         }
-        canvas.position = startPos;
-        pos = canvas.position;
-        newY = pos.y + heightStartPos;
-        canvas.gameObject.SetActive(true);
-        alpha = 1;
-        updateTextPos = true;
     }
 }
