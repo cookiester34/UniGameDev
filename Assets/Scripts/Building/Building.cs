@@ -180,7 +180,7 @@ public class Building : MonoBehaviour {
         var storages = GetComponentsInChildren<ResourceStorage>();
         if (storages != null && storages.Length > 0) {
             foreach (ResourceStorage storage in storages) {
-                storage.RecalculateStorage();
+                storage.RecalculateStorage(this);
             }
         }
         if (resourceTickFloatUI != null)

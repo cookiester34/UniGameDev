@@ -38,7 +38,8 @@ public class ResearchUI : UiHoverable, IPointerEnterHandler {
     }
 
     private void OnResearchFinish() {
-        _isResearchStarted = false;
+        //_isResearchStarted = false;
+        _button.interactable = false;
         progressBar.gameObject.SetActive(false);
     }
 

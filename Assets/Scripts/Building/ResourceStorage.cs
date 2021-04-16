@@ -74,8 +74,8 @@ public class ResourceStorage : MonoBehaviour {
     /// <summary>
     /// Recalculates the storage amount based on the building tier
     /// </summary>
-    public void RecalculateStorage() {
-        Building building = GetComponent<Building>();
+    public void RecalculateStorage(Building building) {
+        //Building building = GetComponent<Building>();
         resource.ModifyCap(_currentStorage * -1, true);
         if (building != null) {
             switch (building.BuildingTier) {
