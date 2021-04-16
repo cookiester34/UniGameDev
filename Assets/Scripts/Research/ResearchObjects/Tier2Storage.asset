@@ -25,8 +25,8 @@ MonoBehaviour:
   researched: 0
   researchProgress: 0
   timer:
-    runTime: 0
+    runTime: 10
     timeRunning: 0
     progressPercent: 0
     active: 0
-  uiSprite: {fileID: 21300000, guid: ac23224a8914e1f46b87815fc7561a74, type: 3}
+  uiSprite: {fileID: 21300000, guid: 058f300339a07d448ba899ca1259ded2, type: 3}

@@ -24,7 +24,7 @@ MonoBehaviour:
   researched: 0
   researchProgress: 0
   timer:
-    runTime: 0
+    runTime: 10
     timeRunning: 0
     progressPercent: 0
     active: 0
