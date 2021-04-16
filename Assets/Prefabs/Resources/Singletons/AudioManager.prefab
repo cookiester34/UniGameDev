@@ -279,8 +279,8 @@ MonoBehaviour:
     source: {fileID: 0}
   mainMenuMusic:
     name: MainMenuTheme
-    musicClip: {fileID: 8300000, guid: f34e48c37fa62a54ea84dc72d08d8f37, type: 3}
-    volume: 1
+    musicClip: {fileID: 8300000, guid: 35050063dac8f9748889886ca9b40b4e, type: 3}
+    volume: 0.6
     pitch: 1
     output: {fileID: -4288427220252951158, guid: ea7e695f976ffaa439230d1fa372b759,
       type: 2}
