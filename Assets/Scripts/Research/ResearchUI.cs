@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class ResearchUI : UiHoverable {
+public class ResearchUI : UiHoverable, IPointerEnterHandler {
     [SerializeField] private Text descriptionText;
     [SerializeField] private ProgressBar progressBar;
     private ResearchObject _researchObject;
@@ -53,8 +53,7 @@ public class ResearchUI : UiHoverable {
         }
     }
 
-    public override void OnPointerEnter(PointerEventData eventData) {
-        base.OnPointerEnter(eventData);
+    public void OnPointerEnter(PointerEventData eventData) {
         descriptionText.text = _researchObject.ResearchName + ":\n\n" + _researchObject.Description;
     }
 }

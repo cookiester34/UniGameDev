@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b4222e2329316b4092c95d942fc8469, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _panel: {fileID: 6003045455294153966}
+  _tooltipEnabler: {fileID: 5874131107193630076}
   _scriptableObject: {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   isLevelEditorOnly: 0
   descriptionText: {fileID: 0}
@@ -29,6 +29,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46cc7dc9b22d63d40927700074a4e94b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5874131107193630076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6003045456184528743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2f38f25bffaa87a4c815ff3076868df6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TooltipText: 'RoyalJelly: 10 Honey: 10 '
+  timeToShow: 0
 --- !u!1001 &367484798854190560
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,12 +265,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 367484798854190560}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6003045455294153966 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6221313263399571726, guid: 361cd233dbf870a458f9d35c597b6312,
-    type: 3}
-  m_PrefabInstance: {fileID: 367484798854190560}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7335082769605683116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -277,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
@@ -302,12 +310,12 @@ PrefabInstance:
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 40
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_SizeDelta.y
-      value: 20
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
@@ -352,7 +360,7 @@ PrefabInstance:
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 13.9
+      value: 10.3
       objectReference: {fileID: 0}
     - target: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
         type: 3}

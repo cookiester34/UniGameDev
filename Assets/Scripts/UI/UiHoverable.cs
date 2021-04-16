@@ -5,7 +5,7 @@ using UnityEngine.UI;
 namespace UI {
     [RequireComponent(typeof(Image))]
     [RequireComponent(typeof(Button))]
-    public class UiHoverable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
+    public class UiHoverable : MonoBehaviour {
         /// <summary>
         /// Image component
         /// </summary>
@@ -16,12 +16,7 @@ namespace UI {
         /// </summary>
         protected Button _button;
 
-        /// <summary>
-        /// Text component should be found in child
-        /// </summary>
-        private Text _tooltipText;
-
-        [SerializeField] private GameObject _panel;
+        [SerializeField] private TooltipEnabler _tooltipEnabler;
 
         [Tooltip("The scriptable object must implement IUiClickableHover, used to call its methods")]
         [SerializeField] protected ScriptableObject _scriptableObject;
@@ -53,19 +48,12 @@ namespace UI {
                 _button = GetComponent<Button>();
             }
 
-            if (_tooltipText == null) {
-                _tooltipText = GetComponentInChildren<Text>(true);
-                if (_tooltipText == null) {
+            if (_tooltipEnabler == null) {
+                _tooltipEnabler = GetComponent<TooltipEnabler>();
+                if (_tooltipEnabler == null) {
                     Debug.LogError(
                         "Something has gone wrong in setting up the button components, ensure there is a child with text component");
-                } else {
-                    _tooltipText.gameObject.SetActive(false);
                 }
-            }
-
-            if (_panel == null) {
-                Debug.LogError(
-                        "Something has gone wrong in setting up the button components, ensure there is a child with image for the panel");
             }
 
             if (_scriptableObject == null) {
@@ -85,10 +73,10 @@ namespace UI {
                 _button.onClick.AddListener(_clickableHover.OnClick);
 				if (_scriptableObject is BuildingData) {
 					_buildingData = (BuildingData) _scriptableObject;
-					_tooltipText.text = _clickableHover.GetHoverText() + CalculateCostString();
-				}
+                    _tooltipEnabler.TooltipText = _clickableHover.GetHoverText() + CalculateCostString();
+                }
 				else {
-					_tooltipText.text = _clickableHover.GetHoverText();
+                    _tooltipEnabler.TooltipText = _clickableHover.GetHoverText();
 				}
                 
             }
@@ -112,23 +100,5 @@ namespace UI {
 			}
 			return "\nNo cost";
 		}
-
-        /// <summary>
-        /// Displays the tooltip on hover
-        /// </summary>
-        /// <param name="eventData"></param>
-        public virtual void OnPointerEnter(PointerEventData eventData) {
-            _tooltipText.gameObject.SetActive(true);
-            _panel.gameObject.SetActive(true);
-        }
-
-        /// <summary>
-        /// Hides the tooltip on hover exit
-        /// </summary>
-        /// <param name="eventData"></param>
-        public void OnPointerExit(PointerEventData eventData) {
-            _tooltipText.gameObject.SetActive(false);
-            _panel.gameObject.SetActive(false);
-        }
     }
 }

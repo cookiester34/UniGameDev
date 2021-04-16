@@ -1813,10 +1813,10 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: ec47dad34802e36429d4b0f01a36772c, type: 3}
-    m_FontSize: 26
+    m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 2
+    m_MinSize: 1
     m_MaxSize: 40
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -3139,7 +3139,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c8b3a773eff16264cbf6e21c0015c3be, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dd9622d6658a7d44b89ff7b3c971847e, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6841,6 +6841,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: cb1174f483f42514b9c5dea559f8069c,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Honey: 10 RoyalJelly: 15 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -6871,7 +6876,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ac23224a8914e1f46b87815fc7561a74,
+      objectReference: {fileID: 21300000, guid: 058f300339a07d448ba899ca1259ded2,
         type: 3}
     - target: {fileID: 6003045456184528740, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
@@ -7024,6 +7029,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Pollen: 10 RoyalJelly: 25 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -7054,7 +7064,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 058f300339a07d448ba899ca1259ded2,
+      objectReference: {fileID: 21300000, guid: 2185d591c99a60f42a3f9d46b6cd146a,
         type: 3}
     - target: {fileID: 6003045456184528740, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
@@ -7207,6 +7217,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Pollen: 10 RoyalJelly: 15 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -7390,6 +7405,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d84f50ae6d307754c9d3f649fc944f64,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Pollen: 10 RoyalJelly: 25 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -7562,6 +7582,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'HoneyConverter
+
+        Wax: 10 Pollen: 10 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -7773,6 +7800,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'StorageBuilding
+
+        Wax: 20 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -7984,6 +8018,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516635040552}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'EnemyBuilding
+
+        No cost'
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -8206,6 +8247,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'WaxConverter
+
+        Pollen: 10 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -8417,6 +8465,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'QueenBee
+
+        No cost'
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -8628,6 +8683,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Housing
+
+        Wax: 10 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -8845,6 +8907,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'DestroyBuilding
+
+        No cost'
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -9062,6 +9131,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Tower
+
+        Pollen: 5 Wax: 10 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -9244,6 +9320,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'JellyConverter
+
+        Wax: 15 Pollen: 10 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -9782,6 +9865,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bbd54cab746591c499d0f65321b4b680,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'RoyalJelly: 25 Pollen: 50 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -9965,6 +10053,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Pollen: 10 RoyalJelly: 5 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -10137,6 +10230,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1215696516088750716}
     m_Modifications:
+    - target: {fileID: 5363100075421652021, guid: 361cd233dbf870a458f9d35c597b6312,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Research
+
+        Wax: 50 Honey: 25 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6221313261983263098, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
       propertyPath: m_Text
@@ -10175,7 +10275,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: e1b9ccda2fdf2e64c9d88835a9370f7e,
+      objectReference: {fileID: 21300000, guid: 66279fd321492144ca69002965fe2cc1,
         type: 3}
     - target: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}
@@ -10370,6 +10470,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: faa6cc4fcf3976943967215f538ee49f,
         type: 2}
+    - target: {fileID: 5874131107193630076, guid: 1e41e920b79bf1642846f7c00ecf44c5,
+        type: 3}
+      propertyPath: TooltipText
+      value: 'Honey: 10 RoyalJelly: 25 '
+      objectReference: {fileID: 0}
     - target: {fileID: 6003045456026746010, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
       propertyPath: m_Text
@@ -10400,7 +10505,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: ac23224a8914e1f46b87815fc7561a74,
+      objectReference: {fileID: 21300000, guid: 058f300339a07d448ba899ca1259ded2,
         type: 3}
     - target: {fileID: 6003045456184528740, guid: 1e41e920b79bf1642846f7c00ecf44c5,
         type: 3}
