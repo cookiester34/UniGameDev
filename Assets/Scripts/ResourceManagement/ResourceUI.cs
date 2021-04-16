@@ -31,7 +31,7 @@ public class ResourceUI : MonoBehaviour {
 
     void UpdateText(float newValue) {
         _text.text =
-            String.Format("{0}: {1:0} / {2}", resource.name, resource.GetFloorCurrentAmount(), resource.ResourceCap);
+            String.Format("{0:0} / {1}", resource.GetFloorCurrentAmount(), resource.ResourceCap);
         _text.color = newValue <= resource.ResourceLowThreshold ? Color.red : defaultColor;
 
         float currentResourceTickAmount = resource.GetResourceTickAmount();
