@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33371308, g: 0.4997731, b: 0.8330084, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1071,13 +1071,8 @@ PrefabInstance:
     - target: {fileID: 345207262248793613, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
         type: 3}
       propertyPath: mainMenuMusic.volume
-      value: 0.6
+      value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 345207262248793613, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
-        type: 3}
-      propertyPath: mainMenuMusic.musicClip
-      value: 
-      objectReference: {fileID: 8300000, guid: 35050063dac8f9748889886ca9b40b4e, type: 3}
     - target: {fileID: 1714416664458419524, guid: bf0ff1e60e7b17843abe6d5cb3eb4da7,
         type: 3}
       propertyPath: m_Name
@@ -4890,7 +4885,7 @@ Transform:
   - {fileID: 1918605539}
   - {fileID: 836100561}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1914559569
 GameObject:
@@ -5185,7 +5180,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2084245192
 GameObject:
