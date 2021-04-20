@@ -53,7 +53,6 @@ public class SeasonManager : MonoBehaviour
 
     private void Start()
     {
-        seasonLength = 5;
         UpdateSeason(Seasons.Winter);
         seasonTimer = seasonLength;
         SeasonChange?.Invoke();
