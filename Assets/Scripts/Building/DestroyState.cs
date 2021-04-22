@@ -42,7 +42,7 @@ public class DestroyState : BuildingManagerState {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape)) {
+        if (Input.GetKeyDown(KeyCode.Escape)  || Input.GetMouseButtonDown(1)) {
             buildingManager.SetBuildMode(BuildingMode.Selection);
         }
     }

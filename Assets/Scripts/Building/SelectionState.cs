@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class SelectionState : BuildingManagerState {
     private GameObject selectedBuilding;
@@ -25,7 +26,8 @@ public class SelectionState : BuildingManagerState {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
+            if (!EventSystem.current.IsPointerOverGameObject()
+                && Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
                 if (hit.transform.CompareTag("Building")) {
                     EnableGlow(false);
                     selectedBuilding = hit.transform.gameObject;
