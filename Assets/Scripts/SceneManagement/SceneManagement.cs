@@ -33,6 +33,11 @@ public class SceneManagement : MonoBehaviour {
         _instance = this;
     }
 
+    private void Start()
+    {
+        loadScreenAnimator.SetTrigger("Play");
+    }
+
     public void LoadScene(string sceneName) {
         StartCoroutine(SceneLoad(sceneName));
     }
@@ -43,7 +48,7 @@ public class SceneManagement : MonoBehaviour {
     /// <param name="sceneName">Name of the scene to load</param>
     private IEnumerator SceneLoad(string sceneName) {
         loadScreenAnimator.SetTrigger("LoadState");
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSecondsRealtime(2);
         var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
         ao.completed += delegate {
