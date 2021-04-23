@@ -44,17 +44,7 @@ public class Building : MonoBehaviour {
 
     protected virtual void Start()
     {
-        if (buildingTier1 != null) {
-            buildingTier1.SetActive(buildingTier == 1);
-        }
-
-        if (buildingTier2 != null) {
-            buildingTier2.SetActive(buildingTier == 2);
-        }
-
-        if (buildingTier3 != null) {
-            buildingTier3.SetActive(buildingTier == 3);
-        }
+        UpdateBuildingVisual();
         BuildingManager.Instance.AddBuildingToBuildings(this);
     }
 
@@ -160,15 +150,17 @@ public class Building : MonoBehaviour {
             case 3:
                 canUpgrade = buildingTier3 != null;
                 break;
+            case 4:
+                // Highest build tier is 3
+                canUpgrade = false;
+                break;
         }
         return canUpgrade && buildingData.CanUpgrade(buildingTier + 1);
     }
 
     public void Upgrade(List<ResourcePurchase> resourcePurchase) {
         buildingTier++;
-        buildingTier1.SetActive(buildingTier == 1);
-        buildingTier2.SetActive(buildingTier == 2);
-        buildingTier3.SetActive(buildingTier == 3);
+        UpdateBuildingVisual();
 
         var suppliers = GetComponentsInChildren<ResourceSupplier>();
         if (suppliers != null && suppliers.Length > 0) {
@@ -223,5 +215,27 @@ public class Building : MonoBehaviour {
             resourceTickFloatUI.TriggerTextEventResourcePurchaseList(true, copy);
         }
         return copy;
+    }
+
+    /// <summary>
+    /// Updates the buildings visual to match its tier
+    /// </summary>
+    /// <param name="newBuildingTier">Optionally change the tier of the building, and then update</param>
+    public void UpdateBuildingVisual(int newBuildingTier = -1) {
+        if (newBuildingTier > 0) {
+            buildingTier = newBuildingTier;
+        }
+
+        if (buildingTier1 != null) {
+            buildingTier1.SetActive(buildingTier == 1);
+        }
+
+        if (buildingTier2 != null) {
+            buildingTier2.SetActive(buildingTier == 2);
+        }
+
+        if (buildingTier3 != null) {
+            buildingTier3.SetActive(buildingTier == 3);
+        }
     }
 }

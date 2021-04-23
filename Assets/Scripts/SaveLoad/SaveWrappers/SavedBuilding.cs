@@ -10,12 +10,14 @@ public class SavedBuilding {
     public SavedHealth health;
     public SavedBuildingData buildingData;
     public List<SavedBee> assignedBees;
+    public int buildingTier = 1;
 
     public SavedBuilding(Building building) {
         transform = new SavedTransform(building.transform);
         health = new SavedHealth(building.GetComponent<Health>());
         buildingData = new SavedBuildingData(building.BuildingData);
         assignedBees = new List<SavedBee>();
+        buildingTier = building.BuildingTier;
         if (building.AssignedBees != null) {
             foreach (Bee bee in building.AssignedBees) {
                 assignedBees.Add(new SavedBee(bee));
@@ -27,13 +29,15 @@ public class SavedBuilding {
         GameObject go = Object.Instantiate(
             buildingData.buildingType.GetPrefab(), transform.Position, transform.Rotation);
         go.GetComponent<Health>().LoadSavedHealth(health);
+        Building building = go.GetComponent<Building>();
+        building.UpdateBuildingVisual(buildingTier);
         foreach (SavedBee bee in assignedBees) {
             Bee matchingBee = loadedBees.Find(bee1 => bee1.Id == bee.id);
             if (matchingBee != null) {
-                go.GetComponent<Building>().AssignBee(matchingBee);
+                building.AssignBee(matchingBee);
             }
         }
 
-        return go.GetComponent<Building>();
+        return building;
     }
 }
