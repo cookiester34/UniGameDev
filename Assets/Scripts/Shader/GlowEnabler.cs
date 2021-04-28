@@ -25,4 +25,19 @@ public class GlowEnabler : MonoBehaviour {
             r.SetPropertyBlock(_propertyBlock);
         }
     }
+
+    public void ChangeGlowColour(Color color)
+    {
+        if (_propertyBlock == null)
+        {
+            _propertyBlock = new MaterialPropertyBlock();
+        }
+
+        foreach (Renderer r in _renderers)
+        {
+            r.GetPropertyBlock(_propertyBlock);
+            _propertyBlock.SetColor("_GlowColor", color);
+            r.SetPropertyBlock(_propertyBlock);
+        }
+    }
 }

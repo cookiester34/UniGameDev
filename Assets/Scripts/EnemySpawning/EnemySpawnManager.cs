@@ -167,6 +167,7 @@ public class EnemySpawnManager : MonoBehaviour
         Transform masterWasp = null;
         yield return new WaitForSeconds(1f);
         if (Random.Range(0f, 100f) < 80f) {
+            ///Increasing total number of wasps with every wave
             float rangeModifier = waveNumber * waveHordeMultiplier;
             for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
             {
@@ -175,6 +176,8 @@ public class EnemySpawnManager : MonoBehaviour
                 WaspAI waspAI = wasp.GetComponent<WaspAI>();
                 waspAI.spawnManager = this;
                 waspAI.WaspGroupID = group;
+                ///Increasing health with every wave;
+                wasp.GetComponent<Health>().SetHealth(wasp.GetComponent<Health>().MaxHealth + (waveNumber * waveHordeMultiplier));
                 if (!masterSet)
                 {
                     waspAI.masterWasp = true;
