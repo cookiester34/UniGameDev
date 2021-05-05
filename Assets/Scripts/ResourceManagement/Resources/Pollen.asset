@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: Pollen
   m_EditorClassIdentifier: 
   resourceType: 0
-  resourceTickAmount: 0
+  resourceTickAmount: 2.0000002
   resourceStartingAmount: 0
-  currentResourceAmount: 100
+  currentResourceAmount: 0
   startingTickAmount: 0
-  resourceCap: 100
+  resourceCap: 0
   startingCap: 0
   resourceLowThreshold: 9
+  infiniteInSandbox: 1

@@ -20,3 +20,4 @@ MonoBehaviour:
   resourceCap: 0
   startingCap: 0
   resourceLowThreshold: 9
+  infiniteInSandbox: 1

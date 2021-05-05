@@ -25,4 +25,20 @@ public static class CurrentSceneType {
         _sceneType.FromScene(SceneManager.GetActiveScene().name);
         Debug.Log("Scene type changed to: " + _sceneType);
     }
+
+    /// <summary>
+    /// Helper function to check if the current scene type is game level
+    /// </summary>
+    /// <returns>True if the current scene type is a game level</returns>
+    public static bool IsGameLevel() {
+        return _sceneType == SceneType.GameLevel;
+    }
+
+    /// <summary>
+    /// Helper function to check if the current scene type is level editor
+    /// </summary>
+    /// <returns>True if the current scene type is the level editor</returns>
+    public static bool IsLevelEditor() {
+        return _sceneType == SceneType.LevelEditor;
+    }
 }
