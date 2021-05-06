@@ -135,9 +135,11 @@ public class Building : MonoBehaviour {
             foundation.CanBuild = true;
         }
 
-        _assignedBees.RemoveAll(x => x == null);
-        foreach (var bee in _assignedBees) {
-            UnassignBee(bee);
+        if (_assignedBees != null) {
+            _assignedBees.RemoveAll(x => x == null);
+            foreach (var bee in _assignedBees) {
+                UnassignBee(bee);
+            }
         }
 
         if (!ApplicationUtil.IsQuitting) {

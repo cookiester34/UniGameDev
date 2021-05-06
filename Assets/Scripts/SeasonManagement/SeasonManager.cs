@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
@@ -34,9 +35,17 @@ public class SeasonManager : MonoBehaviour
     }
     #endregion
 
-    public Seasons currentSeason;
-    public delegate void SeasonChanged();
-    public static event SeasonChanged SeasonChange;
+    private Seasons currentSeason;
+
+    public Seasons CurrentSeason {
+        get => currentSeason;
+        set {
+            currentSeason = value;
+            SeasonChange?.Invoke();
+        }
+    }
+    
+    public static event Action SeasonChange;
     float seasonTimer;
     public int seasonLength;
     
@@ -51,21 +60,18 @@ public class SeasonManager : MonoBehaviour
     [SerializeField] private Sprite autumnSprite;
     [SerializeField] private Sprite winterSprite;
 
-    private void Start()
-    {
-        UpdateSeason(Seasons.Winter);
+    private void Start() {
+        SeasonChange += SeasonChanged;
         seasonTimer = seasonLength;
-        SeasonChange?.Invoke();
-}
+        UpdateSeason(Seasons.Winter);
+    }
 
-private void Update()
+    private void Update()
     {
         if (seasonTimer <= 0)
         {
             seasonTimer = seasonLength;
             UpdateSeason(currentSeason);
-            if (SeasonChange != null)
-                SeasonChange();
         }
         else
             seasonTimer -= Time.deltaTime;
@@ -77,20 +83,15 @@ private void Update()
         {
             case Seasons.Spring:
                 currentSeason = Seasons.Summer;
-                seasonDisplay.sprite = summerSprite;
                 break;
             case Seasons.Summer:
                 currentSeason = Seasons.Autumn;
-                UIEventAnnounceManager.Instance.AnnounceEvent("Autumn begins, man the defenses", AnnounceEventType.Alert);
-                seasonDisplay.sprite = autumnSprite;
                 break;
             case Seasons.Autumn:
                 currentSeason = Seasons.Winter;
-                seasonDisplay.sprite = winterSprite;
                 break;
             case Seasons.Winter:
                 currentSeason = Seasons.Spring;
-                seasonDisplay.sprite = springSprite;
                 break;
         }
 
@@ -108,6 +109,25 @@ private void Update()
         }
 
         AudioManager.Instance.PlaySound("SeasonChange");
+        SeasonChange?.Invoke();
+    }
+
+    private void SeasonChanged() {
+        switch (currentSeason) {
+            case Seasons.Spring:
+                seasonDisplay.sprite = springSprite;
+                break;
+            case Seasons.Summer:
+                seasonDisplay.sprite = summerSprite;
+                break;
+            case Seasons.Autumn:
+                UIEventAnnounceManager.Instance.AnnounceEvent("Autumn begins, man the defenses", AnnounceEventType.Alert);
+                seasonDisplay.sprite = autumnSprite;
+                break;
+            case Seasons.Winter:
+                seasonDisplay.sprite = winterSprite;
+                break;
+        }
     }
 
     public Seasons GetCurrentSeason()
