@@ -60,6 +60,7 @@ public class PauseMenu : MonoBehaviour
 			_mainContainer.SetActive(false);
 			_saveLoadMenu.SetActive(false);
 			_settingsMenu.SetActive(false);
+			_sandboxMenu.SetActive(false);
 			if (_hasSettingsLoaded) {
 				_settingsScript.SaveSettings();
 			}
