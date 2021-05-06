@@ -122,6 +122,10 @@ public class EnemySpawnManager : MonoBehaviour
 
     void SpawnWave()
     {
+        if(SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
+        {
+            StartCoroutine(nameof(KillAllWasps));
+        }
         if (enemyBuildingListOldCount != enemyBuildingsList.Count)
             UpdateWaspGroups();
         if (SeasonManager.Instance.GetCurrentSeason() == enemySpawnSeason)
@@ -161,6 +165,18 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    IEnumerator KillAllWasps()
+    {
+        foreach(WaspGroup i in waspGroupList)
+        {
+            foreach(Transform t in i.wasps)
+            {
+                yield return new WaitForEndOfFrame();
+                t.gameObject.GetComponent<Health>().ModifyHealth(-5);
+            }
+        }
+    }
+
     IEnumerator DelaySpawn(Transform building, int group)
     {
         bool masterSet = false;
@@ -177,7 +193,8 @@ public class EnemySpawnManager : MonoBehaviour
                 waspAI.spawnManager = this;
                 waspAI.WaspGroupID = group;
                 ///Increasing health with every wave;
-                wasp.GetComponent<Health>().SetHealth(wasp.GetComponent<Health>().MaxHealth + (waveNumber * waveHordeMultiplier));
+                Health wasphealth = wasp.GetComponent<Health>();
+                wasphealth.SetHealth(wasphealth.MaxHealth + (waveNumber * waveHordeMultiplier));
                 if (!masterSet)
                 {
                     waspAI.masterWasp = true;

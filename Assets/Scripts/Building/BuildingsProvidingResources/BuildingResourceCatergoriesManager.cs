@@ -84,11 +84,14 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
         }
         foreach(GameObject storage in storageBuildings)
         {
-            var glowEnabler = storage.transform.GetComponent<GlowEnabler>();
-            if (glowEnabler != null)
+            if (storage != null)
             {
-                glowEnabler.EnableGlow(true);
-                glowEnabler.ChangeGlowColour(Color.white);
+                var glowEnabler = storage.transform.GetComponent<GlowEnabler>();
+                if (glowEnabler != null)
+                {
+                    glowEnabler.EnableGlow(true);
+                    glowEnabler.ChangeGlowColour(Color.white);
+                }
             }
         }
     }
