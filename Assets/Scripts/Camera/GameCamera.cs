@@ -49,7 +49,7 @@ namespace CameraNameSpace {
 			if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
 				float scroll = Input.GetAxis("Mouse ScrollWheel");
 				if (Math.Abs(scroll) > 0.05f) {
-					Vector3 newOffset = offset + (transform.forward * (scroll * Time.deltaTime * 500f));
+					Vector3 newOffset = offset + (transform.forward * (scroll * Time.unscaledDeltaTime * 500f));
 					if (newOffset.y > MIN_ZOOM.y && newOffset.y < MAX_ZOOM.y) {
 						offset = newOffset;
 					}
@@ -63,17 +63,18 @@ namespace CameraNameSpace {
 					rotateSpeed = 0f;
 				}
 			}
-            
+			
+			Vector3 oldPosition = transform.position;
+			transform.RotateAround(target.position, Vector3.up, rotateSpeed * Time.unscaledDeltaTime);
+			offset += transform.position - oldPosition;
+			transform.position = Vector3.Lerp(transform.position, target.position + offset, 0.3f);
         }
 
         /// <summary>
         /// Moves the camera if required, as well as its target Y height
         /// </summary>
         void FixedUpdate() {
-            Vector3 oldPosition = transform.position;
-            transform.RotateAround(target.position, Vector3.up, rotateSpeed * Time.deltaTime);
-            offset += transform.position - oldPosition;
-            transform.position = Vector3.Lerp(transform.position, target.position + offset, 0.3f);
+            
         }
 
         /// <summary>
