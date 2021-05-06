@@ -23,18 +23,26 @@ public class ProjectileMoveScript : MonoBehaviour
         {
             rb.position += transform.forward * (speed * Time.deltaTime);
         }
-        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         speed = 0;
-        if (collision.collider.tag == "Building" && collision.collider.name != "QueenBeeBuilding(Clone)")
+        //if (collision.collider.tag == "Building" && collision.collider.name != "QueenBeeBuilding(Clone)")
+        //{
+        //    GameObject dissolver = new GameObject("dissolver", typeof(Dissolver));
+        //    dissolver.GetComponent<Dissolver>().Setup(collision.transform.gameObject);
+        //    Object.Destroy(collision.transform.gameObject, 0.2f);
+        //    AudioManager.Instance.PlaySound("DestroyBuilding");
+        //}
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 3);
+        foreach (var hitCollider in hitColliders)
         {
-            GameObject dissolver = new GameObject("dissolver", typeof(Dissolver));
-            dissolver.GetComponent<Dissolver>().Setup(collision.transform.gameObject);
-            Object.Destroy(collision.transform.gameObject, 0.2f);
-            AudioManager.Instance.PlaySound("DestroyBuilding");
+            Health health = hitCollider.GetComponent<Health>();
+            if(health != null)
+            {
+                health.ModifyHealth(-2);
+            }
         }
 
         ContactPoint contact = collision.contacts[0];

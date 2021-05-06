@@ -4767,7 +4767,6 @@ GameObject:
   - component: {fileID: 4980053369610423016}
   - component: {fileID: 4980053369610423017}
   - component: {fileID: 4980053369610423018}
-  - component: {fileID: 4980053369610423019}
   - component: {fileID: 4980053369610423020}
   m_Layer: 0
   m_Name: MeteorUV'd 1
@@ -4871,22 +4870,6 @@ MonoBehaviour:
     type: 3}
   trails:
   - {fileID: 4980053369491169976}
---- !u!114 &4980053369610423019
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4980053369610423021}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7bc0e240a3994604eadb2d9cf73f1d15, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  vfx: {fileID: 4712339840199091618, guid: 87b6dd714667b6f47a6b3713dca3fd1d, type: 3}
-  startPoint: {fileID: 0}
-  endPoint: {fileID: 4492103124955887143, guid: a8115b40faea49b4f8c31635ff4bd842,
-    type: 3}
 --- !u!65 &4980053369610423020
 BoxCollider:
   m_ObjectHideFlags: 0
