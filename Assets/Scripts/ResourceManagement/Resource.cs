@@ -34,6 +34,7 @@ public class Resource : ScriptableObject {
     [SerializeField] private int startingCap;
 
     [SerializeField] private int resourceLowThreshold;
+    [SerializeField] private bool infiniteInSandbox;
 
     public float CurrentResourceAmount => currentResourceAmount;
 
@@ -48,6 +49,8 @@ public class Resource : ScriptableObject {
     public int StartingCap => startingCap;
 
     public int ResourceLowThreshold => resourceLowThreshold;
+
+    public bool InfiniteInSandbox => infiniteInSandbox;
 
     void OnEnable() {
         //sets the initial value of this resource
@@ -71,6 +74,11 @@ public class Resource : ScriptableObject {
     }
 
     public void ModifyAmount(float value) {
+        // If were infinite do nothing leave the resource at its current value
+        if (Infinite()) {
+            return;
+        }
+
         if (currentResourceAmount < resourceCap || value < 0) {
             currentResourceAmount += value;
             if (currentResourceAmount > resourceCap) {
@@ -82,7 +90,7 @@ public class Resource : ScriptableObject {
     }
 
     public bool CanPurchase(int value) {
-        return (currentResourceAmount - value >= 0);
+        return Infinite() || (currentResourceAmount - value >= 0);
     }
 
     /// <summary>
@@ -149,5 +157,13 @@ public class Resource : ScriptableObject {
     public float GetResourceTickAmount()
     {
         return resourceTickAmount;
+    }
+
+    /// <summary>
+    /// Determines if the resource should be considered infinite
+    /// </summary>
+    /// <returns>True if the resource is currently considered to be infinite, else false</returns>
+    public bool Infinite() {
+        return CurrentSceneType.IsLevelEditor() && infiniteInSandbox;
     }
 }

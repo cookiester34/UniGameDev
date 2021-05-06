@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.AI;
+//using UnityEngine.AI;
+using Pathfinding;
 
 [RequireComponent(typeof(Health))]
 public class WaspAI : MonoBehaviour
@@ -13,7 +14,8 @@ public class WaspAI : MonoBehaviour
     private Vector3 _previousDestination = Vector3.positiveInfinity;
 
     //nav
-    private NavMeshAgent _agent;
+    //private NavMeshAgent _agent;
+    IAstarAI _ai;
 
     //wasp Stats
     Health health;
@@ -21,8 +23,9 @@ public class WaspAI : MonoBehaviour
     public int waspDamage = 1;
     [Range(1, 10)]
     public float attackRange = 5;
-    [Range(10, 50)]
+    [Range(0, 10)]
     public float detectionRange = 5f;
+    private float oldDetectionRange;
     [Range(1, 5)]
     public float attacktimer = 2;
     private float actualTimer;
@@ -46,12 +49,14 @@ public class WaspAI : MonoBehaviour
         waspRenderers = GetComponentsInChildren<Renderer>().ToList();
         health = GetComponentInParent<Health>();
         _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
-        _agent = GetComponent<NavMeshAgent>();
+        //_agent = GetComponent<NavMeshAgent>();
+        _ai = GetComponent<IAstarAI>();
         actualTimer = attacktimer;
         _soundLoopBasePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
         _soundLoopVolume = 0.7f + UnityEngine.Random.Range(-.05f, 0.05f);
         transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
         transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
+        oldDetectionRange = detectionRange;
     }
 
     private void SetupQueenBee()
@@ -65,6 +70,7 @@ public class WaspAI : MonoBehaviour
     private void Start() 
     {
         SetupQueenBee();
+
     }
 
 
@@ -95,7 +101,7 @@ public class WaspAI : MonoBehaviour
                 if (targetObject != null && targetObject.transform != null)
                 {
                     //if (masterWasp)
-                        SetDestination(targetObject);
+                        SetDestination(targetObject, false);
                     //else
                     //{
                     //    transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, 0.05f);
@@ -107,7 +113,7 @@ public class WaspAI : MonoBehaviour
             else
             {
                 //if (masterWasp)
-                    SetDestination(_queenBeeBuilding);
+                    SetDestination(_queenBeeBuilding, true);
                 //else
                 //    followMaster();
             }
@@ -132,6 +138,11 @@ public class WaspAI : MonoBehaviour
             actualTimer = attacktimer;
         }
         actualTimer -= Time.deltaTime;
+        if (transform.position.y < 0)
+        {
+            Vector3 resetHeight = new Vector3(transform.position.x, 1, transform.position.z);
+            transform.position = resetHeight;
+        }
     }
 
     void followMaster()
@@ -154,16 +165,21 @@ public class WaspAI : MonoBehaviour
         }
     }
 
-    void SetDestination(GameObject destinationObject) 
+    void SetDestination(GameObject destinationObject, bool isQueen) 
     {
         if (destinationObject != null)
         {
             Vector3 destination = destinationObject.transform.position;
             if (destination != _previousDestination)
             {
-                _agent.destination = destination;
+                //_agent.destination = destination;
+                _ai.destination = destination;
+                _ai.SearchPath();
                 _previousDestination = destination;
-                _currentTarget = destinationObject;
+                if (!isQueen)
+                    _currentTarget = destinationObject;
+                else
+                    _currentTarget = null;
             }
         }
     }

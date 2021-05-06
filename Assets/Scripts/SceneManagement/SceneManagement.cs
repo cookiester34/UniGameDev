@@ -3,11 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Animations;
 using Util;
 
 public class SceneManagement : MonoBehaviour {
     public delegate void OnSceneLoaded();
     public event OnSceneLoaded SceneLoaded;
+    public Animator loadScreenAnimator;
 
     private static SceneManagement _instance = null;
 
@@ -31,6 +33,11 @@ public class SceneManagement : MonoBehaviour {
         _instance = this;
     }
 
+    private void Start()
+    {
+        loadScreenAnimator.SetTrigger("Play");
+    }
+
     public void LoadScene(string sceneName) {
         StartCoroutine(SceneLoad(sceneName));
     }
@@ -40,6 +47,8 @@ public class SceneManagement : MonoBehaviour {
     /// </summary>
     /// <param name="sceneName">Name of the scene to load</param>
     private IEnumerator SceneLoad(string sceneName) {
+        loadScreenAnimator.SetTrigger("LoadState");
+        yield return new WaitForSecondsRealtime(2);
         var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
         ao.completed += delegate {

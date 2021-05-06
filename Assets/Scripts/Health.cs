@@ -60,6 +60,12 @@ public class Health : MonoBehaviour {
         }
     }
 
+    public void SetHealth(float amount)
+    {
+        maxHealth = amount;
+        currentHealth = amount;
+    }
+
     public void ModulateSound(AudioSource source) {
         float pitchOffset = UnityEngine.Random.Range(-0.05f, 0.05f);
         float volumeOffset = UnityEngine.Random.Range(-0.05f, 0.05f);

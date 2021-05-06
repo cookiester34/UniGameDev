@@ -152,7 +152,7 @@ public static class SaveLoad {
             }
         }
 
-        SeasonManager.Instance.SetCurrentSeason((Seasons)_currentSave.currentSeason);//set currrent season
+        SeasonManager.Instance.CurrentSeason = (Seasons)_currentSave.currentSeason; //set currrent season
         EnemySpawnManager.Instance.waveNumber = _currentSave.waveNumber;
 
         CameraTarget gameCamera = Object.FindObjectOfType<CameraTarget>();

@@ -59,6 +59,7 @@ public class TowerBuilding : Building
             }
             transform.LookAt(enemiesInRange[0].position);
             transform.Rotate(new Vector3(0, -90, 0));
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             
             //anim.ResetTrigger("Attack");
         }

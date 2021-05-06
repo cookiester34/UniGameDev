@@ -18,6 +18,8 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
     }
 
     public List<ResourceSupplier> catergories = new List<ResourceSupplier>();
+    public List<GameObject> housing = new List<GameObject>();
+    public List<GameObject> storageBuildings = new List<GameObject>();
     private int selectedResource = -1;
 
     void CheckList()
@@ -39,25 +41,56 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
         {
             if((int)r.Resource.resourceType == i)
             {
-                if (r.Resource.resourceType == ResourceType.Population)
+                if (r.GetProductionAmount() < 0)
                 {
                     var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
                     if (glowEnabler != null)
                     {
                         glowEnabler.EnableGlow(true);
+                        glowEnabler.ChangeGlowColour(Color.red);
                     }
                 }
-                else if (r.Resource.GetResourceTickAmount() > 0)
+                else if(r.GetProductionAmount() > 0.05f)
                 {
                     var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
                     if (glowEnabler != null)
                     {
                         glowEnabler.EnableGlow(true);
+                        glowEnabler.ChangeGlowColour(Color.green);
                     }
                 }
                 else
                 {
-                    //could glow red here
+                    var glowEnabler = r.transform.GetComponentInParent<GlowEnabler>();
+                    if (glowEnabler != null)
+                    {
+                        glowEnabler.EnableGlow(true);
+                        glowEnabler.ChangeGlowColour(Color.white);
+                    }
+                }
+            }
+        }
+        foreach(GameObject house in housing)
+        {
+            if((ResourceType)i == ResourceType.Population)
+            {
+                var glowEnabler = house.transform.GetComponent<GlowEnabler>();
+                if (glowEnabler != null)
+                {
+                    glowEnabler.EnableGlow(true);
+                    glowEnabler.ChangeGlowColour(Color.white);
+                }
+            }
+        }
+        foreach(GameObject storage in storageBuildings)
+        {
+            if (storage != null)
+            {
+                var glowEnabler = storage.transform.GetComponent<GlowEnabler>();
+                if (glowEnabler != null)
+                {
+                    glowEnabler.EnableGlow(true);
+                    glowEnabler.ChangeGlowColour(Color.white);
                 }
             }
         }
@@ -72,6 +105,25 @@ public class BuildingResourceCatergoriesManager : MonoBehaviour
             if (glowEnabler != null)
             {
                 glowEnabler.EnableGlow(false);
+                glowEnabler.ChangeGlowColour(Color.white);
+            }
+        }
+        foreach (GameObject house in housing)
+        {
+            var glowEnabler = house.transform.GetComponent<GlowEnabler>();
+            if (glowEnabler != null)
+            {
+                glowEnabler.EnableGlow(false);
+                glowEnabler.ChangeGlowColour(Color.white);
+            }
+        }
+        foreach (GameObject storage in storageBuildings)
+        {
+            var glowEnabler = storage.transform.GetComponent<GlowEnabler>();
+            if (glowEnabler != null)
+            {
+                glowEnabler.EnableGlow(false);
+                glowEnabler.ChangeGlowColour(Color.white);
             }
         }
     }

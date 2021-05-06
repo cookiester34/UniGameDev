@@ -18,10 +18,17 @@ public class ResourceUI : MonoBehaviour {
         }
 
         _text = GetComponent<Text>();
+        _text.color = defaultColor;
+    }
 
-        resource.OnCurrentValueChanged += UpdateText;
-        resource.OnCapChanged += UpdateText;
-        UpdateText(resource.CurrentResourceAmount);
+    private void Start() {
+        if (resource.Infinite()) {
+            _text.text = "infinite";
+        } else {
+            resource.OnCurrentValueChanged += UpdateText;
+            resource.OnCapChanged += UpdateText;
+            UpdateText(resource.CurrentResourceAmount);
+        }
     }
 
     private void OnDestroy() {

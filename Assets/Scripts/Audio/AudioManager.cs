@@ -258,7 +258,7 @@ public class AudioManager : MonoBehaviour {
 
     public void ChangeAmbienceTrack()
     {
-        PlayAmbienceTrack(SeasonManager.Instance.currentSeason);
+        PlayAmbienceTrack(SeasonManager.Instance.CurrentSeason);
     }
 
     public void AmbienceFadeTo (Sound ambienceClip)

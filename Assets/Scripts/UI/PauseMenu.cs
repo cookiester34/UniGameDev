@@ -12,6 +12,7 @@ public class PauseMenu : MonoBehaviour
 	public GameObject _mainContainer;
 	public GameObject _saveLoadMenu;
 	public GameObject _settingsMenu;
+	public GameObject _sandboxMenu;
 	private bool _hasSettingsLoaded;
 	private SettingsPanel _settingsScript;
 	
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
 		_mainContainer.SetActive(false);
 		_saveLoadMenu.SetActive(false);
 		_settingsMenu.SetActive(false);
+		_sandboxMenu.SetActive(false);
 	}
 
 	public bool GetIsPaused(){
@@ -58,6 +60,7 @@ public class PauseMenu : MonoBehaviour
 			_mainContainer.SetActive(false);
 			_saveLoadMenu.SetActive(false);
 			_settingsMenu.SetActive(false);
+			_sandboxMenu.SetActive(false);
 			if (_hasSettingsLoaded) {
 				_settingsScript.SaveSettings();
 			}
@@ -69,6 +72,10 @@ public class PauseMenu : MonoBehaviour
 		if (_settingsMenu.activeSelf) {
 			_settingsMenu.SetActive(false);
 		}
+		
+		if (_sandboxMenu.activeSelf) {
+			_sandboxMenu.SetActive(false);
+		}
 	}
 	
 	public void ToggleSettings() {
@@ -76,6 +83,22 @@ public class PauseMenu : MonoBehaviour
 		_hasSettingsLoaded = true;
 		if (_saveLoadMenu.activeSelf) {
 			_saveLoadMenu.SetActive(false);
+		}
+
+		if (_sandboxMenu.activeSelf) {
+			_sandboxMenu.SetActive(false);
+		}
+	}
+
+	public void ToggleSandbox() {
+		_sandboxMenu.SetActive(!_sandboxMenu.activeSelf);
+		
+		if (_saveLoadMenu.activeSelf) {
+			_saveLoadMenu.SetActive(false);
+		}
+		
+		if (_settingsMenu.activeSelf) {
+			_settingsMenu.SetActive(false);
 		}
 	}
 	

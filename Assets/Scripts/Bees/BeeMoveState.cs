@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
+//using UnityEngine.AI;
+using Pathfinding;
 
 public class BeeMoveState : BeeState {
-    private NavMeshAgent _agent;
+    //private NavMeshAgent _agent;
+    private IAstarAI _agent;
 
     public BeeMoveState(BeeStateMachine stateMachine) : base(stateMachine) {
         _agent = stateMachine.Bee.Agent;
@@ -37,7 +39,7 @@ public class BeeMoveState : BeeState {
     
     private bool PathComplete() {
         if ((!_agent.pathPending && !_agent.hasPath) ||
-            Vector3.Distance( _agent.destination, _agent.transform.position) <= 0.3f) {
+            Vector3.Distance( _agent.destination, _agent.position) <= 1.7f) {
             return true;
         }
  
