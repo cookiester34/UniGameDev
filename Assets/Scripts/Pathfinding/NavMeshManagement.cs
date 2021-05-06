@@ -75,7 +75,7 @@ public class NavMeshManagement : MonoBehaviour
     {
         foreach (Progress progress in AstarPath.active.ScanAsync())
         {
-            Debug.Log("Scanning... " + progress.description + " - " + (progress.progress * 100).ToString("0") + "%");
+            //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress * 100).ToString("0") + "%");
             yield return null;
         }
     }

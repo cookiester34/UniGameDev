@@ -75,7 +75,7 @@ public class WaspAI : MonoBehaviour
 
 
     void FixedUpdate() {
-        bool visible = FogOfWarBounds.instance.IsWaspVisible(transform.position);
+        bool visible = FogOfWarBounds.instance.IsVisible(transform.position);
         foreach (Renderer renderer1 in waspRenderers) {
             renderer1.enabled = visible;
         }

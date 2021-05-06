@@ -29,6 +29,13 @@ public class ProjectileMoveScript : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         speed = 0;
+        if (collision.collider.tag == "Building" && collision.collider.name != "QueenBeeBuilding(Clone)")
+        {
+            GameObject dissolver = new GameObject("dissolver", typeof(Dissolver));
+            dissolver.GetComponent<Dissolver>().Setup(collision.transform.gameObject);
+            Object.Destroy(collision.transform.gameObject, 0.2f);
+            AudioManager.Instance.PlaySound("DestroyBuilding");
+        }
 
         ContactPoint contact = collision.contacts[0];
         Quaternion rot = Quaternion.FromToRotation(Vector3.up, contact.normal);

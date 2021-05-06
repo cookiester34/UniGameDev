@@ -48,7 +48,6 @@ public class ResourceTickFloatUI : MonoBehaviour
 
     public void TriggerResourceText()
     {
-        Debug.Log("triggered");
         updateTextPos = false;
         resourceInfoText1.text = "";
         resourceInfoText2.text = "";
