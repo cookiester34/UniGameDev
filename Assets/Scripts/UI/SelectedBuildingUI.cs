@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,9 +9,9 @@ using UnityEngine.UI;
 public class SelectedBuildingUI : MonoBehaviour {
     [SerializeField] private GameObject researchTree;
     [SerializeField] private GameObject generalUi;
-    [SerializeField] private Text assignedBeesText;
-    [SerializeField] private Text resourcesText;
-    [SerializeField] private Text nameText;
+    [SerializeField] private TMP_Text assignedBeesText;
+    [SerializeField] private TMP_Text resourcesText;
+    [SerializeField] private TMP_Text nameText;
     [SerializeField] private Image icon;
     [SerializeField] private UIBottomBar bar;
     [SerializeField] private UIBottomBarButton thisTabbableButton;

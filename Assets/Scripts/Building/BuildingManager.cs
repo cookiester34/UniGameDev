@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -33,7 +34,7 @@ public class BuildingManager : MonoBehaviour {
 
     // TODO: Two UI elements should receive an event when they need to update rather than manager telling them directly
     public Image selectedBuildingUI;
-    public Text selectedBuildingText;
+    public TMP_Text selectedBuildingText;
 
     public Sprite DestroyUISprite;
 
@@ -82,7 +83,7 @@ public class BuildingManager : MonoBehaviour {
         GameObject go = GameObject.Find("SelectedBuildingUIImage");
         if (go != null) {
             selectedBuildingUI = go.GetComponent<Image>();
-            selectedBuildingText = go.GetComponentInChildren<Text>();
+            selectedBuildingText = go.GetComponentInChildren<TMP_Text>();
         }
         InitStates();
         SetBuildMode(BuildingMode.Selection);
