@@ -5,17 +5,11 @@ using System.Runtime.CompilerServices;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Slider))]
 public class ProgressBar : MonoBehaviour {
-    /// <summary>
-    /// Slider component
-    /// </summary>
-    private Slider _slider;
-
     /// <summary>
     /// Fill component of the progress bar
     /// </summary>
-    [SerializeField] private Image fill;
+    [SerializeField] private Image fillImage;
     
     /// <summary>
     /// Potential colours to use for the slider
@@ -47,17 +41,11 @@ public class ProgressBar : MonoBehaviour {
     }
 
     private void Awake() {
-        _slider = GetComponent<Slider>();
-        if (_slider == null) {
-            Debug.LogError("Progress bar is missing its slider component");
-        }
-
-        if (fill == null) {
+        if (fillImage == null) {
             Debug.LogError("Progress bar is missing its fill component");
         }
 
-        _slider.interactable = false;
-        _slider.value = 0;
+        fillImage.fillAmount = 0;
         _targetProgress = 0;
     }
 
@@ -66,8 +54,8 @@ public class ProgressBar : MonoBehaviour {
     /// </summary>
     private void Update() {
 
-        if ((_slider.value < _targetProgress) || (_slider.value > _targetProgress)) {
-            var currentValue = _slider.value;
+        if ((fillImage.fillAmount < _targetProgress) || (fillImage.fillAmount > _targetProgress)) {
+            var currentValue = fillImage.fillAmount;
 
             // Fill direction used to determine whether the value should increase or decrease 
             float fillDirection = currentValue < _targetProgress ? 1f: -1f;
@@ -87,7 +75,7 @@ public class ProgressBar : MonoBehaviour {
             _targetProgress = value;
         }
 
-        _slider.value = Mathf.Clamp(value, 0, 1);
+        fillImage.fillAmount = Mathf.Clamp(value, 0, 1);
         UpdateColour();
     }
     
@@ -97,8 +85,8 @@ public class ProgressBar : MonoBehaviour {
     private void UpdateColour() {
         if (_colourThresholds != null) {
             foreach (ColourThreshold colourThreshold in _colourThresholds) {
-                if (_slider.value < colourThreshold.threshold) {
-                    fill.color = colourThreshold.color;
+                if (fillImage.fillAmount < colourThreshold.threshold) {
+                    fillImage.color = colourThreshold.color;
                     break;
                 }
             }

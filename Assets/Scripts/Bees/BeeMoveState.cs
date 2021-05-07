@@ -26,9 +26,21 @@ public class BeeMoveState : BeeState {
     public override void PhysicsUpdate() {
         if (PathComplete()) {
             if (_stateMachine.NearBuilding(_stateMachine.Bee.Work)) {
-                _stateMachine.ChangeState(BeeStates.Work);
+                Flightpath path = _stateMachine.Bee.Work.Flightpath;
+                if (path != null) {
+                    _stateMachine.SetBuildFlightPath(path);
+                    _stateMachine.ChangeState(BeeStates.Build);
+                } else {
+                    _stateMachine.ChangeState(BeeStates.Work);
+                }
             } else if (_stateMachine.NearBuilding(_stateMachine.Bee.Home)) {
-                _stateMachine.ChangeState(BeeStates.Sleep);
+                Flightpath path = _stateMachine.Bee.Home.Flightpath;
+                if (path != null) {
+                    _stateMachine.SetBuildFlightPath(path);
+                    _stateMachine.ChangeState(BeeStates.Build);
+                } else {
+                    _stateMachine.ChangeState(BeeStates.Sleep);
+                }
             } else {
                 _stateMachine.ChangeState(BeeStates.Idle);
             }

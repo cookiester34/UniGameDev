@@ -24,6 +24,7 @@ public class BeeStateMachine : MonoBehaviour {
     private BeeMoveState _moveState;
     private BeeWorkState _workState;
     private BeeSleepState _sleepState;
+    private BeeBuildState _buildState;
 
     #endregion
 
@@ -38,6 +39,7 @@ public class BeeStateMachine : MonoBehaviour {
         _moveState = new BeeMoveState(this);
         _workState = new BeeWorkState(this);
         _sleepState = new BeeSleepState(this);
+        _buildState = new BeeBuildState(this);
     }
 
     public void ChangeState(BeeStates state) {
@@ -55,6 +57,9 @@ public class BeeStateMachine : MonoBehaviour {
                 break;
             case BeeStates.Work:
                 _currentState = _workState;
+                break;
+            case BeeStates.Build:
+                _currentState = _buildState;
                 break;
 
             default:
@@ -85,6 +90,9 @@ public class BeeStateMachine : MonoBehaviour {
         return nearBuilding;
     }
 
+    public void SetBuildFlightPath(Flightpath path) {
+        _buildState.Path = path;
+    }
 
     public void SleepTime(float timeSeconds) {
         gameObject.Disable(timeSeconds);

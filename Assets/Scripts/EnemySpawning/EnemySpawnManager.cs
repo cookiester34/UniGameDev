@@ -88,16 +88,8 @@ public class EnemySpawnManager : MonoBehaviour
     {
         if (CurrentSceneType.SceneType != SceneType.LevelEditor)
         {
-            foreach (Transform i in enemyBuildingsList)
-            {
-                if (FogOfWarBounds.instance.IsVisible(i.position))
-                {
-                    i.gameObject.GetComponent<Renderer>().enabled = true;
-                }
-                else
-                {
-                    i.gameObject.GetComponent<Renderer>().enabled = false;
-                }
+            foreach (Transform i in enemyBuildingsList) {
+                i.gameObject.GetComponentInChildren<Renderer>().enabled = FogOfWarBounds.instance.IsVisible(i.position);
             }
         }
     }
