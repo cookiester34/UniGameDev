@@ -76,6 +76,8 @@ public class EnemySpawnManager : MonoBehaviour
 
     public List<WaspGroup> waspGroupList = new List<WaspGroup>();
 
+    public List<GameObject> wasps = new List<GameObject>();
+
 
     private void FixedUpdate()
     {
@@ -88,7 +90,7 @@ public class EnemySpawnManager : MonoBehaviour
         {
             foreach (Transform i in enemyBuildingsList)
             {
-                if (FogOfWarBounds.instance.IsWaspVisible(i.position))
+                if (FogOfWarBounds.instance.IsVisible(i.position))
                 {
                     i.gameObject.GetComponent<Renderer>().enabled = true;
                 }
@@ -167,14 +169,19 @@ public class EnemySpawnManager : MonoBehaviour
 
     IEnumerator KillAllWasps()
     {
-        foreach(WaspGroup i in waspGroupList)
+        List<GameObject> temp = wasps;
+        foreach(GameObject i in temp)
         {
-            foreach(Transform t in i.wasps)
+            if (i.GetComponent<Health>().CurrentHealth <= 5)
             {
-                yield return new WaitForEndOfFrame();
-                t.gameObject.GetComponent<Health>().ModifyHealth(-5);
+                wasps.Remove(i);
             }
+            i.GetComponent<Health>().ModifyHealth(-5);
         }
+        if (wasps.Count > 0)
+            return KillAllWasps();
+        else
+            return null;
     }
 
     IEnumerator DelaySpawn(Transform building, int group)
@@ -188,6 +195,7 @@ public class EnemySpawnManager : MonoBehaviour
             for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
             {
                 GameObject wasp = Instantiate(enemyPrefab, building.position, Quaternion.identity);
+                wasps.Add(wasp);
                 waspGroupList[group].wasps.Add(wasp.transform);
                 WaspAI waspAI = wasp.GetComponent<WaspAI>();
                 waspAI.spawnManager = this;

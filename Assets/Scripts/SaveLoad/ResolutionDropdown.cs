@@ -1,16 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(Dropdown))]
+[RequireComponent(typeof(TMP_Dropdown))]
 public class ResolutionDropdown : MonoBehaviour {
-    private Dropdown _dropdown;
+    private TMP_Dropdown _dropdown;
     HashSet<string> _options = new HashSet<string>();
 
     private void Awake() {
-        _dropdown = GetComponent<Dropdown>();
+        _dropdown = GetComponent<TMP_Dropdown>();
         SetupOptions();
     }
 

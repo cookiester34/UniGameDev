@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,7 +12,7 @@ public class Tooltip : MonoBehaviour {
     Camera cam;
     Vector3 min, max;
     RectTransform rect;
-    [SerializeField] private Text _text;
+    [SerializeField] private TMP_Text _text;
     float offset = 1f;
  
 

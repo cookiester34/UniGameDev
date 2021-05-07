@@ -74,8 +74,13 @@ public class FogOfWarBounds : MonoBehaviour
     /// </summary>
     /// <param name="position"></param>
     /// <returns></returns>
-    public bool IsWaspVisible(Vector3 position)
+    public bool IsVisible(Vector3 position)
     {
+        if (CurrentSceneType.SceneType == SceneType.LevelEditor)
+        {
+            return true;
+        }
+
         var tempList = buildBounds;
         foreach (CapsuleCollider i in tempList.ToList())
         {

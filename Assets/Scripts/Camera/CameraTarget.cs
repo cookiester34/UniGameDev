@@ -13,12 +13,12 @@ public class CameraTarget : MonoBehaviour {
 
     void Update() {
 		if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
-			float x = Input.GetAxis("Horizontal");
-			float y = Input.GetAxis("Vertical");
+			float x = Input.GetAxisRaw("Horizontal");
+			float y = Input.GetAxisRaw("Vertical");
 			Vector2 panDirection = new Vector2(x, y);
 			if (panDirection != Vector2.zero) {
-				timeMoving += Time.deltaTime;
-				Pan(panDirection.normalized * Time.deltaTime);
+				timeMoving += Time.unscaledDeltaTime;
+				Pan(panDirection.normalized * Time.unscaledDeltaTime);
 			} else {
 				timeMoving = 0;
 			}
@@ -29,7 +29,7 @@ public class CameraTarget : MonoBehaviour {
 
             if (Input.GetMouseButton(2)) {
                 var difference = Input.mousePosition - lastMousePos;
-                Pan(difference * Time.deltaTime);
+                Pan(difference * Time.unscaledDeltaTime);
             }
         }
 

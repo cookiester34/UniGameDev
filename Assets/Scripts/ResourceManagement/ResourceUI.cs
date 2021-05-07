@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class ResourceUI : MonoBehaviour {
     [SerializeField] private Resource resource;
     [SerializeField] private Color defaultColor = Color.white;
 
-    private Text _text;
+    private TMP_Text _text;
     // Start is called before the first frame update
     void Awake() {
         if (resource == null) {
@@ -17,7 +18,7 @@ public class ResourceUI : MonoBehaviour {
             return;
         }
 
-        _text = GetComponent<Text>();
+        _text = GetComponent<TMP_Text>();
         _text.color = defaultColor;
     }
 
