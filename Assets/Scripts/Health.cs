@@ -45,17 +45,20 @@ public class Health : MonoBehaviour {
         float previousHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-        
-        // Basically an == but comparing floats as == is bad due to their precision
-        if (Math.Abs(currentHealth - previousHealth) > 0.05f) {
-            if (amount > 0) {
-                OnHealthGain?.Invoke();
-            } else {
-                if (currentHealth > 0) {
-                    OnHealthLost?.Invoke();
-                } else {
-                    OnDeath?.Invoke();
-                }
+
+        if (amount > 0)
+        {
+            OnHealthGain?.Invoke();
+        }
+        else
+        {
+            if (currentHealth > 0.1f)
+            {
+                OnHealthLost?.Invoke();
+            }
+            else
+            {
+                OnDeath?.Invoke();
             }
         }
     }

@@ -19,16 +19,17 @@ public class DisasterManager : MonoBehaviour
     }
     #endregion
 
-    //#region OnSeasonChangeSpawnWave
-    //private void OnEnable()
-    //{
-    //    SeasonManager.SeasonChange += TriggerDisaster;
-    //}
-    //private void OnDisable()
-    //{
-    //    SeasonManager.SeasonChange -= TriggerDisaster;
-    //}
-    //#endregion
+    #region OnSeasonChangeSpawnWave
+    private void OnEnable()
+    {
+        SeasonManager.SeasonChange += SnowStorm;
+        snowStormEffect.SetActive(false);
+    }
+    private void OnDisable()
+    {
+        SeasonManager.SeasonChange -= SnowStorm;
+    }
+    #endregion
 
     public int disasterChance = 30;
     public float disasterRadios = 10f;
@@ -37,6 +38,8 @@ public class DisasterManager : MonoBehaviour
 
     private float timer;
     public float timeBetweenDisasters = 25f;
+
+    public GameObject snowStormEffect;
 
     private void FixedUpdate()
     {
@@ -102,6 +105,33 @@ public class DisasterManager : MonoBehaviour
         var direction = destination - obj.transform.position;
         var rotation = Quaternion.LookRotation(direction);
         obj.transform.localRotation = Quaternion.Lerp(obj.transform.rotation, rotation, 1);
+    }
+    #endregion
+
+    #region SnowStorm
+    void SnowStorm()
+    {
+        if (Random.Range(0, 100) < disasterChance)
+        {
+            if (SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
+                StartCoroutine(nameof(SnowStormCycle));
+        }
+    }
+
+    IEnumerator SnowStormCycle()
+    {
+        snowStormEffect.SetActive(true);
+        for (int k = 0; k < 100; k++)
+        {
+            foreach (Building i in BuildingManager.Instance.Buildings)
+            {
+                i.GetComponent<Health>().ModifyHealth(-0.05f);
+            }
+            if (SeasonManager.Instance.GetCurrentSeason() != Seasons.Winter)
+                break;
+            yield return new WaitForSeconds(1);
+        }
+        snowStormEffect.SetActive(false);
     }
     #endregion
 }

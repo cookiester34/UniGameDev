@@ -51,6 +51,7 @@ public class EnemySpawnManager : MonoBehaviour
     /// </summary>
     private int waveHordeMultiplier = 3;
     public int liveWasps = 0;
+    public int waspCap = 100;
 
     [Range(1,5)]
     public int numberOfEnemiesSpawnableMin;
@@ -207,6 +208,9 @@ public class EnemySpawnManager : MonoBehaviour
                     waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
                 }
                 liveWasps++;
+
+                if (i > waspCap)
+                    break;
             }
         }
         OnWaspsSpawn?.Invoke();

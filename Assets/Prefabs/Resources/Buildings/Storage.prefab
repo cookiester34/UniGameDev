@@ -5541,6 +5541,7 @@ MonoBehaviour:
   buildingTier1: {fileID: 6788563238638458517}
   buildingTier2: {fileID: 5261366895230064349}
   buildingTier3: {fileID: 616278990836891147}
+  flightpath: {fileID: 0}
   numAssignedBees: 0
 --- !u!208 &2080038946008790397
 NavMeshObstacle:
@@ -5570,8 +5571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54268b38ed3b18240a8830d92b69fab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 5
-  maxHealth: 5
+  currentHealth: 12
+  maxHealth: 12
   shouldDestroyOnDeath: 1
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
