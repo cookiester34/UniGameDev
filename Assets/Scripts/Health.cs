@@ -30,10 +30,27 @@ public class Health : MonoBehaviour {
     /// </summary>
     public float NormalizedHealth => (currentHealth / maxHealth);
 
+    public bool regen = false;
+    private float regenTimeIntival = 1f;
+
     private void Awake() {
         OnHealthGain += HealthGained;
         OnHealthLost += HealthLost;
         OnDeath += Death;
+    }
+
+    private void Update()
+    {
+        if (regen)
+        {
+            if (regenTimeIntival > 0)
+                regenTimeIntival -= Time.deltaTime;
+            else
+            {
+                regenTimeIntival = 1f;
+                ModifyHealth(0.005f);
+            }
+        }
     }
 
     public void LoadSavedHealth(SavedHealth savedHealth) {
@@ -41,8 +58,15 @@ public class Health : MonoBehaviour {
         maxHealth = savedHealth.maxHealth;
     }
 
+    public void HealForCost(float amount, ResourcePurchase resourcePurchase)
+    {
+        if (ResourceManagement.Instance.CanUseResource(resourcePurchase))
+        {
+            ModifyHealth(amount);
+        }
+    }
+
     public void ModifyHealth(float amount) {
-        float previousHealth = currentHealth;
         currentHealth += amount;
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
 

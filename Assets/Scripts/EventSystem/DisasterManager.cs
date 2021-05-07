@@ -129,7 +129,7 @@ public class DisasterManager : MonoBehaviour
             }
             foreach(Bee i in BeeManager.Instance.Bees)
             {
-                i.GetComponent<Health>().ModifyHealth(-0.001f);
+                i.GetComponent<Health>().ModifyHealth(-0.01f);
             }
             if (SeasonManager.Instance.GetCurrentSeason() != Seasons.Winter)
                 break;
