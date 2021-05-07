@@ -20,6 +20,9 @@ public class Building : MonoBehaviour {
     [FormerlySerializedAs("buildingTeir2")] public GameObject buildingTier2;
     [FormerlySerializedAs("buildingTeir3")] public GameObject buildingTier3;
 
+    [SerializeField] private Flightpath flightpath;
+    public Flightpath Flightpath => flightpath;
+
     public BuildingData BuildingData => buildingData;
 
     public BuildingType BuildingType => buildingType;
@@ -135,9 +138,11 @@ public class Building : MonoBehaviour {
             foundation.CanBuild = true;
         }
 
-        if (_assignedBees != null) {
+        if (_assignedBees != null && _assignedBees.Count > 0) {
             _assignedBees.RemoveAll(x => x == null);
-            foreach (var bee in _assignedBees) {
+            List<Bee> assignedCopy = new List<Bee>();
+            assignedCopy.AddRange(_assignedBees);
+            foreach (var bee in assignedCopy) {
                 UnassignBee(bee);
             }
         }

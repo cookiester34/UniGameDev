@@ -6,5 +6,6 @@ public enum BeeStates {
     Idle,
     Move,
     Sleep,
-    Work
+    Work,
+    Build
 }
