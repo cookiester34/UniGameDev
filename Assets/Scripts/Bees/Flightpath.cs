@@ -9,11 +9,15 @@ public class Flightpath : MonoBehaviour {
     [SerializeField] private List<Transform> flightPoints;
     private int _startIndex = 0;
     private int _endIndex;
+    [SerializeField] private float flyTime;
+    [SerializeField] private float entryTime;
 
     public Transform EntryPoint => entryPoint;
     public Transform ExitPoint => exitPoint;
     public List<Transform> FlightPoints => flightPoints;
     public int EndIndex => _endIndex;
+    public float FlyTime => flyTime;
+    public float EntryTime => entryTime;
 
     private void Awake() {
         if (flightPoints != null) {
