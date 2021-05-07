@@ -17,7 +17,8 @@ public enum BuildingType
     Tower,
     QueenBee,
     Research,
-    EnemyBuilding
+    EnemyBuilding,
+    Healing
 }
 
 /// <summary>
