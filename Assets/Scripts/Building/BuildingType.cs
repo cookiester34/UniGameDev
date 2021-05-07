@@ -18,7 +18,7 @@ public enum BuildingType
     QueenBee,
     Research,
     EnemyBuilding,
-    Healing
+    Repair
 }
 
 /// <summary>

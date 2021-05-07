@@ -21,6 +21,7 @@ public class BuildingManager : MonoBehaviour {
     private BuildState _buildState;
     private SelectionState _selectionState;
     private DestroyState _destroyState;
+    private RepairState _repairState;
 
     #endregion
 
@@ -93,6 +94,7 @@ public class BuildingManager : MonoBehaviour {
         _buildState = new BuildState(this);
         _selectionState = new SelectionState(this);
         _destroyState = new DestroyState(this);
+        _repairState = new RepairState(this);
     }
 	
 	public bool GetIsBuildingOrDestroying() {
@@ -111,6 +113,9 @@ public class BuildingManager : MonoBehaviour {
                 break;
             case BuildingMode.Build:
                 _currentState = _buildState;
+                break;
+            case BuildingMode.Repair:
+                _currentState = _repairState;
                 break;
         }
         
@@ -233,5 +238,6 @@ public class BuildingManager : MonoBehaviour {
 public enum BuildingMode {
     Selection,
     Build,
-    Destroy
+    Destroy,
+    Repair
 }

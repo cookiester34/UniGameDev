@@ -145,7 +145,19 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
     }
 
     public void OnClick() {
-        BuildingMode mode = buildingType == BuildingType.Destroy ? BuildingMode.Destroy : BuildingMode.Build;
+        BuildingMode mode;
+        if(BuildingType == BuildingType.Destroy)
+        {
+            mode = BuildingMode.Destroy;
+        }
+        else if (BuildingType == BuildingType.Repair)
+        {
+            mode = BuildingMode.Repair;
+        }
+        else
+        {
+            mode = BuildingMode.Build;
+        }
         BuildingManager.Instance.SetBuildMode(mode, this);
     }
 }
