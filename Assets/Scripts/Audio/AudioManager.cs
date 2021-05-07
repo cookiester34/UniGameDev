@@ -161,7 +161,15 @@ public class AudioManager : MonoBehaviour {
             AutoModulate(s);
         }
 
-        s.source.Play();
+        // Try playing the sound, since we're taking input from code.
+        try
+        {
+            s.source.Play();
+        }
+        catch (Exception e)
+        {
+            Debug.Log("Error playing sound: " + e.Message);
+        } 
     }
 
     public void PlaySoundClip (AudioClip sound)
