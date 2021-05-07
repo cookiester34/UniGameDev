@@ -69,6 +69,8 @@ public class ProjectileMoveScript : MonoBehaviour
             }
         }
 
+        // Spawn sound emitter and set to destroy
+
         Destroy(gameObject);
     }
 }
