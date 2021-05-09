@@ -11,14 +11,10 @@ public class BuildState : BuildingManagerState {
         if (_propBlock == null) {
             _propBlock = new MaterialPropertyBlock();
         }
-
-        buildingManager.SetUIImage(true);
     }
 
     public override void Exit() {
         GameObject.Destroy(tempBuilding);
-        buildingManager.selectedBuildingText.text = "No building is selected";
-        buildingManager.selectedBuildingUI.sprite = null;
         BuildingFoundation.Hide();
     }
 
@@ -65,8 +61,6 @@ public class BuildState : BuildingManagerState {
                 UIEventAnnounceManager.Instance.AnnounceEvent("Building limit reached for this building type!", AnnounceEventType.Misc);
                 buildingManager.SetBuildMode(BuildingMode.Selection);
             } else {
-                buildingManager.selectedBuildingUI.sprite = buildingData.UiImage;
-                buildingManager.selectedBuildingText.text = buildingData.Description;
                 currentBuilding = buildingData;
                 var buildingModel = currentBuilding.BuildingType.GetModel();
                 tempBuilding = GameObject.Instantiate(buildingModel,

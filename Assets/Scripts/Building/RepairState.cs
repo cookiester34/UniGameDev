@@ -6,15 +6,12 @@ public class RepairState : BuildingManagerState
 {
     public override void Enter()
     {
-        buildingManager.selectedBuildingText.text = "Repair buildings on click";
-        buildingManager.selectedBuildingUI.sprite = buildingManager.DestroyUISprite;
-        buildingManager.SetUIImage(true);
+        
     }
 
     public override void Exit()
     {
-        buildingManager.selectedBuildingText.text = "No building selected.";
-        buildingManager.selectedBuildingUI.sprite = null;
+        
     }
 
     public override void Update()

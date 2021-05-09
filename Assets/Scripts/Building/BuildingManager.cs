@@ -14,6 +14,7 @@ public class BuildingManager : MonoBehaviour {
     public delegate void BuildingEvent(Building building);
     public event BuildingEvent OnBuildingSelected;
     public event BuildingEvent OnBuildingPlaced;
+    public event Action<BuildingData> UiBuildingSelected;
 
     #region states
     
@@ -32,10 +33,6 @@ public class BuildingManager : MonoBehaviour {
     /// </summary>
     public LayerMask buildingMask;
     public LayerMask tileMask;
-
-    // TODO: Two UI elements should receive an event when they need to update rather than manager telling them directly
-    public Image selectedBuildingUI;
-    public TMP_Text selectedBuildingText;
 
     public Sprite DestroyUISprite;
 
@@ -81,11 +78,6 @@ public class BuildingManager : MonoBehaviour {
 
         _instance = this;
 		numBuildingTypes = new int[Enum.GetNames(typeof(BuildingType)).Length];
-        GameObject go = GameObject.Find("SelectedBuildingUIImage");
-        if (go != null) {
-            selectedBuildingUI = go.GetComponent<Image>();
-            selectedBuildingText = go.GetComponentInChildren<TMP_Text>();
-        }
         InitStates();
         SetBuildMode(BuildingMode.Selection);
     }
@@ -123,6 +115,8 @@ public class BuildingManager : MonoBehaviour {
         if (_currentState is BuildState buildState) {
             buildState.SetupBuilding(buildingData);
         }
+
+        UiBuildingSelected?.Invoke(buildingData);
     }
 
     private void Update() {
@@ -202,14 +196,6 @@ public class BuildingManager : MonoBehaviour {
 
             return add;
         });
-    }
-
-    public void SetUIImage(bool visible) {
-        if (selectedBuildingUI != null) {
-            Color color = selectedBuildingUI.color;
-            color.a = visible ? 255 : 0;
-            selectedBuildingUI.color = color;
-        }
     }
 
     #region Debugs
