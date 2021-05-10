@@ -33,8 +33,9 @@ public class SandboxUIMenu : MonoBehaviour {
     }
 
     private void OnDisable() {
-        SeasonManager.Instance.CurrentSeason = (Seasons) currentSeason.value;
-        SeasonManager.Instance.seasonLength = (int) seasonLength.value;
+        //SeasonManager.Instance.CurrentSeason = (Seasons) currentSeason.value;
+        SeasonManager.Instance.seasonLength = (int)seasonLength.value;
+        SeasonManager.Instance.SetCurrentSeason((Seasons)currentSeason.value);
         FogOfWar.Instance.Enable(fogOfWar.isOn);
     }
 }
