@@ -8,6 +8,7 @@ public class SeasonProgressBar : MonoBehaviour
     private RectTransform _rt;
     private float _halfWidth;
     private float _posX = 0f;
+    public float singleSeasonWidth = 278f;
     public bool isDebug = false;
     public float dbgScrollSpeed = 1f;
     private float _scrollSpeed;
@@ -20,10 +21,10 @@ public class SeasonProgressBar : MonoBehaviour
             _scrollSpeed = dbgScrollSpeed;
         } else
         {
-            _scrollSpeed = 100f / (float)SeasonManager.Instance.seasonLength;
+            _scrollSpeed = singleSeasonWidth / (float)SeasonManager.Instance.seasonLength;
         }
         _rt = GetComponent<RectTransform>();
-        _halfWidth = _rt.sizeDelta.x / 2f;
+        _halfWidth = (_rt.sizeDelta.x / 2f) * _rt.localScale.x;
         _posX = _rt.anchoredPosition.x;
         _rt.anchoredPosition = new Vector2(_posX, _rt.anchoredPosition.y);
     }
