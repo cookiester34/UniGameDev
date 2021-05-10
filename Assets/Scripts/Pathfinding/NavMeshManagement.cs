@@ -24,43 +24,73 @@ public class NavMeshManagement : MonoBehaviour
             return;
         }
         _instance = this;
-        time = toggleTime;
+        //time = toggleTime;
     }
     #endregion
 
-    public float toggleTime = 10f;
+    //public float toggleTime = 10f;
     private float time;
     [HideInInspector]
     public List<Transform> towersAffectingNavmesh = new List<Transform>();
-    private bool toggle = false;
+    private int oldTowerCount = 0;
+    private bool canScan = true;
+    private bool scanQue = false;
+    //private bool toggle = false;
 
     private void Update()
     {
         time = -Time.deltaTime;
-        if(time <= 0 && towersAffectingNavmesh.Count > 0)
+        if(time <= 0)
         {
-            time = toggleTime;
-            ScanGraphs();
-            toggle = !toggle;
-            DeactivateBuildings(toggle);
+            CheckTowerList();
+            time = 5f;
         }
+        //if(time <= 0 && towersAffectingNavmesh.Count > 0)
+        //{
+        //    time = toggleTime;
+        //    ScanGraphs();
+        //    toggle = !toggle;
+        //    DeactivateBuildings(toggle);
+        //}
+        if(towersAffectingNavmesh.Count != oldTowerCount)
+        {
+            oldTowerCount = towersAffectingNavmesh.Count;
+            //DeactivateBuildings(true);
+            ScanGraphs();
+        }
+        if (scanQue && canScan)
+        {
+            ScanGraphs();
+            scanQue = false;
+        }
+
     }
 
-    void DeactivateBuildings(bool toggle)
+    void CheckTowerList()
     {
         List<Transform> temp = towersAffectingNavmesh;
-        towersAffectingNavmesh.Clear();
-        foreach(Transform i in temp)
+        foreach (Transform i in temp)
         {
             if (i != null)
-                towersAffectingNavmesh.Add(i);
-        }
-
-        foreach (Transform navObsticle in towersAffectingNavmesh)
-        {
-            navObsticle.gameObject.SetActive(toggle);
+                towersAffectingNavmesh.Remove(i);
         }
     }
+
+    //void DeactivateBuildings(bool toggle)
+    //{
+    //    List<Transform> temp = towersAffectingNavmesh;
+    //    towersAffectingNavmesh.Clear();
+    //    foreach(Transform i in temp)
+    //    {
+    //        if (i != null)
+    //            towersAffectingNavmesh.Add(i);
+    //    }
+
+    //    foreach (Transform navObsticle in towersAffectingNavmesh)
+    //    {
+    //        navObsticle.gameObject.SetActive(toggle);
+    //    }
+    //}
 
     private void ScanGraphs()
     {
@@ -73,10 +103,18 @@ public class NavMeshManagement : MonoBehaviour
     }
     IEnumerator ScanAsync()
     {
-        foreach (Progress progress in AstarPath.active.ScanAsync())
+        if (canScan)
         {
-            //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress * 100).ToString("0") + "%");
-            yield return null;
+            Debug.Log("Scanning Graph");
+            foreach (Progress progress in AstarPath.active.ScanAsync())
+            {
+                //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress * 100).ToString("0") + "%");
+                canScan = false;
+                yield return null;
+            }
+            canScan = true;
         }
+        else
+            scanQue = true;
     }
 }
