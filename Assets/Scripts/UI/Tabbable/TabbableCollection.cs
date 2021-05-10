@@ -18,15 +18,39 @@ public class TabbableCollection : MonoBehaviour {
         }
         
         if (beginningActiveContent != null) {
-            MakeActive(beginningActiveContent);
+            MakeActive(beginningActiveContent, true);
         }
     }
 
+    /// <summary>
+    /// Unable to use default parameters with unity events, hence this exists
+    /// </summary>
+    /// <param name="content"></param>
     public void MakeActive(TabbableContent content) {
-        if (_activeContent != null) {
-            _activeContent.gameObject.SetActive(false);
+        MakeActive(content, false);
+    }
+    
+    public void MakeActive(TabbableContent content, bool force) {
+        if (!force) {
+            if (_activeContent != content) {
+                if (_activeContent != null) {
+                    _activeContent.gameObject.SetActive(false);
+                }
+
+                content.gameObject.SetActive(true);
+            } else {
+                if (_activeContent != null) {
+                    _activeContent.gameObject.SetActive(false);
+                }
+            }
+        } else {
+            if (_activeContent != content) {
+                if (_activeContent != null) {
+                    _activeContent.gameObject.SetActive(false);
+                }
+                content.gameObject.SetActive(true);
+            }
         }
-        content.gameObject.SetActive(content != _activeContent);
     }
 
     public void Deactivate(TabbableContent content) {

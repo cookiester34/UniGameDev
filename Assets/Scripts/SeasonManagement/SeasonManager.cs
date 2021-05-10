@@ -70,7 +70,7 @@ public class SeasonManager : MonoBehaviour
     {
         if (seasonTimer <= 0)
         {
-            seasonTimer = seasonLength;
+            //seasonTimer = seasonLength;
             UpdateSeason(currentSeason);
         }
         else
@@ -113,6 +113,7 @@ public class SeasonManager : MonoBehaviour
     }
 
     private void SeasonChanged() {
+        seasonTimer = seasonLength;
         switch (currentSeason) {
             case Seasons.Spring:
                 seasonDisplay.sprite = springSprite;
@@ -137,6 +138,25 @@ public class SeasonManager : MonoBehaviour
     public void SetCurrentSeason(Seasons season)
     {
         currentSeason = season;
+        if (summerEffect != null)
+        {
+            summerEffect.SetActive(currentSeason == Seasons.Summer);
+        }
+        if (springEffect != null)
+        {
+            springEffect.SetActive(currentSeason == Seasons.Spring);
+        }
+        if (autumnEffect != null)
+        {
+            autumnEffect.SetActive(currentSeason == Seasons.Autumn);
+        }
+        if (winterEffect != null)
+        {
+            winterEffect.SetActive(currentSeason == Seasons.Winter);
+        }
+
+        AudioManager.Instance.PlaySound("SeasonChange");
+        SeasonChange?.Invoke();
     }
 }
 
