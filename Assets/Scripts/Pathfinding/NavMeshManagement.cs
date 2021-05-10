@@ -66,14 +66,8 @@ public class NavMeshManagement : MonoBehaviour
 
     }
 
-    void CheckTowerList()
-    {
-        List<Transform> temp = towersAffectingNavmesh;
-        foreach (Transform i in temp)
-        {
-            if (i != null)
-                towersAffectingNavmesh.Remove(i);
-        }
+    void CheckTowerList() {
+        towersAffectingNavmesh.RemoveAll(x => x == null);
     }
 
     //void DeactivateBuildings(bool toggle)

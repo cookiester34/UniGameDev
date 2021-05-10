@@ -1669,7 +1669,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.8962264, g: 0.25787643, b: 0.25787643, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1831,10 +1831,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2fbb95a2e0a3634f9a467bdf3164650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _contents:
+  contents:
   - {fileID: 72453666680776431}
-  - {fileID: 5828563989147998857}
   - {fileID: 5478257154044618829}
+  - {fileID: 5828563989147998857}
   beginningActiveContent: {fileID: 72453666680776431}
 --- !u!1 &1215696515687770589
 GameObject:
@@ -3650,7 +3650,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 1, g: 0.3160377, b: 0.3160377, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -7690,8 +7690,6 @@ MonoBehaviour:
   resourcesText: {fileID: 176022477365979132}
   nameText: {fileID: 2252762970257196088}
   icon: {fileID: 4311410647082540664}
-  bar: {fileID: 0}
-  thisTabbableButton: {fileID: 0}
   content: {fileID: 5478257154044618829}
   collection: {fileID: 1370244443917654490}
   upgradeBuildingButton: {fileID: 5117620293856858042}

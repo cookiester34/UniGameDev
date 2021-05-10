@@ -48,7 +48,15 @@ public class SelectedBuildingUI : MonoBehaviour {
         _unassignBeeTooltip = unassignBeeButton.GetComponent<TooltipEnabler>();
         _upgradeBuildingTooltip = upgradeBuildingButton.GetComponent<TooltipEnabler>();
         BuildingManager.Instance.OnBuildingSelected += UpdateDisplay;
-        content.OnHide += () => _selectedBuilding = null;
+        content.OnHide += () => {
+            if (_selectedBuilding != null) {
+                var glowEnabler = _selectedBuilding.GetComponent<GlowEnabler>();
+                if (glowEnabler != null) {
+                    glowEnabler.EnableGlow(false);
+                }
+            }
+            _selectedBuilding = null;
+        };
         InvokeRepeating(nameof(UpdateDisplay), 0f, 2f);
     }
 
@@ -64,7 +72,7 @@ public class SelectedBuildingUI : MonoBehaviour {
             return;
         }
 
-        collection.MakeActive(content);
+        collection.MakeActive(content, true);
         researchTree.SetActive(building.BuildingType == BuildingType.Research);
         generalUi.SetActive(building.BuildingType != BuildingType.Research);
         
