@@ -14,8 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 5
   uiImage: {fileID: 21300000, guid: cb1829d8007388a4799b31b882082ec8, type: 3}
-  resourcePurchase: []
-  buildingSize: 0
+  buildingShape: 0
   maxInstances: 100000
-  description: Destroys buildings, offering no refund
+  description: Destroys buildings on click offering a partial refund
   maxNumberOfWorkers: 0
+  tier1RequiredResearch: []
+  tier2RequiredResearch: []
+  tier3RequiredResearch: []
+  tier1Cost: []
+  tier2Cost: []
+  tier3Cost: []

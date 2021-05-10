@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.UI;
@@ -18,7 +19,7 @@ public class SettingsPanel : MonoBehaviour {
     [SerializeField] private Slider musicSlider;
     [SerializeField] private Slider effectsSlider;
     [SerializeField] private Slider uiSlider;
-    [SerializeField] private Dropdown quality;
+    [SerializeField] private TMP_Dropdown quality;
     [SerializeField] private Toggle fullscreen;
     [SerializeField] private ResolutionDropdown resolution;
 

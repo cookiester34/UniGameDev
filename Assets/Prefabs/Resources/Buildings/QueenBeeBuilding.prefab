@@ -5833,6 +5833,8 @@ MonoBehaviour:
   - {fileID: 7581878884433201981}
   - {fileID: 6408510576254959207}
   - {fileID: 940932819254251911}
+  flyTime: 4
+  entryTime: 2.5
 --- !u!1 &7642171427236103336
 GameObject:
   m_ObjectHideFlags: 0

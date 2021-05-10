@@ -954,6 +954,7 @@ GameObject:
   - component: {fileID: 1215696514677338196}
   - component: {fileID: 1215696514677338203}
   - component: {fileID: 3702293289293254084}
+  - component: {fileID: 72453666680776431}
   m_Layer: 5
   m_Name: BuildBar(Scroll View)
   m_TagString: Untagged
@@ -1061,6 +1062,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 5837889534303428324}
+--- !u!114 &72453666680776431
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215696514677338202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb180bba2b6d0a4c84816ba44a0d868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 1370244443917654490}
+  hideButtonOnDismiss: 0
+  associatedButton: {fileID: 1215696515477898302}
 --- !u!1 &1215696514715665428
 GameObject:
   m_ObjectHideFlags: 0
@@ -1377,6 +1393,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1215696515448509384}
+  - component: {fileID: 5828563989147998857}
   m_Layer: 5
   m_Name: DebugMenu
   m_TagString: Untagged
@@ -1406,6 +1423,21 @@ RectTransform:
   m_AnchoredPosition: {x: -542.1, y: 180.2002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5828563989147998857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215696515448509391}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb180bba2b6d0a4c84816ba44a0d868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 1370244443917654490}
+  hideButtonOnDismiss: 0
+  associatedButton: {fileID: 1215696516766285282}
 --- !u!1 &1215696515474139473
 GameObject:
   m_ObjectHideFlags: 0
@@ -1553,7 +1585,6 @@ GameObject:
   - component: {fileID: 1215696515477898296}
   - component: {fileID: 1215696515477898303}
   - component: {fileID: 1215696515477898302}
-  - component: {fileID: 1215696515477898301}
   m_Layer: 5
   m_Name: BuildingsButton
   m_TagString: Untagged
@@ -1638,7 +1669,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 0.8962264, g: 0.25787643, b: 0.25787643, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -1660,30 +1691,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1215696515655329252}
-        m_MethodName: MakeContentsActive
+      - m_Target: {fileID: 1370244443917654490}
+        m_MethodName: MakeActive
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1215696515477898301}
-          m_ObjectArgumentAssemblyTypeName: UI.UIBottomBarButton, Assembly-CSharp
+          m_ObjectArgument: {fileID: 72453666680776431}
+          m_ObjectArgumentAssemblyTypeName: TabbableContent, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1215696515477898301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215696515477898300}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  content: {fileID: 1215696514677338202}
 --- !u!1 &1215696515618862058
 GameObject:
   m_ObjectHideFlags: 0
@@ -1771,7 +1789,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1215696515655329259}
-  - component: {fileID: 1215696515655329252}
+  - component: {fileID: 1370244443917654490}
   m_Layer: 5
   m_Name: BottomButtons
   m_TagString: Untagged
@@ -1801,7 +1819,7 @@ RectTransform:
   m_AnchoredPosition: {x: -475, y: 30}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1215696515655329252
+--- !u!114 &1370244443917654490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1810,10 +1828,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1215696515655329258}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3d2bf08041afa034fbcdd9918091ef96, type: 3}
+  m_Script: {fileID: 11500000, guid: d2fbb95a2e0a3634f9a467bdf3164650, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  beginActive: {fileID: 1215696515477898301}
+  _contents:
+  - {fileID: 72453666680776431}
+  - {fileID: 5828563989147998857}
+  - {fileID: 5478257154044618829}
+  beginningActiveContent: {fileID: 72453666680776431}
 --- !u!1 &1215696515687770589
 GameObject:
   m_ObjectHideFlags: 0
@@ -2363,6 +2385,7 @@ GameObject:
   - component: {fileID: 1215696516160532267}
   - component: {fileID: 1215696516160532261}
   - component: {fileID: 1215696516160532260}
+  - component: {fileID: 5409508841368907145}
   m_Layer: 5
   m_Name: SelectedBuildingUIImage
   m_TagString: Untagged
@@ -2427,6 +2450,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 1
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5409508841368907145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215696516160532266}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1bdcee7e61a0e1d47a85e9616c16babe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1215696516165152878
 GameObject:
   m_ObjectHideFlags: 0
@@ -3530,7 +3565,6 @@ GameObject:
   - component: {fileID: 1215696516766285084}
   - component: {fileID: 1215696516766285283}
   - component: {fileID: 1215696516766285282}
-  - component: {fileID: 1215696516766285281}
   - component: {fileID: 2318204721971783036}
   m_Layer: 5
   m_Name: ResourcesButton
@@ -3616,7 +3650,7 @@ MonoBehaviour:
   m_Transition: 1
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_HighlightedColor: {r: 1, g: 0.3160377, b: 0.3160377, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
@@ -3638,30 +3672,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1215696515655329252}
-        m_MethodName: MakeContentsActive
+      - m_Target: {fileID: 1370244443917654490}
+        m_MethodName: MakeActive
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 1215696516766285281}
-          m_ObjectArgumentAssemblyTypeName: UI.UIBottomBarButton, Assembly-CSharp
+          m_ObjectArgument: {fileID: 5828563989147998857}
+          m_ObjectArgumentAssemblyTypeName: TabbableContent, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &1215696516766285281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1215696516766285287}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  content: {fileID: 1215696515448509391}
 --- !u!114 &2318204721971783036
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4435,7 +4456,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5261,7 +5282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -6412,7 +6433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -7327,8 +7348,6 @@ GameObject:
   - component: {fileID: 6281862962128314830}
   - component: {fileID: 373886559862923480}
   - component: {fileID: 6391523318595322705}
-  - component: {fileID: 3839816034020284615}
-  - component: {fileID: 5272884929594048170}
   m_Layer: 5
   m_Name: SelectedButton
   m_TagString: Untagged
@@ -7435,42 +7454,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1215696515655329252}
-        m_MethodName: MakeContentsActive
+      - m_Target: {fileID: 1370244443917654490}
+        m_MethodName: MakeActive
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 3839816034020284615}
-          m_ObjectArgumentAssemblyTypeName: UI.UIBottomBarButton, Assembly-CSharp
+          m_ObjectArgument: {fileID: 5478257154044618829}
+          m_ObjectArgumentAssemblyTypeName: TabbableContent, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &3839816034020284615
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157799941638731265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ddc2e62815cb7d4594cc67fdb5f96f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  content: {fileID: 7066135941653756892}
---- !u!114 &5272884929594048170
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6157799941638731265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 546d0142bec4fcc4fbbd43dc111a9a4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &6216683197501156447
 GameObject:
   m_ObjectHideFlags: 0
@@ -7649,6 +7643,7 @@ GameObject:
   - component: {fileID: 4480331613445582192}
   - component: {fileID: 8724919511634046939}
   - component: {fileID: 1867062454596849853}
+  - component: {fileID: 5478257154044618829}
   m_Layer: 5
   m_Name: SelectedBuildingContents
   m_TagString: Untagged
@@ -7695,8 +7690,10 @@ MonoBehaviour:
   resourcesText: {fileID: 176022477365979132}
   nameText: {fileID: 2252762970257196088}
   icon: {fileID: 4311410647082540664}
-  bar: {fileID: 1215696515655329252}
-  thisTabbableButton: {fileID: 3839816034020284615}
+  bar: {fileID: 0}
+  thisTabbableButton: {fileID: 0}
+  content: {fileID: 5478257154044618829}
+  collection: {fileID: 1370244443917654490}
   upgradeBuildingButton: {fileID: 5117620293856858042}
   assignBeeButton: {fileID: 7089807534885072901}
   unassignBeeButton: {fileID: 5715545151319825128}
@@ -7713,6 +7710,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 8052771459758701871}
+--- !u!114 &5478257154044618829
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7066135941653756892}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fbb180bba2b6d0a4c84816ba44a0d868, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  collection: {fileID: 1370244443917654490}
+  hideButtonOnDismiss: 1
+  associatedButton: {fileID: 6391523318595322705}
 --- !u!1 &7089207414318431613
 GameObject:
   m_ObjectHideFlags: 0
@@ -9871,15 +9883,15 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 361cd233dbf870a458f9d35c597b6312, type: 3}
---- !u!224 &5082750855409388881 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
-    type: 3}
-  m_PrefabInstance: {fileID: 1215696514678314965}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5082750855409388882 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6221313262142200455, guid: 361cd233dbf870a458f9d35c597b6312,
+    type: 3}
+  m_PrefabInstance: {fileID: 1215696514678314965}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5082750855409388881 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
     type: 3}
   m_PrefabInstance: {fileID: 1215696514678314965}
   m_PrefabAsset: {fileID: 0}
@@ -10978,15 +10990,15 @@ PrefabInstance:
         type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 361cd233dbf870a458f9d35c597b6312, type: 3}
---- !u!224 &5082750854644750727 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
-    type: 3}
-  m_PrefabInstance: {fileID: 1215696515591324419}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &5082750854644750724 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6221313262142200455, guid: 361cd233dbf870a458f9d35c597b6312,
+    type: 3}
+  m_PrefabInstance: {fileID: 1215696515591324419}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &5082750854644750727 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
     type: 3}
   m_PrefabInstance: {fileID: 1215696515591324419}
   m_PrefabAsset: {fileID: 0}
@@ -12530,15 +12542,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 361cd233dbf870a458f9d35c597b6312, type: 3}
---- !u!224 &6969355649583232261 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
-    type: 3}
-  m_PrefabInstance: {fileID: 3958289665339731841}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6969355649583232262 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6221313262142200455, guid: 361cd233dbf870a458f9d35c597b6312,
+    type: 3}
+  m_PrefabInstance: {fileID: 3958289665339731841}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &6969355649583232261 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
     type: 3}
   m_PrefabInstance: {fileID: 3958289665339731841}
   m_PrefabAsset: {fileID: 0}

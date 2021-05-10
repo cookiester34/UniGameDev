@@ -13,8 +13,8 @@ public class SelectedBuildingUI : MonoBehaviour {
     [SerializeField] private TMP_Text resourcesText;
     [SerializeField] private TMP_Text nameText;
     [SerializeField] private Image icon;
-    [SerializeField] private UIBottomBar bar;
-    [SerializeField] private UIBottomBarButton thisTabbableButton;
+    [SerializeField] private TabbableContent content;
+    [SerializeField] private TabbableCollection collection;
     [SerializeField] private Button upgradeBuildingButton;
     [SerializeField] private Button assignBeeButton;
     [SerializeField] private Button unassignBeeButton;
@@ -48,7 +48,8 @@ public class SelectedBuildingUI : MonoBehaviour {
         _unassignBeeTooltip = unassignBeeButton.GetComponent<TooltipEnabler>();
         _upgradeBuildingTooltip = upgradeBuildingButton.GetComponent<TooltipEnabler>();
         BuildingManager.Instance.OnBuildingSelected += UpdateDisplay;
-        InvokeRepeating(nameof(UpdateDisplay), 0f, 1f);
+        content.OnHide += () => _selectedBuilding = null;
+        InvokeRepeating(nameof(UpdateDisplay), 0f, 2f);
     }
 
     private void UpdateDisplay() {
@@ -57,14 +58,13 @@ public class SelectedBuildingUI : MonoBehaviour {
 
     private void UpdateDisplay(Building building) {
         _selectedBuilding = building;
-        
-        thisTabbableButton.gameObject.SetActive(building != null);
+
         if (building == null) {
-            thisTabbableButton.ActivateContents(false);
+            collection.Deactivate(content);
             return;
         }
 
-        bar.MakeContentsActive(thisTabbableButton, true);
+        collection.MakeActive(content);
         researchTree.SetActive(building.BuildingType == BuildingType.Research);
         generalUi.SetActive(building.BuildingType != BuildingType.Research);
         

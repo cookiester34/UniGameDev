@@ -31,9 +31,9 @@ public class BeeBuildState : BeeState {
         }
         _mainPath = new Path(PathType.CatmullRom, points, 2);
         Tween startTween = _stateMachine.gameObject.transform.DOMove(
-            _flightpath.GetPoint(0).position, 1f);
+            _flightpath.GetPoint(0).position, _flightpath.EntryTime);
         startTween.OnComplete(() => {
-            Tween tween = _stateMachine.gameObject.transform.DOPath(_mainPath, 3f);
+            Tween tween = _stateMachine.gameObject.transform.DOPath(_mainPath, _flightpath.FlyTime);
             tween.OnComplete(AdvancePath);
         });
     }
@@ -74,12 +74,12 @@ public class BeeBuildState : BeeState {
         // }
         
         Tween finalTween = _stateMachine.gameObject.transform.DOMove(
-            _flightpath.GetPoint(_flightpath.EndIndex).position, 1f);
+            _flightpath.GetPoint(_flightpath.EndIndex).position, _flightpath.EntryTime);
         finalTween.OnComplete(() => _stateMachine.ChangeState(BeeStates.Idle));
     }
 
     private void RestartPath() {
-        Tween pathTween = _stateMachine.gameObject.transform.DOPath(_mainPath, 3f);
+        Tween pathTween = _stateMachine.gameObject.transform.DOPath(_mainPath, _flightpath.FlyTime);
         pathTween.OnComplete(AdvancePath);
     }
 

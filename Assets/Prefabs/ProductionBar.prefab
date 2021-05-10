@@ -199,4 +199,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   progressBar: {fileID: 7559670000160085053}
+  progress: {fileID: 6772027739237264936}
   supplier: {fileID: 0}

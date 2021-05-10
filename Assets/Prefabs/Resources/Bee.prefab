@@ -231,8 +231,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54268b38ed3b18240a8830d92b69fab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 1
-  maxHealth: 1
+  currentHealth: 3
+  maxHealth: 3
   shouldDestroyOnDeath: 1
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
@@ -242,6 +242,8 @@ MonoBehaviour:
   deathParticles: {fileID: 325289575595182778, guid: 8543d490924f4f248b11901ea61c5e53,
     type: 3}
   deathAudio: {fileID: -6088405221562166559}
+  regen: 1
+  regenTimeIntival: 1
 --- !u!65 &5540302586420343944
 BoxCollider:
   m_ObjectHideFlags: 0

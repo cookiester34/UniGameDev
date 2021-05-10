@@ -4,9 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class RadialProgress : MonoBehaviour
-{
+public class RadialProgress : MonoBehaviour {
     public Image progressBar;
+    [SerializeField] private GameObject progress;
     protected float currentValue;
     private float fillSpeed;
     private bool active;
@@ -32,11 +32,13 @@ public class RadialProgress : MonoBehaviour
     {
         active = false;
         progressBar.fillAmount = 0;
+        progress.SetActive(false);
     }
 
     public void Activate(float speed)
     {
         active = true;
         fillSpeed = speed;
+        progress.SetActive(fillSpeed > 0);
     }
 }
