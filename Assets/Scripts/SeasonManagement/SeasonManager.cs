@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 using Util;
 
 public class SeasonManager : MonoBehaviour
@@ -48,6 +49,7 @@ public class SeasonManager : MonoBehaviour
     public static event Action SeasonChange;
     float seasonTimer;
     public int seasonLength;
+    private int _currentYear = 0;
     
     public GameObject springEffect;
     public GameObject summerEffect;
@@ -60,6 +62,8 @@ public class SeasonManager : MonoBehaviour
     [SerializeField] private Sprite autumnSprite;
     [SerializeField] private Sprite winterSprite;
 
+    [SerializeField] private TMP_Text _yearText;
+
     private void Start() {
         SeasonChange += SeasonChanged;
         seasonTimer = seasonLength;
@@ -68,6 +72,10 @@ public class SeasonManager : MonoBehaviour
 
     private void Update()
     {
+        if (_yearText)
+        {
+            _yearText.text = "Year " + _currentYear.ToString();
+        }
         if (seasonTimer <= 0)
         {
             //seasonTimer = seasonLength;
@@ -91,25 +99,12 @@ public class SeasonManager : MonoBehaviour
                 currentSeason = Seasons.Winter;
                 break;
             case Seasons.Winter:
+                _currentYear++;
                 currentSeason = Seasons.Spring;
                 break;
         }
 
-        if (summerEffect != null) {
-            summerEffect.SetActive(currentSeason == Seasons.Summer);
-        }
-        if (springEffect != null) {
-            springEffect.SetActive(currentSeason == Seasons.Spring);
-        }
-        if (autumnEffect != null) {
-            autumnEffect.SetActive(currentSeason == Seasons.Autumn);
-        }
-        if (winterEffect != null) {
-            winterEffect.SetActive(currentSeason == Seasons.Winter);
-        }
-
-        AudioManager.Instance.PlaySound("SeasonChange");
-        SeasonChange?.Invoke();
+        SeasonChangeHandler();
     }
 
     private void SeasonChanged() {
@@ -137,7 +132,23 @@ public class SeasonManager : MonoBehaviour
     }
     public void SetCurrentSeason(Seasons season)
     {
+        if (currentSeason == season)
+        {
+            _currentYear++;
+        } else
+        {
+            int seasonDiff = season - currentSeason;
+            if (seasonDiff < 0)
+            {
+                _currentYear++;
+            }
+        }
         currentSeason = season;
+        SeasonChangeHandler();
+    }
+
+    void SeasonChangeHandler()
+    {
         if (summerEffect != null)
         {
             summerEffect.SetActive(currentSeason == Seasons.Summer);
@@ -157,6 +168,11 @@ public class SeasonManager : MonoBehaviour
 
         AudioManager.Instance.PlaySound("SeasonChange");
         SeasonChange?.Invoke();
+    }
+
+    public int GetCurrentYear()
+    {
+        return _currentYear;
     }
 }
 
