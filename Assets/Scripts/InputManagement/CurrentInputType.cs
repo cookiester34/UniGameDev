@@ -51,6 +51,10 @@ public class CurrentInputType : MonoBehaviour
 				inputType = InputType.Game;
 			}
 		}
+		else if (PauseMenu.Instance.GetIsPaused())
+        {
+			inputType = InputType.Other;
+        }
 		else {
 			inputType = InputType.Game;
 		}

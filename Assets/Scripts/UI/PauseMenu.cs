@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
 	public GameObject _settingsMenu;
 	public GameObject _sandboxMenu;
 	private bool _hasSettingsLoaded;
-	private SettingsPanel _settingsScript;
+	public SettingsPanel _settingsScript;
 
 	public static event Action Pause;
 	public static event Action UnPause;
@@ -42,7 +42,7 @@ public class PauseMenu : MonoBehaviour
 		//_mainContainer = transform.Find("Container").gameObject;
 		//_saveLoadMenu = transform.Find("SaveLoadPanel").gameObject;
 		//_settingsMenu = transform.Find("SettingsPanel").gameObject;
-		_settingsScript = _settingsMenu.GetComponent<SettingsPanel>();
+		//_settingsScript = _settingsMenu.GetComponent<SettingsPanel>();
 		_mainContainer.SetActive(false);
 		_saveLoadMenu.SetActive(false);
 		_settingsMenu.SetActive(false);
