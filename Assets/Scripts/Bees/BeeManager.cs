@@ -26,8 +26,14 @@ public class BeeManager : MonoBehaviour {
     public static BeeManager Instance {
         get {
             if (_instance == null) {
-                GameObject go = Resources.Load<GameObject>(ResourceLoad.BeeSingleton);
-                Instantiate(go);
+                try
+                {
+                    GameObject go = Resources.Load<GameObject>(ResourceLoad.BeeSingleton); //NOTE: This doesn't work. The prefab at the specified path doesn't exist. Even if it did, a queen bee building would spawn at a weird location
+                    Instantiate(go);
+                } catch
+                {
+                    return null; //doing this so that code in DisasterManager doesn't completely break
+                }
             }
 
             return _instance;
