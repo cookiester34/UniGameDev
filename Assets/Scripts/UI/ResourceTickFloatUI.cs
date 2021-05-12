@@ -19,6 +19,9 @@ public class ResourceTickFloatUI : MonoBehaviour
 
     public List<ResourceSupplier> suppliers = new List<ResourceSupplier>();
 
+    public GameObject resourceFloatUIObject;
+    public Transform buildingPos;
+
 
     // Update is called once per frame
     void FixedUpdate()
@@ -103,45 +106,10 @@ public class ResourceTickFloatUI : MonoBehaviour
 
     public void TriggerTextEventResourcePurchaseList(bool isPositive, List<ResourcePurchase> resourcePurchaseList)
     {
-
-        updateTextPos = false;
-        bool secondUI = false;
-        foreach (ResourcePurchase i in resourcePurchaseList)
-        {
-            if (!secondUI)
-            {
-                if (isPositive)
-                {
-                    resourceInfoText1.text = "+ " + i.cost;
-                    resourceInfoText1.color = Color.green;
-                }
-                else
-                {
-                    resourceInfoText1.text = i.cost.ToString();
-                    resourceInfoText1.color = Color.red;
-                }
-            }
-            else
-            {
-                if (isPositive)
-                {
-                    resourceInfoText2.text = "+ " + i.cost;
-                    resourceInfoText2.color = Color.green;
-                }
-                else
-                {
-                    resourceInfoText2.text = i.cost.ToString();
-                    resourceInfoText2.color = Color.red;
-                }
-            }
-            
-            secondUI = true;
-            canvas.position = startPos;
-            pos = canvas.position;
-            newY = pos.y + heightStartPos;
-            canvas.gameObject.SetActive(true);
-            alpha = 1;
-            updateTextPos = true;
-        }
+        GameObject floatUIClone = Instantiate(resourceFloatUIObject, buildingPos.position, Quaternion.identity);
+        ResourceFloatUI floatUI = floatUIClone.GetComponent<ResourceFloatUI>();
+        floatUI.startPos = buildingPos.position;
+        floatUI.heightStartPos = heightStartPos;
+        floatUI.TriggerResourceText(isPositive, resourcePurchaseList);
     }
 }

@@ -5370,6 +5370,9 @@ MonoBehaviour:
   fillRadial: {fileID: 0}
   heightStartPos: 1
   suppliers: []
+  resourceFloatUIObject: {fileID: 2538298698804660122, guid: d4796bb65c539074e9cd81b681284ef7,
+    type: 3}
+  buildingPos: {fileID: 8351206003755007005}
 --- !u!114 &7006334519606629488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5923,7 +5926,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 6530205768283716941
+  uniqueID: 910981969350192015
   points:
   - {x: 0.046101768, y: 0, z: 3.4951904}
   - {x: -2.4699256, y: 0, z: 2.7762866}
