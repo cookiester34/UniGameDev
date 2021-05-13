@@ -37,11 +37,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_420197E2:
-        m_Texture: {fileID: 2800000, guid: a13ce151c0a1e614aa12b297b1c8bc3c, type: 3}
+        m_Texture: {fileID: 2800000, guid: 2c28614e930d9204d9ad084ab3553788, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_459AB3B1:
-        m_Texture: {fileID: 2800000, guid: 0a015e596dc5a6a419a64991569c5682, type: 3}
+        m_Texture: {fileID: 2800000, guid: b7786b7374b392345acc263d54fe3133, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - Texture2D_54A0517D:
+        m_Texture: {fileID: 2800000, guid: 2cd0b565db558104f8464353d68a6bc2, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_A77B37C4:
@@ -49,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_D186AC0B:
-        m_Texture: {fileID: 2800000, guid: 800342ac0e55dec44ab764fac7203914, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7864c4ce15153654296acc766ca9cb28, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -149,7 +153,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_19305F1A: 0.76
+    - Vector1_19305F1A: 0.95
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -285,6 +289,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
+    - Color_482B9BFE: {r: 0.16078432, g: 0.11237589, b: 0.09411765, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
