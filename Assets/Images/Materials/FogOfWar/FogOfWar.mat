@@ -27,7 +27,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 3000
+  m_CustomRenderQueue: 3400
   stringTagMap:
     MotionVector: User
     RenderType: Transparent
@@ -166,7 +166,7 @@ Material:
     - _AlphaCutoffPrepass: 0.5
     - _AlphaCutoffShadow: 0.5
     - _AlphaDstBlend: 1
-    - _AlphaSrcBlend: 1
+    - _AlphaSrcBlend: 0
     - _Anisotropy: 0
     - _BlendMode: 1
     - _CoatMask: 0
@@ -233,7 +233,7 @@ Material:
     - _Radius: 1.38
     - _ReceivesSSR: 0
     - _RefractionModel: 0
-    - _RenderQueueType: 5
+    - _RenderQueueType: 6
     - _RequireSplitLighting: 0
     - _SSRefractionProjectionModel: 0
     - _ShadowMatteFilter: 1.8e-43
@@ -279,7 +279,8 @@ Material:
     - _ZTestTransparent: 5
     - _ZWrite: 0
     m_Colors:
-    - Color_BDAFE2CA: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 0}
+    - Color_A85BF699: {r: 0.5566038, g: 0.5566038, b: 0.5566038, a: 1}
+    - Color_BDAFE2CA: {r: 0.5188678, g: 0.5188678, b: 0.5188678, a: 0}
     - Color_F69F1A11: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 1}
     - Vector3_C4BF94B7: {r: 6, g: 1, b: 4, a: 0}
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
