@@ -23,7 +23,7 @@ public class SeasonProgressBar : MonoBehaviour
         } else
         {
             _scrollSpeed = singleSeasonWidth / (float)SeasonManager.Instance.seasonLength;
-            SeasonManager.SeasonChange += HandleSeasonChange;
+            SeasonManager.Instance.SeasonChange += HandleSeasonChange;
         }
         _rt = GetComponent<RectTransform>();
         _halfWidth = (_rt.sizeDelta.x / 2f) * _rt.localScale.x;
