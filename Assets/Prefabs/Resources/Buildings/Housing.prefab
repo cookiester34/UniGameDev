@@ -5157,7 +5157,7 @@ MonoBehaviour:
   m_UVBias: {x: 0, y: 0}
   m_AffectsTransparency: 0
   m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 2.5, y: 2.5, z: 0.5}
+  m_Size: {x: 3.5, y: 3.5, z: 0.5}
   m_FadeFactor: 1
 --- !u!1 &4270626133237559758
 GameObject:
