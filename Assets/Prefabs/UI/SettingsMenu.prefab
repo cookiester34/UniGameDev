@@ -7822,7 +7822,7 @@ MonoBehaviour:
   musicSlider: {fileID: 3488933512887431994}
   effectsSlider: {fileID: 6261527760333819876}
   uiSlider: {fileID: 5012003780341926883}
-  quality: {fileID: 5779779359131120023}
+  quality: {fileID: 6113536879521551764}
   fullscreen: {fileID: 3329268865298949419}
   resolution: {fileID: 7141919783504810877}
 --- !u!1 &6948017759753146500
