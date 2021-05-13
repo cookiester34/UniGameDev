@@ -16,6 +16,8 @@ public class DisasterManager : MonoBehaviour
         }
         _instance = this;
         SetupQueenBee();
+        disasterChance = baseDisasterChance;
+        InvokeRepeating(nameof(TriggerDisaster), 30, 30);
     }
     #endregion
 
@@ -31,26 +33,11 @@ public class DisasterManager : MonoBehaviour
     }
     #endregion
 
-    public int disasterChance = 30;
-    public float disasterRadios = 10f;
-    public float distanceFromQueen = 2f;
+    private int disasterChance = 30;
+    public int baseDisasterChance = 30;
     public int minNumberOfBuildingsToTrigger = 5;
 
-    private float timer;
-    public float timeBetweenDisasters = 25f;
-
     public GameObject snowStormEffect;
-
-    private void FixedUpdate()
-    {
-        if (timer <= 0)
-        {
-            timer = timeBetweenDisasters;
-            TriggerDisaster();
-        }
-        else
-            timer -= Time.deltaTime;
-    }
 
     void TriggerDisaster()
     {
@@ -58,6 +45,11 @@ public class DisasterManager : MonoBehaviour
         {
             if(BuildingManager.Instance.Buildings.Count > minNumberOfBuildingsToTrigger)
                 spawnMeteor();
+            disasterChance = baseDisasterChance;
+        }
+        else
+        {
+            disasterChance += 5;
         }
     }
 
