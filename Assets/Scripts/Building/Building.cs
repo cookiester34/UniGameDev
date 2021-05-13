@@ -144,6 +144,14 @@ public class Building : MonoBehaviour {
             assignedCopy.AddRange(_assignedBees);
             foreach (var bee in assignedCopy) {
                 UnassignBee(bee);
+
+                switch (buildingType) {
+                    case BuildingType.Housing:
+                        break;
+                    default:
+                        ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).ModifyAmount(-1);
+                        break;
+                }
             }
         }
 
