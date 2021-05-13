@@ -123,7 +123,7 @@ public static class BuildingTypeExtension {
                 break;
 
             case BuildingType.TowerRepellant:
-                obj = Resources.Load<GameObject>("BuildingModels/Tower");//needs changing
+                obj = Resources.Load<GameObject>("BuildingModels/TowerRepellent");
                 break;
         }
 
