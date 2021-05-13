@@ -121,15 +121,18 @@ public class DisasterManager : MonoBehaviour
     IEnumerator SnowStormCycle()
     {
         snowStormEffect.SetActive(true);
-        for (int k = 0; k < 100; k++)
+        while (true)
         {
             foreach (Building i in BuildingManager.Instance.Buildings)
             {
                 i.GetComponent<Health>().ModifyHealth(-0.05f);
             }
-            foreach(Bee i in BeeManager.Instance.Bees)
+            if (BeeManager.Instance)
             {
-                i.GetComponent<Health>().ModifyHealth(-0.01f);
+                foreach (Bee i in BeeManager.Instance.Bees)
+                {
+                    i.GetComponent<Health>().ModifyHealth(-0.01f);
+                }
             }
             if (SeasonManager.Instance.GetCurrentSeason() != Seasons.Winter)
                 break;

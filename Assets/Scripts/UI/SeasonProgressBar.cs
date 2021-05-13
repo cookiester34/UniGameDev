@@ -41,6 +41,7 @@ public class SeasonProgressBar : MonoBehaviour
 
     void HandleSeasonChange()
     {
+        _scrollSpeed = singleSeasonWidth / (float)SeasonManager.Instance.seasonLength;
         //Debug.Log(SeasonManager.Instance.GetCurrentSeason().ToString());
         Seasons currentSeason = SeasonManager.Instance.GetCurrentSeason();
         switch (currentSeason)

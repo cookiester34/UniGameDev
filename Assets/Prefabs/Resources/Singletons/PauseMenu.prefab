@@ -7894,7 +7894,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_TargetDisplay: 0
 --- !u!114 &8461780049010728530
 MonoBehaviour:
@@ -7951,6 +7951,7 @@ MonoBehaviour:
   _saveLoadMenu: {fileID: 8776753514949398395}
   _settingsMenu: {fileID: 3828674021242091115}
   _sandboxMenu: {fileID: 8066053159783518789}
+  _settingsScript: {fileID: 8021361857522590366}
 --- !u!1 &7223355516753892458
 GameObject:
   m_ObjectHideFlags: 0
@@ -10818,6 +10819,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
+      objectReference: {fileID: 8021361857522590366}
+    - target: {fileID: 748215992958217210, guid: ebaea9b8b37a5a64ba022473d5da0ed4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: SaveSettings
       objectReference: {fileID: 0}
     - target: {fileID: 754699586606132329, guid: ebaea9b8b37a5a64ba022473d5da0ed4,
         type: 3}
@@ -10866,8 +10872,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1338150273198828640, guid: ebaea9b8b37a5a64ba022473d5da0ed4,
         type: 3}
+      propertyPath: m_Size
+      value: 0.40000004
+      objectReference: {fileID: 0}
+    - target: {fileID: 1338150273198828640, guid: ebaea9b8b37a5a64ba022473d5da0ed4,
+        type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 1.0000001
       objectReference: {fileID: 0}
     - target: {fileID: 1627836498808123830, guid: ebaea9b8b37a5a64ba022473d5da0ed4,
         type: 3}
@@ -11948,3 +11959,15 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1620961236353841860}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &8021361857522590366 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8732292467280058458, guid: ebaea9b8b37a5a64ba022473d5da0ed4,
+    type: 3}
+  m_PrefabInstance: {fileID: 1620961236353841860}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eae9ec96d9245b4f9d27f468ebd5533, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

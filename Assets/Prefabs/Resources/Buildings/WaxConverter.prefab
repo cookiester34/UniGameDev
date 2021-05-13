@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 6530205768283716941
+  uniqueID: 8079907527723052654
   points:
   - {x: 0.056620017, y: 0, z: 1.1711848}
   - {x: 2.109604, y: 0, z: 0.34549862}
@@ -554,6 +554,9 @@ MonoBehaviour:
   suppliers:
   - {fileID: 8371589692882830809}
   - {fileID: 5841476588566671173}
+  resourceFloatUIObject: {fileID: 2538298698804660122, guid: d4796bb65c539074e9cd81b681284ef7,
+    type: 3}
+  buildingPos: {fileID: 9044554618713697553}
 --- !u!114 &2679373276659679054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5682,6 +5685,7 @@ MonoBehaviour:
   healthLostAudio: {fileID: -2637207741737993495}
   deathParticles: {fileID: 0}
   deathAudio: {fileID: 0}
+  regen: 0
 --- !u!114 &-6864802344025532779
 MonoBehaviour:
   m_ObjectHideFlags: 0

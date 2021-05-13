@@ -168,6 +168,9 @@ MonoBehaviour:
   fillRadial: {fileID: 0}
   heightStartPos: 1
   suppliers: []
+  resourceFloatUIObject: {fileID: 2538298698804660122, guid: d4796bb65c539074e9cd81b681284ef7,
+    type: 3}
+  buildingPos: {fileID: 272088267735573681}
 --- !u!114 &1499886308936542768
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5290,7 +5293,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 1
-  uniqueID: 6530205768283716941
+  uniqueID: 88178823253725271
   points:
   - {x: 0.6962179, y: 0, z: 0.37971005}
   - {x: 0.9869121, y: 0, z: -0.49010217}
@@ -5580,6 +5583,7 @@ MonoBehaviour:
   healthLostAudio: {fileID: 4227842971696157888}
   deathParticles: {fileID: 0}
   deathAudio: {fileID: 0}
+  regen: 0
 --- !u!114 &-3096613449295289422
 MonoBehaviour:
   m_ObjectHideFlags: 0

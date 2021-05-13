@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,10 @@ public class PauseMenu : MonoBehaviour
 	public GameObject _settingsMenu;
 	public GameObject _sandboxMenu;
 	private bool _hasSettingsLoaded;
-	private SettingsPanel _settingsScript;
+	public SettingsPanel _settingsScript;
+
+	public static event Action Pause;
+	public static event Action UnPause;
 	
     public static PauseMenu Instance {
         get {
@@ -38,7 +42,7 @@ public class PauseMenu : MonoBehaviour
 		//_mainContainer = transform.Find("Container").gameObject;
 		//_saveLoadMenu = transform.Find("SaveLoadPanel").gameObject;
 		//_settingsMenu = transform.Find("SettingsPanel").gameObject;
-		_settingsScript = _settingsMenu.GetComponent<SettingsPanel>();
+		//_settingsScript = _settingsMenu.GetComponent<SettingsPanel>();
 		_mainContainer.SetActive(false);
 		_saveLoadMenu.SetActive(false);
 		_settingsMenu.SetActive(false);
@@ -52,11 +56,12 @@ public class PauseMenu : MonoBehaviour
 	public void TogglePause() {
 		_isPaused = !_isPaused;
 		if (_isPaused) {
+			Pause?.Invoke();
 			Time.timeScale = 0f;
 			_mainContainer.SetActive(true);
 		}
 		else {
-			Time.timeScale = 1f;
+			Time.timeScale = 1f; //will likely get overwritten by TimeManagement class (if it exists)
 			_mainContainer.SetActive(false);
 			_saveLoadMenu.SetActive(false);
 			_settingsMenu.SetActive(false);
@@ -64,6 +69,7 @@ public class PauseMenu : MonoBehaviour
 			if (_hasSettingsLoaded) {
 				_settingsScript.SaveSettings();
 			}
+			UnPause?.Invoke();
 		}
 	}
 	
