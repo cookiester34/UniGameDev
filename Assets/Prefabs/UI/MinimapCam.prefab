@@ -157,7 +157,7 @@ MonoBehaviour:
   flipYMode: 0
   fullscreenPassthrough: 0
   allowDynamicResolution: 0
-  customRenderingSettings: 0
+  customRenderingSettings: 1
   invertFaceCulling: 0
   probeLayerMask:
     serializedVersion: 2
@@ -165,8 +165,8 @@ MonoBehaviour:
   hasPersistentHistory: 0
   m_RenderingPathCustomFrameSettings:
     bitDatas:
-      data1: 70297877217101
-      data2: 4539628425463136256
+      data1: 69842351656781
+      data2: 4539628425211609088
     lodBias: 1
     lodBiasMode: 0
     lodBiasQualityLevel: 0
@@ -176,6 +176,6 @@ MonoBehaviour:
     materialQuality: 0
   renderingPathCustomFrameSettingsOverrideMask:
     mask:
-      data1: 0
-      data2: 0
+      data1: 5764608072798437184
+      data2: 805240839
   defaultFrameSettings: 0

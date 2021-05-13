@@ -46,7 +46,7 @@ public class SeasonManager : MonoBehaviour
         }
     }
 
-    public static event Action SeasonChange;
+    public event Action SeasonChange;
     float seasonTimer;
     public int seasonLength;
     private float _halfSeasonLength;

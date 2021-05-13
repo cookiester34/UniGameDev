@@ -24,12 +24,12 @@ public class DisasterManager : MonoBehaviour
     #region OnSeasonChangeSpawnWave
     private void OnEnable()
     {
-        SeasonManager.SeasonChange += SnowStorm;
+        SeasonManager.Instance.SeasonChange += SnowStorm;
         snowStormEffect.SetActive(false);
     }
     private void OnDisable()
     {
-        SeasonManager.SeasonChange -= SnowStorm;
+        SeasonManager.Instance.SeasonChange -= SnowStorm;
     }
     #endregion
 

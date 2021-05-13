@@ -17,8 +17,8 @@ public class PauseMenu : MonoBehaviour
 	private bool _hasSettingsLoaded;
 	public SettingsPanel _settingsScript;
 
-	public static event Action Pause;
-	public static event Action UnPause;
+	public event Action Pause;
+	public event Action UnPause;
 	
     public static PauseMenu Instance {
         get {

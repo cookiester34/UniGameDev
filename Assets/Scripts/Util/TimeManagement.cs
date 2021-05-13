@@ -12,8 +12,8 @@ public class TimeManagement : MonoBehaviour {
 
     private void Start() {
         timeDefault.interactable = false;
-        PauseMenu.Pause += HandlePause;
-        PauseMenu.UnPause += HandleUnPause;
+        PauseMenu.Instance.Pause += HandlePause;
+        PauseMenu.Instance.UnPause += HandleUnPause;
     }
 
     public void SetTimeRate(float timeScale) {
