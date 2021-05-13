@@ -89,7 +89,9 @@ public class SeasonManager : MonoBehaviour
             UpdateSeason(currentSeason);
         }
         else
+        {
             seasonTimer -= Time.deltaTime;
+        }
         UpdateParticles();
     }
 
