@@ -46,7 +46,7 @@ public class SeasonManager : MonoBehaviour
         }
     }
 
-    public static event Action SeasonChange;
+    public event Action SeasonChange;
     float seasonTimer;
     public int seasonLength;
     private float _halfSeasonLength;
@@ -89,7 +89,9 @@ public class SeasonManager : MonoBehaviour
             UpdateSeason(currentSeason);
         }
         else
+        {
             seasonTimer -= Time.deltaTime;
+        }
         UpdateParticles();
     }
 

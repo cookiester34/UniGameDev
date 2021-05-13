@@ -17,7 +17,7 @@ public class UIEventAnnounceManager : MonoBehaviour
 	[SerializeField] private Sprite alertSprite;
 
 	public delegate void EventAnnouncement(AnnounceEventType eventType);
-	public static event EventAnnouncement announcement;
+	public event EventAnnouncement announcement;
 	
 	public static UIEventAnnounceManager Instance {
         get {

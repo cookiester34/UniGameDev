@@ -89,8 +89,8 @@ public class AudioManager : MonoBehaviour {
         BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
         ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
         SceneManager.activeSceneChanged += MatchMusicToScene;
-        SeasonManager.SeasonChange += ChangeAmbienceTrack;
-        UIEventAnnounceManager.announcement += PlayAnnouncementAlert;
+        SeasonManager.Instance.SeasonChange += ChangeAmbienceTrack;
+        UIEventAnnounceManager.Instance.announcement += PlayAnnouncementAlert;
 
         DontDestroyOnLoad(transform.gameObject);
     }

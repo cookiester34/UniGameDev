@@ -32,12 +32,12 @@ public class EnemySpawnManager : MonoBehaviour
     #region OnSeasonChangeSpawnWave
     private void OnEnable()
     {
-        SeasonManager.SeasonChange += SpawnWave;
+        SeasonManager.Instance.SeasonChange += SpawnWave;
         UpdateWaspGroups();
     }
     private void OnDisable()
     {
-        SeasonManager.SeasonChange -= SpawnWave;
+        SeasonManager.Instance.SeasonChange -= SpawnWave;
     }
     #endregion
 
