@@ -48,14 +48,20 @@ public class TabbableContent : MonoBehaviour {
     }
 
     private void OnEnable() {
-        collection.ActiveContent = this;
+        if (collection != null) {
+            collection.ActiveContent = this;
+        }
+
         if (hideButtonOnDismiss) {
             associatedButton.gameObject.SetActive(true);
         }
     }
 
     private void OnDisable() {
-        collection.ActiveContent = null;
+        if (collection != null) {
+            collection.ActiveContent = null;
+        }
+
         if (hideButtonOnDismiss) {
             associatedButton.gameObject.SetActive(false);
         }
