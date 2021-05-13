@@ -45,16 +45,21 @@ public class SeasonManager : MonoBehaviour
             SeasonChange?.Invoke();
         }
     }
-    
+
     public static event Action SeasonChange;
     float seasonTimer;
     public int seasonLength;
+    private float _halfSeasonLength;
     private int _currentYear = 0;
-    
+    private int _seasonParticleIndex = -1;
+
     public GameObject springEffect;
     public GameObject summerEffect;
     public GameObject autumnEffect;
     public GameObject winterEffect;
+
+    [SerializeField] private ParticleSystem[] _seasonParticles;
+    private float[] _targetEmissionRates = { 0f, 0f, 0f };
 
     [SerializeField] private Image seasonDisplay;
     [SerializeField] private Sprite springSprite;
@@ -65,8 +70,10 @@ public class SeasonManager : MonoBehaviour
     [SerializeField] private TMP_Text _yearText;
 
     private void Start() {
+        ResetParticles();
         SeasonChange += SeasonChanged;
         seasonTimer = seasonLength;
+        _halfSeasonLength = seasonTimer / 2f;
         UpdateSeason(Seasons.Winter);
     }
 
@@ -83,6 +90,33 @@ public class SeasonManager : MonoBehaviour
         }
         else
             seasonTimer -= Time.deltaTime;
+        UpdateParticles();
+    }
+
+    void ResetParticles()
+    {
+        for (int i = 0; i < _seasonParticles.Length; i++)
+        {
+            var emissionVal = _seasonParticles[i].emission;
+            if (_targetEmissionRates[i] == 0f)
+            {
+                _targetEmissionRates[i] = emissionVal.rateOverTimeMultiplier;
+            }
+
+            emissionVal.rateOverTimeMultiplier = 0f;
+        }
+    }
+
+    void UpdateParticles()
+    {
+        if (_seasonParticleIndex >= 0)
+        {
+            var emissionVal = _seasonParticles[_seasonParticleIndex].emission;
+            float distFromTargetEmission = Mathf.Abs(_halfSeasonLength - seasonTimer);
+            float percentToTarget = distFromTargetEmission / _halfSeasonLength;
+            float newEmissionRate = Mathf.Lerp(_targetEmissionRates[_seasonParticleIndex], 0f, percentToTarget);
+            emissionVal.rateOverTimeMultiplier = newEmissionRate;
+        }
     }
 
     void UpdateSeason(Seasons season)
@@ -109,19 +143,25 @@ public class SeasonManager : MonoBehaviour
 
     private void SeasonChanged() {
         seasonTimer = seasonLength;
+        _halfSeasonLength = seasonTimer / 2f;
+        ResetParticles();
         switch (currentSeason) {
             case Seasons.Spring:
                 seasonDisplay.sprite = springSprite;
+                _seasonParticleIndex = 0;
                 break;
             case Seasons.Summer:
                 seasonDisplay.sprite = summerSprite;
+                _seasonParticleIndex = -1;
                 break;
             case Seasons.Autumn:
                 UIEventAnnounceManager.Instance.AnnounceEvent("Autumn begins, man the defenses", AnnounceEventType.Alert);
                 seasonDisplay.sprite = autumnSprite;
+                _seasonParticleIndex = 1;
                 break;
             case Seasons.Winter:
                 seasonDisplay.sprite = winterSprite;
+                _seasonParticleIndex = 2;
                 break;
         }
     }
