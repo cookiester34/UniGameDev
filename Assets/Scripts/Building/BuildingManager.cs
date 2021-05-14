@@ -177,9 +177,15 @@ public class BuildingManager : MonoBehaviour {
     public List<Building> GetAllStorageBuildingsOfType(ResourceType resourceType) {
         return _buildings.FindAll(building => {
             bool add = false;
-            var storage = building.GetComponent<ResourceStorage>();
-            if (storage != null && storage.Resource.resourceType == resourceType) {
-                add = true;
+            if (building.BuildingType == BuildingType.Housing) {
+                var storages = building.GetComponentsInChildren<ResourceStorage>();
+                if (storages != null && storages.Length > 0) {
+                    foreach (ResourceStorage storage in storages) {
+                        if (storage != null && storage.Resource.resourceType == resourceType) {
+                            add = true;
+                        }
+                    }
+                }
             }
 
             return add;

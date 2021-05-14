@@ -76,7 +76,6 @@ public class BeeManager : MonoBehaviour {
         if (populationChange > 0) {
             spawnQueue += populationChange;
         }
-        ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).OverrideCap((int)populationNewValue);
         _cachedPopulation += populationChange;
     }
 
@@ -86,14 +85,13 @@ public class BeeManager : MonoBehaviour {
             Bee bee = go.GetComponent<Bee>();
             _bees.Add(bee);
             spawnQueue--;
+            ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).ModifyCap(1);
         }
         spawnTimer.Reset(true);
     }
 
     public void AssignBeeToBuilding(Building building) {
         switch (building.BuildingType) {
-            case BuildingType.QueenBee:
-            // fall through
             case BuildingType.Housing:
                 foreach (Bee bee in _bees) {
                     if (bee.Home == null) {
