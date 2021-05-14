@@ -15,6 +15,15 @@ public class TowerSelected : MonoBehaviour
     {
         _renderer = GetComponent<Renderer>();
         BuildingManager.Instance.OnBuildingSelected += EnableTowerRadius;
+        BuildingManager.Instance.UiBuildingSelected += EnableTowerRadius;
+    }
+
+    public void EnableTowerRadius(BuildingData buildingData) {
+        if (buildingData == null) {
+            EnableTowerRadius(false);
+        } else if (buildingData.BuildingType.IsTower()) {
+            EnableTowerRadius(true);
+        }
     }
 
     public void EnableTowerRadius(Building building)
@@ -43,5 +52,6 @@ public class TowerSelected : MonoBehaviour
     private void OnDestroy()
     {
         BuildingManager.Instance.OnBuildingSelected -= EnableTowerRadius;
+        BuildingManager.Instance.UiBuildingSelected -= EnableTowerRadius;
     }
 }
