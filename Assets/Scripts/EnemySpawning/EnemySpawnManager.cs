@@ -162,16 +162,9 @@ public class EnemySpawnManager : MonoBehaviour
             {
                 wasps.Remove(i);
             }
-            i.GetComponent<Health>().ModifyHealth(-5);
+            i.GetComponent<Health>().ModifyHealth(-50);
         }
-        if (wasps.Count > 0)
-            return KillAllWasps();
-        else
-        {
-            OnWaspsDefeated?.Invoke();
-            waspsSpawned = false;
-            return null;
-        }
+        return null;
     }
 
     IEnumerator DelaySpawn(Transform building, int group)

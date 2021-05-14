@@ -13252,17 +13252,17 @@ PrefabInstance:
     - target: {fileID: 1164953925160693241, guid: 1f91376306b706c43ba1eeadf2561179,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 215.95264
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1164953925160693241, guid: 1f91376306b706c43ba1eeadf2561179,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 383.78275
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1164953925160693241, guid: 1f91376306b706c43ba1eeadf2561179,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.199943
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1164953925160693241, guid: 1f91376306b706c43ba1eeadf2561179,
         type: 3}
@@ -13327,6 +13327,11 @@ PrefabInstance:
     - target: {fileID: 6895281769261638690, guid: 1f91376306b706c43ba1eeadf2561179,
         type: 3}
       propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7060678293810873309, guid: 1f91376306b706c43ba1eeadf2561179,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

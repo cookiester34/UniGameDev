@@ -343,8 +343,9 @@ MonoBehaviour:
   heightStartPos: 1
   suppliers:
   - {fileID: 4088913957561633906}
-  resourceFloatUIObject: {fileID: 7512098845248726570}
-  buildingPos: {fileID: 3930296320170964270}
+  resourceFloatUIObject: {fileID: 2538298698804660122, guid: d4796bb65c539074e9cd81b681284ef7,
+    type: 3}
+  buildingPos: {fileID: 862531013630147079}
 --- !u!114 &6698116191115454468
 MonoBehaviour:
   m_ObjectHideFlags: 0

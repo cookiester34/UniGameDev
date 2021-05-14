@@ -14,6 +14,7 @@ public class TowerBuilding : Building
     [Range(1,100)] //not sure on what the range values should be
     public int towerRange;
     public GameObject SphereRange;
+    public GameObject SphereRangeVisual;
 
     public float baseFiringSpeed;
     public float firingSpeed;
@@ -29,6 +30,7 @@ public class TowerBuilding : Building
     protected override void Start() {
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
+        SphereRangeVisual.GetComponent<SphereCollider>().radius = towerRange;
         fireSound = gameObject.transform.GetComponent<AudioSource>();
         anim = GetComponentsInChildren<Animator>();
     }

@@ -133,4 +133,9 @@ public static class BuildingTypeExtension {
 
         return obj;
     }
+
+    public static bool IsTower(this BuildingType type)
+    {
+        return type == BuildingType.Tower || type == BuildingType.TowerRepellant;
+    }
 }

@@ -115,7 +115,6 @@ public class SelectedBuildingUI : MonoBehaviour {
             _unassignBeeTooltip.TooltipText = unassignText;
 
         }
-
     }
 
     public void UpgradeBuilding() {
