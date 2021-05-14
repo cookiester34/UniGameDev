@@ -51,7 +51,7 @@ public class BeeMoveState : BeeState {
     
     private bool PathComplete() {
         if ((!_agent.pathPending && !_agent.hasPath) ||
-            Vector3.Distance( _agent.destination, _agent.position) <= 1.7f) {
+            Vector3.Distance( _agent.destination, _agent.position) <= 2.2f) {
             return true;
         }
  

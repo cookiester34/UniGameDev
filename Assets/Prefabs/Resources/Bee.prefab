@@ -16,12 +16,10 @@ GameObject:
   - component: {fileID: -5077826352974351252}
   - component: {fileID: 7827538122793138350}
   - component: {fileID: 6399493685275147712}
-  - component: {fileID: 5540302586420343944}
   - component: {fileID: -8690333063550466358}
   - component: {fileID: -6088405221562166559}
   - component: {fileID: 1477354331595704149}
   - component: {fileID: 9044130949996507685}
-  - component: {fileID: 4106602619232670479}
   - component: {fileID: 6502343160342807085}
   m_Layer: 14
   m_Name: Bee
@@ -38,7 +36,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 326437159731175180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 3.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3895469141646735686}
@@ -58,10 +56,10 @@ SphereCollider:
   m_GameObject: {fileID: 326437159731175180}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 0
+  m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.38
-  m_Center: {x: 0, y: -0.42, z: 0}
+  m_Radius: 0.15
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!114 &583407852114117726
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -245,19 +243,6 @@ MonoBehaviour:
     type: 3}
   deathAudio: {fileID: -6088405221562166559}
   regen: 1
---- !u!65 &5540302586420343944
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326437159731175180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Size: {x: 0.01, y: 0.5, z: 0.01}
-  m_Center: {x: -0.00000055134296, y: -0.25, z: 0.029228762}
 --- !u!82 &-8690333063550466358
 AudioSource:
   m_ObjectHideFlags: 0
@@ -493,8 +478,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 2
-  radius: 0.5
-  height: 2
+  radius: 0.15
+  height: 0.4
   repathRate: 0.5
   canSearch: 1
   canMove: 1
@@ -516,20 +501,6 @@ MonoBehaviour:
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
   constrainInsideGraph: 0
---- !u!136 &4106602619232670479
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326437159731175180}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: -0.35, z: 0}
 --- !u!54 &6502343160342807085
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5732,15 +5703,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9802f137e978aee4e968172e9a65ada5, type: 3}
---- !u!224 &27449512923161005 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
-    type: 3}
-  m_PrefabInstance: {fileID: 233349479110920868}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6183399947383410532 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6265315638745023936, guid: 9802f137e978aee4e968172e9a65ada5,
+    type: 3}
+  m_PrefabInstance: {fileID: 233349479110920868}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &27449512923161005 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 242212733593266953, guid: 9802f137e978aee4e968172e9a65ada5,
     type: 3}
   m_PrefabInstance: {fileID: 233349479110920868}
   m_PrefabAsset: {fileID: 0}
@@ -5810,6 +5781,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BeeMinimapIcon
+      objectReference: {fileID: 0}
+    - target: {fileID: 4552601271516103940, guid: df364f0a6e4e2ca43a1cbc8442c812f0,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df364f0a6e4e2ca43a1cbc8442c812f0, type: 3}
