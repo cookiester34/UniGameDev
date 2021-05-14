@@ -85,12 +85,9 @@ public class AudioManager : MonoBehaviour {
 
         InitialiseSound(buildingSelectSound);
         #endregion
-
-        BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
-        ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
+        HandleSceneChange();
         SceneManager.activeSceneChanged += MatchMusicToScene;
-        SeasonManager.Instance.SeasonChange += ChangeAmbienceTrack;
-        UIEventAnnounceManager.Instance.announcement += PlayAnnouncementAlert;
+
 
         DontDestroyOnLoad(transform.gameObject);
     }
@@ -98,9 +95,23 @@ public class AudioManager : MonoBehaviour {
     // Start is called before the first frame update.
     void Start()
     {
+        SceneManager.sceneLoaded += HandleSceneChangeEvent;
         UpdateAudioLevels();
         // Music playback can be started here.
         //StartPeaceMusic();
+    }
+
+    void HandleSceneChangeEvent(Scene scene, LoadSceneMode mode)
+    {
+        HandleSceneChange();
+    }
+
+    void HandleSceneChange()
+    {
+        BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
+        ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
+        SeasonManager.Instance.SeasonChange += ChangeAmbienceTrack;
+        UIEventAnnounceManager.Instance.announcement += PlayAnnouncementAlert;
     }
 
     private void InitialiseSound(Sound s)

@@ -72,6 +72,7 @@ public class SeasonManager : MonoBehaviour
     private void Start() {
         ResetParticles();
         SeasonChange += SeasonChanged;
+        //SeasonChange += AudioManager.Instance.ChangeAmbienceTrack;
         seasonTimer = seasonLength;
         _halfSeasonLength = seasonTimer / 2f;
         UpdateSeason(Seasons.Winter);
