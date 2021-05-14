@@ -50,7 +50,6 @@ public class EnemySpawnManager : MonoBehaviour
     /// How many more wasps to spawn per wave
     /// </summary>
     private int waveHordeMultiplier = 3;
-    public int liveWasps = 0;
     public int waspCap = 100;
 
     [Range(1,5)]
@@ -66,6 +65,7 @@ public class EnemySpawnManager : MonoBehaviour
     public delegate void WaspEvent();
     public event WaspEvent OnWaspsDefeated;
     public event WaspEvent OnWaspsSpawn;
+    private bool waspsSpawned = false;
 
     private Renderer renderer;
 
@@ -106,15 +106,6 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
-    public void UpdateLiveWasps()
-    {
-        liveWasps--;
-        if (liveWasps <= 0)
-        {
-            OnWaspsDefeated?.Invoke();
-        }
-    }
-
     void SpawnWave()
     {
         if(SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
@@ -136,8 +127,10 @@ public class EnemySpawnManager : MonoBehaviour
                     StartCoroutine(DelaySpawn(temp[i], i));
             }
             waveNumber++;
+            OnWaspsSpawn?.Invoke();
+            waspsSpawned = true;
 
-            foreach(WaspGroup i in waspGroupList) //go through all wasp groups and merge the smaller groups
+            foreach (WaspGroup i in waspGroupList) //go through all wasp groups and merge the smaller groups
             {
                 if (i.wasps.Count < 3)
                 {
@@ -174,7 +167,11 @@ public class EnemySpawnManager : MonoBehaviour
         if (wasps.Count > 0)
             return KillAllWasps();
         else
+        {
+            OnWaspsDefeated?.Invoke();
+            waspsSpawned = false;
             return null;
+        }
     }
 
     IEnumerator DelaySpawn(Transform building, int group)
@@ -207,12 +204,10 @@ public class EnemySpawnManager : MonoBehaviour
                     waspAI.masterWaspObject = masterWasp;
                     waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
                 }
-                liveWasps++;
 
                 if (i > waspCap)
                     break;
             }
         }
-        OnWaspsSpawn?.Invoke();
     }
 }

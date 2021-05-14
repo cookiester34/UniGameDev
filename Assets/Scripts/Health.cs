@@ -137,10 +137,6 @@ public class Health : MonoBehaviour {
             dissolver.GetComponent<Dissolver>().Setup(gameObject);
             Destroy(gameObject);
         }
-        if (gameObject.CompareTag("Enemy"))
-        {
-            EnemySpawnManager.Instance.UpdateLiveWasps();
-        }
     }
 
     private void CreateParticles(GameObject particlePrefab) {
