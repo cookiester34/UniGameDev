@@ -30,7 +30,7 @@ public class TowerBuilding : Building
     protected override void Start() {
         base.Start();
         SphereRange.GetComponent<SphereCollider>().radius = towerRange;
-        SphereRangeVisual.GetComponent<SphereCollider>().radius = towerRange;
+        SphereRangeVisual.transform.localScale = new Vector3(towerRange * 2, towerRange * 2, towerRange * 2);
         fireSound = gameObject.transform.GetComponent<AudioSource>();
         anim = GetComponentsInChildren<Animator>();
     }
