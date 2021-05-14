@@ -105,7 +105,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16896
   waspDamage: 1
-  attackRange: 1.83
+  attackRange: 2.99
   detectionRange: 3.25
   attacktimer: 2
   masterWasp: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
   version: 2
   radius: 0.5
   height: 2
-  repathRate: 0.5
+  repathRate: 1
   canSearch: 1
   canMove: 1
   maxSpeed: 2
@@ -494,7 +494,7 @@ MonoBehaviour:
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
-  constrainInsideGraph: 1
+  constrainInsideGraph: 0
 --- !u!136 &6875166916504814235
 CapsuleCollider:
   m_ObjectHideFlags: 0

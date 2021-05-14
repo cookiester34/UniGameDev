@@ -476,7 +476,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 4294967295
     useGraphRaycasting: 0
-  traversableTags: -1
+  traversableTags: 3
   tagPenalties: 0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000
   graphMask:
     value: -1
@@ -515,7 +515,7 @@ MonoBehaviour:
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
-  constrainInsideGraph: 1
+  constrainInsideGraph: 0
 --- !u!136 &4106602619232670479
 CapsuleCollider:
   m_ObjectHideFlags: 0

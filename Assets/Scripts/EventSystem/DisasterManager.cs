@@ -107,6 +107,8 @@ public class DisasterManager : MonoBehaviour
         {
             if (SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
                 StartCoroutine(nameof(SnowStormCycle));
+            else
+                snowStormEffect.SetActive(false);
         }
     }
 
@@ -117,13 +119,15 @@ public class DisasterManager : MonoBehaviour
         {
             foreach (Building i in BuildingManager.Instance.Buildings)
             {
-                i.GetComponent<Health>().ModifyHealth(-0.05f);
+                if(i != null)
+                    i.GetComponent<Health>().ModifyHealth(-0.05f);
             }
             if (BeeManager.Instance)
             {
                 foreach (Bee i in BeeManager.Instance.Bees)
                 {
-                    i.GetComponent<Health>().ModifyHealth(-0.01f);
+                    if(i != null)
+                        i.GetComponent<Health>().ModifyHealth(-0.01f);
                 }
             }
             if (SeasonManager.Instance.GetCurrentSeason() != Seasons.Winter)

@@ -100,22 +100,15 @@ public class WaspAI : MonoBehaviour
 
                 if (targetObject != null && targetObject.transform != null)
                 {
-                    //if (masterWasp)
-                        SetDestination(targetObject, false);
-                    //else
-                    //{
-                    //    transform.position = Vector3.MoveTowards(transform.position, targetObject.transform.position, 0.05f);
-                    //    transform.LookAt(targetObject.transform.position);
-                    //    _currentTarget = targetObject;
-                    //}
+                    SetDestination(targetObject, false);
                 }
             }
             else
             {
-                //if (masterWasp)
+                if(_queenBeeBuilding != null)
                     SetDestination(_queenBeeBuilding, true);
-                //else
-                //    followMaster();
+                else
+                    SetupQueenBee();
             }
         }
         else
@@ -151,7 +144,7 @@ public class WaspAI : MonoBehaviour
     {
         if (masterWaspObject != null)
         {
-            if (FastMath.SqrDistance(transform.position, masterWaspObject.position) > 4f)
+            if (FastMath.SqrDistance(transform.position, masterWaspObject.position) > 9f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, masterWaspObject.position, 0.05f);
                 transform.LookAt(masterWaspObject);
