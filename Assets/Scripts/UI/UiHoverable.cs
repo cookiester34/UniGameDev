@@ -86,7 +86,7 @@ namespace UI {
         {
             if (_buildingData)
             {
-                _button.interactable = ResourceManagement.Instance.CanUseResources(_buildingData.Tier1Cost);
+                _button.interactable = GetIsInBuildingLimit() && ResourceManagement.Instance.CanUseResources(_buildingData.Tier1Cost);
             }
         }
 		
@@ -100,5 +100,11 @@ namespace UI {
 			}
 			return "\nNo cost";
 		}
+
+        private bool GetIsInBuildingLimit()
+        {
+            int buildingTypeIndex = (int)_buildingData.BuildingType;
+            return _buildingData.MaxInstances > BuildingManager.Instance.numBuildingTypes[buildingTypeIndex];
+        }
     }
 }
