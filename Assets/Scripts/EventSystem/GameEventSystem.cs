@@ -79,13 +79,13 @@ public class GameEventSystem : MonoBehaviour
         }
 
         //Everytime
-        if(SnowStormEnabled && ((SnowStormTime -= Time.deltaTime) == 0))
+        if(SnowStormEnabled && ((SnowStormTime -= Time.deltaTime) <= 0))
         {
             SnowStormEnabled = false;
             //OnSnowStormTrigger;
         }
 
-        if (meteorEnabled && ((meteorTime -= Time.deltaTime) == 0))
+        if (meteorEnabled && ((meteorTime -= Time.deltaTime) <=  0))
         {
             meteorEnabled = false;
             //OnMeteorTrigger;

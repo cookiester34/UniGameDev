@@ -173,7 +173,10 @@ public class EnemySpawnManager : MonoBehaviour
             float rangeModifier = waveNumber * waveHordeMultiplier;
             for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
             {
-                GameObject wasp = Instantiate(enemyPrefab, building.position, Quaternion.identity);
+                Vector3 waspPosition = building.position;
+                waspPosition.x += Random.Range(-10f, 10f);
+                waspPosition.z += Random.Range(-10f, 10f);
+                GameObject wasp = Instantiate(enemyPrefab, waspPosition, Quaternion.identity);
                 wasps.Add(wasp);
                 waspGroupList[group].wasps.Add(wasp.transform);
                 WaspAI waspAI = wasp.GetComponent<WaspAI>();
