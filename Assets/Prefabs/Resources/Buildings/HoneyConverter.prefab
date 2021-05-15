@@ -391,7 +391,7 @@ MonoBehaviour:
   - {fileID: 4088913957561633906}
   resourceFloatUIObject: {fileID: 2538298698804660122, guid: d4796bb65c539074e9cd81b681284ef7,
     type: 3}
-  buildingPos: {fileID: 0}
+  buildingPos: {fileID: 1019907913518373587}
 --- !u!114 &6698116191115454468
 MonoBehaviour:
   m_ObjectHideFlags: 0
