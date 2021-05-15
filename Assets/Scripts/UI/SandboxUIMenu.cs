@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class SandboxUIMenu : MonoBehaviour {
     [SerializeField] private Toggle fogOfWar;
-    [SerializeField] private Dropdown currentSeason;
+    [SerializeField] private TMP_Dropdown currentSeason;
     [SerializeField] private Slider seasonLength;
 
     private void Awake() {
