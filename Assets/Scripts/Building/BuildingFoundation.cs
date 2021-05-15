@@ -125,6 +125,24 @@ public class BuildingFoundation : MonoBehaviour {
                     }
                 }
                 break;
+            
+            case BuildingShape.SevenTileJut:
+                if (foundations.Count == 8) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
 
             case BuildingShape.ThreeThreeTile:
                 if (foundations.Count == 9) {
@@ -193,6 +211,23 @@ public class BuildingFoundation : MonoBehaviour {
                     foundations.Add(neighbour.BuildingFoundation);
                 }
                 break;
+
+            case BuildingShape.SevenTileJut: {
+                foundations.Add(this);
+                foreach (HexPanel neighbour in _hexPanel.GetNeighbours()) {
+                    foundations.Add(neighbour.BuildingFoundation);
+                }
+
+                var below = _hexPanel.GetNeighbour(NeighbourDirection.Below);
+                if (below != null) {
+                    var belowRight = below.GetNeighbour(NeighbourDirection.BelowRight);
+                    if (belowRight != null) {
+                        foundations.Add(belowRight.BuildingFoundation);
+                    }
+                }
+
+                break;
+            }
 
             case BuildingShape.ThreeThreeTile: {
                 foundations.Add(this);

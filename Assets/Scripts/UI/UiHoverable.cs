@@ -23,6 +23,7 @@ namespace UI {
 		public bool isLevelEditorOnly;
         private IUiClickableHover _clickableHover;
 		private BuildingData _buildingData;
+        private string _defaultTooltipText;
 
         protected virtual void Awake() {
             Setup();
@@ -73,7 +74,8 @@ namespace UI {
                 _button.onClick.AddListener(_clickableHover.OnClick);
 				if (_scriptableObject is BuildingData) {
 					_buildingData = (BuildingData) _scriptableObject;
-                    _tooltipEnabler.TooltipText = _clickableHover.GetHoverText() + CalculateCostString();
+                    _defaultTooltipText = _clickableHover.GetHoverText() + CalculateCostString();
+                    _tooltipEnabler.TooltipText = _defaultTooltipText;
                 }
 				else {
                     _tooltipEnabler.TooltipText = _clickableHover.GetHoverText();
@@ -86,7 +88,15 @@ namespace UI {
         {
             if (_buildingData)
             {
-                _button.interactable = GetIsInBuildingLimit() && ResourceManagement.Instance.CanUseResources(_buildingData.Tier1Cost);
+                bool isInBuildingLimit = GetIsInBuildingLimit();
+                _button.interactable = isInBuildingLimit && ResourceManagement.Instance.CanUseResources(_buildingData.Tier1Cost);
+                if (!isInBuildingLimit) {
+                    _tooltipEnabler.TooltipText = _defaultTooltipText + "\n(Limit Reached)";
+                }
+                else
+                {
+                    _tooltipEnabler.TooltipText = _defaultTooltipText;
+                }
             }
         }
 		

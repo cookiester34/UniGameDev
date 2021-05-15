@@ -7,5 +7,6 @@ public enum BuildingShape {
     ThreeTile,
     SevenTile,
     ThreeThreeTile,
-    Square
+    Square,
+    SevenTileJut
 }

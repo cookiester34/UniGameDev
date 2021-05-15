@@ -4867,7 +4867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f085943523d079644a188ae5f73d742e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 30
+  speed: 20
   impactPrefab: {fileID: 4712339840199091618, guid: 87b6dd714667b6f47a6b3713dca3fd1d,
     type: 3}
   trails:
