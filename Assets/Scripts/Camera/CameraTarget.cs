@@ -29,7 +29,7 @@ public class CameraTarget : MonoBehaviour {
 
             if (Input.GetMouseButton(2)) {
                 var difference = Input.mousePosition - lastMousePos;
-                Pan(difference * Time.unscaledDeltaTime);
+                Pan(difference * (Time.unscaledDeltaTime * 0.1f));
             }
         }
 
