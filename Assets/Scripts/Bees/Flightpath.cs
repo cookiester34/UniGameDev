@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEditor;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class Flightpath : MonoBehaviour {
@@ -39,6 +37,9 @@ public class Flightpath : MonoBehaviour {
         return flightPoints[index - 1];
     }
 
+    /// <summary>
+    /// Comment in and out to display the gizmos for setting up paths
+    /// </summary>
     // private void OnDrawGizmos() {
     //     Gizmos.color = Color.magenta;
     //     GUIStyle style = new GUIStyle {normal = {textColor = Color.cyan}};

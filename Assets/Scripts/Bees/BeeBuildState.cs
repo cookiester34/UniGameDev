@@ -22,6 +22,7 @@ public class BeeBuildState : BeeState {
     public BeeBuildState(BeeStateMachine stateMachine) : base(stateMachine) { }
     
     public override void Enter() {
+        _stateMachine.Bee.LockHeight = false;
         _agent = _stateMachine.Bee.Agent;
         _pathIndex = -1;
         _exitChance = 50;
@@ -29,11 +30,12 @@ public class BeeBuildState : BeeState {
         for (int i = 0; i < _flightpath.FlightPoints.Count; i++) {
             points[i] = _flightpath.FlightPoints[i].position;
         }
-        _mainPath = new Path(PathType.CatmullRom, points, 2);
+        _mainPath = new Path(PathType.CatmullRom, points, 5);
         Tween startTween = _stateMachine.gameObject.transform.DOMove(
             _flightpath.GetPoint(0).position, _flightpath.EntryTime);
         startTween.OnComplete(() => {
-            Tween tween = _stateMachine.gameObject.transform.DOPath(_mainPath, _flightpath.FlyTime);
+            Tween tween = _stateMachine.gameObject.transform.DOPath(_mainPath, _flightpath.FlyTime, PathMode.Ignore);
+            tween.OnWaypointChange(index => { _stateMachine.transform.LookAt(_flightpath.GetPoint(index + 1)); });
             tween.OnComplete(AdvancePath);
         });
     }
@@ -84,6 +86,7 @@ public class BeeBuildState : BeeState {
     }
 
     public override void Exit() {
+        _stateMachine.Bee.LockHeight = true;
         _flightpath = null;
     }
 }

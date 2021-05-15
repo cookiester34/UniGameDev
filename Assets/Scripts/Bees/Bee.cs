@@ -14,7 +14,8 @@ public class Bee : MonoBehaviour {
     private BeeStateMachine _stateMachine;
     //private NavMeshAgent _agent;
     private IAstarAI _agent;
-
+    private float _flyingHeight;
+    private bool _lockHeight = true;
 
     private float _soundLoopBasePitch;
     private float _soundLoopVolume;
@@ -42,6 +43,11 @@ public class Bee : MonoBehaviour {
         set => _agent = value;
     }
 
+    public bool LockHeight {
+        get => _lockHeight;
+        set => _lockHeight = value;
+    }
+
     private void Awake() {
         idCounter++;
         id = idCounter;
@@ -53,8 +59,7 @@ public class Bee : MonoBehaviour {
         transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
         transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
 
-        _agent.height = Random.Range(0.2f, 2f);
-        //_agent.baseOffset = _agent.height / 2f;
+        _flyingHeight = Random.Range(1f, 1.5f);
 
         var scale = Random.Range(0.6f, 0.9f);
         transform.localScale = new Vector3(scale, scale, scale);
@@ -67,12 +72,12 @@ public class Bee : MonoBehaviour {
         }
     }
 
-    private void Update()
-    {
-        if(transform.position.y < 0)
-        {
-            Vector3 resetHeight = new Vector3(transform.position.x, 1, transform.position.z);
-            transform.position = resetHeight;
+    private void Update() {
+        var position = transform.position;
+        if (_lockHeight && (position.y < _flyingHeight || position.y > _flyingHeight)) {
+            Vector3 resetHeight = new Vector3(position.x, _flyingHeight, position.z);
+            position = resetHeight;
+            transform.position = position;
         }
     }
 

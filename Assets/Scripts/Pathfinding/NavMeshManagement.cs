@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Pathfinding;
-using UnityEditor.SceneManagement;
+using UnityEngine;
 
 public class NavMeshManagement : MonoBehaviour {
     #region Instance
