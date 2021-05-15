@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEditor.SceneManagement;
 
-public class NavMeshManagement : MonoBehaviour
-{
+public class NavMeshManagement : MonoBehaviour {
     #region Instance
     private static NavMeshManagement _instance = null;
     public static NavMeshManagement Instance
@@ -24,91 +24,68 @@ public class NavMeshManagement : MonoBehaviour
             return;
         }
         _instance = this;
-        //time = toggleTime;
     }
     #endregion
 
-    //public float toggleTime = 10f;
-    private float time;
-    [HideInInspector]
-    public List<Transform> towersAffectingNavmesh = new List<Transform>();
-    private int oldTowerCount = 0;
-    private bool canScan = true;
-    private bool scanQue = false;
-    //private bool toggle = false;
+    private List<GraphUpdateScene> _navmeshModifiers = new List<GraphUpdateScene>();
+    private bool _canScan = true;
+    private bool _scanQue = false;
 
-    private void Update()
-    {
-        time = -Time.deltaTime;
-        if(time <= 0)
-        {
-            CheckTowerList();
-            time = 5f;
+    /// <summary>
+    /// Adds objects to the navmesh modifiers and applies them 
+    /// </summary>
+    /// <param name="graphUpdates">The objects blockers to add and apply</param>
+    public void AddObjects(GraphUpdateScene[] graphUpdates) {
+        foreach (GraphUpdateScene graphUpdate in graphUpdates) {
+            graphUpdate.Apply();
         }
-        //if(time <= 0 && towersAffectingNavmesh.Count > 0)
-        //{
-        //    time = toggleTime;
-        //    ScanGraphs();
-        //    toggle = !toggle;
-        //    DeactivateBuildings(toggle);
-        //}
-        if(towersAffectingNavmesh.Count != oldTowerCount)
-        {
-            oldTowerCount = towersAffectingNavmesh.Count;
-            //DeactivateBuildings(true);
-            ScanGraphs();
-        }
-        if (scanQue && canScan)
-        {
-            ScanGraphs();
-            scanQue = false;
-        }
-
+        _navmeshModifiers.AddRange(graphUpdates);
     }
 
-    void CheckTowerList() {
-        towersAffectingNavmesh.RemoveAll(x => x == null);
+    /// <summary>
+    /// Removes objects from the navmesh modifiers and causes a rescan to remove their affect on pathfinding
+    /// </summary>
+    /// <param name="graphUpdates">The objects blockers to remove</param>
+    public void RemoveObjects(GraphUpdateScene[] graphUpdates) {
+        foreach (GraphUpdateScene graphUpdate in graphUpdates) {
+            _navmeshModifiers.Remove(graphUpdate);
+        }
+
+        ReScan();
     }
 
-    //void DeactivateBuildings(bool toggle)
-    //{
-    //    List<Transform> temp = towersAffectingNavmesh;
-    //    towersAffectingNavmesh.Clear();
-    //    foreach(Transform i in temp)
-    //    {
-    //        if (i != null)
-    //            towersAffectingNavmesh.Add(i);
-    //    }
-
-    //    foreach (Transform navObsticle in towersAffectingNavmesh)
-    //    {
-    //        navObsticle.gameObject.SetActive(toggle);
-    //    }
-    //}
-
-    private void ScanGraphs()
-    {
-        ///this will scan all graphs faster but also freezes game for less than a second but noticible.
-        //AstarPath.active.Scan();
-
-        ///will scan all graphs without freezing game, but is a lot slower.
-        StartCoroutine("ScanAsync");
-        
+    /// <summary>
+    /// Removes potential null entries and begins a rescan of the pathfinding
+    /// </summary>
+    private void ReScan() {
+        _navmeshModifiers.RemoveAll(x => x == null);
+        StartCoroutine(nameof(ScanAsync));
     }
+
+    /// <summary>
+    /// Exists so that if a scan fails it will then try again
+    /// </summary>
+    private void Update() {
+        if (_scanQue && _canScan) {
+            _scanQue = false;
+            ReScan();
+        }
+    }
+    
     IEnumerator ScanAsync()
     {
-        if (canScan)
+        if (_canScan)
         {
             Debug.Log("Scanning Graph");
             foreach (Progress progress in AstarPath.active.ScanAsync())
             {
                 //Debug.Log("Scanning... " + progress.description + " - " + (progress.progress * 100).ToString("0") + "%");
-                canScan = false;
+                _canScan = false;
                 yield return null;
             }
-            canScan = true;
+            _canScan = true;
         }
         else
-            scanQue = true;
+            _scanQue = true;
     }
 }
