@@ -17,7 +17,7 @@ public class DisasterManager : MonoBehaviour
         _instance = this;
         SetupQueenBee();
         disasterChance = baseDisasterChance;
-        InvokeRepeating(nameof(TriggerDisaster), 30, 30);
+        InvokeRepeating(nameof(TriggerDisaster), SeasonManager.Instance.seasonLength * 2, 45);
     }
     #endregion
 
@@ -49,7 +49,7 @@ public class DisasterManager : MonoBehaviour
         }
         else
         {
-            disasterChance += 5;
+            disasterChance += 3;
         }
     }
 
