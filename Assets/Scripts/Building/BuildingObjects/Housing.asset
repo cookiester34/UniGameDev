@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Housing
   m_EditorClassIdentifier: 
   buildingType: 1
-  uiImage: {fileID: 21300000, guid: 8ddab7ff90a6d1e4da50c3b032ff29fe, type: 3}
+  uiImage: {fileID: 21300000, guid: 3d020385e22821441a074a98bacbc3b9, type: 3}
   buildingShape: 1
   maxInstances: 1000
   description: Housing - A place for bees to rest up and raise their happiness. Bees
