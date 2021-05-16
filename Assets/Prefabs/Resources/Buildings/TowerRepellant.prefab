@@ -6837,6 +6837,7 @@ MonoBehaviour:
   buildingTier2: {fileID: 6700858294462153184}
   buildingTier3: {fileID: 785669384311857063}
   flightpath: {fileID: 0}
+  canUpgradeBuilding: 0
   numAssignedBees: 0
 --- !u!1 &7689494080487549506
 GameObject:

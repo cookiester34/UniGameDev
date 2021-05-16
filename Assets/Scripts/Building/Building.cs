@@ -28,12 +28,12 @@ public class Building : MonoBehaviour {
     public BuildingType BuildingType => buildingType;
     public int BuildingTier => buildingTier;
 
+    public bool canUpgradeBuilding = true;
+
     /// <summary>
     /// number of bees assigned to this building
     /// </summary>
     [HideInInspector]
-
-
     public int numAssignedBees;
     private List<Bee> _assignedBees;
     private List<BuildingFoundation> usedFoundations = new List<BuildingFoundation>();
@@ -161,21 +161,29 @@ public class Building : MonoBehaviour {
     }
 
     public bool CanUpgrade() {
-        bool canUpgrade = true;
-        int newTier = buildingTier + 1;
-        switch (newTier) {
-            case 2:
-                canUpgrade = buildingTier2 != null;
-                break;
-            case 3:
-                canUpgrade = buildingTier3 != null;
-                break;
-            case 4:
-                // Highest build tier is 3
-                canUpgrade = false;
-                break;
+        if (canUpgradeBuilding)
+        {
+            bool canUpgrade = true;
+            int newTier = buildingTier + 1;
+            switch (newTier)
+            {
+                case 2:
+                    canUpgrade = buildingTier2 != null;
+                    break;
+                case 3:
+                    canUpgrade = buildingTier3 != null;
+                    break;
+                case 4:
+                    // Highest build tier is 3
+                    canUpgrade = false;
+                    break;
+            }
+            return canUpgrade && buildingData.CanUpgrade(buildingTier + 1);
         }
-        return canUpgrade && buildingData.CanUpgrade(buildingTier + 1);
+        else
+        {
+            return false;
+        }
     }
 
     public void Upgrade(List<ResourcePurchase> resourcePurchase) {
