@@ -53,4 +53,8 @@ public class LoadPanelHolder : MonoBehaviour {
             LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
         }
     }
+
+    private void OnDestroy() {
+        SaveLoad.OnSaveAdded -= AddLoadPanel;
+    }
 }
