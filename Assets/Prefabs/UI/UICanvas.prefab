@@ -5194,6 +5194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed1168c69a4696345b7234934f3959d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  selectedBuildingUI: {fileID: 8724919511634046939}
 --- !u!1 &4109777158428846610
 GameObject:
   m_ObjectHideFlags: 0
@@ -7899,6 +7900,7 @@ MonoBehaviour:
   upgradeBuildingButton: {fileID: 5117620293856858042}
   assignBeeButton: {fileID: 7089807534885072901}
   unassignBeeButton: {fileID: 5715545151319825128}
+  _selectedBuilding: {fileID: 0}
 --- !u!114 &1867062454596849853
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11300,7 +11302,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 8ddab7ff90a6d1e4da50c3b032ff29fe,
+      objectReference: {fileID: 21300000, guid: 3d020385e22821441a074a98bacbc3b9,
         type: 3}
     - target: {fileID: 6221313262142200452, guid: 361cd233dbf870a458f9d35c597b6312,
         type: 3}

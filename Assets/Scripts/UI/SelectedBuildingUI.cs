@@ -21,7 +21,8 @@ public class SelectedBuildingUI : MonoBehaviour {
     private TooltipEnabler _upgradeBuildingTooltip;
     private TooltipEnabler _assignBeeTooltip;
     private TooltipEnabler _unassignBeeTooltip;
-    private Building _selectedBuilding;
+    [HideInInspector]
+    public Building _selectedBuilding;
 
     private void Awake() {
         if (!assignedBeesText) {
