@@ -118,8 +118,6 @@ public class BeeManager : MonoBehaviour {
 
     public void UnassignBeeFromBuilding(Building building) {
         switch (building.BuildingType) {
-            case BuildingType.QueenBee:
-            // fall through
             case BuildingType.Housing: {
                 Bee unassignedBee = building.UnassignBee();
                 unassignedBee.Home = null;
