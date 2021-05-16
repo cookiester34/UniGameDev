@@ -34,7 +34,7 @@ public class SavedBuilding {
         foreach (SavedBee bee in assignedBees) {
             Bee matchingBee = loadedBees.Find(bee1 => bee1.Id == bee.id);
             if (matchingBee != null) {
-                building.AssignBee(matchingBee);
+                BeeAssign.AssignBeeToBuilding(building, matchingBee);
             }
         }
 

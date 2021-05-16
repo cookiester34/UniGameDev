@@ -167,3 +167,28 @@ public class BeeManager : MonoBehaviour {
         _cachedPopulation = bees.Count;
     }
 }
+
+/// <summary>
+/// Made so when loading a save back in bees can get re-assigned correctly, this is pretty bad code, and the whole bee
+/// manager wants redoing so it is easier to work with but a deadline looms and changing it too dramatically at this
+/// point is rather scary as it may introduce more bugs
+/// </summary>
+public static class BeeAssign {
+    public static void AssignBeeToBuilding(Building building, Bee bee) {
+        switch (building.BuildingType) {
+            case BuildingType.Housing:
+                if (bee.Home == null) {
+                    bee.Home = building;
+                    building.AssignBee(bee);
+                }
+                break;
+
+            default:
+                if (bee.Work == null) {
+                    bee.Work = building;
+                    building.AssignBee(bee);
+                }
+                break;
+        }
+    }
+}
