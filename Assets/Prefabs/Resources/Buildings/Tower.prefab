@@ -6704,7 +6704,7 @@ MonoBehaviour:
   buildingTier2: {fileID: 6700858294462153184}
   buildingTier3: {fileID: 785669384311857063}
   flightpath: {fileID: 7849661411555609110}
-  canUpgradeBuilding: 0
+  canUpgradeBuilding: 1
   numAssignedBees: 0
   projectile: {fileID: 7277737900402773344, guid: e03c7411cb7bd084cb86a6a334a9ada6,
     type: 3}
