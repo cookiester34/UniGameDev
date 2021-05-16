@@ -113,6 +113,7 @@ MonoBehaviour:
   WaspGroupID: 0
   masterWaspAI: {fileID: 0}
   spawnManager: {fileID: 0}
+  animator: {fileID: 1734481273263909428}
 --- !u!82 &-1163787736537535343
 AudioSource:
   m_ObjectHideFlags: 0

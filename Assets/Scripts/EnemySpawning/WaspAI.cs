@@ -44,6 +44,9 @@ public class WaspAI : MonoBehaviour
     private float _soundLoopBasePitch;
     private float _soundLoopVolume;
 
+    public Animator animator;
+    private static readonly int Attack = Animator.StringToHash("Attack");
+
     void Awake() 
     {
         waspRenderers = GetComponentsInChildren<Renderer>().ToList();
@@ -128,8 +131,8 @@ public class WaspAI : MonoBehaviour
                 followMaster();
             }
         }
-        if (AttackDistance() && actualTimer <= 0) 
-        {
+        if (AttackDistance() && actualTimer <= 0) {
+            animator.SetTrigger(Attack);
             Health targetHealth = _currentTarget.GetComponent<Health>();
             targetHealth.ModifyHealth(-waspDamage);
             actualTimer = attacktimer;
