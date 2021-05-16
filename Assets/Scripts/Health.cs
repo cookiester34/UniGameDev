@@ -31,7 +31,9 @@ public class Health : MonoBehaviour {
     public float NormalizedHealth => (currentHealth / maxHealth);
 
     public bool regen = false;
-    private float regenTimeIntival = 1f;
+    private float timeIntival = 1f;
+
+    private bool lostHealth = false;
 
     private void Awake() {
         OnHealthGain += HealthGained;
@@ -41,14 +43,24 @@ public class Health : MonoBehaviour {
 
     private void Update()
     {
-        if (regen)
+        if (regen && !lostHealth)
         {
-            if (regenTimeIntival > 0)
-                regenTimeIntival -= Time.deltaTime;
+            if (timeIntival > 0)
+                timeIntival -= Time.deltaTime;
             else
             {
-                regenTimeIntival = 1f;
-                ModifyHealth(0.005f);
+                timeIntival = 1f;
+                ModifyHealth(0.1f);
+            }
+        }
+        if (regen && lostHealth)
+        {
+            if (timeIntival > 0)
+                timeIntival -= Time.deltaTime;
+            else
+            {
+                timeIntival = 1f;
+                lostHealth = false;
             }
         }
     }
@@ -120,6 +132,9 @@ public class Health : MonoBehaviour {
         if (healthLostParticles != null) {
             CreateParticles(healthLostParticles);
         }
+
+        lostHealth = true;
+        timeIntival = 5f;
     }
 
     private void Death() {
