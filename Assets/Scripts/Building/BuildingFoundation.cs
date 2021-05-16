@@ -161,6 +161,25 @@ public class BuildingFoundation : MonoBehaviour {
                     }
                 }
                 break;
+
+            case BuildingShape.Semicircle: {
+                if (foundations.Count == 5) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+            }
             
             case BuildingShape.Square:
                 if (foundations.Count == 4) {
@@ -289,6 +308,30 @@ public class BuildingFoundation : MonoBehaviour {
                     }
                 }
 
+                break;
+            }
+
+            case BuildingShape.Semicircle: {
+                foundations.Add(this);
+                var above = _hexPanel.GetNeighbour(NeighbourDirection.Above);
+                if (above != null) {
+                    foundations.Add(above.BuildingFoundation);
+                }
+                
+                var below = _hexPanel.GetNeighbour(NeighbourDirection.Below);
+                if (below != null) {
+                    foundations.Add(below.BuildingFoundation);
+                }
+                
+                var aboveRight = _hexPanel.GetNeighbour(NeighbourDirection.AboveRight);
+                if (aboveRight != null) {
+                    foundations.Add(aboveRight.BuildingFoundation);
+                }
+                
+                var belowRight = _hexPanel.GetNeighbour(NeighbourDirection.BelowRight);
+                if (belowRight != null) {
+                    foundations.Add(belowRight.BuildingFoundation);
+                }
                 break;
             }
         }
