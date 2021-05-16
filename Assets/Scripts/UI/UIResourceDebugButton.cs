@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ using UnityEngine.UI;
 /// </summary>
 [RequireComponent(typeof(Button))]
 public class UIResourceDebugButton : MonoBehaviour {
-    [SerializeField] private Text text;
+    [SerializeField] private TMP_InputField text;
     [SerializeField] private Resource resource;
     [SerializeField] private Toggle resourceToggle;
     [SerializeField] private Toggle resourceCapToggle;

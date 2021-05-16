@@ -1,11 +1,12 @@
 ﻿using Research;
+using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ResearchUI : UiHoverable, IPointerEnterHandler {
-    [SerializeField] private Text descriptionText;
+    [SerializeField] private TMP_Text descriptionText;
     [SerializeField] private ProgressBar progressBar;
     private ResearchObject _researchObject;
     private bool _isResearchStarted = false;
