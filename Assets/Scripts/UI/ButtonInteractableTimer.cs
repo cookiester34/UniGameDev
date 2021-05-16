@@ -8,9 +8,9 @@ public class ButtonInteractableTimer : MonoBehaviour
     private Button _button;
     private bool disableButton = true;
     private bool Toggle = false;
-    public void OnClick(Button button)
+    public void OnClick()
     {
-        _button = button;
+        _button = GetComponent<Button>();
         StartCoroutine("ToggleButton");
     }
 
