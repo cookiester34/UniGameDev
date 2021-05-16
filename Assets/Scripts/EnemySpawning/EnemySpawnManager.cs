@@ -174,8 +174,8 @@ public class EnemySpawnManager : MonoBehaviour
             for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
             {
                 Vector3 waspPosition = building.position;
-                waspPosition.x += Random.Range(-10f, 10f);
-                waspPosition.z += Random.Range(-10f, 10f);
+                waspPosition.x += Random.Range(-3f, 3f);
+                waspPosition.z += Random.Range(-3f, 3f);
                 GameObject wasp = Instantiate(enemyPrefab, waspPosition, Quaternion.identity);
                 wasps.Add(wasp);
                 waspGroupList[group].wasps.Add(wasp.transform);
