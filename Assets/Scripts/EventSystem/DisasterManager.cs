@@ -41,16 +41,18 @@ public class DisasterManager : MonoBehaviour
 
     void TriggerDisaster()
     {
-        if (Random.Range(0, 100) < disasterChance)
+        if (Random.Range(0, 100) < disasterChance && BeeManager.Instance != null && BeeManager.Instance.Bees.Count > 20)
         {
-            if(BuildingManager.Instance.Buildings.Count > minNumberOfBuildingsToTrigger)
-                spawnMeteor();
-            disasterChance = baseDisasterChance;
-            UIEventAnnounceManager.Instance.AnnounceEvent("Meteor Inbound", AnnounceEventType.Alert);
+            if (BuildingManager.Instance.Buildings.Count > minNumberOfBuildingsToTrigger) {
+                UIEventAnnounceManager.Instance.AnnounceEvent("Meteor Inbound", AnnounceEventType.Alert);
+                StartCoroutine(nameof(spawnMeteor));
+                disasterChance = baseDisasterChance;
+            }
+
         }
         else
         {
-            disasterChance += 3;
+            disasterChance += 20;
         }
     }
 
@@ -76,21 +78,19 @@ public class DisasterManager : MonoBehaviour
             return PickRandomBuildingPos();
     }
 
-    void spawnMeteor()
-    {
-        if (startPoint == null)
-        {
-            return;
+    IEnumerator spawnMeteor() {
+        if (startPoint != null) {
+            yield return new WaitForSeconds(3f);
+            SetupQueenBee();
+
+            var startPos = startPoint.position;
+            GameObject objVFX = Instantiate(vfx, startPos, Quaternion.identity) as GameObject;
+            Destroy(objVFX, 6);
+
+            var endPos = PickRandomBuildingPos() + new Vector3(0, 0.5f, 0);
+
+            RotateTo(objVFX, endPos);
         }
-        SetupQueenBee();
-
-        var startPos = startPoint.position;
-        GameObject objVFX = Instantiate(vfx, startPos, Quaternion.identity) as GameObject;
-        Destroy(objVFX, 6);
-
-        var endPos = PickRandomBuildingPos() + new Vector3(0,0.5f,0);
-
-        RotateTo(objVFX, endPos);
     }
 
     void RotateTo(GameObject obj, Vector3 destination)
