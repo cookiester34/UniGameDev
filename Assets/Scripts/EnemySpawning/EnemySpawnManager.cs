@@ -155,11 +155,15 @@ public class EnemySpawnManager : MonoBehaviour
 
     IEnumerator KillAllWasps()
     {
-        foreach(GameObject i in wasps)
-        {
-            i.GetComponent<Health>().ModifyHealth(-50);
+        wasps.RemoveAll(wasp => wasp == null);
+        if (wasps.Count > 0) {
+            foreach (GameObject i in wasps) {
+                i.GetComponent<Health>().ModifyHealth(-50);
+            }
+
+            wasps.Clear();
         }
-        wasps.Clear();
+
         return null;
     }
 

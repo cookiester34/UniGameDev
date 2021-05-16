@@ -13,7 +13,7 @@ public class HouseBuilding : Building {
     public override string GetAssignedBeesText() {
         return "Assigned Bees: " + numAssignedBees + " / " +
                populationStorage.CurrentStorage + "\n" + "Unassigned Bees: " +
-               (int) (ResourceManagement.Instance.GetResource(ResourceType.Population).CurrentResourceAmount
+               (int) (ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).ResourceCap
                       - (int) ResourceManagement.Instance.GetResource(ResourceType.AssignedPop).CurrentResourceAmount);
     }
 }
