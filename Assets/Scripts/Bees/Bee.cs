@@ -64,6 +64,8 @@ public class Bee : MonoBehaviour {
 
         var scale = Random.Range(0.6f, 0.9f);
         transform.localScale = new Vector3(scale, scale, scale);
+
+        GetComponent<AIPath>().maxSpeed = Random.Range(1.4f, 1.8f);
     }
 
     /// <summary>

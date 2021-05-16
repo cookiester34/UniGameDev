@@ -57,6 +57,8 @@ public class WaspAI : MonoBehaviour
         transform.GetComponent<AudioSource>().volume = _soundLoopVolume;
         transform.GetComponent<AudioSource>().pitch = _soundLoopBasePitch;
         oldDetectionRange = detectionRange;
+        
+        GetComponent<AIPath>().maxSpeed = Random.Range(2f, 2.4f);
     }
 
     private void SetupQueenBee()
