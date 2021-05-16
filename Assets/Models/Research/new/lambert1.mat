@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7089333041745835615
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 2
 --- !u!21 &2100000
 Material:
   serializedVersion: 6
@@ -7,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Tree
+  m_Name: lambert1
   m_Shader: {fileID: -6465566751694194690, guid: 17070b3721e970a49adcb5305c8bbc67,
     type: 3}
   m_ShaderKeywords: _NORMALMAP_TANGENT_SPACE
@@ -27,15 +40,15 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_1E8131C6:
-        m_Texture: {fileID: 2800000, guid: 3c66d53e56be08d419efcee644132da6, type: 3}
+        m_Texture: {fileID: 2800000, guid: fa24bc4794f071049a4fcd1c2dac3d16, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_455C37C1:
-        m_Texture: {fileID: 2800000, guid: c775c9b628e3a7c4a803d981270e46c4, type: 3}
+        m_Texture: {fileID: 2800000, guid: f89bebad18572ad4084000dc6b86c07e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_68DE0B3F:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7e194db342f28e04780eb66c69d87ae5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_7C644DCD:
@@ -43,7 +56,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - Texture2D_BA25113F:
-        m_Texture: {fileID: 2800000, guid: e0459ce788fcd094aa9bfe7a66395e86, type: 3}
+        m_Texture: {fileID: 2800000, guid: e56246a70b95e7f42a9bed53a9e9a592, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _AnisotropyMap:
@@ -137,7 +150,7 @@ Material:
     m_Floats:
     - CanBuild: 0
     - UseShader: 0
-    - Vector1_1BC76CC2: 100
+    - Vector1_1BC76CC2: 60
     - Vector1_287EDC53: 1
     - Vector1_C6321E9F: 100
     - _AORemapMax: 1
@@ -266,9 +279,8 @@ Material:
     - BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - CanBuildColor: {r: 0.18397805, g: 0.5566037, b: 0, a: 0.6862745}
     - CannotBuildColor: {r: 0.53773576, g: 0.0228284, b: 0.0228284, a: 0.6862745}
-    - Color_1DC22CD0: {r: 0, g: 0, b: 0, a: 1}
+    - Color_1DC22CD0: {r: 0, g: 0.4245283, b: 0.3680001, a: 1}
     - Color_762EE56B: {r: 1.929412, g: 0.9098039, b: 0.282353, a: 0}
-    - Color_B0CAA98A: {r: 2.219895, g: 4.272251, b: 4.774868, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
@@ -286,16 +298,3 @@ Material:
     - _UVDetailsMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMask: {r: 1, g: 0, b: 0, a: 0}
     - _UVMappingMaskEmissive: {r: 1, g: 0, b: 0, a: 0}
---- !u!114 &2799255739615787852
-MonoBehaviour:
-  m_ObjectHideFlags: 11
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da692e001514ec24dbc4cca1949ff7e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  version: 2
