@@ -46,6 +46,7 @@ public class DisasterManager : MonoBehaviour
             if(BuildingManager.Instance.Buildings.Count > minNumberOfBuildingsToTrigger)
                 spawnMeteor();
             disasterChance = baseDisasterChance;
+            UIEventAnnounceManager.Instance.AnnounceEvent("Meteor Inbound", AnnounceEventType.Alert);
         }
         else
         {
@@ -106,7 +107,10 @@ public class DisasterManager : MonoBehaviour
         if (Random.Range(0, 100) < disasterChance)
         {
             if (SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
+            {
                 StartCoroutine(nameof(SnowStormCycle));
+                UIEventAnnounceManager.Instance.AnnounceEvent("Incoming Snowstorms", AnnounceEventType.Alert);
+            }
             else
                 snowStormEffect.SetActive(false);
         }
