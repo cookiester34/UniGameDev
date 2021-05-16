@@ -54,7 +54,12 @@ public class BeeIdleState : BeeState {
         }
 
         if (BuildingManager.Instance.Buildings.Count > 0) {
-            Building randBuild = BuildingManager.Instance.Buildings.Random();
+            List<Building> buildings = new List<Building>();
+            buildings.AddRange(BuildingManager.Instance.Buildings.FindAll(
+                building => FastMath.SqrDistance(building.transform.position, _stateMachine.transform.position) < 400f));
+            var randBuild = 
+                buildings.Count > 0 ? buildings.Random() : BuildingManager.Instance.Buildings.Random();
+
             Vector3 position = randBuild.transform.position;
             if (position != _lastDecidedLocation) {
                 possiblePositions.Add(position);

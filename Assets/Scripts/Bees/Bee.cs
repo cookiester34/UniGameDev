@@ -53,6 +53,7 @@ public class Bee : MonoBehaviour {
         id = idCounter;
 
         _agent = GetComponent<IAstarAI>();
+        _stateMachine = GetComponent<BeeStateMachine>();
 
         _soundLoopBasePitch = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
         _soundLoopVolume = 1f + UnityEngine.Random.Range(-.05f, 0.05f);
@@ -63,6 +64,14 @@ public class Bee : MonoBehaviour {
 
         var scale = Random.Range(0.6f, 0.9f);
         transform.localScale = new Vector3(scale, scale, scale);
+    }
+
+    /// <summary>
+    /// Used to force the bee into finding a new path, this is required so after loading in the save they can all
+    /// re-calculate pathfinding after all the buildings have been placed
+    /// </summary>
+    public void ForceNewPath() {
+        _stateMachine.ChangeState(BeeStates.Idle);
     }
 
     private void Start() {

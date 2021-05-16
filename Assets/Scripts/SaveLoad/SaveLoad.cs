@@ -131,7 +131,6 @@ public static class SaveLoad {
             }
         }
 
-
         foreach (SavedTransform savedTransform in _currentSave.enemyBuildings) {
             GameObject go = Resources.Load<GameObject>(ResourceLoad.EnemyBuilding);
             Object.Instantiate(go, savedTransform.Position, savedTransform.Rotation);
@@ -159,6 +158,13 @@ public static class SaveLoad {
         Transform cameraTransform = gameCamera.transform;
         cameraTransform.position = _currentSave.cameraTransform.Position;
         cameraTransform.rotation = _currentSave.cameraTransform.Rotation;
+
+        GameObject delayCall = new GameObject("DelayedCall", typeof(DelayCall));
+        delayCall.GetComponent<DelayCall>().DelayedCall(1.5f, () => {
+            foreach (Bee bee in loadedBees) {
+                bee.ForceNewPath();
+            }
+        });
 
         _isLoading = false;
     }
