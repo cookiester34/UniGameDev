@@ -20,7 +20,8 @@ public class AudioManager : MonoBehaviour {
 
     private Music currentTrack;
     private float currentTrackLength;
-    private IEnumerator musicLoop;
+    private IEnumerator peaceMusicLoop;
+    private IEnumerator combatMusicLoop;
     private AudioSource musicSource;
     private MusicQueue peaceMusicQueue;
     private MusicQueue combatMusicQueue;
@@ -224,14 +225,23 @@ public class AudioManager : MonoBehaviour {
         //    musicQueue.ClearTracks();
         //}
 
-        if (musicLoop != null)
+        if (peaceMusicLoop != null)
         {
-            Debug.Log("Stopping coroutine " + musicLoop.ToString());
-            StopCoroutine(musicLoop);
+            Debug.Log("Stopping coroutine " + peaceMusicLoop.ToString());
+            StopCoroutine(peaceMusicLoop);
+            peaceMusicLoop = null;
+        }
+        else if (combatMusicLoop != null)
+        {
+            Debug.Log("Stopping coroutine " + combatMusicLoop.ToString());
+            StopCoroutine(combatMusicLoop);
+            combatMusicLoop = null;
         }
 
         if (musicSource != null)
             musicSource.Stop();
+        peaceMusicQueue = null;
+        combatMusicQueue = null;
     }
 
     // Initialises the music queue and starts playback.
@@ -249,18 +259,18 @@ public class AudioManager : MonoBehaviour {
                 mainMenuMusic.source.Play();
                 break;
             case SceneMusicType.peace:
-                //peaceMusicQueue = new MusicQueue(peaceMusic);
+                peaceMusicQueue = new MusicQueue(peaceMusic);
                 musicSource = GetComponent<AudioSource>();
-                musicLoop = peaceMusicQueue.LoopMusic(this, 0, PlayMusicClip);
+                peaceMusicLoop =  peaceMusicQueue.LoopMusic(this, 1.0f, PlayMusicClip);
                 Debug.Log("playing peace");
-                StartCoroutine(musicLoop);
+                StartCoroutine(peaceMusicLoop);
                 break;
             case SceneMusicType.combat:
-                //combatMusicQueue = new MusicQueue(combatMusic);
+                combatMusicQueue = new MusicQueue(combatMusic);
                 musicSource = GetComponent<AudioSource>();
-                musicLoop = combatMusicQueue.LoopMusic(this, 0, PlayMusicClip);
+                combatMusicLoop = combatMusicQueue.LoopMusic(this, 1.0f, PlayMusicClip);
                 Debug.Log("playing combat");
-                StartCoroutine(musicLoop);
+                StartCoroutine(combatMusicLoop);
                 break;
         }
     }
