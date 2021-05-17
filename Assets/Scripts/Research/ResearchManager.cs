@@ -105,8 +105,6 @@ namespace Research {
                 return;
             }
 
-            UIEventAnnounceManager.Instance.AnnounceEvent(
-                researchObject.name + " has started being researched", AnnounceEventType.Misc);
             ongoingResearch.Add(researchObject);
             researchObject.BeginResearch();
             researchObject.OnResearchFinished += () => tempFinishedResearch.Add(researchObject);

@@ -10,12 +10,19 @@ public class Splash : MonoBehaviour {
 
     private void Start() {
         content.SetActive(false);
+        if (EntryTracker.VisitedMainMenu) {
+            mainAnim.SetTrigger(StartProperty);
+            mainAnim.speed = 100f;
+            content.SetActive(true);
+            Destroy(gameObject);
+        }
     }
 
     private void Update() {
         if (Input.anyKey) {
             content.SetActive(true);
             mainAnim.SetTrigger(StartProperty);
+            EntryTracker.VisitedMainMenu = true;
             Destroy(gameObject);
         }
     }
