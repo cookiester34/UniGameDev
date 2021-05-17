@@ -92,26 +92,32 @@ public class WaspAI : MonoBehaviour
             {
                 float closestDist = float.MaxValue;
                 GameObject targetObject = null;
-                foreach (Collider hitCollider in sphereAlloc)
-                {
-                    float currentDistance = FastMath.SqrDistance(transform.position, hitCollider.transform.position);
+                foreach (Collider hitCollider in sphereAlloc) {
+                    Vector3 waspPos = transform.position;
+                    waspPos.y = 0;
+                    Vector3 targetPos = hitCollider.transform.position;
+                    targetPos.y = 0;
+                    float currentDistance = FastMath.SqrDistance(waspPos, targetPos);
                     if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
-                        && currentDistance < closestDist)
-                    {
-                        targetObject = hitCollider.gameObject;
-                        closestDist = currentDistance;
+                        && currentDistance < closestDist) {
+                        if (hitCollider.gameObject.GetComponent<EnemyBuilding>() == null) {
+                            targetObject = hitCollider.gameObject;
+                            closestDist = currentDistance;
+                        }
                     }
                 }
 
                 if (targetObject != null && targetObject.transform != null)
                 {
-                    SetDestination(targetObject, false);
+                    SetDestination(targetObject);
+                } else {
+                    SetDestination(_queenBeeBuilding);
                 }
             }
             else
             {
                 if(_queenBeeBuilding != null)
-                    SetDestination(_queenBeeBuilding, true);
+                    SetDestination(_queenBeeBuilding);
                 else
                     SetupQueenBee();
             }
@@ -120,7 +126,11 @@ public class WaspAI : MonoBehaviour
         {
             if(masterWaspAI._currentTarget != null)
             {
-                transform.position = Vector3.MoveTowards(transform.position, masterWaspAI._currentTarget.transform.position, 0.05f);
+                if (!AttackDistance()) {
+                    transform.position = Vector3.MoveTowards(transform.position,
+                        masterWaspAI._currentTarget.transform.position, 0.05f);
+                }
+
                 transform.LookAt(masterWaspAI._currentTarget.transform.position);
                 transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
                 transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
@@ -166,7 +176,7 @@ public class WaspAI : MonoBehaviour
         }
     }
 
-    void SetDestination(GameObject destinationObject, bool isQueen) 
+    void SetDestination(GameObject destinationObject) 
     {
         if (destinationObject != null)
         {
@@ -177,10 +187,7 @@ public class WaspAI : MonoBehaviour
                 _ai.destination = destination;
                 _ai.SearchPath();
                 _previousDestination = destination;
-                if (!isQueen)
-                    _currentTarget = destinationObject;
-                else
-                    _currentTarget = null;
+                _currentTarget = destinationObject;
             }
         }
     }

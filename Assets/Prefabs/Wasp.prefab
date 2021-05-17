@@ -105,7 +105,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16896
   waspDamage: 1
-  attackRange: 2.99
+  attackRange: 1
   detectionRange: 3.25
   attacktimer: 2
   masterWasp: 0
@@ -491,7 +491,7 @@ MonoBehaviour:
   rotationSpeed: 360
   slowdownDistance: 0.7
   pickNextWaypointDist: 2
-  endReachedDistance: 0.66
+  endReachedDistance: 0.2
   alwaysDrawGizmos: 1
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
