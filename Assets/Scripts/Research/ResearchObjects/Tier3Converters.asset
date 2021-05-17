@@ -16,14 +16,14 @@ MonoBehaviour:
   description: This new technology will allow converter type buildings to be upgraded
     to their maximum of tier 3.
   resources:
-  - cost: 10
-    resourceType: 0
   - cost: 25
+    resourceType: 0
+  - cost: 35
     resourceType: 2
   Prerequisites:
   - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
   researched: 0
-  researchProgress: 0
+  researchProgress: 99.213295
   timer:
     runTime: 10
     timeRunning: 0

@@ -21,9 +21,9 @@ MonoBehaviour:
   - cost: 15
     resourceType: 2
   Prerequisites:
-  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
+  - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   researched: 0
-  researchProgress: 0
+  researchProgress: 99.15312
   timer:
     runTime: 10
     timeRunning: 0

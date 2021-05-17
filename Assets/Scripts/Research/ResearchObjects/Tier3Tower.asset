@@ -15,14 +15,14 @@ MonoBehaviour:
   researchName: Tier 3 Tower
   description: ' Allows towers to be upgraded to tier 3.'
   resources:
-  - cost: 10
-    resourceType: 0
   - cost: 25
+    resourceType: 0
+  - cost: 35
     resourceType: 2
   Prerequisites:
   - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
   researched: 0
-  researchProgress: 0
+  researchProgress: 99.0361
   timer:
     runTime: 10
     timeRunning: 0

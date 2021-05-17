@@ -122,7 +122,7 @@ public class WaspAI : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, masterWaspAI._currentTarget.transform.position, 0.05f);
                 transform.LookAt(masterWaspAI._currentTarget.transform.position);
-                transform.Rotate(new Vector3(0, -90, 0));
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
                 transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
                 _currentTarget = masterWaspAI._currentTarget;
             }
@@ -153,6 +153,7 @@ public class WaspAI : MonoBehaviour
             {
                 transform.position = Vector3.MoveTowards(transform.position, masterWaspObject.position, 0.05f);
                 transform.LookAt(masterWaspObject);
+                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
             }
         }
         else

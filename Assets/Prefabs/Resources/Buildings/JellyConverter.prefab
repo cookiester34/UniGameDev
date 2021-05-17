@@ -6523,6 +6523,10 @@ MonoBehaviour:
   baseProductionAmount: -0.5
   resource: {fileID: 11400000, guid: 80ce552d1c10ba34a8bf2bb18c9a9f3a, type: 2}
   building: {fileID: -3125807644095819491}
+  research:
+  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
+  - {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633, type: 2}
+  - {fileID: 11400000, guid: de818e27885a7cd46905b34db74e5575, type: 2}
 --- !u!1 &2832082240623771679
 GameObject:
   m_ObjectHideFlags: 0
@@ -8624,6 +8628,10 @@ MonoBehaviour:
   baseProductionAmount: 1
   resource: {fileID: 11400000, guid: 6805fa6b226494444ad52bbd41c2b73a, type: 2}
   building: {fileID: -3125807644095819491}
+  research:
+  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
+  - {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633, type: 2}
+  - {fileID: 11400000, guid: de818e27885a7cd46905b34db74e5575, type: 2}
 --- !u!1 &6385261918937207730
 GameObject:
   m_ObjectHideFlags: 0
@@ -9655,7 +9663,7 @@ MonoBehaviour:
   buildingTier2: {fileID: 5173821152998520138}
   buildingTier3: {fileID: 6826917559002701692}
   flightpath: {fileID: 8954505637210625710}
-  canUpgradeBuilding: 1
+  canUpgradeBuilding: 0
   numAssignedBees: 0
 --- !u!114 &3685020429907254626
 MonoBehaviour:
