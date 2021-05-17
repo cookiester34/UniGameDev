@@ -25,7 +25,7 @@ public class SelectionState : BuildingManagerState {
         if (Input.GetKeyDown(KeyCode.Mouse0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (!EventSystem.current.IsPointerOverGameObject()
+            if ((!EventSystem.current.IsPointerOverGameObject() || EventSystem.current.currentSelectedGameObject == null)
                 && Physics.Raycast(ray, out hit, Mathf.Infinity, buildingManager.buildingMask)) {
                 if (hit.transform.CompareTag("Building")) {
                     EnableGlow(false);
