@@ -7,9 +7,6 @@ public class TowerSelected : MonoBehaviour
     private Renderer _renderer;
     private MaterialPropertyBlock _propertyBlock;
     private static readonly int TowerRadiusEnable = Shader.PropertyToID("TowerRadiusEnable");
-    [SerializeField]
-    private Building _building;
-
 
     void Awake()
     {

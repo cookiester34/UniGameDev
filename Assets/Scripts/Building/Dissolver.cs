@@ -34,7 +34,8 @@ public class Dissolver : MonoBehaviour {
         dissolve = -1f;
         for(int i = 0; i < mrs.Length; i++) {
             if (mrs[i].gameObject.layer == LayerMask.NameToLayer("Trails")
-                || mrs[i].gameObject.layer == LayerMask.NameToLayer("Minimap")) {
+                || mrs[i].gameObject.layer == LayerMask.NameToLayer("Minimap")
+                || mrs[i].gameObject.layer == LayerMask.NameToLayer("DontDissolve")) {
                 continue;
             }
             GameObject child = new GameObject("dissolvee", typeof(MeshRenderer), typeof(MeshFilter));
