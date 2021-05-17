@@ -159,6 +159,9 @@ public static class SaveLoad {
         cameraTransform.position = _currentSave.cameraTransform.Position;
         cameraTransform.rotation = _currentSave.cameraTransform.Rotation;
 
+        // Forces towers to not show their radius on load
+        BuildingManager.Instance.BuildingSelected(null);
+        
         GameObject delayCall = new GameObject("DelayedCall", typeof(DelayCall));
         delayCall.GetComponent<DelayCall>().DelayedCall(1.5f, () => {
             foreach (Bee bee in loadedBees) {

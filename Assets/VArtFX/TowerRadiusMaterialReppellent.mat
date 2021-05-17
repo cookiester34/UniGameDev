@@ -45,7 +45,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - RadiusToggle: 0
-    - TowerRadiusEnable: 0
+    - TowerRadiusEnable: 1
     - TowerRadiusToggle: 1
     - Vector1_E27059B5: 0.02
     - Vector1_E4725E17: 11.81
