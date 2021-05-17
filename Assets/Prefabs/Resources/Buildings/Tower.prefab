@@ -6704,7 +6704,7 @@ MonoBehaviour:
   buildingTier2: {fileID: 6700858294462153184}
   buildingTier3: {fileID: 785669384311857063}
   flightpath: {fileID: 7849661411555609110}
-  canUpgradeBuilding: 1
+  canUpgradeBuilding: 0
   numAssignedBees: 0
   projectile: {fileID: 7277737900402773344, guid: e03c7411cb7bd084cb86a6a334a9ada6,
     type: 3}
@@ -6712,11 +6712,15 @@ MonoBehaviour:
   damage: 2
   splashDamageDistance: 2
   splahDamageReduction: 1
-  towerRange: 10
+  towerRange: 5
   SphereRange: {fileID: 7772026237646767974}
   SphereRangeVisual: {fileID: 1071544183396796930}
   baseFiringSpeed: 0.3
   firingSpeed: 0.4
+  research:
+  - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
+  - {fileID: 11400000, guid: d84f50ae6d307754c9d3f649fc944f64, type: 2}
+  - {fileID: 11400000, guid: 8ce868dd1b158eb45896d9c15309ced2, type: 2}
   enemiesInRange: []
 --- !u!208 &-8408377489312832863
 NavMeshObstacle:

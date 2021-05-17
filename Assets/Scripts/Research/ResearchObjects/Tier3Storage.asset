@@ -16,14 +16,14 @@ MonoBehaviour:
   description: Allows upgrading of storage to their maximum of tier 3, packing the
     resources even more tightly.
   resources:
-  - cost: 10
-    resourceType: 1
   - cost: 25
+    resourceType: 1
+  - cost: 35
     resourceType: 2
   Prerequisites:
   - {fileID: 11400000, guid: cb1174f483f42514b9c5dea559f8069c, type: 2}
   researched: 0
-  researchProgress: 0
+  researchProgress: 99.13626
   timer:
     runTime: 10
     timeRunning: 0

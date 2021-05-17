@@ -21,6 +21,9 @@ public class TowerBuilding : Building
     private float timer = 1f;
     private AudioSource fireSound;
 
+    [SerializeField]
+    private List<Research.ResearchObject> research = new List<Research.ResearchObject>();
+
     private Animator[] anim;
 
     [HideInInspector]
@@ -77,7 +80,7 @@ public class TowerBuilding : Building
             fireSound.Play();
             if (enemiesInRange[0] != null)
             {
-                enemiesInRange[0].GetComponent<WaspAI>().TakeDamage(damage);
+                enemiesInRange[0].GetComponent<WaspAI>().TakeDamage(PercentageBuff(damage));
 
 
                 ///for visual effect now
@@ -92,11 +95,24 @@ public class TowerBuilding : Building
                     foreach (Transform t in i.wasps)
                     {
                         if (Vector3.Distance(t.position, enemiesInRange[0].position) < splashDamageDistance)
-                            t.GetComponent<WaspAI>().TakeDamage(damage - splahDamageReduction);
+                            t.GetComponent<WaspAI>().TakeDamage(PercentageBuff(damage) - splahDamageReduction);
                     }
                 }
             }
         }
+    }
+
+    float PercentageBuff(float damage)
+    {
+        float buff = 0;
+        foreach(Research.ResearchObject i in research)
+        {
+            if (i.Researched)
+                buff += 10;
+        }
+        if(buff > 0)
+            damage *= 1 + (buff / 100);
+        return damage;
     }
 
     public override void AssignBee(Bee bee) {
