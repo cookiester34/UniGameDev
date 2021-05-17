@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingType: 11
   uiImage: {fileID: 21300000, guid: 315ed2288b9b8eb40ae4551fa191aa77, type: 3}
-  buildingShape: 0
+  buildingShape: 1
   maxInstances: 1000
   description: Ivy Tower That Wasps Avoid
   maxNumberOfWorkers: 0

@@ -12,6 +12,8 @@ public class SceneManagement : MonoBehaviour {
     public Animator loadScreenAnimator;
 
     private static SceneManagement _instance = null;
+    private static readonly int Load = Animator.StringToHash("Load");
+    private static readonly int Unload = Animator.StringToHash("Unload");
 
     public static SceneManagement Instance {
         get {
@@ -33,9 +35,11 @@ public class SceneManagement : MonoBehaviour {
         _instance = this;
     }
 
-    private void Start()
-    {
-        loadScreenAnimator.SetTrigger("Play");
+    private void Start() {
+        if (EntryTracker.VisitedMainMenu) {
+            loadScreenAnimator.SetTrigger(Load);
+            loadScreenAnimator.ResetTrigger(Unload);
+        }
     }
 
     public void LoadScene(string sceneName) {
@@ -47,7 +51,8 @@ public class SceneManagement : MonoBehaviour {
     /// </summary>
     /// <param name="sceneName">Name of the scene to load</param>
     private IEnumerator SceneLoad(string sceneName) {
-        loadScreenAnimator.SetTrigger("LoadState");
+        loadScreenAnimator.SetTrigger(Unload);
+        loadScreenAnimator.ResetTrigger(Load);
         yield return new WaitForSecondsRealtime(2);
         var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
