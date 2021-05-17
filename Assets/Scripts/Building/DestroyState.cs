@@ -38,13 +38,6 @@ public class DestroyState : BuildingManagerState {
                     }
                     
                     ResourceManagement.Instance.AddResources(building.GetRefundAmount());
-                    var beforeDestroy = hit.collider.GetComponents<IBeforeDestroy>();
-                    if (beforeDestroy != null && beforeDestroy.Length > 0) {
-                        foreach (var destroy in beforeDestroy) {
-                            destroy.BeforeDestroy();
-                        }
-                    }
-
                     DissolveAndDestroy(hit);
                 }
             }
