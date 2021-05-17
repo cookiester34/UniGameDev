@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: Tier2Converters
   m_EditorClassIdentifier: 
   researchName: Tier 2 Converters
-  description: This new technology will allow converter type buildings to be upgraded
-    to tier 2.
+  description: Researching this will give you a 10% increase in resource production.
   resources:
   - cost: 10
     resourceType: 0
