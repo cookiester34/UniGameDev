@@ -47,19 +47,19 @@ public class Flightpath : MonoBehaviour {
     
         if (entryPoint != null) {
             Gizmos.DrawWireSphere(entryPoint.position, 0.2f);
-            Handles.Label(entryPoint.position, "Entry", style);
+            //Handles.Label(entryPoint.position, "Entry", style);
         }
     
         if (exitPoint != null) {
             Gizmos.DrawWireSphere(exitPoint.position, 0.2f);
-            Handles.Label(exitPoint.position, "Exit", style);
+            //Handles.Label(exitPoint.position, "Exit", style);
         }
     
         if (flightPoints != null && flightPoints.Count > 0) {
             int i = 0;
             foreach (Transform point in flightPoints) {
                 Gizmos.DrawWireSphere(point.position, 0.2f);
-                Handles.Label(point.position, i.ToString(), style);
+                //Handles.Label(point.position, i.ToString(), style);
                 i++;
             }
         }
