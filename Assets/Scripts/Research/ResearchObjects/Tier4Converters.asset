@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Tier4Converters
   m_EditorClassIdentifier: 
   researchName: Tier 3 Converters
-  description: This new technology will allow converter type buildings to be upgraded
-    to their maximum of tier 3.
+  description: Researching this will give you a further 10% increase in resource
+    production.
   resources:
   - cost: 40
     resourceType: 0

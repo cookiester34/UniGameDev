@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Tier4Tower
   m_EditorClassIdentifier: 
   researchName: Tier 3 Tower
-  description: ' Allows towers to be upgraded to tier 3.'
+  description: Researching this will give you a further 10% increase in tower damage.
   resources:
   - cost: 35
     resourceType: 0

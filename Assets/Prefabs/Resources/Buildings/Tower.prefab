@@ -364,7 +364,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 810d9f05f39ec7942967277d336a2eca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _building: {fileID: 3046545903379351341}
 --- !u!1 &1098514395159976613
 GameObject:
   m_ObjectHideFlags: 0
@@ -6709,9 +6708,9 @@ MonoBehaviour:
   projectile: {fileID: 7277737900402773344, guid: e03c7411cb7bd084cb86a6a334a9ada6,
     type: 3}
   projectileSpeed: 20
-  damage: 2
-  splashDamageDistance: 2
-  splahDamageReduction: 1
+  damage: 1
+  splashDamageDistance: 0.5
+  splahDamageReduction: 0.8
   towerRange: 5
   SphereRange: {fileID: 7772026237646767974}
   SphereRangeVisual: {fileID: 1071544183396796930}
