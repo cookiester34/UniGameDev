@@ -20,9 +20,10 @@ public class AudioManager : MonoBehaviour {
 
     private Music currentTrack;
     private float currentTrackLength;
-    private Coroutine musicLoop;
+    private IEnumerator musicLoop;
     private AudioSource musicSource;
-    private MusicQueue musicQueue;
+    private MusicQueue peaceMusicQueue;
+    private MusicQueue combatMusicQueue;
 
     private Sound currentAmbience;
 
@@ -88,6 +89,8 @@ public class AudioManager : MonoBehaviour {
         HandleSceneChange();
         SceneManager.activeSceneChanged += MatchMusicToScene;
 
+        peaceMusicQueue = new MusicQueue(peaceMusic);
+        combatMusicQueue = new MusicQueue(combatMusic);
 
         DontDestroyOnLoad(transform.gameObject);
     }
@@ -215,8 +218,18 @@ public class AudioManager : MonoBehaviour {
     // If there's a queue, stop it, if there is any music audiosource playing, stop it.
     public void StopMusic()
     {
+        //if (musicQueue != null)
+        //{
+        //    Debug.Log("Clearing Tracks");
+        //    musicQueue.ClearTracks();
+        //}
+
         if (musicLoop != null)
+        {
+            Debug.Log("Stopping coroutine " + musicLoop.ToString());
             StopCoroutine(musicLoop);
+        }
+
         if (musicSource != null)
             musicSource.Stop();
     }
@@ -229,27 +242,32 @@ public class AudioManager : MonoBehaviour {
         if (mainMenuMusic.source.isPlaying)
             mainMenuMusic.source.Stop();
         StopMusic();
+        Debug.Log("Music Stopped");
         switch(type)
         {
             case SceneMusicType.mainMenu:
                 mainMenuMusic.source.Play();
                 break;
             case SceneMusicType.peace:
-                musicQueue = new MusicQueue(peaceMusic);
+                //peaceMusicQueue = new MusicQueue(peaceMusic);
                 musicSource = GetComponent<AudioSource>();
-                musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
+                musicLoop = peaceMusicQueue.LoopMusic(this, 0, PlayMusicClip);
+                Debug.Log("playing peace");
+                StartCoroutine(musicLoop);
                 break;
             case SceneMusicType.combat:
-                musicQueue = new MusicQueue(combatMusic);
+                //combatMusicQueue = new MusicQueue(combatMusic);
                 musicSource = GetComponent<AudioSource>();
-                musicLoop = StartCoroutine(musicQueue.LoopMusic(this, 0, PlayMusicClip));
+                musicLoop = combatMusicQueue.LoopMusic(this, 0, PlayMusicClip);
+                Debug.Log("playing combat");
+                StartCoroutine(musicLoop);
                 break;
         }
     }
 
     public void MatchMusicToScene(Scene current, Scene next)
     {
-        //Debug.Log("Changing scene type to " + CurrentSceneType.SceneType + "WHY DO I NOT CHANGE THE MUSIC!?");
+        Debug.Log("Changing scene type to " + CurrentSceneType.SceneType);
 
         if (next.name == "Main")
         {
@@ -267,11 +285,13 @@ public class AudioManager : MonoBehaviour {
 
     public void StartCombatMusic()
     {
+        Debug.Log("Switching to combat");
         StartMusic(SceneMusicType.combat);
     }
 
     public void StartPeaceMusic()
     {
+        Debug.Log("Switching to peace");
         StartMusic(SceneMusicType.peace);
     }
 

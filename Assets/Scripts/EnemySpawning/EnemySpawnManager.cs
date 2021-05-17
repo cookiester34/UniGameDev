@@ -65,7 +65,8 @@ public class EnemySpawnManager : MonoBehaviour
     public delegate void WaspEvent();
     public event WaspEvent OnWaspsDefeated;
     public event WaspEvent OnWaspsSpawn;
-    private bool waspsSpawned = false;
+    private bool shouldChangeMusic = true;
+    private int deadWasps = 0;
 
     private Renderer renderer;
 
@@ -95,6 +96,27 @@ public class EnemySpawnManager : MonoBehaviour
         }
     }
 
+    public void OnWaspDeath()
+    {
+        deadWasps++;
+        Debug.Log("Wasp Died! " + (wasps.Count - deadWasps) + " remain");
+        if (wasps.Count == deadWasps)
+        {
+            OnWaspsDefeated?.Invoke();
+            shouldChangeMusic = true;
+        }
+    }
+
+    public void OnWaspSpawn()
+    {
+        Debug.Log("Wasp Lives! " + wasps.Count + " alive");
+        if (shouldChangeMusic)
+        {
+            shouldChangeMusic = false;
+            OnWaspsSpawn?.Invoke();
+        }
+    }
+
     void UpdateWaspGroups()
     {
         
@@ -111,6 +133,7 @@ public class EnemySpawnManager : MonoBehaviour
         if(SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
         {
             StartCoroutine(nameof(KillAllWasps));
+            deadWasps = 0;
         }
         if (enemyBuildingListOldCount != enemyBuildingsList.Count)
             UpdateWaspGroups();
@@ -127,8 +150,6 @@ public class EnemySpawnManager : MonoBehaviour
                     StartCoroutine(DelaySpawn(temp[i], i));
             }
             waveNumber++;
-            OnWaspsSpawn?.Invoke();
-            waspsSpawned = true;
 
             foreach (WaspGroup i in waspGroupList) //go through all wasp groups and merge the smaller groups
             {
@@ -149,7 +170,7 @@ public class EnemySpawnManager : MonoBehaviour
                         }
                     }
                 }
-            }            
+            }
         }
     }
 
@@ -162,6 +183,8 @@ public class EnemySpawnManager : MonoBehaviour
             }
 
             wasps.Clear();
+            OnWaspsDefeated?.Invoke();
+            deadWasps = 0;
         }
 
         return null;

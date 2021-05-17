@@ -25,6 +25,8 @@ public class Health : MonoBehaviour {
     public float CurrentHealth => currentHealth;
     public float MaxHealth => maxHealth;
 
+    private bool dead;
+
     /// <summary>
     /// The health as a percentage value between 0 to 1
     /// </summary>
@@ -39,6 +41,9 @@ public class Health : MonoBehaviour {
         OnHealthGain += HealthGained;
         OnHealthLost += HealthLost;
         OnDeath += Death;
+        if (gameObject.CompareTag("Enemy"))
+            EnemySpawnManager.Instance.OnWaspSpawn();
+        dead = false;
     }
 
     private void Update()
@@ -92,8 +97,9 @@ public class Health : MonoBehaviour {
             {
                 OnHealthLost?.Invoke();
             }
-            else
+            else if (!dead)
             {
+                dead = true;
                 OnDeath?.Invoke();
             }
         }
@@ -138,9 +144,17 @@ public class Health : MonoBehaviour {
     }
 
     private void Death() {
+
+
         if (deathAudio != null) {
             AudioManager.Instance.ModulateAudioSource(deathAudio);
-            deathAudio.Play();
+            if (gameObject != null)
+                deathAudio.Play();
+        }
+
+        if (gameObject.CompareTag("Enemy"))
+        {
+            EnemySpawnManager.Instance.OnWaspDeath();
         }
 
         if (deathParticles != null) {

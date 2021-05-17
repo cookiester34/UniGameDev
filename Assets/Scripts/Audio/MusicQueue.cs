@@ -28,6 +28,7 @@ public class MusicQueue
         foreach(Music track in tracks)
         {
             playFunction(track);
+            Debug.Log("Playing " + track.name);
 
             yield return new WaitForSeconds(track.source.clip.length + delay);
         }
