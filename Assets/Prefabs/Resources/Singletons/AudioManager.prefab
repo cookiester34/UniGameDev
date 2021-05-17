@@ -287,11 +287,11 @@ MonoBehaviour:
     source: {fileID: 0}
   buildingSelectSound:
     name: BuildingSelect
-    soundClip: {fileID: 8300000, guid: 831bed766a1c9b848803111476cfc4cf, type: 3}
+    soundClip: {fileID: 8300000, guid: a832be2c364608f46a1d79e7323d4c15, type: 3}
     volume: 1
     pitch: 1
     loop: 0
-    autoModulation: 0
+    autoModulation: 1
     output: {fileID: 70648913230145613, guid: ea7e695f976ffaa439230d1fa372b759, type: 2}
     source: {fileID: 0}
   startingMusicType: 2
