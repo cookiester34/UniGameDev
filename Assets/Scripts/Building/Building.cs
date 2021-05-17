@@ -37,6 +37,7 @@ public class Building : MonoBehaviour {
     public int numAssignedBees;
     private List<Bee> _assignedBees;
     private List<BuildingFoundation> usedFoundations = new List<BuildingFoundation>();
+    private static readonly int Animate = Animator.StringToHash("Animate");
 
     public List<BuildingFoundation> UsedFoundations {
         get => usedFoundations;
@@ -55,11 +56,11 @@ public class Building : MonoBehaviour {
     {
         switch (buildingTier)
         {
-            case 0:
-                return buildingTier1;
             case 1:
-                return buildingTier2;
+                return buildingTier1;
             case 2:
+                return buildingTier2;
+            case 3:
                 return buildingTier3;
         }
         return null;
@@ -98,6 +99,8 @@ public class Building : MonoBehaviour {
                 supplier.CalculateProductionAmount();
             }
         }
+
+        AssignAnimation();
     }
 
     /// <summary>
@@ -129,6 +132,8 @@ public class Building : MonoBehaviour {
                 supplier.CalculateProductionAmount();
             }
         }
+
+        AssignAnimation();
 
         return beeUnassigned;
     }
@@ -264,6 +269,19 @@ public class Building : MonoBehaviour {
 
         if (buildingTier3 != null) {
             buildingTier3.SetActive(buildingTier == 3);
+        }
+    }
+
+    /// <summary>
+    /// Turns on or off animation based on whether the building has bees assigned
+    /// </summary>
+    public void AssignAnimation() {
+        GameObject active = GetActiveBuilding();
+        if (active != null) {
+            Animator animator = active.GetComponent<Animator>();
+            if (animator != null && _assignedBees != null) {
+                animator.SetBool(Animate, _assignedBees.Count > 0);
+            }
         }
     }
 }
