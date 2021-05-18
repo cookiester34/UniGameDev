@@ -50,7 +50,6 @@ public class EnemySpawnManager : MonoBehaviour
     /// How many more wasps to spawn per wave
     /// </summary>
     private int waveHordeMultiplier = 3;
-    public int waspCap = 100;
 
     [Range(1,5)]
     public int numberOfEnemiesSpawnableMin;
@@ -222,9 +221,6 @@ public class EnemySpawnManager : MonoBehaviour
                 waspAI.masterWaspObject = masterWasp;
                 waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
             }
-
-            if (i > waspCap)
-                break;
         }
     }
 }
