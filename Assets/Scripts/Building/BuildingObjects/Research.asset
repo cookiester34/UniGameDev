@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Research
   m_EditorClassIdentifier: 
   buildingType: 8
-  uiImage: {fileID: 21300000, guid: 66279fd321492144ca69002965fe2cc1, type: 3}
+  uiImage: {fileID: 21300000, guid: 34ade0040ec6d3a48ab3c36b4f17cc6f, type: 3}
   buildingShape: 2
   maxInstances: 1
   description: Allows researching of new techniques allowing for buildings to be
