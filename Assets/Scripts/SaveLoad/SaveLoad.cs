@@ -126,9 +126,12 @@ public static class SaveLoad {
             foreach (RaycastHit hit in hits) {
                 var bf = hit.collider.gameObject.GetComponentInParent<BuildingFoundation>();
                 if (bf != null) {
-                    bf.BuildMulti(building.BuildingData.BuildingShape);
+                    var foundations = bf.BuildMultiFoundation(building.BuildingData.BuildingShape);
+                    building.UsedFoundations.AddRange(foundations);
                 }
             }
+
+            building.UsedFoundations = building.UsedFoundations.Distinct().ToList();
         }
 
         foreach (SavedTransform savedTransform in _currentSave.enemyBuildings) {

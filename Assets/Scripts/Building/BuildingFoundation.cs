@@ -71,6 +71,132 @@ public class BuildingFoundation : MonoBehaviour {
         return buildingCenter;
     }
 
+    public List<BuildingFoundation> BuildMultiFoundation(BuildingShape shape, bool updateBuildStatus = true) {
+        bool canBuild = false;
+        List<BuildingFoundation> foundations = GetFoundations(shape);
+
+        switch (shape) {
+            case BuildingShape.OneTile:
+                canBuild = _canBuild;
+                if (updateBuildStatus) {
+                    CanBuild = false;
+                }
+
+                break;
+
+            case BuildingShape.ThreeTile:
+                if (foundations.Count == 3) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+
+            case BuildingShape.SevenTile:
+                if (foundations.Count == 7) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+            
+            case BuildingShape.SevenTileJut:
+                if (foundations.Count == 8) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+
+            case BuildingShape.ThreeThreeTile:
+                if (foundations.Count == 9) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+
+            case BuildingShape.Semicircle: {
+                if (foundations.Count == 5) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+            }
+            
+            case BuildingShape.Square:
+                if (foundations.Count == 4) {
+                    foreach (BuildingFoundation foundation in foundations) {
+                        canBuild = foundation.CanBuild;
+                        if (!canBuild) {
+                            break;
+                        }
+                    }
+
+                    if (updateBuildStatus && canBuild) {
+                        CanBuild = false;
+                        foreach (BuildingFoundation foundation in foundations) {
+                            foundation.CanBuild = false;
+                        }
+                    }
+                }
+                break;
+        }
+
+        return foundations;
+    }
+
     /// <summary>
     /// Checks if the tiles are available for building and changes them to not available if they can
     /// </summary>
