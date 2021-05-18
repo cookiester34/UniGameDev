@@ -11,7 +11,7 @@ public static class BeeFacts {
         "Each bee will fly about 800km in her 3-week lifetime.",
         "Bees are covered by tiny hairs, which help spread the pollen from one flower to another to help new flowers grow.",
         "Bees are 100 times more sensitive to the smell of flowers than humans.",
-        "Did you know that bees love dancing? The foraging bees do a “waggle dance” to tell bees in their hive know where the flowers are.",
+        "Did you know that bees love dancing? The foraging bees do a “waggle dance” to tell bees in their hive where the flowers are.",
         "About a third of the world’s food supply depends on pollinating insects like honeybees.",
         "According to Albert Einstein, if honeybees were to disappear from earth, humanity would die within 4 years.",
         "A hexagonal shape of a honeycomb cell is the most optimal shape for the beehive.",
