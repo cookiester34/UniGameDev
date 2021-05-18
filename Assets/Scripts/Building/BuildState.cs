@@ -28,8 +28,8 @@ public class BuildState : BuildingManagerState {
             tempBuilding.SetActive(true);
             BuildingFoundation foundation = hit.collider.GetComponentInParent<BuildingFoundation>();
             if (foundation != null) {
-                Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingShape);
-                tempBuilding.transform.position = buildPosition;
+                Vector3 buildPosition = foundation.BuildingPosition(currentBuilding.BuildingShape); ;
+                tempBuilding.transform.position = buildPosition + currentBuilding.BuildingType.GetModel().transform.position;
 
                 if (Input.GetMouseButtonDown(0)) {
                     PlaceBuilding(buildPosition, foundation);

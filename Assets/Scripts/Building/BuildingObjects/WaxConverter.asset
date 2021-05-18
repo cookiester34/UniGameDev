@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WaxConverter
   m_EditorClassIdentifier: 
   buildingType: 2
-  uiImage: {fileID: 21300000, guid: eb6863fa1de395a49992604c8ff3f5d5, type: 3}
+  uiImage: {fileID: 21300000, guid: 9054adffe62577b42b5da37c2471c256, type: 3}
   buildingShape: 6
   maxInstances: 1000
   description: Wax Converter - This building converts pollen into wax. Wax is used
