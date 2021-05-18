@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -9,7 +10,7 @@ public class SaveLoadMonoWrapper : MonoBehaviour {
     /// <summary>
     /// Text component to rely on for savename
     /// </summary>
-    [SerializeField] private Text text;
+    [SerializeField] private TMP_InputField text;
 
     private void Awake() {
         if (text == null) {
