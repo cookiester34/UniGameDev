@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace CameraNameSpace {
     /// <summary>
@@ -48,7 +49,8 @@ namespace CameraNameSpace {
         void Update() {
 			if (CurrentInputType.Instance.GetInputType() == InputType.Game) {
 				float scroll = Input.GetAxis("Mouse ScrollWheel");
-				if (Math.Abs(scroll) > 0.05f) {
+				if (Math.Abs(scroll) > 0.05f && (!EventSystem.current.IsPointerOverGameObject() 
+				                                 && EventSystem.current.currentSelectedGameObject == null)) {
 					Vector3 newOffset = offset + (transform.forward * (scroll * Time.unscaledDeltaTime * 500f));
 					if (newOffset.y > MIN_ZOOM.y && newOffset.y < MAX_ZOOM.y) {
 						offset = newOffset;
