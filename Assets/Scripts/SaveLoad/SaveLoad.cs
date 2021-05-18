@@ -139,9 +139,13 @@ public static class SaveLoad {
             Object.Instantiate(go, savedTransform.Position, savedTransform.Rotation);
         }
 
-        for (int i = 0; i < _currentSave.resources.Count; i++) {
-            ResourceManagement.Instance.resourceList[i].CopySavedResource(_currentSave.resources[i]);
-        }
+        GameObject delayCall2 = new GameObject("DelayedCall", typeof(DelayCall));
+        delayCall2.GetComponent<DelayCall>().DelayedCall(1f, () => {
+            for (int i = 0; i < _currentSave.resources.Count; i++) {
+                ResourceManagement.Instance.resourceList[i].CopySavedResource(_currentSave.resources[i]);
+            }
+        });
+        
 
         foreach (SavedResearch research in _currentSave.researches) {
             ResearchObject obj = ResearchManager.Instance.AllResearch.Find(
