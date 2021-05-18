@@ -66,16 +66,13 @@ public class WaspAI : MonoBehaviour
 
     private void SetupQueenBee()
     {
-        if (_queenBeeBuilding == null) 
-        {
-            _queenBeeBuilding = GameObject.Find("QueenBeeBuilding(Clone)");
+        if (_queenBeeBuilding == null) {
+            _queenBeeBuilding = BeeManager.Instance.gameObject;
         }
     }
 
-    private void Start() 
-    {
+    private void Start() {
         SetupQueenBee();
-
     }
 
 
