@@ -192,12 +192,14 @@ public class SeasonManager : MonoBehaviour
             }
         }
         currentSeason = season;
+        
+        SeasonChangeHandler();
         if (!_hasInitialSeasonBeenSet)
         {
             //ResetParticles();
             _hasInitialSeasonBeenSet = true;
+            SeasonChanged();
         }
-        SeasonChangeHandler();
     }
 
     void SeasonChangeHandler()
