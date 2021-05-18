@@ -118,6 +118,8 @@ public class DisasterManager : MonoBehaviour
 
     IEnumerator SnowStormCycle()
     {
+        UIEventAnnounceManager.Instance.AnnounceEvent("A snow storm is imminent", AnnounceEventType.Alert);
+        yield return new WaitForSeconds(3f);
         snowStormEffect.SetActive(true);
         while (true)
         {
