@@ -109,7 +109,6 @@ public class DisasterManager : MonoBehaviour
             if (SeasonManager.Instance.GetCurrentSeason() == Seasons.Winter)
             {
                 StartCoroutine(nameof(SnowStormCycle));
-                UIEventAnnounceManager.Instance.AnnounceEvent("Incoming Snowstorms", AnnounceEventType.Alert);
             }
             else
                 snowStormEffect.SetActive(false);
@@ -118,7 +117,7 @@ public class DisasterManager : MonoBehaviour
 
     IEnumerator SnowStormCycle()
     {
-        UIEventAnnounceManager.Instance.AnnounceEvent("A snow storm is imminent", AnnounceEventType.Alert);
+        UIEventAnnounceManager.Instance.AnnounceEvent("Incoming Snowstorms", AnnounceEventType.Alert);
         yield return new WaitForSeconds(3f);
         snowStormEffect.SetActive(true);
         while (true)

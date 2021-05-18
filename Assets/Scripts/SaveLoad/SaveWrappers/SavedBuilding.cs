@@ -19,6 +19,7 @@ public class SavedBuilding {
         assignedBees = new List<SavedBee>();
         buildingTier = building.BuildingTier;
         if (building.AssignedBees != null) {
+            building.AssignedBees.RemoveAll(x => x == null);
             foreach (Bee bee in building.AssignedBees) {
                 assignedBees.Add(new SavedBee(bee));
             }
