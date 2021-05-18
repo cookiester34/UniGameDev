@@ -61,7 +61,13 @@ public class LoadPanelHolder : MonoBehaviour {
             loadPanel.SetText(save.name);
             loadPanel.IncludeLoadButton = removeLoadButton;
             LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
+            StartCoroutine(DelayRebuild());
         }
+    }
+
+    IEnumerator DelayRebuild() {
+        yield return new WaitForSecondsRealtime(1f);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
     }
 
     private void OnDestroy() {
