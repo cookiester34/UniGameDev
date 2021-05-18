@@ -43,6 +43,11 @@ public class ResourceManagement : MonoBehaviour {
     {
         //will call the resourceTick every x seconds
         InvokeRepeating(nameof(ResourceTick), 1, resourceTickTime);
+
+        // Ensures that resources have defaults on load
+        foreach (Resource resource in resourceList) {
+            resource.RevertToStarting();
+        }
     }
 
     /// <summary>

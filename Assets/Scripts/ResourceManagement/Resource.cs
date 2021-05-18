@@ -73,6 +73,12 @@ public class Resource : ScriptableObject {
         OnCapChanged?.Invoke(resourceCap);
     }
 
+    public void RevertToStarting() {
+        currentResourceAmount = resourceStartingAmount;
+        resourceCap = startingCap;
+        resourceTickAmount = startingTickAmount;
+    }
+
     public void ModifyAmount(float value) {
         // If were infinite do nothing leave the resource at its current value
         if (Infinite()) {
