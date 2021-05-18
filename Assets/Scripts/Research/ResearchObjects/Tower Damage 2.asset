@@ -10,18 +10,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier2Tower
+  m_Name: Tower Damage 2
   m_EditorClassIdentifier: 
-  researchName: Tier 2 Tower
-  description: Researching this will give you a 10% increase in tower damage.
+  researchName: Tower Damage II
+  description: Researching this will give you a further 10% increase in tower damage.
   resources:
-  - cost: 10
+  - cost: 25
     resourceType: 0
-  - cost: 5
+  - cost: 35
     resourceType: 2
-  Prerequisites: []
+  Prerequisites:
+  - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
   researched: 0
-  researchProgress: 99.182785
+  researchProgress: 99.0361
   timer:
     runTime: 10
     timeRunning: 0

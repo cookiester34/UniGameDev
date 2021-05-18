@@ -10,22 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier3Tower
+  m_Name: Resource Boost 3
   m_EditorClassIdentifier: 
-  researchName: Tier 3 Tower
-  description: Researching this will give you a further 10% increase in tower damage.
+  researchName: Resource Boost III
+  description: Researching this will give you a further 10% increase in resource
+    production.
   resources:
-  - cost: 25
+  - cost: 40
     resourceType: 0
-  - cost: 35
+  - cost: 55
     resourceType: 2
   Prerequisites:
-  - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
+  - {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633, type: 2}
   researched: 0
-  researchProgress: 99.0361
+  researchProgress: 99.09682
   timer:
     runTime: 10
     timeRunning: 0
     progressPercent: 0
     active: 0
-  uiSprite: {fileID: 21300000, guid: 315ed2288b9b8eb40ae4551fa191aa77, type: 3}
+  uiSprite: {fileID: 21300000, guid: 2185d591c99a60f42a3f9d46b6cd146a, type: 3}

@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier3Converters
+  m_Name: Resource Boost 2
   m_EditorClassIdentifier: 
-  researchName: Tier 3 Converters
+  researchName: Resource Boost II
   description: Researching this will give you a further 10% increase in resource
     production.
   resources:
@@ -23,7 +23,7 @@ MonoBehaviour:
   Prerequisites:
   - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
   researched: 0
-  researchProgress: 99.213295
+  researchProgress: 99.05614
   timer:
     runTime: 10
     timeRunning: 0

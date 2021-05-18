@@ -10,21 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ea2055fbbeeea84449674c14a3f5e782, type: 3}
-  m_Name: Tier2Converters
+  m_Name: Tower Damage 3
   m_EditorClassIdentifier: 
-  researchName: Tier 2 Converters
-  description: Researching this will give you a 10% increase in resource production.
+  researchName: Tower Damage III
+  description: Researching this will give you a further 10% increase in tower damage.
   resources:
-  - cost: 10
+  - cost: 35
     resourceType: 0
-  - cost: 15
+  - cost: 55
     resourceType: 2
-  Prerequisites: []
+  Prerequisites:
+  - {fileID: 11400000, guid: d84f50ae6d307754c9d3f649fc944f64, type: 2}
   researched: 0
-  researchProgress: 0
+  researchProgress: 99.03152
   timer:
     runTime: 10
     timeRunning: 0
     progressPercent: 0
     active: 0
-  uiSprite: {fileID: 21300000, guid: 2185d591c99a60f42a3f9d46b6cd146a, type: 3}
+  uiSprite: {fileID: 21300000, guid: 315ed2288b9b8eb40ae4551fa191aa77, type: 3}

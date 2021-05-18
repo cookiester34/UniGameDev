@@ -18,7 +18,7 @@ MonoBehaviour:
   maxInstances: 1000
   description: Storage - This building is used to increase the maximum capacity of
     various resource types.
-  maxNumberOfWorkers: 5
+  maxNumberOfWorkers: 0
   tier1RequiredResearch: []
   tier2RequiredResearch:
   - {fileID: 11400000, guid: cb1174f483f42514b9c5dea559f8069c, type: 2}
