@@ -1,0 +1,473 @@
+{
+    "name": "Hard",
+    "terrainSceneName": "SmoothHills",
+    "playerMade": false,
+    "buildings": [
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.767470359802246,
+                    "y": -0.43445757031440737,
+                    "z": -55.37236785888672
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.0,
+                    "z": 0.0,
+                    "w": 1.0
+                }
+            },
+            "health": {
+                "currentHealth": 50.0,
+                "maxHealth": 50.0
+            },
+            "buildingData": {
+                "buildingType": 7,
+                "resourcePurchase": []
+            },
+            "assignedBees": [],
+            "buildingTier": 1
+        }
+    ],
+    "bees": [
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.833992004394531,
+                    "y": 1.2611303329467774,
+                    "z": -54.82204818725586
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.9985723495483398,
+                    "z": 0.0,
+                    "w": 0.053417034447193149
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 24
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.74542760848999,
+                    "y": 1.3042283058166505,
+                    "z": -54.9953727722168
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.15839171409606934,
+                    "z": 0.0,
+                    "w": 0.9873763918876648
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 23
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.954145908355713,
+                    "y": 1.1921706199645997,
+                    "z": -54.9744987487793
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.0963606983423233,
+                    "z": 0.0,
+                    "w": 0.9953465461730957
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 22
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.814720153808594,
+                    "y": 1.4769223928451539,
+                    "z": -54.819129943847659
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.9995927810668945,
+                    "z": 0.0,
+                    "w": -0.02853628620505333
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 21
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.569497585296631,
+                    "y": 1.1200611591339112,
+                    "z": -55.02088928222656
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.5186055302619934,
+                    "z": 0.0,
+                    "w": -0.8550136089324951
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 20
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.570741653442383,
+                    "y": 1.3995769023895264,
+                    "z": -55.025428771972659
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.9773716330528259,
+                    "z": 0.0,
+                    "w": 0.21152964234352113
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 19
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.947822093963623,
+                    "y": 1.452161192893982,
+                    "z": -55.03586959838867
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": 0.460911363363266,
+                    "z": 0.0,
+                    "w": -0.8874461650848389
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 18
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.928736686706543,
+                    "y": 1.1310513019561768,
+                    "z": -55.226741790771487
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.24640382826328278,
+                    "z": 0.0,
+                    "w": 0.9691672921180725
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 17
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.71013879776001,
+                    "y": 1.0165202617645264,
+                    "z": -55.181766510009769
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.35830143094062807,
+                    "z": 0.0,
+                    "w": -0.9336060285568237
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 16
+        },
+        {
+            "transform": {
+                "Position": {
+                    "x": 7.706972599029541,
+                    "y": 1.329941749572754,
+                    "z": -55.186180114746097
+                },
+                "Rotation": {
+                    "x": 0.0,
+                    "y": -0.09941859543323517,
+                    "z": 0.0,
+                    "w": 0.9950457811355591
+                }
+            },
+            "health": {
+                "currentHealth": 3.0,
+                "maxHealth": 3.0
+            },
+            "id": 15
+        }
+    ],
+    "enemyBuildings": [
+        {
+            "Position": {
+                "x": 46.60496139526367,
+                "y": -0.4434615671634674,
+                "z": -21.90736961364746
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": 34.654964447021487,
+                "y": -0.4434615671634674,
+                "z": -17.767370223999025
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": -38.24002456665039,
+                "y": -0.4431850016117096,
+                "z": -28.117368698120118
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": -33.460025787353519,
+                "y": -0.4431850016117096,
+                "z": -26.0473690032959
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        },
+        {
+            "Position": {
+                "x": -38.24002456665039,
+                "y": -0.4431850016117096,
+                "z": -34.32736587524414
+            },
+            "Rotation": {
+                "x": 0.0,
+                "y": 0.0,
+                "z": 0.0,
+                "w": 1.0
+            }
+        }
+    ],
+    "resources": [
+        {
+            "Type": 1,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 30.0,
+            "Cap": 30
+        },
+        {
+            "Type": 0,
+            "StartingAmount": 0,
+            "TickDrainAmount": 1.0000001192092896,
+            "CurrentResourceAmount": 100.0,
+            "Cap": 100
+        },
+        {
+            "Type": 2,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 5.0,
+            "Cap": 5
+        },
+        {
+            "Type": 3,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 50.0,
+            "Cap": 50
+        },
+        {
+            "Type": 4,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 10.0,
+            "Cap": 10
+        },
+        {
+            "Type": 5,
+            "StartingAmount": 0,
+            "TickDrainAmount": 0.0,
+            "CurrentResourceAmount": 0.0,
+            "Cap": 10
+        }
+    ],
+    "researches": [
+        {
+            "researched": false,
+            "name": "Tier 2 Housing",
+            "progress": 99.03507232666016,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tier 3 Housing",
+            "progress": 0.0,
+            "timer": {
+                "runTime": 20.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tier 2 Storage",
+            "progress": 99.15312194824219,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tier 3 Storage",
+            "progress": 99.13626098632813,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Resource Boost I",
+            "progress": 99.2506103515625,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Resource Boost II",
+            "progress": 99.05613708496094,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Resource Boost III",
+            "progress": 99.09681701660156,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tower Damage I",
+            "progress": 99.18278503417969,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tower Damage II",
+            "progress": 99.03610229492188,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        },
+        {
+            "researched": false,
+            "name": "Tower Damage III",
+            "progress": 99.0315170288086,
+            "timer": {
+                "runTime": 10.0,
+                "timeRunning": 0.0,
+                "progressPercent": 0.0,
+                "active": false
+            }
+        }
+    ],
+    "cameraTransform": {
+        "Position": {
+            "x": 37.50929641723633,
+            "y": -0.5052008628845215,
+            "z": -20.805278778076173
+        },
+        "Rotation": {
+            "x": 0.0,
+            "y": 0.0,
+            "z": 0.0,
+            "w": 1.0
+        }
+    },
+    "currentSeason": 0,
+    "waveNumber": 0,
+    "year": 1
+}

@@ -6708,9 +6708,9 @@ MonoBehaviour:
   projectile: {fileID: 7277737900402773344, guid: e03c7411cb7bd084cb86a6a334a9ada6,
     type: 3}
   projectileSpeed: 20
-  damage: 1
-  splashDamageDistance: 0.5
-  splahDamageReduction: 0.8
+  damage: 2.5
+  splashDamageDistance: 1.5
+  splahDamageReduction: 1
   towerRange: 5
   SphereRange: {fileID: 7772026237646767974}
   SphereRangeVisual: {fileID: 1071544183396796930}
