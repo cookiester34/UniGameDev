@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.33311632, g: 0.4989613, b: 0.8330084, a: 1}
+  m_IndirectSpecularColor: {r: 0.33371308, g: 0.4997731, b: 0.8330084, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1324,7 +1324,9 @@ MonoBehaviour:
   loadPanelPrefab: {fileID: 4843594805372743400, guid: 52d2282a675348d49a21cdae0b5e72d7,
     type: 3}
   levelsTitle: {fileID: 163339548}
+  levelsText: {fileID: 0}
   playersTitle: {fileID: 4237811}
+  removeLoadButton: 0
 --- !u!114 &318082830
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1445,8 +1447,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2018200481}
   m_HandleRect: {fileID: 2018200480}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.8000001
+  m_Value: 0.9999991
+  m_Size: 0.7999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4945,7 +4947,7 @@ RectTransform:
   m_Father: {fileID: 2145319960}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.19999993}
+  m_AnchorMin: {x: 0, y: 0.20792085}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -6387,8 +6389,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 745736820}
   m_HandleRect: {fileID: 745736819}
   m_Direction: 2
-  m_Value: 0.9999997
-  m_Size: 0.8000001
+  m_Value: 1.0000002
+  m_Size: 0.79207915
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -7319,10 +7321,10 @@ RectTransform:
   m_Father: {fileID: 1897046434}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0.018469656, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.00091308507, y: 0.00005340576}
-  m_SizeDelta: {x: 0, y: 500}
+  m_AnchoredPosition: {x: -7.000913, y: -0.000038146973}
+  m_SizeDelta: {x: 7, y: 515}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &1257968868
 GameObject:
@@ -7751,7 +7753,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1393458180
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7960,8 +7962,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2116933256}
   m_HandleRect: {fileID: 2116933254}
   m_Direction: 2
-  m_Value: 1.0000004
-  m_Size: 0.8000001
+  m_Value: 0.9999994
+  m_Size: 0.7999999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -9378,14 +9380,14 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 3
   m_Viewport: {fileID: 1897046434}
   m_HorizontalScrollbar: {fileID: 0}
   m_VerticalScrollbar: {fileID: 1111955474}
   m_HorizontalScrollbarVisibility: 2
   m_VerticalScrollbarVisibility: 2
   m_HorizontalScrollbarSpacing: -3
-  m_VerticalScrollbarSpacing: -3
+  m_VerticalScrollbarSpacing: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -15708,7 +15710,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -17, y: 0}
+  m_SizeDelta: {x: -21, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1897046435
 MonoBehaviour:
@@ -16511,7 +16513,7 @@ RectTransform:
   m_Father: {fileID: 432939773}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.19999987}
+  m_AnchorMin: {x: 0, y: 0.20000005}
   m_AnchorMax: {x: 1, y: 0.99999994}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
@@ -17186,7 +17188,7 @@ RectTransform:
   m_Father: {fileID: 1205620726}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.19999987}
+  m_AnchorMin: {x: 0, y: 0.2000001}
   m_AnchorMax: {x: 1, y: 0.99999994}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
