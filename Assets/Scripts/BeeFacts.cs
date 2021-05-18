@@ -26,7 +26,7 @@ public static class BeeFacts {
         "For a very long-time scientists were not able to figure out how bees are able to fly.",
         "A single bee produces only 1/12 of a teaspoon of honey during its lifetime.",
         "Honeybees can detect explosives.",
-        "A honeybee a colony is technically immortal.",
+        "A honeybee colony is technically immortal.",
         "Approximately 80% of insect crop pollination is done by honeybees.",
         "Pollen affects honeybee’s development and productivity of the whole colony.",
         "What do you call a bee born in May?\nA maybe!",
