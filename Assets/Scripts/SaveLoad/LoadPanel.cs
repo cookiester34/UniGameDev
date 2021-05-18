@@ -10,6 +10,7 @@ public class LoadPanel : MonoBehaviour {
     [SerializeField] private TMP_Text text;
     [SerializeField] private Button loadButton;
     [SerializeField] private Button deleteButton;
+    private bool _includeLoadButton = true;
     private bool _includeDeleteButton = true;
 
     public bool IncludeDeleteButton {
@@ -17,6 +18,15 @@ public class LoadPanel : MonoBehaviour {
             _includeDeleteButton = value;
             if (!_includeDeleteButton) {
                 Destroy(deleteButton.gameObject);
+            }
+        }
+    }
+    
+    public bool IncludeLoadButton {
+        set {
+            _includeLoadButton = value;
+            if (_includeLoadButton) {
+                Destroy(loadButton.gameObject);
             }
         }
     }

@@ -12,7 +12,9 @@ public class LoadPanelHolder : MonoBehaviour {
     [SerializeField] private GameObject loadPanelPrefab;
 
     [SerializeField] private RectTransform levelsTitle;
+    [SerializeField] private GameObject levelsText;
     [SerializeField] private RectTransform playersTitle;
+    [SerializeField] private bool removeLoadButton;
     
     /// <summary>
     /// Rect transform component, used to update layout
@@ -34,6 +36,11 @@ public class LoadPanelHolder : MonoBehaviour {
 
         SaveLoad.OnSaveAdded += AddLoadPanel;
         SaveLoad.CheckExistingSaves();
+
+        if (removeLoadButton) {
+            Destroy(levelsTitle.gameObject);
+            Destroy(levelsText);
+        }
     }
 
     /// <summary>
@@ -43,13 +50,16 @@ public class LoadPanelHolder : MonoBehaviour {
     void AddLoadPanel(Save save) {
         LoadPanel loadPanel = _loadPanels.Find(panel => panel.Savename == save.name);
         if (loadPanel == null) {
-            // TODO: differentiate between a player save and in game save for the prefab, an in game save should not support delete
             RectTransform parent = save.playerMade ? playersTitle : levelsTitle;
+            if (removeLoadButton && !save.playerMade) {
+                return;
+            }
             GameObject go = Instantiate(loadPanelPrefab, parent);
             loadPanel = go.GetComponent<LoadPanel>();
             loadPanel.IncludeDeleteButton = save.playerMade;
             _loadPanels.Add(loadPanel);
             loadPanel.SetText(save.name);
+            loadPanel.IncludeLoadButton = removeLoadButton;
             LayoutRebuilder.ForceRebuildLayoutImmediate(_rectTransform);
         }
     }
