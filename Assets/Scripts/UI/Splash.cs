@@ -7,10 +7,12 @@ public class Splash : MonoBehaviour {
     [SerializeField] private Animator mainAnim;
     private static readonly int StartProperty = Animator.StringToHash("Start");
     [SerializeField] private GameObject content;
+    private bool _oneShot = false;
 
     private void Start() {
         content.SetActive(false);
-        if (EntryTracker.VisitedMainMenu) {
+        if (!_oneShot && EntryTracker.VisitedMainMenu) {
+            _oneShot = true;
             mainAnim.SetTrigger(StartProperty);
             mainAnim.speed = 100f;
             content.SetActive(true);
@@ -19,11 +21,11 @@ public class Splash : MonoBehaviour {
     }
 
     private void Update() {
-        if (Input.anyKey) {
+        if (!_oneShot && Input.anyKey) {
+            _oneShot = true;
             content.SetActive(true);
             mainAnim.SetTrigger(StartProperty);
             EntryTracker.VisitedMainMenu = true;
-            Destroy(gameObject);
         }
     }
 }
