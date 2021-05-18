@@ -28,11 +28,11 @@ public class Dissolver : MonoBehaviour {
         }
 
         var mfs = other.GetComponentsInChildren<MeshFilter>();
-        if (mfs == null || mfs.Length < 1) {
-            Destroy(gameObject);
-            Debug.LogWarning("Attempted to setup dissolver but missing meshfilter on base object");
-            return;
-        }
+        // if (mfs == null || mfs.Length < 1) {
+        //     // Destroy(gameObject);
+        //     // Debug.LogWarning("Attempted to setup dissolver but missing meshfilter on base object");
+        //     // return;
+        // }
 
         transform.position = other.transform.position;
         transform.rotation = other.transform.rotation;

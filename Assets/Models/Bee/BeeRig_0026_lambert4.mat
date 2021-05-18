@@ -265,7 +265,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_134FA1E3: {r: 0, g: 0, b: 0, a: 0}
+    - Color_134FA1E3: {r: 1.929412, g: 0.9098039, b: 0.282353, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _BaseColorMap_MipInfo: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
