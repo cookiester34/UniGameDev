@@ -19,7 +19,7 @@ public class TooltipEnabler : MonoBehaviour, IPointerEnterHandler, IPointerExitH
 
     private void Update() {
         if (pointerOver) {
-            _timer.Tick(Time.deltaTime);
+            _timer.Tick(Time.unscaledDeltaTime);
         }
     }
 
