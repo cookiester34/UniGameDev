@@ -77,8 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54268b38ed3b18240a8830d92b69fab2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth: 10
-  maxHealth: 10
+  currentHealth: 5
+  maxHealth: 5
   shouldDestroyOnDeath: 1
   healthGainParticles: {fileID: 0}
   healthGainAudio: {fileID: 0}
