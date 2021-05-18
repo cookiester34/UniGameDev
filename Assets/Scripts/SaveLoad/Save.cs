@@ -28,6 +28,7 @@ public class Save {
 
     public int currentSeason;
     public int waveNumber;
+    public int year;
 
     public Save(string name, string terrainSceneName, bool playerMade) {
         this.name = name;

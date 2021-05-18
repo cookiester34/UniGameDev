@@ -217,6 +217,11 @@ public class SeasonManager : MonoBehaviour
     {
         return _currentYear;
     }
+
+    public void SetCurrentYear(int val)
+    {
+        _currentYear = val;
+    }
 }
 
 public enum Seasons { Spring, Summer, Autumn, Winter}
