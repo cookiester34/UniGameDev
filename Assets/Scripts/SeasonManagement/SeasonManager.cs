@@ -71,13 +71,13 @@ public class SeasonManager : MonoBehaviour
     [SerializeField] private TMP_Text _yearText;
 
     private void Start() {
-        ResetParticles();
         SeasonChange += SeasonChanged;
         SeasonChange += AudioManager.Instance.ChangeAmbienceTrack;
         seasonTimer = seasonLength;
         _halfSeasonLength = seasonTimer / 2f;
         if (!_hasInitialSeasonBeenSet)
         {
+            ResetParticles();
             UpdateSeason(Seasons.Winter);
             _hasInitialSeasonBeenSet = true;
         }
@@ -192,7 +192,11 @@ public class SeasonManager : MonoBehaviour
             }
         }
         currentSeason = season;
-        _hasInitialSeasonBeenSet = true;
+        if (!_hasInitialSeasonBeenSet)
+        {
+            //ResetParticles();
+            _hasInitialSeasonBeenSet = true;
+        }
         SeasonChangeHandler();
     }
 
