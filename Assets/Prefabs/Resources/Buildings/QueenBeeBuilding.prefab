@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 115496347395529816}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 16.24282, y: 11.369974, z: 16.24282}
+  m_LocalScale: {x: 9, y: 9, z: 9}
   m_Children: []
   m_Father: {fileID: 1019907913518373587}
   m_RootOrder: 4
@@ -5438,6 +5438,7 @@ MonoBehaviour:
   baseProductionAmount: 0.2
   resource: {fileID: 11400000, guid: 9d64fdbeef59d374ab7183bd444dcd2d, type: 2}
   building: {fileID: -3125807644095819491}
+  research: []
 --- !u!1 &5340396395013051672
 GameObject:
   m_ObjectHideFlags: 0
@@ -6092,6 +6093,7 @@ MonoBehaviour:
   buildingTier2: {fileID: 0}
   buildingTier3: {fileID: 0}
   flightpath: {fileID: 7436356554210309322}
+  canUpgradeBuilding: 1
   numAssignedBees: 0
 --- !u!208 &7310969651345916939
 NavMeshObstacle:

@@ -21,6 +21,8 @@ MonoBehaviour:
   tier1RequiredResearch: []
   tier2RequiredResearch: []
   tier3RequiredResearch: []
-  tier1Cost: []
+  tier1Cost:
+  - cost: 15
+    resourceType: 0
   tier2Cost: []
   tier3Cost: []

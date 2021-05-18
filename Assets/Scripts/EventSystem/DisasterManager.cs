@@ -38,6 +38,8 @@ public class DisasterManager : MonoBehaviour
     public int minNumberOfBuildingsToTrigger = 5;
 
     public GameObject snowStormEffect;
+    public GameObject meteorIcon;
+    public GameObject meteorIconTemp;
 
     void TriggerDisaster()
     {
@@ -83,14 +85,35 @@ public class DisasterManager : MonoBehaviour
             yield return new WaitForSeconds(3f);
             SetupQueenBee();
 
-            var startPos = startPoint.position;
-            GameObject objVFX = Instantiate(vfx, startPos, Quaternion.identity) as GameObject;
-            Destroy(objVFX, 6);
-
             var endPos = PickRandomBuildingPos() + new Vector3(0, 0.5f, 0);
 
+            meteorIconTemp = Instantiate(meteorIcon, endPos, Quaternion.identity);
+            StartCoroutine("MeteorWarning");
+
+            yield return new WaitForSeconds(1f);
+
+            var startPos = startPoint.position;
+            GameObject objVFX = Instantiate(vfx, startPos, Quaternion.identity);
+            Destroy(objVFX, 6);
+
+            
             RotateTo(objVFX, endPos);
         }
+    }
+
+    IEnumerator MeteorWarning()
+    {
+        meteorIconTemp.Disable(0.2f);
+        yield return new WaitForSeconds(0.4f);
+        meteorIconTemp.Disable(0.2f);
+        yield return new WaitForSeconds(0.4f);
+        meteorIconTemp.Disable(0.2f);
+        yield return new WaitForSeconds(0.4f);
+        meteorIconTemp.Disable(0.2f);
+        yield return new WaitForSeconds(0.4f);
+        meteorIconTemp.Disable(0.2f);
+        yield return new WaitForSeconds(0.4f);
+        Destroy(meteorIconTemp);
     }
 
     void RotateTo(GameObject obj, Vector3 destination)
