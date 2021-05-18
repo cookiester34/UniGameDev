@@ -111,6 +111,8 @@ public class SelectedBuildingUI : MonoBehaviour {
                 assignText = unassignText = "Bees autoassign selves to housing as needed";
                 unassignBeeButton.interactable = false;
                 assignBeeButton.interactable = false;
+            } else if (building.BuildingType == BuildingType.TowerRepellant) {
+                assignText = unassignText = "Does not require bee maintenance";
             }
             _assignBeeTooltip.TooltipText = assignText;
             _unassignBeeTooltip.TooltipText = unassignText;

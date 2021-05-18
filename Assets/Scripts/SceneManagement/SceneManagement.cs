@@ -14,6 +14,7 @@ public class SceneManagement : MonoBehaviour {
     private static SceneManagement _instance = null;
     private static readonly int Load = Animator.StringToHash("Load");
     private static readonly int Unload = Animator.StringToHash("Unload");
+    private bool _isLoading = false;
 
     public static SceneManagement Instance {
         get {
@@ -43,7 +44,10 @@ public class SceneManagement : MonoBehaviour {
     }
 
     public void LoadScene(string sceneName) {
-        StartCoroutine(SceneLoad(sceneName));
+        if (!_isLoading) {
+            _isLoading = true;
+            StartCoroutine(SceneLoad(sceneName));
+        }
     }
 
     /// <summary>
@@ -57,6 +61,7 @@ public class SceneManagement : MonoBehaviour {
         var ao = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         ao.allowSceneActivation = false;
         ao.completed += delegate {
+            _isLoading = false;
             SceneType newType = SceneType.Main;
             newType.FromScene(sceneName);
             CurrentSceneType.SceneType = newType;

@@ -9,7 +9,7 @@ public class HexHighlighter : MonoBehaviour {
     private Collider[] colliders = new Collider[100];
     private int size = 0;
 
-    void FixedUpdate() {
+    void Update() {
         if (BuildingManager.Instance.CurrentState is BuildState) {
             for (int i = 0; i < size; i++) {
                 colliders[i].gameObject.GetComponentInParent<BuildingFoundation>().UpdateVisibleColour(0f, 1f);
@@ -26,7 +26,6 @@ public class HexHighlighter : MonoBehaviour {
                             .UpdateVisibleColour(25f - sqrMagnitude, 20f);
                     }
                 }
-
             }
         }
     }

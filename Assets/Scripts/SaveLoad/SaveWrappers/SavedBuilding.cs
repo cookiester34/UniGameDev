@@ -22,6 +22,7 @@ public class SavedBuilding {
             foreach (Bee bee in building.AssignedBees) {
                 assignedBees.Add(new SavedBee(bee));
             }
+            building.AssignAnimation();
         }
     }
 
