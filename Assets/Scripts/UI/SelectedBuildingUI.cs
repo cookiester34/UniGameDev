@@ -48,6 +48,7 @@ public class SelectedBuildingUI : MonoBehaviour {
         _assignBeeTooltip = assignBeeButton.GetComponent<TooltipEnabler>();
         _unassignBeeTooltip = unassignBeeButton.GetComponent<TooltipEnabler>();
         _upgradeBuildingTooltip = upgradeBuildingButton.GetComponent<TooltipEnabler>();
+        upgradeBuildingButton.interactable = false;
         BuildingManager.Instance.OnBuildingSelected += UpdateDisplay;
         content.OnHide += () => {
             if (_selectedBuilding != null) {
@@ -77,7 +78,8 @@ public class SelectedBuildingUI : MonoBehaviour {
         researchTree.SetActive(building.BuildingType == BuildingType.Research);
         generalUi.SetActive(building.BuildingType != BuildingType.Research);
         
-        upgradeBuildingButton.interactable = _selectedBuilding.CanUpgrade();
+        if(building.BuildingData.CanAffordUpgrade(building.BuildingTier + 1))
+            upgradeBuildingButton.interactable = _selectedBuilding.CanUpgrade();
         assignBeeButton.interactable =
             _selectedBuilding.numAssignedBees < _selectedBuilding.BuildingData.maxNumberOfWorkers;
         unassignBeeButton.interactable = _selectedBuilding.numAssignedBees > 0;
