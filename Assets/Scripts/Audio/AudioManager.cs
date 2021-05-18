@@ -114,7 +114,7 @@ public class AudioManager : MonoBehaviour {
     {
         BuildingManager.Instance.OnBuildingSelected += PlayBuildingClip;
         ResourceManagement.Instance.resourceList.ForEach(GetValueChanged);
-        SeasonManager.Instance.SeasonChange += ChangeAmbienceTrack;
+        //SeasonManager.Instance.SeasonChange += ChangeAmbienceTrack;
         UIEventAnnounceManager.Instance.announcement += PlayAnnouncementAlert;
     }
 
