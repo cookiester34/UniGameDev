@@ -52,6 +52,7 @@ public class SeasonManager : MonoBehaviour
     private float _halfSeasonLength;
     private int _currentYear = 0;
     private int _seasonParticleIndex = -1;
+    private bool _hasInitialSeasonBeenSet = false;
 
     public GameObject springEffect;
     public GameObject summerEffect;
@@ -75,7 +76,11 @@ public class SeasonManager : MonoBehaviour
         SeasonChange += AudioManager.Instance.ChangeAmbienceTrack;
         seasonTimer = seasonLength;
         _halfSeasonLength = seasonTimer / 2f;
-        UpdateSeason(Seasons.Winter);
+        if (!_hasInitialSeasonBeenSet)
+        {
+            UpdateSeason(Seasons.Winter);
+            _hasInitialSeasonBeenSet = true;
+        }
     }
 
     private void Update()
@@ -187,6 +192,7 @@ public class SeasonManager : MonoBehaviour
             }
         }
         currentSeason = season;
+        _hasInitialSeasonBeenSet = true;
         SeasonChangeHandler();
     }
 

@@ -30,6 +30,7 @@ public class SeasonProgressBar : MonoBehaviour
         _halfSeasonWidth = singleSeasonWidth / 2f;
         _posX = _rt.anchoredPosition.x;
         _rt.anchoredPosition = new Vector2(_posX, _rt.anchoredPosition.y);
+        HandleSeasonChange();
     }
 
     // Update is called once per frame

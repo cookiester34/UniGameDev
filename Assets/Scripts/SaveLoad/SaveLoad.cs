@@ -159,7 +159,8 @@ public static class SaveLoad {
             }
         }
 
-        SeasonManager.Instance.CurrentSeason = (Seasons)_currentSave.currentSeason; //set currrent season
+        //SeasonManager.Instance.CurrentSeason = (Seasons)_currentSave.currentSeason; //set currrent season
+        SeasonManager.Instance.SetCurrentSeason((Seasons)_currentSave.currentSeason);
         EnemySpawnManager.Instance.waveNumber = _currentSave.waveNumber;
         SeasonManager.Instance.SetCurrentYear(_currentSave.year);
 
