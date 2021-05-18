@@ -31,9 +31,12 @@ public class ButtonInteractableTimer : MonoBehaviour
 
     private void OnDisable()
     {
-        _button.interactable = lastBuildingCanUpgrade;
-        disableButton = lastBuildingCanUpgrade;
-        Toggle = false;
+        if (Toggle)
+        {
+            _button.interactable = lastBuildingCanUpgrade;
+            disableButton = lastBuildingCanUpgrade;
+            Toggle = false;
+        }
     }
 
     IEnumerator ToggleButton()

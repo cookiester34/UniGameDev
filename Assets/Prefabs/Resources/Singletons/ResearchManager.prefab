@@ -46,3 +46,11 @@ MonoBehaviour:
   allResearch:
   - {fileID: 11400000, guid: d6dbab79fa2c8ab43b5f43e224089032, type: 2}
   - {fileID: 11400000, guid: bbd54cab746591c499d0f65321b4b680, type: 2}
+  - {fileID: 11400000, guid: cb1174f483f42514b9c5dea559f8069c, type: 2}
+  - {fileID: 11400000, guid: faa6cc4fcf3976943967215f538ee49f, type: 2}
+  - {fileID: 11400000, guid: 7147e13afc435d344ad4b23bfd428136, type: 2}
+  - {fileID: 11400000, guid: 6ac89f18eb8d43b4ba591249ba783633, type: 2}
+  - {fileID: 11400000, guid: de818e27885a7cd46905b34db74e5575, type: 2}
+  - {fileID: 11400000, guid: ff8823363ffbb2d4d87a3ad2f95a7276, type: 2}
+  - {fileID: 11400000, guid: d84f50ae6d307754c9d3f649fc944f64, type: 2}
+  - {fileID: 11400000, guid: 8ce868dd1b158eb45896d9c15309ced2, type: 2}
