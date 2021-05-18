@@ -8,8 +8,7 @@ public class TowerSelected : MonoBehaviour
     private MaterialPropertyBlock _propertyBlock;
     private static readonly int TowerRadiusEnable = Shader.PropertyToID("TowerRadiusEnable");
 
-    void Awake()
-    {
+    void Awake() {
         _renderer = GetComponent<Renderer>();
         BuildingManager.Instance.OnBuildingSelected += EnableTowerRadius;
         BuildingManager.Instance.UiBuildingSelected += EnableTowerRadius;

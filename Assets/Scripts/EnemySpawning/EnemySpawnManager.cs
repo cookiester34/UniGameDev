@@ -195,38 +195,36 @@ public class EnemySpawnManager : MonoBehaviour
         bool masterSet = false;
         Transform masterWasp = null;
         yield return new WaitForSeconds(1f);
-        if (Random.Range(0f, 100f) < 80f) {
-            ///Increasing total number of wasps with every wave
-            float rangeModifier = waveNumber * waveHordeMultiplier;
-            for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
+        ///Increasing total number of wasps with every wave
+        float rangeModifier = waveNumber * waveHordeMultiplier;
+        for (int i = 0; i < Random.Range(numberOfEnemiesSpawnableMin + rangeModifier, numberOfEnemiesSpawnableMax + rangeModifier); i++)
+        {
+            Vector3 waspPosition = building.position;
+            waspPosition.x += Random.Range(-3f, 3f);
+            waspPosition.z += Random.Range(-3f, 3f);
+            GameObject wasp = Instantiate(enemyPrefab, waspPosition, Quaternion.identity);
+            wasps.Add(wasp);
+            waspGroupList[group].wasps.Add(wasp.transform);
+            WaspAI waspAI = wasp.GetComponent<WaspAI>();
+            waspAI.spawnManager = this;
+            waspAI.WaspGroupID = group;
+            ///Increasing health with every wave;
+            Health wasphealth = wasp.GetComponent<Health>();
+            wasphealth.SetHealth(wasphealth.MaxHealth + (waveNumber * waveHordeMultiplier));
+            if (!masterSet)
             {
-                Vector3 waspPosition = building.position;
-                waspPosition.x += Random.Range(-3f, 3f);
-                waspPosition.z += Random.Range(-3f, 3f);
-                GameObject wasp = Instantiate(enemyPrefab, waspPosition, Quaternion.identity);
-                wasps.Add(wasp);
-                waspGroupList[group].wasps.Add(wasp.transform);
-                WaspAI waspAI = wasp.GetComponent<WaspAI>();
-                waspAI.spawnManager = this;
-                waspAI.WaspGroupID = group;
-                ///Increasing health with every wave;
-                Health wasphealth = wasp.GetComponent<Health>();
-                wasphealth.SetHealth(wasphealth.MaxHealth + (waveNumber * waveHordeMultiplier));
-                if (!masterSet)
-                {
-                    waspAI.masterWasp = true;
-                    masterWasp = wasp.transform;
-                    masterSet = true;
-                }
-                else
-                {
-                    waspAI.masterWaspObject = masterWasp;
-                    waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
-                }
-
-                if (i > waspCap)
-                    break;
+                waspAI.masterWasp = true;
+                masterWasp = wasp.transform;
+                masterSet = true;
             }
+            else
+            {
+                waspAI.masterWaspObject = masterWasp;
+                waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
+            }
+
+            if (i > waspCap)
+                break;
         }
     }
 }
