@@ -12,6 +12,14 @@ public class Dissolver : MonoBehaviour {
     private List<Renderer> toDissolve = new List<Renderer>();
 
     public void Setup(GameObject other) {
+        Vector3 offset = Vector3.zero;
+        Building building = other.GetComponent<Building>();
+        if (building != null) {
+            if (building.BuildingType == BuildingType.HoneyConverter) {
+                offset = new Vector3(2.146094f, 0, -3.6992531f);
+            } 
+        }
+        
         var mrs = other.GetComponentsInChildren<Renderer>();
         if (mrs == null || mrs.Length < 1) {
             Destroy(gameObject);
@@ -43,6 +51,11 @@ public class Dissolver : MonoBehaviour {
             child.transform.position = mrs[i].transform.position;
             child.transform.rotation = mrs[i].transform.rotation;
             child.transform.localScale = mrs[i].transform.localScale;
+            
+            // This is very specific horrible code to handle the weirdness of the mushroom honey converter
+            if (i == 2 && offset != Vector3.zero) {
+                child.transform.position += offset;
+            }
 
             var mf = child.GetComponent<MeshFilter>();
             if (mrs[i] is SkinnedMeshRenderer) {
