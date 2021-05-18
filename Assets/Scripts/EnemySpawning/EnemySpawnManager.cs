@@ -162,8 +162,6 @@ public class EnemySpawnManager : MonoBehaviour
                             {
                                 i.wasps.Add(q);
                                 q.GetComponent<WaspAI>().WaspGroupID = t.wasps[0].GetComponent<WaspAI>().WaspGroupID;
-                                q.GetComponent<WaspAI>().masterWasp = false;
-                                q.GetComponent<WaspAI>().masterWaspObject = null;
                             }
                             t.wasps.Clear();
                         }
@@ -191,7 +189,6 @@ public class EnemySpawnManager : MonoBehaviour
 
     IEnumerator DelaySpawn(Transform building, int group)
     {
-        bool masterSet = false;
         Transform masterWasp = null;
         yield return new WaitForSeconds(1f);
         ///Increasing total number of wasps with every wave
@@ -210,17 +207,6 @@ public class EnemySpawnManager : MonoBehaviour
             ///Increasing health with every wave;
             Health wasphealth = wasp.GetComponent<Health>();
             wasphealth.SetHealth(wasphealth.MaxHealth + (waveNumber * waveHordeMultiplier));
-            if (!masterSet)
-            {
-                waspAI.masterWasp = true;
-                masterWasp = wasp.transform;
-                masterSet = true;
-            }
-            else
-            {
-                waspAI.masterWaspObject = masterWasp;
-                waspAI.masterWaspAI = masterWasp.GetComponent<WaspAI>();
-            }
         }
     }
 }

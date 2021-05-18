@@ -31,11 +31,7 @@ public class WaspAI : MonoBehaviour
     private float actualTimer;
     
     private Collider[] sphereAlloc = new Collider[100];
-
-    public bool masterWasp = false;
-    public Transform masterWaspObject;
     public int WaspGroupID;
-    public WaspAI masterWaspAI;
 
     public EnemySpawnManager spawnManager;
 
@@ -81,62 +77,33 @@ public class WaspAI : MonoBehaviour
         foreach (Renderer renderer1 in waspRenderers) {
             renderer1.enabled = visible;
         }
-
-        if (masterWasp)
-        {
-            sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);
-            if (sphereAlloc.Length > 0)
-            {
-                float closestDist = float.MaxValue;
-                GameObject targetObject = null;
-                foreach (Collider hitCollider in sphereAlloc) {
-                    Vector3 waspPos = transform.position;
-                    waspPos.y = 0;
-                    Vector3 targetPos = hitCollider.transform.position;
-                    targetPos.y = 0;
-                    float currentDistance = FastMath.SqrDistance(waspPos, targetPos);
-                    if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
-                        && currentDistance < closestDist) {
-                        if (hitCollider.gameObject.GetComponent<EnemyBuilding>() == null) {
-                            targetObject = hitCollider.gameObject;
-                            closestDist = currentDistance;
-                        }
+        
+        sphereAlloc = Physics.OverlapSphere(transform.position, detectionRange, mask);
+        if (sphereAlloc.Length > 0) {
+            float closestDist = float.MaxValue;
+            GameObject targetObject = null;
+            foreach (Collider hitCollider in sphereAlloc) {
+                Vector3 waspPos = transform.position;
+                waspPos.y = 0;
+                Vector3 targetPos = hitCollider.transform.position;
+                targetPos.y = 0;
+                float currentDistance = FastMath.SqrDistance(waspPos, targetPos);
+                if (hitCollider.CompareTag("Bee") || hitCollider.CompareTag("Building")
+                    && currentDistance < closestDist) {
+                    if (hitCollider.gameObject.GetComponent<EnemyBuilding>() == null) {
+                        targetObject = hitCollider.gameObject;
+                        closestDist = currentDistance;
                     }
                 }
+            }
 
-                if (targetObject != null && targetObject.transform != null)
-                {
-                    SetDestination(targetObject);
-                } else {
-                    SetDestination(_queenBeeBuilding);
-                }
+            if (targetObject != null && targetObject.transform != null) {
+                SetDestination(targetObject);
+            } else {
+                SetDestination(_queenBeeBuilding);
             }
-            else
-            {
-                if(_queenBeeBuilding != null)
-                    SetDestination(_queenBeeBuilding);
-                else
-                    SetupQueenBee();
-            }
-        }
-        else
-        {
-            if(masterWaspAI._currentTarget != null)
-            {
-                if (!AttackDistance()) {
-                    transform.position = Vector3.MoveTowards(transform.position,
-                        masterWaspAI._currentTarget.transform.position, 0.05f);
-                }
-
-                transform.LookAt(masterWaspAI._currentTarget.transform.position);
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-                _currentTarget = masterWaspAI._currentTarget;
-            }
-            else
-            {
-                followMaster();
-            }
+        } else {
+            SetDestination(_queenBeeBuilding);
         }
         if (AttackDistance() && actualTimer <= 0) {
             animator.SetTrigger(Attack);
@@ -152,40 +119,15 @@ public class WaspAI : MonoBehaviour
         }
     }
 
-    void followMaster()
-    {
-        if (masterWaspObject != null)
-        {
-            if (FastMath.SqrDistance(transform.position, masterWaspObject.position) > 9f)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, masterWaspObject.position, 0.05f);
-                transform.LookAt(masterWaspObject);
-                transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, 0);
-            }
-        }
-        else
-        {
-            masterWaspObject = spawnManager.waspGroupList[WaspGroupID].wasps[0];
-            if (masterWaspObject == this.transform)
-                masterWasp = true;
-            else
-                masterWaspAI = masterWaspObject.GetComponent<WaspAI>();
-        }
-    }
-
     void SetDestination(GameObject destinationObject) 
     {
         if (destinationObject != null)
         {
             Vector3 destination = destinationObject.transform.position;
-            if (destination != _previousDestination)
-            {
-                //_agent.destination = destination;
-                _ai.destination = destination;
-                _ai.SearchPath();
-                _previousDestination = destination;
-                _currentTarget = destinationObject;
-            }
+            //_agent.destination = destination;
+            _ai.destination = destination;
+            _previousDestination = destination;
+            _currentTarget = destinationObject;
         }
     }
 
@@ -194,9 +136,16 @@ public class WaspAI : MonoBehaviour
         health.ModifyHealth(-damage);
     }
 
-    private bool AttackDistance() 
-    {
-        return _currentTarget != null && FastMath.SqrDistance(_currentTarget.transform.position, transform.position) < attackRange * attackRange;
+    private bool AttackDistance() {
+        if (_currentTarget == null) {
+            return false;
+        }
+
+        Vector3 pos1 = _currentTarget.transform.position;
+        pos1.y = 0;
+        Vector3 pos2 = transform.position;
+        pos2.y = 0;
+        return FastMath.SqrDistance(pos1, pos2) < attackRange * attackRange;
     }
 
     private void OnDestroy()

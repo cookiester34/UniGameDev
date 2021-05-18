@@ -105,13 +105,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16896
   waspDamage: 1
-  attackRange: 1
+  attackRange: 2
   detectionRange: 3.25
   attacktimer: 2
-  masterWasp: 0
-  masterWaspObject: {fileID: 0}
   WaspGroupID: 0
-  masterWaspAI: {fileID: 0}
   spawnManager: {fileID: 0}
   animator: {fileID: 1734481273263909428}
 --- !u!82 &-1163787736537535343
