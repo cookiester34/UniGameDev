@@ -136,6 +136,28 @@ public class BuildingData : ScriptableObject, IUiClickableHover {
         return costString;
     }
 
+    public bool CanAffordUpgrade(int buildingTier)
+    {
+        List<ResourcePurchase> purchase = null;
+
+        switch (buildingTier)
+        {
+            case 1:
+                purchase = tier1Cost;
+                break;
+            case 2:
+                purchase = tier2Cost;
+                break;
+            case 3:
+                purchase = tier3Cost;
+                break;
+            default:
+                return false;
+        }
+
+        return ResourceManagement.Instance.CanUseResources(purchase);
+    }
+
     public Sprite GetSprite() {
         return uiImage;
     }

@@ -168,7 +168,7 @@ public class Building : MonoBehaviour {
     public bool CanUpgrade() {
         if (canUpgradeBuilding)
         {
-            bool canUpgrade = true;
+            bool canUpgrade = false;
             int newTier = buildingTier + 1;
             switch (newTier)
             {
